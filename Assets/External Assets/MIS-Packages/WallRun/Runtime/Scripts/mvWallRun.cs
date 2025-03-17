@@ -7,6 +7,7 @@ using Invector.vCharacterController;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityStandardAssets.CrossPlatformInput;
 
 namespace com.mobilin.games
 {
@@ -18,9 +19,9 @@ namespace com.mobilin.games
     {
 #if MIS_WALLRUN && INVECTOR_BASIC
         // ----------------------------------------------------------------------------------------------------
-        // 
+        
         [vEditorToolbar("Input", order = 0)]
-        public GenericInput forwardInput = new GenericInput("W", "", "");
+        public GenericInput forwardInput = new GenericInput("W", "Vertical", "Vertical");
         public GenericInput sprintInput = new GenericInput("LeftShift", "LeftStickClick", "LeftStickClick");
         public GenericInput wallJumpInput = new GenericInput("Space", "X", "X");
 
@@ -211,12 +212,55 @@ namespace com.mobilin.games
         // ----------------------------------------------------------------------------------------------------
         // 
         // ----------------------------------------------------------------------------------------------------
+        //protected virtual void FixedUpdate()
+        //{
+        //    if (!IsAvailable || !tpInput.enabled)
+        //        return;
+
+        //    CheckForWall();
+
+        //    if (IsOnAction)
+        //    {
+        //        if (tpInput.cc.customAction)
+        //        {
+        //            ExitActionState();
+        //            return;
+        //        }
+
+        //        if (tpInput.cc.groundDistance < minGroundDistance)
+        //        {
+        //            if (wallRunTime > 0f)
+        //                wallRunTimer -= Time.deltaTime;
+
+        //            if (wallExitTimer <= 0f)
+        //            {
+        //                if (debugMode)
+        //                    Debug.LogWarning("[MIS-WallRun] WallRun has been canceled due to the ground constraint.");
+
+        //                ExitActionState();
+        //                return;
+        //            }
+        //        }
+
+        //        WallJumpInput();
+        //        WallRunControl();
+        //    }
+
+
+        //    //Debug.Log("ForwardInput : " + forwardInput.GetButton());
+        //}
+
+        bool isMovingForward;
         protected virtual void FixedUpdate()
         {
             if (!IsAvailable || !tpInput.enabled)
                 return;
 
             CheckForWall();
+
+            // Read movement input from keyboard, joystick, or mobile
+            isMovingForward = forwardInput.GetButton() || CrossPlatformInputManager.GetAxis("Vertical") > 0.1f;
+           
 
             if (IsOnAction)
             {
@@ -233,9 +277,6 @@ namespace com.mobilin.games
 
                     if (wallExitTimer <= 0f)
                     {
-                        if (debugMode)
-                            Debug.LogWarning("[MIS-WallRun] WallRun has been canceled due to the ground constraint.");
-
                         ExitActionState();
                         return;
                     }
@@ -244,7 +285,10 @@ namespace com.mobilin.games
                 WallJumpInput();
                 WallRunControl();
             }
+
+            // Debugging Input
         }
+
 
         // ----------------------------------------------------------------------------------------------------
         // 
@@ -262,11 +306,7 @@ namespace com.mobilin.games
 
             return false;
         }
-        //[ContextMenu("Wall Input")]
-        //public void OnwallEnable()
-        //{
-        //    wallJumpInput.useInput = true;
-        //}
+
         // ----------------------------------------------------------------------------------------------------
         // 
         // ----------------------------------------------------------------------------------------------------
@@ -537,7 +577,7 @@ namespace com.mobilin.games
             {
                 tpInput.cc._rigidbody.velocity = wallJumpDirection * wallJumpSpeed;
 
-                if (!forwardInput.GetButton() || WallJumpRemainDistance <= 0f)
+                if (!isMovingForward|| WallJumpRemainDistance <= 0f)
                 {
                     ExitActionState();
                     return;
@@ -565,8 +605,12 @@ namespace com.mobilin.games
             if (wallRunTime > 0f)
                 wallRunTimer -= Time.deltaTime;
 
-            if ((wallRunTime > 0f && wallRunTimer < 0f) 
-                || !forwardInput.GetButton()
+
+         
+
+
+            if ((wallRunTime > 0f && wallRunTimer < 0f)   
+                || !isMovingForward 
                 || !(hasLeftWall || hasRightWall) 
                 || !StaminaConsumption())
             {
@@ -598,8 +642,6 @@ namespace com.mobilin.games
         // ----------------------------------------------------------------------------------------------------
         public virtual void EnterActionState()
         {
-
-
             print("Enter Action State");
             CheckChainedAction();
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityStandardAssets.CrossPlatformInput;
@@ -101,8 +102,10 @@ public class InvectorJoystick : MonoBehaviour, IPointerDownHandler, IPointerUpHa
             //delta = Mathf.Clamp(delta, -MovementRange, MovementRange);
             newPos.y = delta;
         }
+
         // change to clamp on a circular area instead of a square area
         transform.localPosition = Vector3.ClampMagnitude(transform.parent.InverseTransformPoint(new Vector3(newPos.x, newPos.y, newPos.z)), MovementRange) + m_StartPos;
+        //print("transform.localPosition:"+ transform.localPosition);
         UpdateVirtualAxes(transform.localPosition);
     }
 
@@ -115,6 +118,11 @@ public class InvectorJoystick : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         //{
         //    CrossPlatformInputManager.SetButtonUp(pressButtonName);
         //}
+
+
+        // print("OnPointerUp");
+
+        
     }
 
     public void OnPointerDown(PointerEventData data)
@@ -123,5 +131,7 @@ public class InvectorJoystick : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         //{
         //    CrossPlatformInputManager.SetButtonDown(pressButtonName);
         //}
+
+       // print("OnPointerDown");
     }
 }
