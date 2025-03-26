@@ -18,14 +18,12 @@ public class SlowMo : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if (isSlowMoActive)
         {
-
-
-            Debug.Log("Time Scale Active : " + Time.timeScale);
+            //Debug.Log("Time Scale Active : " + Time.timeScale);
             Time.timeScale = slowMoFactor;
             //Time.fixedDeltaTime = Time.timeScale * 0.02f;
             slowMoEnergy -= depletionRate * Time.unscaledDeltaTime;
             slowMoEnergy = Mathf.Clamp(slowMoEnergy, 0f, 1f);
-            Debug.Log("Slow-Mo Active. Energy Depleting: " + slowMoEnergy);
+           // Debug.Log("Slow-Mo Active. Energy Depleting: " + slowMoEnergy);
 
             if (slowMoEnergy <= 0)
             {
@@ -35,13 +33,13 @@ public class SlowMo : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }
         else
         {
-            Debug.Log("Time Scale Deactive : " + Time.timeScale);
+          //  Debug.Log("Time Scale Deactive : " + Time.timeScale);
             // Refill energy when not in slow-mo
             Time.timeScale = 1f;
             //Time.fixedDeltaTime = 0.02f;
             slowMoEnergy += rechargeRate * Time.unscaledDeltaTime;
             slowMoEnergy = Mathf.Clamp(slowMoEnergy, 0f, 1f);
-            Debug.Log("Slow-Mo Inactive. Energy Recharging: " + slowMoEnergy);
+           // Debug.Log("Slow-Mo Inactive. Energy Recharging: " + slowMoEnergy);
         }
 
         // Update UI slider
