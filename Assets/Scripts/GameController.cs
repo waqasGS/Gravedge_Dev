@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
     }
     #endregion
     #region PrivateMethods
-    private void MountBike()
+    public void MountBike()
     {
         player.SetActive(false);
         bikeRider.SetActive(true);
