@@ -114,8 +114,26 @@ namespace Invector.vCharacterController
 
         public virtual void TriggerWeakAttack()
         {
-            animator.SetInteger(vAnimatorParameters.AttackID, AttackID);
-            animator.SetTrigger(vAnimatorParameters.WeakAttack);
+            if (meleeManager == null)
+            {
+                meleeManager = GetComponent<vMeleeManager>();
+            }
+            if (cc.isGrounded)
+            {
+                Debug.Log("Play groundSTrike");
+                animator.SetInteger(vAnimatorParameters.AttackID, AttackID);
+                animator.SetTrigger(vAnimatorParameters.WeakAttack);
+            }
+            else if (!cc.isGrounded && meleeManager != null && meleeManager.rightWeapon != null)
+            {
+                {
+                    Debug.Log("Play airstrike");
+                    //animator.SetInteger(vAnimatorParameters.AttackID, AttackID);
+                    //animator.SetTrigger(vAnimatorParameters.WeakAttack);
+                    animator.SetInteger(vAnimatorParameters.AttackID, AttackID);
+                    animator.SetTrigger(vAnimatorParameters.AirStrike);
+                }
+            }
         }
 
         /// <summary>
@@ -181,6 +199,8 @@ namespace Invector.vCharacterController
             {
                 meleeManager = GetComponent<vMeleeManager>();
             }
+            if (!cc.isGrounded) return meleeManager != null && !cc.customAction && !cc.isCrouching && !cc.isRolling && !isEquipping /*&& !animator.IsInTransition(cc.baseLayer)*/;
+
 
             return meleeManager != null && cc.isGrounded && !cc.customAction && !cc.isJumping && !cc.isCrouching && !cc.isRolling && !isEquipping && !animator.IsInTransition(cc.baseLayer);
         }
@@ -357,6 +377,7 @@ namespace Invector.vCharacterController
         public static int RecoilID = Animator.StringToHash("RecoilID");
         public static int TriggerRecoil = Animator.StringToHash("TriggerRecoil");
         public static int WeakAttack = Animator.StringToHash("WeakAttack");
+        public static int AirStrike = Animator.StringToHash("AirStrike");
         public static int StrongAttack = Animator.StringToHash("StrongAttack");
     }
 }
