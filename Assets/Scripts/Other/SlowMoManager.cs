@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SlowMoManager : MonoBehaviour
@@ -14,6 +14,7 @@ public class SlowMoManager : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;
         // Assign button click event
         //slowMoButton.onClick.AddListener(ToggleSlowMo);
         //Debug.Log("SlowMoManager Initialized. Energy: " + slowMoEnergy);
@@ -24,7 +25,12 @@ public class SlowMoManager : MonoBehaviour
         if (isSlowMoActive)
         {
             Time.timeScale = slowMoFactor;
-            //Time.fixedDeltaTime = Time.timeScale * 0.02f;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+
+            // Force 60 FPS during slow-mo
+            if (Application.targetFrameRate != 60)
+                Application.targetFrameRate = 60;
+
             slowMoEnergy -= depletionRate * Time.unscaledDeltaTime;
             slowMoEnergy = Mathf.Clamp(slowMoEnergy, 0f, 1f);
             Debug.Log("Slow-Mo Active. Energy Depleting: " + slowMoEnergy);
@@ -37,9 +43,13 @@ public class SlowMoManager : MonoBehaviour
         }
         else
         {
-            // Refill energy when not in slow-mo
             Time.timeScale = 1f;
-            //Time.fixedDeltaTime = 0.02f;
+            Time.fixedDeltaTime = 0.02f;
+
+            // Reset frame rate when not in slow-mo
+            if (Application.targetFrameRate != 60)
+                Application.targetFrameRate = 60; // Or -1 if you want uncapped outside slow-mo
+
             slowMoEnergy += rechargeRate * Time.unscaledDeltaTime;
             slowMoEnergy = Mathf.Clamp(slowMoEnergy, 0f, 1f);
             Debug.Log("Slow-Mo Inactive. Energy Recharging: " + slowMoEnergy);
@@ -68,8 +78,7 @@ public class SlowMoManager : MonoBehaviour
         if (slowMoEnergy > 0)
         {
             isSlowMoActive = true;
-            //Time.timeScale = slowMoFactor;
-            //Time.fixedDeltaTime = Time.timeScale * 0.02f;
+            Application.targetFrameRate = 60; // Lock FPS during slow-mo
             Debug.Log("Slow-Mo Started. Time Scale: " + Time.timeScale);
         }
     }
