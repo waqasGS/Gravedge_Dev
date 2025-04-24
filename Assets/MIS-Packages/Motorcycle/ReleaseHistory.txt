@@ -1,0 +1,89 @@
+v1.3.10
+- Update: Invector 2.6.4
+
+v1.3.9
+- Fix: Wrong namespace was added
+
+v1.3.8
+- Fix: Missing data structure issue in MIS v2.7.7
+
+v1.3.7 (Remove old package before update)
+- Fix: Add IKPass to Base Layer in MISMotorcycleRiderSetup
+- Update: Class name change in order to prevent confliction with MIS-VehicleWeapons2.
+          mvRearAxle => mvMotorcycleRearAxle
+          mvShockAbsorber => mvMotorcycleShockAbsorber
+
+v1.3.6
+- Fix: Wrong audio path in the setup
+- Fix: Added to activate IK Pass option in Base Layer
+- Update: Chained-Action with MIS-LedgeClimb
+
+V1.3.5
+- Update: Invector Shooter Template v2.6.3
+- Note: Invector Animator Controllers have been modified.
+
+v1.3.4
+- Fix: Compiler error with MIS-VehicleRider
+
+v1.3.3 (Remove old version before update)
+- Update: Document
+
+v1.3.2
+- Add: MIS namespace on VolumetricLight in order to prevent compiler errors with other assets
+- Fix: Riding_B animation clip
+- Update: MISCast replaces FilterRayCast
+- Update: MIS Setup v2.7.0
+- Update: MIS Animation StateMachines integration
+- Update: Chained-Action with MIS-Swimming
+
+v1.3.1
+- Add: applyVehicleSpeedOnExit option for Chained-Action
+- Update: Chained-Action with MIS-SoftFlying and FreeClimb
+- Update: Set up only the necessary Animator Parameters in each MIS package
+
+v1.3.0
+- Update: Compatibility with MIS v2.6.0
+
+v1.2.3
+- Update: Chained-Action with MIS-Helicopter-AH64D
+
+v1.2.2
+- Fix: Compiler error in Chained-Action with INVECTOR Swimming addon
+
+v1.2.1
+- Add: Supports MIS-VehicleWeapons
+- Add: Machinegun and Rocket Launchers
+- Remove: MIS-AirController
+- Remove: mvVehicleAutoInput (Will be added in the future with better solution)
+- Remove: mvVehiclePhysicalDamage, VehicleMine (Will be added in MIS-VehicleWeapons)
+- Update: mvTime to Time according to MIS-ActionShooter removal
+
+v1.2.0 (Remove old package before update)
+- Update: Megerged Rider and Vehicle folders into Motorcycle
+
+v1.1.3
+- Update: Chained-Action with MIS-CarRider
+- Update: Separate Enter and Exit inputs
+
+v1.1.2
+- Update: Chained-Action with MIS-WallRun
+
+v1.1.1
+- Fix: Sometimes the engine sound was not turned off
+- Update: Separate a suspension from MIS-Car
+- Update: Separate a Steering smoothdamp between normal and handbrake inputs
+- Update: Smooth turn
+- Update: Chained-Action with MIS-AirController
+- Update: Chained-Action with Invector Push&Pull
+
+v1.1.0 (Remove old package before update)
+- Update: Price has been increased
+- Update: MIS v2.0.0 (No backward compatibility)
+- Update: Setup is integrated in All-In-On Setup
+- Update: Adujusts the Animator StateMachines and States positions automatically
+- Update: Skips already existing settings including components and animator controller
+- Update: Supports Invector Water
+- Update: Document renewal
+
+v1.0.0
+- First release
