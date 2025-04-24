@@ -27707,7 +27707,7 @@ GameObject:
   - component: {fileID: 114382262437889658}
   - component: {fileID: 3978637271864031997}
   m_Layer: 2
-  m_Name: vAssaultRifle_Inventory_v2 1
+  m_Name: vLaserRifle_Inventory_v2
   m_TagString: Weapon
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -27743,7 +27743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 4
+  selectedToolbar: 3
   weaponCategory: Rifle
   _shootFrequency: 0.125
   isInfinityAmmo: 0
@@ -28230,7 +28230,7 @@ Transform:
   m_GameObject: {fileID: 195192}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5495596, y: 0.49158344, z: 0.5414079, w: -0.40398937}
-  m_LocalPosition: {x: 0.009, y: -0.036, z: 0.37}
+  m_LocalPosition: {x: 0.04, y: -0.017, z: 0.426}
   m_LocalScale: {x: 1.5415711, y: 1.5415874, z: 1.0005714}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -48035,15 +48035,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5566240532493202685, guid: a1db201987255e14ebc8e3c4476a247f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.007
+      value: 0.0247
       objectReference: {fileID: 0}
     - target: {fileID: 5566240532493202685, guid: a1db201987255e14ebc8e3c4476a247f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.072
+      value: -0.0184
       objectReference: {fileID: 0}
     - target: {fileID: 5566240532493202685, guid: a1db201987255e14ebc8e3c4476a247f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.006
+      value: -0.0028
       objectReference: {fileID: 0}
     - target: {fileID: 5566240532493202685, guid: a1db201987255e14ebc8e3c4476a247f, type: 3}
       propertyPath: m_LocalRotation.w
