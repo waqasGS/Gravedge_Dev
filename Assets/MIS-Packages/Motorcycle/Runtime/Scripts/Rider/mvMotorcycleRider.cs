@@ -8,6 +8,7 @@ using Invector.vItemManager;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -496,25 +497,32 @@ namespace com.mobilin.games
         // ----------------------------------------------------------------------------------------------------
         public virtual void EnterInput()
         {
+            print("EnterInput");
             if (!(RiderState == (int)MotorcycleRidingState.None || RiderState == (int)MotorcycleRidingState.WaitingAutoEnter))
+            {
+                Debug.Log("aaa");
                 return;
+            }
 
 #if MIS_CARRIDER_EVP || MIS_CARRIDER_RCC || MIS_HELICOPTER || MIS_ROWINGBOAT
             if (tpInput.cc.IsVehicleRiderAvailable &&
                 (tpInput.cc.misVehicleRider.VehicleRiderState == VehicleRidingState.Enter || tpInput.cc.misVehicleRider.VehicleRiderState == VehicleRidingState.Exit))
             {
+                Debug.Log("bbb");
                 return;
             }
 #endif
 
-            if (enterInput.useInput && enterInput.GetButtonDown())
-            {
+            //  if (enterInput.useInput && enterInput.GetButtonDown())
+
+            //{
                 if (FindEntryPoint() != null && EnterEntryCondition())
                 {
+                    Debug.Log("ccc");
                     CheckChainedAction();
                     EnterEntry(entryPoint);
                 }
-            }
+            //}
         }
 
         // ----------------------------------------------------------------------------------------------------
@@ -522,10 +530,12 @@ namespace com.mobilin.games
         // ----------------------------------------------------------------------------------------------------
         public virtual void ExitInput()
         {
+            print("ExitInput");
             if (RiderState != (int)MotorcycleRidingState.Riding)
                 return;
 
-            if (exitInput.useInput && exitInput.GetButtonDown())
+            // if (exitInput.useInput && exitInput.GetButtonDown())
+
             {
                 if (CheckExitPoint())
                 {

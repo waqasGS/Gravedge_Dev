@@ -6,6 +6,7 @@ using Invector.vShooter;
 #endif
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace com.mobilin.games
 {
@@ -62,14 +63,49 @@ namespace com.mobilin.games
         // ----------------------------------------------------------------------------------------------------
         // 
         // ----------------------------------------------------------------------------------------------------
+
+        bool mount = true;
+        bool togglePressed = false; // To prevent repeated toggling while holding the key
+
         public override void Update()
         {
             if (!IsAvailable)
                 return;
 
-            EnterInput();
-            ExitInput();
 
+            /*
+            //Toggle bike 
+            // Handle mount/dismount input with single key press detection
+            if (Input.GetKeyDown(KeyCode.T) && !togglePressed)
+            {
+                if (mount)
+                {
+                    EnterInput();
+                }
+                else
+                {
+                    ExitInput();
+                }
+
+                mount = !mount;
+                togglePressed = true;
+            }
+
+            // Reset togglePressed when key is released
+            if (Input.GetKeyUp(KeyCode.T))
+            {
+                togglePressed = false;
+            }
+
+            */
+
+
+
+
+            //real code
+            //EnterInput();
+            //ExitInput();
+            
             if (!IsOnAction || vcBikeInput == null)
                 return;
 
@@ -78,9 +114,9 @@ namespace com.mobilin.games
             SetRiderCapsuleCollider();
 
 #if MIS_VEHICLEWEAPONS
-            ToggleWeaponInput();
-            GunLaunchInput();
-            RocketLaunchInput();
+    ToggleWeaponInput();
+    GunLaunchInput();
+    RocketLaunchInput();
 #endif
         }
 
