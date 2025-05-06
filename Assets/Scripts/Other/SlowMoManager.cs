@@ -52,7 +52,7 @@ public class SlowMoManager : MonoBehaviour
 
             slowMoEnergy += rechargeRate * Time.unscaledDeltaTime;
             slowMoEnergy = Mathf.Clamp(slowMoEnergy, 0f, 1f);
-            Debug.Log("Slow-Mo Inactive. Energy Recharging: " + slowMoEnergy);
+            //Debug.Log("Slow-Mo Inactive. Energy Recharging: " + slowMoEnergy);
         }
 
         // Update UI slider
