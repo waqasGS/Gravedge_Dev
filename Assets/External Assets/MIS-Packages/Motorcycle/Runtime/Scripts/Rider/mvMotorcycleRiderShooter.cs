@@ -62,13 +62,46 @@ namespace com.mobilin.games
         // ----------------------------------------------------------------------------------------------------
         // 
         // ----------------------------------------------------------------------------------------------------
+
+       private bool mount = true;
+       private bool togglePressed = false; // To prevent repeated toggling while holding the key
         public override void Update()
         {
             if (!IsAvailable)
                 return;
 
-            EnterInput();
-            ExitInput();
+
+            // //Toggle bike 
+            // Handle mount/dismount input with single key press detection
+            if (Input.GetKeyDown(KeyCode.T) && !togglePressed)
+            {
+                if (mount)
+                {
+                    EnterInput();
+                }
+                else
+                {
+                    ExitInput();
+                }
+            
+                mount = !mount;
+                togglePressed = true;
+            }
+            
+            // Reset togglePressed when key is released
+            if (Input.GetKeyUp(KeyCode.T))
+            {
+                togglePressed = false;
+            }
+
+
+
+
+
+
+            //real code
+          // EnterInput();
+          // ExitInput();
 
             if (!IsOnAction || vcBikeInput == null)
                 return;

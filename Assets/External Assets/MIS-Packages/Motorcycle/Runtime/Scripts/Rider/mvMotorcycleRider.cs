@@ -507,7 +507,7 @@ namespace com.mobilin.games
             }
 #endif
 
-            if (enterInput.useInput && enterInput.GetButtonDown())
+          // if (enterInput.useInput && enterInput.GetButtonDown())
             {
                 if (FindEntryPoint() != null && EnterEntryCondition())
                 {
@@ -525,7 +525,8 @@ namespace com.mobilin.games
             if (RiderState != (int)MotorcycleRidingState.Riding)
                 return;
 
-            if (exitInput.useInput && exitInput.GetButtonDown())
+            
+           //if (exitInput.useInput && exitInput.GetButtonDown())
             {
                 if (CheckExitPoint())
                 {
@@ -700,7 +701,7 @@ namespace com.mobilin.games
                 entryPoint.entryState = EntryState.Occupied;
 
                 OnFinishAnimation.Invoke();
-                OnFinishGetOn.Invoke();
+//                OnFinishGetOn.Invoke();  //it gives null ref
                 EnterActionState();
             }
 
