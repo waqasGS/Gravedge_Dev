@@ -212,6 +212,35 @@ namespace Invector.Throw
             UpdateUI();
         }
 
+        public void ChangeThrowableOnButton()
+        {
+            if (throwables.Count == 0)
+                return;
+
+            int _index = indexOfCurrentThrowable;
+            bool found = false;
+
+            // Search forward from current index + 1
+            for (int i = 1; i <= throwables.Count; i++)
+            {
+                int nextIndex = (indexOfCurrentThrowable + i) % throwables.Count;
+
+                if (throwables[nextIndex].amount > 0)
+                {
+                    _index = nextIndex;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found)
+            {
+                SelectThrowable(_index);
+            }
+
+            UpdateUI();
+        }
+
         public void SelectThrowable(int indexOfThrowable)
         {
             if (inEnterThrowMode || isThrowing) return;
