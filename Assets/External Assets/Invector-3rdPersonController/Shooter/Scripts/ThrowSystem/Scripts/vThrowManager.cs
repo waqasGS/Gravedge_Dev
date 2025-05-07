@@ -244,7 +244,6 @@ namespace Invector.Throw
         public void SelectThrowable(int indexOfThrowable)
         {
             if (inEnterThrowMode || isThrowing) return;
-
             bool wasAiming = isAiming;
             DisableAimMode();
             ExitThrowMode();
@@ -252,6 +251,7 @@ namespace Invector.Throw
             {
                 indexOfCurrentThrowable = indexOfThrowable;
             }
+            
             if (wasAiming && CurrentThrowAmount > 0)
             {
                 EnterThrowMode();

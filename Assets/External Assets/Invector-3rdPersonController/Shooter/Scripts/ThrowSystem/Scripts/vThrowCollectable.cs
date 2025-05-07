@@ -28,24 +28,20 @@ namespace Invector.Throw
         private void OnTriggerStay(Collider other)
         {
             Debug.Log(other.name);
-            Debug.Log("AA");
             if (throwManager != null)
             {
-                Debug.Log("A");
                 UpdateThrowInfo(false);
                 return;
             }
 
             if (other.gameObject.CompareTag("Player"))
             {
-                Debug.Log("B");
                 //throwManager = other.GetComponent<vThrowManagerBase>();
                 throwManager = other.transform.root.GetComponent<vThrowManagerBase>();
             }
 
             if (throwManager != null)
             {
-                Debug.Log("C");
                 _throwManagerCollider = other;
                 onEnterTrigger.Invoke();
             }
