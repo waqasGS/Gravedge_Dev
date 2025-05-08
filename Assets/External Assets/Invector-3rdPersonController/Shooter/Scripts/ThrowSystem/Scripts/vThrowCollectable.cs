@@ -65,10 +65,8 @@ namespace Invector.Throw
             {
                 if (isInventory != _isInventory || firstEnter)
                 {
-                    Debug.Log("H");
                     if (isInventory)
                     {
-                        Debug.Log("I");
                         onIsInventoryManager.Invoke();
                     }
                     else onIsStandAloneManager.Invoke();
@@ -76,21 +74,16 @@ namespace Invector.Throw
                 }
 
                 var _canCollect = throwManager.CanCollectThrowable(throwableName, out int remainingAmount);
-                Debug.Log("D" + _canCollect);
                 if (canCollect != _canCollect || firstEnter)
                 {
-                    Debug.Log("E");
                     canCollect = _canCollect;
                     if (_canCollect)
                     {
                         if (isInventory) onCanCollectFromInventory.Invoke();
                         else onCanCollect.Invoke();
-                        Debug.Log("F");
                     }
                     else
                     {
-                        Debug.Log("G");
-                        onReachMaxObjects.Invoke();
                     }
                 }
             }

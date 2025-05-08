@@ -162,7 +162,6 @@ namespace Invector.vShooter
                     return;
                 }
 
-                Debug.Log("Kuch b");
 
                 UseAmmo();
                 this.sender = _sender != null ? _sender : transform;
