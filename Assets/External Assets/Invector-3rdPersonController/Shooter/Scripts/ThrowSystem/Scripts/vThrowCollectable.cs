@@ -27,6 +27,7 @@ namespace Invector.Throw
         bool _isInventory;
         private void OnTriggerStay(Collider other)
         {
+            Debug.Log(other.name);
             if (throwManager != null)
             {
                 UpdateThrowInfo(false);
@@ -34,11 +35,13 @@ namespace Invector.Throw
             }
 
             if (other.gameObject.CompareTag("Player"))
-                throwManager = other.GetComponentInChildren<vThrowManagerBase>();
+            {
+                //throwManager = other.GetComponent<vThrowManagerBase>();
+                throwManager = other.transform.root.GetComponent<vThrowManagerBase>();
+            }
 
             if (throwManager != null)
             {
-
                 _throwManagerCollider = other;
                 onEnterTrigger.Invoke();
             }
@@ -81,7 +84,6 @@ namespace Invector.Throw
                     }
                     else
                     {
-                        onReachMaxObjects.Invoke();
                     }
                 }
             }

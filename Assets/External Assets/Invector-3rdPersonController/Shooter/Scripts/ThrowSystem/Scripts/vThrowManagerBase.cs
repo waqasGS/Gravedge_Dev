@@ -316,11 +316,14 @@ namespace Invector.Throw
         {
             if (!ThrowConditions)
             {
+              //  Debug.Log("ThrowConditions false");
                 return;
             }
 
+            
             if (aimThrowInput.GetButtonDown() && !inEnterThrowMode && !isThrowing && !isAiming)
             {
+            
                 EnterThrowMode();
                 return;
             }
@@ -467,6 +470,7 @@ namespace Invector.Throw
 
         protected virtual void EnterThrowMode()
         {
+            
             inEnterThrowMode = true;
             tpInput.animator.CrossFadeInFixedTime(holdingAnimation, 0.2f);
             tpInput.SetLockAllInput(true);

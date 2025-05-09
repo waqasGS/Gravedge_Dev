@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 721108003, guid: 3a7fdfbafe9a1dc48aa29baf52499061, type: 3}
+  m_Name: GroundData
+  m_EditorClassIdentifier: 
+  groundFrictions:
+  - physicsMaterial: {fileID: 13400000, guid: f677da4e025d0974da4c685a8f7a7406, type: 2}
+    forwardStiffness: 1.2
+    sidewaysStiffness: 1.2
+    slip: 0.3
+    wheelDampingRate: 0.25
+    volume: 0.4
+    slipSmokePrefab: {fileID: 1088255853978532, guid: edc18e6ff35c6884d9c9dfb7236af010, type: 3}
+    acSkid: {fileID: 8300000, guid: e3ca69f35590e7641aa9acbd5565f01f, type: 3}
+    skidmark: {fileID: 4185640835607925306, guid: 0f47a830440d11240b9b11d2dd8cf67e, type: 3}
+  - physicsMaterial: {fileID: 13400000, guid: 81bb437a2d5cc5143b00ac0b379c1ea9, type: 2}
+    forwardStiffness: 0.8
+    sidewaysStiffness: 1
+    slip: 0.05
+    wheelDampingRate: 2
+    volume: 0.4
+    slipSmokePrefab: {fileID: 100000, guid: 08879218f0b9bb6458e1455c7aae21c3, type: 3}
+    acSkid: {fileID: 8300000, guid: 235882be41f9de3419e84d276b1c2bb3, type: 3}
+    skidmark: {fileID: 4143494355265446379, guid: e6d1f563fd44afb489b2852343d3a670, type: 3}
+  - physicsMaterial: {fileID: 13400000, guid: 5b10e437535ca49459ffb385d4cc1cf6, type: 2}
+    forwardStiffness: 1
+    sidewaysStiffness: 1
+    slip: 0.1
+    wheelDampingRate: 1
+    volume: 0.4
+    slipSmokePrefab: {fileID: 177572, guid: 904458c8586be6e47829a744f9407d02, type: 3}
+    acSkid: {fileID: 8300000, guid: 92628b9c57e68b449b67aa4269de897a, type: 3}
+    skidmark: {fileID: 6566313994098181502, guid: 8ba24b6cd892e964c8a727d456e6cc9d, type: 3}

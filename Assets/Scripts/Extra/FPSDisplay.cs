@@ -14,7 +14,8 @@ public class FPSDisplay : MonoBehaviour
     }
     void Update()
     {
-        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        // Use unscaledDeltaTime to get real rendering framerate regardless of slow-mo
+        deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
         float fps = 1.0f / deltaTime;
         FpsText.text = $"FPS: {Mathf.RoundToInt(fps)}";
     }

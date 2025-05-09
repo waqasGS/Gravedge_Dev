@@ -162,6 +162,7 @@ namespace Invector.vShooter
                     return;
                 }
 
+
                 UseAmmo();
                 this.sender = _sender != null ? _sender : transform;
                 HandleShot(startPoint, endPoint);
