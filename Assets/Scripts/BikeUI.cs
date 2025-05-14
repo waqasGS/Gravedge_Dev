@@ -10,28 +10,20 @@ public class BikeUI : MonoBehaviour
     public void MountBike()
     {
         _MvMotorcycleRiderShooter.EnterInput();
-       OffBothButtons();
-        DisMountButton.SetActive(true);
+       //OffBothButtons();
+        //DisMountButton.SetActive(true);
     }
 
     public void DisMount()
     {
         _MvMotorcycleRiderShooter.ExitInput();
-        OffBothButtons();
-        MountButton.SetActive(true);
+       // OffBothButtons();
+      //  MountButton.SetActive(true);
     }
 
     private void OffBothButtons()
     {
         MountButton.SetActive(false);
         DisMountButton.SetActive(false);
-    }
-
-
-
-
-    public void ShowMsg(string msg)
-    {
-        Debug.Log(msg);
     }
 }
