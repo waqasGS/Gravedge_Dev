@@ -3,27 +3,20 @@ using UnityEngine;
 
 public class BikeUI : MonoBehaviour
 {
-    public mvMotorcycleRiderShooter _MvMotorcycleRiderShooter;
-    public GameObject MountButton;
-    public GameObject DisMountButton;
+    private mvMotorcycleRiderShooter _mvMotorcycleRiderShooter;
+
+    private void Start()
+    {
+        _mvMotorcycleRiderShooter = GetComponent<mvMotorcycleRiderShooter>();
+    }
 
     public void MountBike()
     {
-        _MvMotorcycleRiderShooter.EnterInput();
-       //OffBothButtons();
-        //DisMountButton.SetActive(true);
+        _mvMotorcycleRiderShooter.EnterInput();
     }
 
     public void DisMount()
     {
-        _MvMotorcycleRiderShooter.ExitInput();
-       // OffBothButtons();
-      //  MountButton.SetActive(true);
-    }
-
-    private void OffBothButtons()
-    {
-        MountButton.SetActive(false);
-        DisMountButton.SetActive(false);
+        _mvMotorcycleRiderShooter.ExitInput();
     }
 }
