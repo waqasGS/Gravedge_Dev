@@ -25,7 +25,7 @@ namespace Invector.vMelee
         #endregion
 
         [Tooltip("NPC ONLY- Ideal distance for the attack")]
-        public float defaultAttackDistance = 1f;
+        public float defaultAttackDistance = 2f;
         [Tooltip("Default cost for stamina when attack")]
         public float defaultStaminaCost = 20f;
         [Tooltip("Default recovery delay for stamina when attack")]
