@@ -588771,7 +588771,7 @@ MonoBehaviour:
   gearShiftUpRPM: 6000
   gearShiftDownRPM: 2500
   engineRPMInertia: 0.1
-  maxMotorTorque: 2500
+  maxMotorTorque: 1500
   maxBrakeTorque: 5000
   ikLeftHand: {fileID: 8591202101736820947}
   ikRightHand: {fileID: 8591202102209840438}
@@ -589030,7 +589030,7 @@ CapsuleCollider:
   m_Radius: 0.35
   m_Height: 2.5
   m_Direction: 2
-  m_Center: {x: 0, y: 0.5, z: 0.4}
+  m_Center: {x: 0, y: 0.85, z: 0.4}
 --- !u!4 &8591202101581531052
 Transform:
   m_ObjectHideFlags: 0
@@ -649334,7 +649334,7 @@ Transform:
   m_GameObject: {fileID: 8591202102748007593}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
