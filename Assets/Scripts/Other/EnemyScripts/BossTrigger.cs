@@ -5,10 +5,11 @@ public class BossTrigger : MonoBehaviour
 {
     public TitanBossController titanBoss;
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            //titanBoss.StartDetectionBehavior();
             mvThirdPersonController tempHealth = other.GetComponent<mvThirdPersonController>();
 
             if (tempHealth != null)
@@ -23,6 +24,7 @@ public class BossTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            //titanBoss.StopDetectionBehavior();
             titanBoss.DeactivateBoss();
         }
     }

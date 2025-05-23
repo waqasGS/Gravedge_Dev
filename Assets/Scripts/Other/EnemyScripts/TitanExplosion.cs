@@ -111,7 +111,7 @@ namespace Invector
 
         protected virtual void Explode()
         {
-            onExplode.Invoke();
+            //onExplode.Invoke();
             var colliders = Physics.OverlapSphere(transform.position, maxExplosionRadius, applyDamageLayer);
 
             //if (collidersReached == null)
