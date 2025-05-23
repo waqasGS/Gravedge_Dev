@@ -37,6 +37,9 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(homeSceneName);
     }
-    
-    
+
+    public void Msgshow(string msg)
+    {
+        Debug.Log(msg);
+    }
 }
