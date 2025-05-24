@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Invector.vCharacterController.vActions
@@ -514,6 +515,27 @@ namespace Invector.vCharacterController.vActions
         }
 
         public override void OnActionExit(Collider other)
+        {
+            if (isLockTriggerEvents)
+            {
+                return;
+            }
+
+            if (other.gameObject.CompareTag(actionTag) && actions.ContainsKey(other) && (!doingAction || other != triggerAction._collider))
+            {
+                vTriggerGenericAction action = actions[other];
+                actions.Remove(other);
+                action.OnPlayerExit.Invoke(gameObject);
+                action.OnInvalidate.Invoke(gameObject);
+                OnExitTriggerAction.Invoke(action);
+                if (debugMode)
+                {
+                    Debug.Log("<color=red>Exit of Trigger </color> " + other.gameObject, other.gameObject);
+                }
+            }
+        }
+
+        public void OnTriggerExit(Collider other)
         {
             if (isLockTriggerEvents)
             {
