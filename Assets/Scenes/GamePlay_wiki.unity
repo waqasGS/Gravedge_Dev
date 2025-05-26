@@ -488858,10 +488858,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f66a52c3c67ac0438fa54788c311abf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 0}
+  healthSlider: {fileID: 4652404558115986233}
   healthSliderMaxValueSmooth: 10
   healthSliderValueSmooth: 10
-  staminaSlider: {fileID: 0}
+  staminaSlider: {fileID: 7220252026601879020}
   staminaSliderMaxValueSmooth: 10
   staminaSliderValueSmooth: 100
   damageImage: {fileID: 1804518922367180188}
@@ -546151,7 +546151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 0
+  selectedToolbar: 3
   _isDead: 1
   _currentHealth: 0
   isImmortal: 1
@@ -546215,7 +546215,7 @@ MonoBehaviour:
   onActionExit:
     m_PersistentCalls:
       m_Calls: []
-  _maxStamina: 200
+  _maxStamina: 100
   _staminaRecovery: 1.2
   _sprintStamina: 30
   _jumpStamina: 30
@@ -637608,8 +637608,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f5523d2a00695b4ba1cfe2dc1e8e516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
-  rectTransform: {fileID: 0}
+  slider: {fileID: 7220252026601879020}
+  rectTransform: {fileID: 7304240903888056871}
   multipScale: 1
 --- !u!222 &7305128041169526883
 CanvasRenderer:
@@ -657215,8 +657215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f5523d2a00695b4ba1cfe2dc1e8e516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
-  rectTransform: {fileID: 0}
+  slider: {fileID: 4652404558115986233}
+  rectTransform: {fileID: 8193671831509242599}
   multipScale: 1
 --- !u!1 &8194053340892146216
 GameObject:
