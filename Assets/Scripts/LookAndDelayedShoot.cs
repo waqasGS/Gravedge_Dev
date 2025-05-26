@@ -12,7 +12,8 @@ public class LookAndDelayedShoot : MonoBehaviour
 
     private Transform _parentTransform;
     private Invector.vShooter.vShooterWeaponBase shooterComponent;
-    private vHealthController playerHealth; // <-- Player health reference
+    private vHealthController playerHealth;
+    private vHealthController enemyHealth; // <-- Enemy AI health
     private float timeSinceLastShot = 0f;
 
     void Start()
@@ -27,30 +28,40 @@ public class LookAndDelayedShoot : MonoBehaviour
                 player = playerObj.transform;
         }
 
-        // Get player health component
+        // Get player health
         if (player != null)
         {
             playerHealth = player.GetComponent<vHealthController>();
         }
 
+        // Get shooter component
         shooterComponent = GetComponent<Invector.vShooter.vShooterWeaponBase>();
         if (shooterComponent == null)
             Debug.LogError("Shooter component not found on this GameObject!");
+
+        // Get enemy (self) health
+        enemyHealth = GetComponentInParent<vHealthController>();
+        if (enemyHealth == null)
+            Debug.LogError("Enemy health component not found on parent!");
     }
 
     void Update()
     {
-        if (player == null || _parentTransform == null || playerHealth == null)
+        if (player == null || _parentTransform == null || playerHealth == null || enemyHealth == null)
             return;
 
-        // Don't do anything if player is dead
+        // Stop if player is dead
         if (playerHealth.currentHealth <= 0)
+            return;
+
+        // Stop shooting if enemy is dead
+        if (enemyHealth.currentHealth <= 0)
             return;
 
         Vector3 directionToPlayer = player.position - _parentTransform.position;
         float distance = directionToPlayer.magnitude;
 
-        // LookAt only horizontally
+        // Horizontal LookAt
         directionToPlayer.y = 0;
         if (directionToPlayer != Vector3.zero)
         {
@@ -58,7 +69,7 @@ public class LookAndDelayedShoot : MonoBehaviour
             _parentTransform.rotation = Quaternion.Slerp(_parentTransform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
 
-        // Shoot if in range and alive
+        // Shoot if within range
         if (distance >= minRange && distance <= maxRange)
         {
             timeSinceLastShot += Time.deltaTime;
