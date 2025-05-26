@@ -238230,7 +238230,7 @@ GameObject:
   - component: {fileID: 1871611245}
   - component: {fileID: 1871611244}
   m_Layer: 2
-  m_Name: PlayerDetection
+  m_Name: DroneEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326322,6 +326322,7 @@ GameObject:
   - component: {fileID: 5471427383485953716}
   - component: {fileID: 1953157881109828061}
   - component: {fileID: 7124992398573183360}
+  - component: {fileID: 7124992398573183361}
   m_Layer: 5
   m_Name: SlowMoButton
   m_TagString: Untagged
@@ -635879,8 +635880,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: SlowMoManager, Assembly-CSharp
+        - m_Target: {fileID: 7124992398573183361}
+          m_TargetAssemblyTypeName: SlowMo, Assembly-CSharp
           m_MethodName: StartSlowMo
           m_Mode: 1
           m_Arguments:
@@ -635895,8 +635896,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: SlowMoManager, Assembly-CSharp
+        - m_Target: {fileID: 7124992398573183361}
+          m_TargetAssemblyTypeName: SlowMo, Assembly-CSharp
           m_MethodName: StopSlowMo
           m_Mode: 1
           m_Arguments:
@@ -635907,6 +635908,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &7124992398573183361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022416038907815886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9329e2b08528ca47a9563687a9b9ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowMoFactor: 0.3
+  depletionRate: 0.2
+  rechargeRate: 0.1
+  slowMoSlider: {fileID: 6864142492041235872}
 --- !u!222 &7127219649770034693
 CanvasRenderer:
   m_ObjectHideFlags: 0
