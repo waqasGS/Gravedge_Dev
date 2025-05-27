@@ -190810,6 +190810,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1871611243}
   - {fileID: 933173249}
   - {fileID: 780500867}
   - {fileID: 164989773}
@@ -238603,7 +238604,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1277147031145530505}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1450165084}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1871611244
 MonoBehaviour:
@@ -264427,15 +264428,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4221965899463790, guid: 5ae8cb557fec5034aa662aa39b00cc76, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30
+      value: -30.01
       objectReference: {fileID: 0}
     - target: {fileID: 4221965899463790, guid: 5ae8cb557fec5034aa662aa39b00cc76, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.003
       objectReference: {fileID: 0}
     - target: {fileID: 4221965899463790, guid: 5ae8cb557fec5034aa662aa39b00cc76, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.16
+      value: 4.987
       objectReference: {fileID: 0}
     - target: {fileID: 4221965899463790, guid: 5ae8cb557fec5034aa662aa39b00cc76, type: 3}
       propertyPath: m_LocalRotation.w
@@ -326940,6 +326941,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1450165084}
     m_Modifications:
+    - target: {fileID: 3814819161139772665, guid: c73b4e4e4854bb048b12af53e8b9a43d, type: 3}
+      propertyPath: selectedToolbar
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7902791783635957177, guid: c73b4e4e4854bb048b12af53e8b9a43d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -31.4
@@ -695772,7 +695777,6 @@ SceneRoots:
   - {fileID: 1196192170}
   - {fileID: 171903231}
   - {fileID: 1132851030}
-  - {fileID: 1871611243}
   - {fileID: 8122051064985920019}
   - {fileID: 969196679}
   - {fileID: 1450165084}
