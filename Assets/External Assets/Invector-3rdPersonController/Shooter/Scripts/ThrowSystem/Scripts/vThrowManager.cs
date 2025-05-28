@@ -240,6 +240,10 @@ namespace Invector.Throw
 
             UpdateUI();
         }
+        public void DisableAim()
+        {
+            base.DisableAimMode();
+        }
 
         public void SelectThrowable(int indexOfThrowable)
         {
