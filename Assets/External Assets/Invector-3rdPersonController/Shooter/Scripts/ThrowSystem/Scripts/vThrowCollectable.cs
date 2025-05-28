@@ -27,7 +27,7 @@ namespace Invector.Throw
         bool _isInventory;
         private void OnTriggerStay(Collider other)
         {
-            Debug.Log(other.name);
+            //Debug.Log(other.name);
             if (throwManager != null)
             {
                 UpdateThrowInfo(false);
