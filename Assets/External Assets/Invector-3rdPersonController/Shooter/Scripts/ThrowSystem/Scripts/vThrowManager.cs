@@ -138,79 +138,79 @@ namespace Invector.Throw
             }
         }
 
-        public void NextThrowable()
-        {
-            var _index = 0;
-            if (indexOfCurrentThrowable + 1 < throwables.Count)
-            {
-                _index = indexOfCurrentThrowable + 1;
-            }
-            if (throwables[_index].amount > 0 || !isAiming)
-            {
-                SelectThrowable(_index);
-            }
-            else if (isAiming)
-            {
-                if (throwables.Exists(t => t.amount > 0))
-                {
-                    for (int i = 0; i < throwables.Count; i++)
-                    {
-                        if (_index + 1 < throwables.Count)
-                        {
-                            _index++;
-                        }
-                        else
-                        {
-                            _index = 0;
-                        }
-                        if (throwables[_index].amount > 0)
-                        {
-                            SelectThrowable(_index);
-                            break;
-                        }
-                    }
-                }
-            }
+        //public void NextThrowable()
+        //{
+        //    var _index = 0;
+        //    if (indexOfCurrentThrowable + 1 < throwables.Count)
+        //    {
+        //        _index = indexOfCurrentThrowable + 1;
+        //    }
+        //    if (throwables[_index].amount > 0 || !isAiming)
+        //    {
+        //        SelectThrowable(_index);
+        //    }
+        //    else if (isAiming)
+        //    {
+        //        if (throwables.Exists(t => t.amount > 0))
+        //        {
+        //            for (int i = 0; i < throwables.Count; i++)
+        //            {
+        //                if (_index + 1 < throwables.Count)
+        //                {
+        //                    _index++;
+        //                }
+        //                else
+        //                {
+        //                    _index = 0;
+        //                }
+        //                if (throwables[_index].amount > 0)
+        //                {
+        //                    SelectThrowable(_index);
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //    }
 
-            UpdateUI();
-        }
+        //    UpdateUI();
+        //}
 
-        public void PreviousThrowable()
-        {
-            var _index = throwables.Count - 1;
-            if (indexOfCurrentThrowable - 1 >= 0)
-            {
-                _index = indexOfCurrentThrowable - 1;
-            }
-            if (throwables[_index].amount > 0 || !isAiming)
-            {
-                SelectThrowable(_index);
-            }
-            else if (isAiming)
-            {
-                if (throwables.Exists(t => t.amount > 0))
-                {
-                    for (int i = 0; i < throwables.Count; i++)
-                    {
-                        if (_index - 1 >= 0)
-                        {
-                            _index--;
-                        }
-                        else
-                        {
-                            _index = throwables.Count - 1;
-                        }
-                        if (throwables[_index].amount > 0)
-                        {
-                            SelectThrowable(_index);
-                            break;
-                        }
-                    }
-                }
-            }
+        //public void PreviousThrowable()
+        //{
+        //    var _index = throwables.Count - 1;
+        //    if (indexOfCurrentThrowable - 1 >= 0)
+        //    {
+        //        _index = indexOfCurrentThrowable - 1;
+        //    }
+        //    if (throwables[_index].amount > 0 || !isAiming)
+        //    {
+        //        SelectThrowable(_index);
+        //    }
+        //    else if (isAiming)
+        //    {
+        //        if (throwables.Exists(t => t.amount > 0))
+        //        {
+        //            for (int i = 0; i < throwables.Count; i++)
+        //            {
+        //                if (_index - 1 >= 0)
+        //                {
+        //                    _index--;
+        //                }
+        //                else
+        //                {
+        //                    _index = throwables.Count - 1;
+        //                }
+        //                if (throwables[_index].amount > 0)
+        //                {
+        //                    SelectThrowable(_index);
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //    }
 
-            UpdateUI();
-        }
+        //    UpdateUI();
+        //}
 
         public void ChangeThrowableOnButton()
         {
