@@ -9,7 +9,7 @@ public class FPSDisplay : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 60; // Set your desired FPS
+        //Application.targetFrameRate = 60; // Set your desired FPS
         QualitySettings.vSyncCount = 0; // Disable V-Sync to unlock frame rate
     }
     void Update()

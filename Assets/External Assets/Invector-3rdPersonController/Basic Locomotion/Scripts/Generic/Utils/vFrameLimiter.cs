@@ -8,7 +8,7 @@ namespace Invector
 
         void Awake()
         {
-            Application.targetFrameRate = desiredFPS;
+            //Application.targetFrameRate = desiredFPS;
             QualitySettings.vSyncCount = 0;
         }
 

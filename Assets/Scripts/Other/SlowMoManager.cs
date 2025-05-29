@@ -14,7 +14,7 @@ public class SlowMoManager : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 60;
+       // Application.targetFrameRate = 60;
         // Assign button click event
         //slowMoButton.onClick.AddListener(ToggleSlowMo);
         //Debug.Log("SlowMoManager Initialized. Energy: " + slowMoEnergy);
@@ -29,7 +29,7 @@ public class SlowMoManager : MonoBehaviour
 
             // Force 60 FPS during slow-mo
             if (Application.targetFrameRate != 60)
-                Application.targetFrameRate = 60;
+               // Application.targetFrameRate = 60;
 
             slowMoEnergy -= depletionRate * Time.unscaledDeltaTime;
             slowMoEnergy = Mathf.Clamp(slowMoEnergy, 0f, 1f);
@@ -48,7 +48,7 @@ public class SlowMoManager : MonoBehaviour
 
             // Reset frame rate when not in slow-mo
             if (Application.targetFrameRate != 60)
-                Application.targetFrameRate = 60; // Or -1 if you want uncapped outside slow-mo
+                //Application.targetFrameRate = 60; // Or -1 if you want uncapped outside slow-mo
 
             slowMoEnergy += rechargeRate * Time.unscaledDeltaTime;
             slowMoEnergy = Mathf.Clamp(slowMoEnergy, 0f, 1f);
@@ -78,7 +78,7 @@ public class SlowMoManager : MonoBehaviour
         if (slowMoEnergy > 0)
         {
             isSlowMoActive = true;
-            Application.targetFrameRate = 60; // Lock FPS during slow-mo
+            //Application.targetFrameRate = 60; // Lock FPS during slow-mo
             Debug.Log("Slow-Mo Started. Time Scale: " + Time.timeScale);
         }
     }
