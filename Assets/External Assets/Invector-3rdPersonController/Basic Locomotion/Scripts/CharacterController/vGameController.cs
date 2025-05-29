@@ -77,7 +77,7 @@ namespace Invector
         {
             if (value)
             {
-                Cursor.lockState = CursorLockMode.Locked;
+                //Cursor.lockState = CursorLockMode.Locked;
             }
             else
             {
