@@ -136549,9 +136549,9 @@ GameObject:
   - component: {fileID: 978722288}
   - component: {fileID: 978722293}
   - component: {fileID: 978722292}
-  - component: {fileID: 978722291}
   - component: {fileID: 978722290}
   - component: {fileID: 978722289}
+  - component: {fileID: 978722294}
   m_Layer: 5
   m_Name: Gernade
   m_TagString: Untagged
@@ -136624,7 +136624,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 978722292}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 978722294}
+        m_TargetAssemblyTypeName: GrenadeSwitch, Assembly-CSharp
+        m_MethodName: GrenadButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &978722290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136638,51 +136650,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: GB
---- !u!114 &978722291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 978722287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 978722290}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: SetDownState
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Jump
-            m_BoolArgument: 0
-          m_CallState: 1
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 978722290}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: SetUpState
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Jump
-            m_BoolArgument: 0
-          m_CallState: 1
 --- !u!114 &978722292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136721,6 +136688,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978722287}
   m_CullTransparentMesh: 0
+--- !u!114 &978722294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978722287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f715700ee5868294f8fd21f7e20b4e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonHandler: {fileID: 978722290}
+  isGrenadeEquip: 0
 --- !u!1001 &978921069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188127,7 +188108,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 44c0740a3be2c374da66abb567bd6183, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9563bbfce8564c942801f9b39f5b9d57, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -367303,6 +367284,7 @@ GameObject:
   - component: {fileID: 8019880325258473273}
   - component: {fileID: 7441468193238755514}
   - component: {fileID: 8557010521408981094}
+  - component: {fileID: 8970554265332832318}
   m_Layer: 5
   m_Name: Reload
   m_TagString: Untagged
@@ -414668,7 +414650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 0
+  selectedToolbar: 4
   cameraStyle: 0
   canUseThrow: 0
   drawTrajectory: 1
@@ -420102,6 +420084,7 @@ GameObject:
   - component: {fileID: 4853298056865141789}
   - component: {fileID: 7263195254882645340}
   - component: {fileID: 8012102914508198266}
+  - component: {fileID: 9153543530123182734}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -491977,6 +491960,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 978722294}
+        m_TargetAssemblyTypeName: GrenadeSwitch, Assembly-CSharp
+        m_MethodName: IsAlwaysEquiped
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4684175962724956313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518039,7 +518034,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 19a6ead23457815498b7a87daf3b1aaa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 16f519e59ff50904f8f94d00099170d8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -656252,13 +656247,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5002811618901400439}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.4764151, b: 0.4764151, a: 0.50980395}
+  m_Color: {r: 1, g: 0.4764151, b: 0.4764151, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -656802,7 +656797,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 4
+  selectedToolbar: 0
   cameraStyle: 0
   canUseThrow: 1
   drawTrajectory: 1
@@ -656860,20 +656855,8 @@ MonoBehaviour:
       m_Calls: []
   onEnableAim:
     m_PersistentCalls:
-      m_Calls: []
-  onCancelAim:
-    m_PersistentCalls:
-      m_Calls: []
-  onStartThrowObject:
-    m_PersistentCalls:
-      m_Calls: []
-  onThrowObject:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollectObject:
-    m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 978722287}
+      - m_Target: {fileID: 6256281323861482537}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -656885,6 +656868,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 5823620693123307692}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onCancelAim:
+    m_PersistentCalls:
+      m_Calls: []
+  onStartThrowObject:
+    m_PersistentCalls:
+      m_Calls: []
+  onThrowObject:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollectObject:
+    m_PersistentCalls:
+      m_Calls: []
   onFinishThrow:
     m_PersistentCalls:
       m_Calls: []
@@ -656962,6 +656969,18 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
+        - m_Target: {fileID: 978722294}
+          m_TargetAssemblyTypeName: GrenadeSwitch, Assembly-CSharp
+          m_MethodName: SwitchGrenad
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
         - m_Target: {fileID: 7441468193238755514}
           m_TargetAssemblyTypeName: 
           m_MethodName: SetDownState
@@ -671343,7 +671362,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3951179725818869322}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8970554265332832318}
+        m_TargetAssemblyTypeName: ShootButtonActivate, Assembly-CSharp
+        m_MethodName: ToShowShootButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8012102914508198266}
+        m_TargetAssemblyTypeName: Invector.Throw.vThrowManager, Assembly-CSharp
+        m_MethodName: DisableAim
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8565195016076932629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688578,6 +688621,21 @@ RectTransform:
   m_AnchoredPosition: {x: -128, y: 237.5}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8970554265332832318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807998906954298268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95df32326332389468c6e8b74460cabc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonClick: {fileID: 0}
+  shootButton: {fileID: 5823620693123307692}
+  unArmedButton: {fileID: 6256281323861482537}
 --- !u!114 &8972755551516386931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695133,6 +695191,19 @@ MonoBehaviour:
   shoot: 0
   aim: 1
   hipFire: 1
+--- !u!114 &9153543530123182734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2918226667846317504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01bf8eb5e21bc44589186feccecf8cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonHandler: {fileID: 5589995928791428958}
 --- !u!1 &9159898703773374672
 GameObject:
   m_ObjectHideFlags: 0
