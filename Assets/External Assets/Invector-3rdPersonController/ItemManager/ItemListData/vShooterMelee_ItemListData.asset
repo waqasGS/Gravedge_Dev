@@ -16,9 +16,9 @@ MonoBehaviour:
   description: Fragment Grenade
   type: 0
   icon: {fileID: 21300000, guid: 072fabb08b4333748a030d028e0f9170, type: 3}
-  stackable: 1
+  stackable: 0
   createNewItem: 1
-  maxStack: 6
+  maxStack: 1
   amount: 0
   originalObject: {fileID: 170736, guid: c221411e499bdd94f90413254abf7860, type: 3}
   dropObject: {fileID: 4018256157275831458, guid: a04c9098c7a452447912f6c5069bd095, type: 3}
@@ -123,7 +123,7 @@ MonoBehaviour:
   - {fileID: 9220526243217188814}
   - {fileID: 3997341154424474500}
   - {fileID: 4736072419254908150}
-  inEdition: 1
+  inEdition: 0
   itemsHidden: 1
 --- !u!114 &11427962
 MonoBehaviour:
@@ -1360,7 +1360,7 @@ MonoBehaviour:
   id: 30
   description: Attached with a Scope
   type: 2
-  icon: {fileID: 21300000, guid: c9bcb3ac64db75147b5fde5864fdfcb2, type: 3}
+  icon: {fileID: 21300000, guid: 11d58d58195f2db49912211cd00593b9, type: 3}
   stackable: 0
   createNewItem: 0
   maxStack: 1
@@ -1415,7 +1415,7 @@ MonoBehaviour:
   id: 31
   description: Tactical Shotgun
   type: 2
-  icon: {fileID: 21300000, guid: 0cf8e5588722acf40bfed44d2b39a429, type: 3}
+  icon: {fileID: 21300000, guid: 2792505c150e3784cb2f7f4fd52611ad, type: 3}
   stackable: 0
   createNewItem: 0
   maxStack: 1
@@ -1500,11 +1500,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 29
   description: Stun Grenade
-  type: 0
+  type: 6
   icon: {fileID: 21300000, guid: 1f3b8e1bda8349946a81d2a5adaaec75, type: 3}
-  stackable: 1
+  stackable: 0
   createNewItem: 1
-  maxStack: 6
+  maxStack: 1
   amount: 0
   originalObject: {fileID: 2275447201054405111, guid: df29a1ce804661b4d91e53c7c6e7e384, type: 3}
   dropObject: {fileID: 4018256157275831458, guid: 092023529ae5aa0488c373ee62d54549, type: 3}
@@ -1520,7 +1520,7 @@ MonoBehaviour:
   DisableAnim: LowBack
   enableDelayTime: 0.5
   disableDelayTime: 0.5
-  customHandler: 
+  customHandler: Consumable
   twoHandWeapon: 0
   onDestroy:
     m_PersistentCalls:
