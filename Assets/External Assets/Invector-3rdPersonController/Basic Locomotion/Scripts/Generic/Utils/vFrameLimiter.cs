@@ -8,8 +8,8 @@ namespace Invector
 
         void Awake()
         {
-            Application.targetFrameRate = desiredFPS;
-            QualitySettings.vSyncCount = 0;
+            QualitySettings.vSyncCount = 0; // Don't sync to refresh rate
+            //Application.targetFrameRate = 120;
         }
 
 #if UNITY_EDITOR
