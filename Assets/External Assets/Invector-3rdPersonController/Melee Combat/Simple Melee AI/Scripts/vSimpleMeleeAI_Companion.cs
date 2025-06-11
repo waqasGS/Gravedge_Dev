@@ -123,7 +123,7 @@ namespace Invector.vCharacterController.AI
             agent.enabled = true;
             StartCoroutine(CompanionStateRoutine());
             StartCoroutine(FindTarget());
-            StartCoroutine(DestinationBehaviour());
+            
         }
 
         /// <summary>

@@ -10,12 +10,15 @@ public class PA_DroneShooterEnemy : MonoBehaviour
     private float nextFireTime = 0f;
 
     public vShooterWeapon shooterWeapon; // child rifle
+    public AntiGravityController antiGravityController;
     private vShooterMeleeInput weaponInput;
 
     private Transform targetPlayer;
     public Animator droneAnimator;
     private vHealthController droneHealth;
     private mvThirdPersonController playerHealth;
+    public Transform muzzleTransform;
+    public Vector3 muzzlePostion;
 
     public GameObject droneOnFire;
 
@@ -29,22 +32,25 @@ public class PA_DroneShooterEnemy : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (antiGravityController.currentState == AntiGravityController.State.Idle)
         {
-            mvThirdPersonController tempHealth = other.GetComponent<mvThirdPersonController>();
-
-            if (tempHealth != null)
+            if (other.CompareTag("Player"))
             {
-                targetPlayer = other.transform;
-                playerHealth = tempHealth;
-                droneAnimator.SetBool("PlayerEnter", false);
-                Debug.Log("Player detected: " + other.name);
+                mvThirdPersonController tempHealth = other.GetComponent<mvThirdPersonController>();
+
+                if (tempHealth != null)
+                {
+                    targetPlayer = other.transform;
+                    playerHealth = tempHealth;
+                    droneAnimator.SetBool("PlayerEnter", false);
+                    Debug.Log("Player detected: " + other.name);
+                }
+                //else
+                //{
+                //    // Optional: Log only once or suppress
+                //    // Debug.Log("Object has Player tag but no mvThirdPersonController: " + other.name);
+                //}
             }
-            //else
-            //{
-            //    // Optional: Log only once or suppress
-            //    // Debug.Log("Object has Player tag but no mvThirdPersonController: " + other.name);
-            //}
         }
     }
 
@@ -66,11 +72,7 @@ public class PA_DroneShooterEnemy : MonoBehaviour
                 return;
             LookAtPlayer();
 
-            if (Time.time >= nextFireTime)
-            {
-                FireWeapon();
-                nextFireTime = Time.time + fireRate;
-            }
+            TimeToShoot();
         }
     }
 
@@ -80,7 +82,22 @@ public class PA_DroneShooterEnemy : MonoBehaviour
         Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.fixedDeltaTime * 5f);
     }
-
+    public void TimeToShoot()
+    {
+        if (antiGravityController.currentState == AntiGravityController.State.Idle)
+        {
+            muzzleTransform.localPosition = muzzlePostion;
+        }
+        else
+        {
+            muzzleTransform.localPosition = Vector3.zero;
+        }
+        if (Time.time >= nextFireTime)
+        {
+            FireWeapon();
+            nextFireTime = Time.time + fireRate;
+        }
+    }
     void FireWeapon()
     {
         if (shooterWeapon != null)

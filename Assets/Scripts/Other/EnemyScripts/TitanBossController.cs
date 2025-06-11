@@ -50,7 +50,7 @@ public class TitanBossController : MonoBehaviour
 
         if (agent != null)
         {
-            agent.isStopped = true;
+            //agent.isStopped = true;
             agent.ResetPath();
             animator.SetBool("Walk", false);
         }

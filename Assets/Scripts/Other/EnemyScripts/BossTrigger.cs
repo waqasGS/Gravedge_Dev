@@ -3,21 +3,25 @@ using UnityEngine;
 
 public class BossTrigger : MonoBehaviour
 {
+    public TitanAntiGravityController titanAntiGravityController;
     public TitanBossController titanBoss;
 
     void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (titanAntiGravityController.currentState == TitanAntiGravityController.State.Idle)
         {
-            //titanBoss.StartDetectionBehavior();
-            mvThirdPersonController tempHealth = other.GetComponent<mvThirdPersonController>();
-
-            if (tempHealth != null)
+            if (other.CompareTag("Player"))
             {
-                titanBoss.ActivateBoss(other.transform);
+                //titanBoss.StartDetectionBehavior();
+                mvThirdPersonController tempHealth = other.GetComponent<mvThirdPersonController>();
+
+                if (tempHealth != null)
+                {
+                    titanBoss.ActivateBoss(other.transform);
+
+                }
 
             }
-
         }
     }
     private void OnTriggerExit(Collider other)

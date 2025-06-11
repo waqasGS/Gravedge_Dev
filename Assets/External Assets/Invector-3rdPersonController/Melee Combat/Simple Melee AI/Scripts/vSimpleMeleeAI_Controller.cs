@@ -24,7 +24,7 @@ namespace Invector.vCharacterController.AI
         protected virtual float moveToSpeed { get { return _moveToSpeed; } set { _moveToSpeed = value; } }
         protected Vector3 _moveToDestination;
         protected virtual Vector3 moveToDestination { get { return _moveToDestination; } set { _moveToDestination = value; } }
-
+        private float timer = 0f;
         protected override void Start()
         {
             base.Start();
@@ -33,7 +33,27 @@ namespace Invector.vCharacterController.AI
             Init();
             StartCoroutine(StateRoutine());
             StartCoroutine(FindTarget());
-            StartCoroutine(DestinationBehaviour());
+
+        }
+        private void Update()
+        {
+            timer += Time.deltaTime;
+
+            if (timer >= destinationRoutineIteration)
+            {
+                if (!GetComponent<NinjaAntiGravity>().isGravityActivate)
+                {
+
+                    CheckGroundDistance();
+
+                    if (agent.updatePosition)
+                    {
+                        UpdateDestination(destination);
+                    }
+
+                    timer = 0f; // reset timer
+                }
+            }
         }
 
         protected void FixedUpdate()
@@ -180,18 +200,7 @@ namespace Invector.vCharacterController.AI
             return fwd;
         }
 
-        protected virtual IEnumerator DestinationBehaviour()
-        {
-            while (true)
-            {
-                yield return new WaitForSeconds(destinationRoutineIteration);
-                CheckGroundDistance();
-                if (agent.updatePosition)
-                {
-                    UpdateDestination(destination);
-                }
-            }
-        }
+
 
         protected virtual void UpdateDestination(Vector3 position)
         {
