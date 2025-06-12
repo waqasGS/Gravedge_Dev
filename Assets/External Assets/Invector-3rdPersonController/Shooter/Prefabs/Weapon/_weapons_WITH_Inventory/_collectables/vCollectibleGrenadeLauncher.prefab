@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 11411812}
   - component: {fileID: 11498750}
   m_Layer: 11
-  m_Name: vCollectibleAssaultRifle
+  m_Name: vCollectibleGrenadeLauncher
   m_TagString: Action
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -652,27 +652,11 @@ MonoBehaviour:
   ignoreItemAnimation: 0
   itemsFilter: 02000000
   items:
-  - id: 11
+  - id: 33
     name: 
     amount: 1
-    attributes:
-    - name: 2
-      value: 25
-      isOpen: 0
-      isBool: 0
-    - name: 6
-      value: 25
-      isOpen: 0
-      isBool: 0
-    - name: 10
-      value: 85
-      isOpen: 0
-      isBool: 0
-    - name: 9
-      value: 0
-      isOpen: 0
-      isBool: 0
-    changeAttributes: 1
+    attributes: []
+    changeAttributes: 0
     autoEquip: 1
     addToEquipArea: 1
     indexArea: 0

@@ -27705,7 +27705,7 @@ GameObject:
   - component: {fileID: 114382262437889658}
   - component: {fileID: 3978637271864031997}
   m_Layer: 2
-  m_Name: vAssaultRifle_Inventory_v2
+  m_Name: GrenadeLauncher_Inventory_v2
   m_TagString: Weapon
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -27742,26 +27742,26 @@ MonoBehaviour:
   openCloseEvents: 0
   openCloseWindow: 1
   selectedToolbar: 1
-  weaponCategory: Rifle
-  _shootFrequency: 0.125
+  weaponCategory: GrenadeLauncher
+  _shootFrequency: 1
   isInfinityAmmo: 0
-  _ammo: 25
+  _ammo: 6
   ignoreTags:
   - Player
   hitLayer:
     serializedVersion: 2
     m_Bits: 32769
-  projectile: {fileID: 1000010710861650, guid: 22773fb6a3ebd59429b49fd6e288058e, type: 3}
+  projectile: {fileID: 1000010710861650, guid: deaa3fe696e614749b59349d802fb465, type: 3}
   muzzle: {fileID: 4000012731015802}
   projectilesPerShot: 1
   dispersion: 0
   quadDispersion: 0
-  velocity: 380
-  damageByDistance: 1
+  velocity: 200
+  damageByDistance: 0
   _minDamageDistance: 8
   _maxDamageDistance: 50
   _minDamage: 15
-  _maxDamage: 25
+  _maxDamage: 0
   source: {fileID: 8229992}
   fireClip: {fileID: 8300000, guid: 097e8235e0162d64ba53da9ef4ab8d61, type: 3}
   emptyClip: {fileID: 8300000, guid: 9b2ce00d16b72c34a9b46200421a6def, type: 3}
@@ -27805,14 +27805,14 @@ MonoBehaviour:
   chargeDamageMultiplier: 2
   changeVelocityByCharge: 1
   chargeVelocityMultiplier: 2
-  automaticWeapon: 1
+  automaticWeapon: 0
   reloadTime: 1
-  reloadOneByOne: 0
-  _clipSize: 25
+  reloadOneByOne: 1
+  _clipSize: 6
   dontUseReload: 0
   autoReload: 1
   autoReloadStyle: 1
-  ammoID: 13
+  ammoID: 32
   moveSetID: 1
   upperBodyID: 2
   shotID: 2
