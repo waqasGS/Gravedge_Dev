@@ -27741,11 +27741,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 1
+  selectedToolbar: 3
   weaponCategory: GrenadeLauncher
   _shootFrequency: 1
   isInfinityAmmo: 0
-  _ammo: 6
+  _ammo: 3
   ignoreTags:
   - Player
   hitLayer:
@@ -27756,7 +27756,7 @@ MonoBehaviour:
   projectilesPerShot: 1
   dispersion: 0
   quadDispersion: 0
-  velocity: 200
+  velocity: 10
   damageByDistance: 0
   _minDamageDistance: 8
   _maxDamageDistance: 50
@@ -27808,7 +27808,7 @@ MonoBehaviour:
   automaticWeapon: 0
   reloadTime: 1
   reloadOneByOne: 1
-  _clipSize: 6
+  _clipSize: 3
   dontUseReload: 0
   autoReload: 1
   autoReloadStyle: 1
