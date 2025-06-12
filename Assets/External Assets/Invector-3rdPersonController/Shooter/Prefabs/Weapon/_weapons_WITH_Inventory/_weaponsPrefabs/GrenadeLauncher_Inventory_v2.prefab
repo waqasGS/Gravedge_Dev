@@ -27704,6 +27704,7 @@ GameObject:
   - component: {fileID: 11429992}
   - component: {fileID: 114382262437889658}
   - component: {fileID: 3978637271864031997}
+  - component: {fileID: -3252184553612039875}
   m_Layer: 2
   m_Name: GrenadeLauncher_Inventory_v2
   m_TagString: Weapon
@@ -28080,6 +28081,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &-3252184553612039875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d10538eb284f6b4ca9a8a2bad5805b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showTrajectoryWhileAiming: 1
+  throwSettings: {fileID: 0}
+  visualSettings: {fileID: 0}
+  grenadePrefab: {fileID: 5072132771294544799, guid: e2db650e9dfcbaf429dc1a3e5048431b, type: 3}
 --- !u!1 &130018
 GameObject:
   m_ObjectHideFlags: 0

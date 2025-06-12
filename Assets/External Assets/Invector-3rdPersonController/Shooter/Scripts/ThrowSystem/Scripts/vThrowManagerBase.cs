@@ -218,6 +218,26 @@ namespace Invector.Throw
                 rotateWhileAiming = true;
                 strafeWhileAiming = true;
             }
+
+            // Initialize settings if not set
+            if (defaultSettings == null)
+            {
+                defaultSettings = ScriptableObject.CreateInstance<vThrowSettings>();
+                defaultSettings.metersPerSeconds = 10f;
+                defaultSettings.minMaxTime = new Vector2(0.1f, 0.2f);
+                defaultSettings.maxDistance = 100f;
+                defaultSettings.maxVelocity = 100f;
+                defaultSettings.lineStepPerTime = 0.01f;
+                defaultSettings.maxLineLength = 100f;
+            }
+
+            if (defaultVisualSettings == null)
+            {
+                defaultVisualSettings = ScriptableObject.CreateInstance<vThrowVisualSettings>();
+                defaultVisualSettings.useLine = true;
+                defaultVisualSettings.lineRendererColor = Color.white;
+                defaultVisualSettings.lineRendererWidth = 0.1f;
+            }
         }
 
         public virtual void CanUseThrow(bool value)

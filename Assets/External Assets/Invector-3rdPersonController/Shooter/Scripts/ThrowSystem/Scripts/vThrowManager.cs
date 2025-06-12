@@ -308,5 +308,47 @@ namespace Invector.Throw
                 ui.UpdateCount(this);
             }
         }
+
+        public virtual void AddThrowable(string name, Transform handler, vThrowableObject throwable, int amount = 1, int maxAmount = 1, Sprite sprite = null)
+        {
+            if (throwables == null)
+            {
+                throwables = new List<Throwable>();
+            }
+
+            var newThrowable = new Throwable
+            {
+                name = name,
+                handler = handler,
+                throwable = throwable,
+                amount = amount,
+                maxAmount = maxAmount,
+                sprite = sprite
+            };
+
+            // Set up throwable settings
+            if (throwable != null)
+            {
+                throwable.throwSettings = defaultSettings;
+                throwable.throwVisualSettings = defaultVisualSettings;
+            }
+
+            throwables.Add(newThrowable);
+            
+            // If this is the first throwable, set it as current
+            if (throwables.Count == 1)
+            {
+                indexOfCurrentThrowable = 0;
+            }
+        }
+
+        public virtual void ForceTrajectoryUpdate()
+        {
+            if (drawTrajectory && ObjectToThrow != null)
+            {
+                CalculateAimPoint();
+                DrawTrajectory();
+            }
+        }
     }
 }
