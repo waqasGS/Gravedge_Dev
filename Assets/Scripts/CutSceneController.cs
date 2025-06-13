@@ -1,14 +1,36 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 using UnityEngine.Playables;
 
-public class CutSceneController : MonoBehaviour
+public class FadeOnClick : MonoBehaviour
 {
-    public PlayableDirector _PlayableDirector;
+    public float fadeDuration = 1f;
+    public Image fadeImage;
+    public PlayableDirector _playableDirector;
 
 
-
-    public void PlayCutScene()
+    private void Start()
     {
-        _PlayableDirector.Play();
+        StartCoroutine(FadeOut());
+    }
+
+    private IEnumerator FadeOut()
+    { 
+        _playableDirector.Play();
+        float elapsed = 0f;
+        Color color = fadeImage.color;
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            fadeImage.color = new Color(color.r, color.g, color.b, alpha);
+            yield return null;
+        }
+        
+        fadeImage.gameObject.SetActive(false);
+        
     }
 }
