@@ -3,6 +3,7 @@ using Invector.vShooter;
 using Invector.Throw;
 using Invector.vCharacterController;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(vShooterWeapon))]
 public class GrenadeLauncherTrajectory : MonoBehaviour
@@ -13,29 +14,45 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
     public vThrowVisualSettings visualSettings;
     public GameObject grenadePrefab;
     
+    [Header("Trajectory Adjustments")]
+    [Tooltip("Initial velocity of the projectile")]
+    public float initialVelocity = 20f;
+    [Tooltip("Minimum and maximum time for trajectory calculation")]
+    public Vector2 trajectoryTimeRange = new Vector2(0.1f, 0.2f);
+    [Tooltip("Maximum distance the trajectory can reach")]
+    public float maxTrajectoryDistance = 100f;
+    [Tooltip("Maximum velocity of the projectile")]
+    public float maxTrajectoryVelocity = 100f;
+    [Tooltip("How detailed the trajectory line is")]
+    public float trajectoryLineStep = 0.01f;
+    [Tooltip("Right offset multiplier for the throw start point")]
+    public float throwStartRightOffset = 1f;
+    [Tooltip("Vertical offset for the throw start point")]
+    public float throwStartVerticalOffset = 0f;
+
     private vShooterWeapon weapon;
     private vThrowManager throwManager;
     private vThirdPersonInput tpInput;
+    private Vector3 originalThrowStartPosition;
 
     private void Start()
     {
-        Debug.Log("GrenadeLauncherTrajectory Start called");
         weapon = GetComponent<vShooterWeapon>();
         if (weapon == null)
         {
-            Debug.LogError("vShooterWeapon component not found!");
+            Debug.LogError("[GrenadeLauncher] vShooterWeapon component not found!");
             return;
         }
 
         if (weapon.muzzle == null)
         {
-            Debug.LogError("Weapon muzzle is not set!");
+            Debug.LogError("[GrenadeLauncher] Weapon muzzle is not set!");
             return;
         }
 
         if (grenadePrefab == null)
         {
-            Debug.LogError("Grenade prefab is not assigned!");
+            Debug.LogError("[GrenadeLauncher] Grenade prefab is not assigned!");
             return;
         }
 
@@ -43,28 +60,40 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
         tpInput = GetComponentInParent<vThirdPersonInput>();
         if (tpInput == null)
         {
-            Debug.LogError("vThirdPersonInput not found in parent hierarchy!");
+            Debug.LogError("[GrenadeLauncher] vThirdPersonInput not found in parent hierarchy!");
             return;
         }
 
         throwManager = tpInput.GetComponent<vThrowManager>();
         if (throwManager == null)
         {
-            Debug.LogError("vThrowManager not found on character!");
+            Debug.LogError("[GrenadeLauncher] vThrowManager not found on character!");
             return;
+        }
+
+        // Store original throw start position
+        if (throwManager.throwStartPoint != null)
+        {
+            originalThrowStartPosition = throwManager.throwStartPoint.localPosition;
         }
 
         // Setup settings if not provided
         if (throwSettings == null)
         {
             throwSettings = ScriptableObject.CreateInstance<vThrowSettings>();
-            throwSettings.metersPerSeconds = 10f;
-            throwSettings.minMaxTime = new Vector2(0.1f, 0.2f);
-            throwSettings.maxDistance = 100f;
-            throwSettings.maxVelocity = 100f;
-            throwSettings.lineStepPerTime = 0.01f;
-            throwSettings.maxLineLength = 100f;
         }
+        
+        // Apply trajectory adjustments
+        throwSettings.metersPerSeconds = initialVelocity;
+        throwSettings.minMaxTime = trajectoryTimeRange;
+        throwSettings.maxDistance = maxTrajectoryDistance;
+        throwSettings.maxVelocity = maxTrajectoryVelocity;
+        throwSettings.lineStepPerTime = trajectoryLineStep;
+        throwSettings.maxLineLength = maxTrajectoryDistance;
+        
+        // Apply throw start offset
+        throwManager.useThrowStartRightOffset = true;
+        throwManager.throwStartRightOffsetMultiplier = throwStartRightOffset;
         
         if (visualSettings == null)
         {
@@ -74,21 +103,13 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
             visualSettings.lineRendererWidth = 0.1f;
         }
 
-        // Add grenade throwable
-        Debug.Log("Adding grenade throwable");
-        var throwable = grenadePrefab.GetComponent<vThrowableObject>();
-        if (throwable == null)
-        {
-            Debug.LogError("Grenade prefab does not have vThrowableObject component!");
-            return;
-        }
-
-        throwManager.AddThrowable("Grenade", weapon.muzzle, throwable, 1, 1);
-
         // Subscribe to weapon events
-        Debug.Log("Subscribing to weapon events");
         weapon.onEnableAim.AddListener(OnWeaponAimStart);
         weapon.onDisableAim.AddListener(OnWeaponAimEnd);
+        weapon.onInstantiateProjectile.AddListener((vProjectileControl projectile) => OnProjectileInstantiated(projectile.gameObject));
+
+        // Apply initial vertical offset
+        UpdateThrowStartVerticalOffset();
     }
 
     private void OnDisable()
@@ -98,30 +119,29 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
         {
             weapon.onEnableAim.RemoveListener(OnWeaponAimStart);
             weapon.onDisableAim.RemoveListener(OnWeaponAimEnd);
+            weapon.onInstantiateProjectile.RemoveListener((vProjectileControl projectile) => OnProjectileInstantiated(projectile.gameObject));
+        }
+
+        // Reset throw start position
+        if (throwManager != null && throwManager.throwStartPoint != null)
+        {
+            throwManager.throwStartPoint.localPosition = originalThrowStartPosition;
         }
     }
 
     private void OnWeaponAimStart()
     {
-        Debug.Log("OnWeaponAimStart called");
         if (showTrajectoryWhileAiming && throwManager != null)
         {
-            Debug.Log("Enabling trajectory visualization");
             throwManager.drawTrajectory = true;
             UpdateTrajectory();
-        }
-        else
-        {
-            Debug.LogWarning("Trajectory not enabled: showTrajectoryWhileAiming=" + showTrajectoryWhileAiming + ", throwManager=" + (throwManager != null));
         }
     }
 
     private void OnWeaponAimEnd()
     {
-        Debug.Log("OnWeaponAimEnd called");
         if (showTrajectoryWhileAiming && throwManager != null)
         {
-            Debug.Log("Disabling trajectory visualization");
             throwManager.drawTrajectory = false;
             if (throwManager.lineRenderer)
             {
@@ -147,11 +167,73 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
     {
         if (throwManager == null || !weapon.muzzle)
         {
-            Debug.LogWarning("UpdateTrajectory failed: throwManager=" + (throwManager != null) + ", weapon.muzzle=" + (weapon.muzzle != null));
             return;
         }
-
-        Debug.Log("Updating trajectory");
         throwManager.ForceTrajectoryUpdate();
+    }
+
+    private void OnProjectileInstantiated(GameObject projectile)
+    {
+        var projectileControl = projectile.GetComponent<vProjectileControl>();
+        if (projectileControl != null)
+        {
+            projectileControl.enabled = false;
+        }
+
+        // Get the trajectory points from the line renderer
+        List<Vector3> trajectoryPoints = new List<Vector3>();
+        if (throwManager != null && throwManager.lineRenderer != null)
+        {
+            // Ensure line renderer is enabled and has points
+            throwManager.lineRenderer.enabled = true;
+            throwManager.ForceTrajectoryUpdate();
+            
+            int pointCount = throwManager.lineRenderer.positionCount;
+            if (pointCount > 0)
+            {
+                // Convert line renderer positions to world space
+                for (int i = 0; i < pointCount; i++)
+                {
+                    Vector3 localPos = throwManager.lineRenderer.GetPosition(i);
+                    Vector3 worldPos = throwManager.lineRenderer.transform.TransformPoint(localPos);
+                    trajectoryPoints.Add(worldPos);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("[GrenadeLauncher] Line renderer has no points!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[GrenadeLauncher] Line renderer not found!");
+        }
+
+        // Add our trajectory follower
+        var trajectoryFollower = projectile.AddComponent<TrajectoryFollower>();
+        trajectoryFollower.Initialize(trajectoryPoints, trajectoryTimeRange.y);
+    }
+
+    /// <summary>
+    /// Updates the vertical offset of the throw start point
+    /// </summary>
+    public void UpdateThrowStartVerticalOffset()
+    {
+        if (throwManager != null && throwManager.throwStartPoint != null)
+        {
+            Vector3 newPosition = originalThrowStartPosition;
+            newPosition.y += throwStartVerticalOffset;
+            throwManager.throwStartPoint.localPosition = newPosition;
+        }
+    }
+
+    /// <summary>
+    /// Sets a new vertical offset for the throw start point
+    /// </summary>
+    /// <param name="offset">The new vertical offset value</param>
+    public void SetThrowStartVerticalOffset(float offset)
+    {
+        throwStartVerticalOffset = offset;
+        UpdateThrowStartVerticalOffset();
     }
 } 
