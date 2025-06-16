@@ -41,7 +41,7 @@ namespace Invector.vCharacterController.AI
 
             if (timer >= destinationRoutineIteration)
             {
-                if (!GetComponent<NinjaAntiGravity>().isGravityActivate)
+                if (!GetComponent<NinjaAntiGravity>().isGravityActivate || !GetComponent<NinjaAntiGravity>().toStealthKill)
                 {
 
                     CheckGroundDistance();
