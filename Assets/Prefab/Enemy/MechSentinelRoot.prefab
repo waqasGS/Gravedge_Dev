@@ -29508,7 +29508,7 @@ Transform:
   m_GameObject: {fileID: 3367817798930558733}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.345, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29924,6 +29924,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 1605589619989482850}
   rotationRoot: {fileID: 4508583896602060131}
   playerDetection: {fileID: 3611586599166559814}
+  meleeWeapon: {fileID: 0}
   targetHeight: 3
   riseDuration: 10
   floatDuration: 10
@@ -29974,7 +29975,9 @@ MonoBehaviour:
   isGravityActivate: 0
   axisChangeInterval: 1
   axisLerpSpeed: 3
+  dropDelay: 1.5
   currentState: 0
+  toStealthKill: 0
 --- !u!114 &3284310451253238853
 MonoBehaviour:
   m_ObjectHideFlags: 0
