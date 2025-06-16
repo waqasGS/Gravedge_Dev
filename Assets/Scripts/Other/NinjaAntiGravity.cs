@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Invector.vCharacterController.AI;
+using Invector.vMelee;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class NinjaAntiGravity : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;
     public Transform rotationRoot;
     public vSimpleMeleeAI_SphereSensor playerDetection;
+    public vMeleeWeapon meleeWeapon;
 
     [Header("Anti-Gravity Settings")]
     public float targetHeight = 5f;
@@ -38,8 +41,12 @@ public class NinjaAntiGravity : MonoBehaviour
     public float axisChangeInterval = 1f;
     public float axisLerpSpeed = 1f;
 
+    public float dropDelay = 1.5f;
+
     public enum State { Idle, GoingUp, Floating, GoingDown }
     public State currentState = State.Idle;
+
+    public bool toStealthKill;
 
     void Start()
     {
@@ -78,10 +85,20 @@ public class NinjaAntiGravity : MonoBehaviour
 
     void Update()
     {
-        if (isGravityActivate)
+        if (!isGravityActivate)
         {
             //navMeshAgent.isStopped = true;
+            navMeshAgent.enabled = true;
+        }
+        else
+        {
             navMeshAgent.enabled = false;
+        }
+        if (toStealthKill)
+        {
+            navMeshAgent.enabled = false;
+            rb.constraints = RigidbodyConstraints.None;
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
         else
         {
@@ -158,6 +175,11 @@ public class NinjaAntiGravity : MonoBehaviour
             rotationRoot.localRotation = Quaternion.Slerp(rotationRoot.localRotation, originalRotation, Time.deltaTime * 2f);
         }
     }
+    public void StealthKill()
+    {
+        toStealthKill = true;
+
+    }
 
     void ResetSystem()
     {
@@ -176,4 +198,27 @@ public class NinjaAntiGravity : MonoBehaviour
 
         currentState = State.Idle;
     }
+
+
+    public void DropSword()
+    {
+        StartCoroutine(DropSwordWithDelay());
+    }
+    private IEnumerator DropSwordWithDelay()
+    {
+        GameObject sword = meleeWeapon.gameObject;
+        yield return new WaitForSeconds(dropDelay);
+
+        sword.transform.parent = null;
+
+        Rigidbody rb = sword.GetComponent<Rigidbody>();
+        if (rb == null) rb = sword.AddComponent<Rigidbody>();
+
+        rb.useGravity = true;
+        rb.isKinematic = false;
+
+        Collider col = sword.GetComponent<Collider>();
+        if (col != null) col.enabled = true;
+    }
+
 }
