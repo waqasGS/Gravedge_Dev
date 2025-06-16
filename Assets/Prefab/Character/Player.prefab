@@ -24400,7 +24400,6 @@ GameObject:
   - component: {fileID: 342168011370028750}
   - component: {fileID: 836417176573976333}
   - component: {fileID: 7890907065397531003}
-  - component: {fileID: 6559572529412798061}
   - component: {fileID: 7088838427954291139}
   - component: {fileID: 7568312670945915668}
   - component: {fileID: 7687733655766151467}
@@ -24771,30 +24770,6 @@ MonoBehaviour:
   useRelativeLookAngle: 0
   relativeLookAngleH: HorizontalLookAngleRelative
   relativeLookAngleV: VerticalLookAngleRelative
---- !u!114 &6559572529412798061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2581321778397671749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19ce6a4d1f67f494f8e871355031f21c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultSurface: {fileID: 11400000, guid: 710c74baecce50746bd56b9711c851e7, type: 2}
-  customSurfaces: []
-  animationType: 0
-  debugTextureName: 0
-  _volume: 1
-  _spawnParticle: 1
-  _spawnStepMark: 1
-  _useTriggerEnter: 1
-  leftFootTrigger: {fileID: 3805526590629459526}
-  rightFootTrigger: {fileID: 1922016649628141677}
-  currentStep: {fileID: 0}
-  footStepTriggers: []
 --- !u!114 &7088838427954291139
 MonoBehaviour:
   m_ObjectHideFlags: 0
