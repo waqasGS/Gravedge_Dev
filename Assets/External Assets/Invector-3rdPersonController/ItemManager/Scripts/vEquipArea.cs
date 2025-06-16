@@ -550,5 +550,47 @@ namespace Invector.vItemManager
             equipSlots[indexOfEquippedItem].RemoveItem();
             onUnequipItem.Invoke(this, lastEquippedItem);
         }
+
+        public void SwitchToNextWeapon()
+    {
+        if (equipSlots == null || equipSlots.Count == 0) return;
+
+
+        // Find the next valid slot
+        int currentIndex = indexOfEquippedItem;
+        int nextIndex = currentIndex;
+        bool foundValidSlot = false;
+
+        // Try to find the next valid slot
+        for (int i = 0; i < equipSlots.Count; i++)
+        {
+            nextIndex = (currentIndex + 1 + i) % equipSlots.Count;
+
+                if (equipSlots[nextIndex].isValid && (!skipEmptySlots || equipSlots[nextIndex].item != null))
+                {
+                    foundValidSlot = true;
+                    break;
+                }
+            }
+
+        if (foundValidSlot)
+        {
+          
+            lastEquippedItem = currentEquippedItem;
+            indexOfEquippedItem = nextIndex;
+
+            // Always trigger unequip for the previous item
+            if (lastEquippedItem != null)
+            {
+                onUnequipItem.Invoke(this, lastEquippedItem);
+            }
+
+            // Always trigger equip for the new item if it exists, regardless of ignoreEquipEvents
+            if (currentEquippedItem != null)
+            {
+                onEquipItem.Invoke(this, currentEquippedItem);
+            }
+        }
+    }
     }
 }
