@@ -4297,9 +4297,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 500
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Mouse X
   verticalAxisName: Mouse Y
+  alwaysVisible: 0
   joystickBackground: {fileID: 0}
   joystickHandle: {fileID: 0}
 --- !u!114 &3132158180593832478
@@ -10297,7 +10301,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2581321778397671749}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61a5d2516d5dbbc40b1cfb5cbf17758a, type: 3}
   m_Name: 
@@ -11070,7 +11074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 3
+  selectedToolbar: 2
   _isDead: 1
   _currentHealth: 0
   isImmortal: 1
@@ -11178,8 +11182,8 @@ MonoBehaviour:
   _locomotionType: 0
   freeSpeed:
     movementSmooth: 8
-    animationSmooth: 0.05
-    rotationSpeed: 10
+    animationSmooth: 0.2
+    rotationSpeed: 16
     walkByDefault: 0
     rotateWithCamera: 0
     walkSpeed: 2
@@ -14866,7 +14870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 170, y: 129}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8522133031322551560
@@ -17664,9 +17668,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 100
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
+  alwaysVisible: 0
   joystickBackground: {fileID: 8039597591719259191}
   joystickHandle: {fileID: 7250981876138302364}
 --- !u!1 &3853794832336810993
@@ -23712,7 +23720,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -26715,7 +26723,7 @@ RectTransform:
   m_Father: {fileID: 3663777097340454793}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.3178157, y: 1}
+  m_AnchorMax: {x: 0.3178157, y: 0.47500002}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
@@ -26732,9 +26740,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 100
+  deadzone: 0.1
+  minInputValue: 0.8
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
+  alwaysVisible: 1
   joystickBackground: {fileID: 8039597591719259191}
   joystickHandle: {fileID: 7250981876138302364}
 --- !u!222 &1745746431213894536
@@ -29366,7 +29378,7 @@ MonoBehaviour:
   checkHeightRadius: 0
   showGizmos: 0
   startUsingTargetRotation: 1
-  startSmooth: 0
+  startSmooth: 1
   startSmoothFactor: 1
   autoBehindTarget: 0
   behindTargetDelay: 2
