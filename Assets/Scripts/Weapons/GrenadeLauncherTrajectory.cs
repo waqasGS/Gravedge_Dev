@@ -2,6 +2,7 @@ using UnityEngine;
 using Invector.vShooter;
 using Invector.Throw;
 using Invector.vCharacterController;
+using Invector.vItemManager;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,6 +11,7 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
 {
     [Header("Trajectory Settings")]
     public bool showTrajectoryWhileAiming = true;
+    public bool showTrajectoryWhenEquipped = true;
     public vThrowSettings throwSettings;
     public vThrowVisualSettings visualSettings;
     public GameObject grenadePrefab;
@@ -34,6 +36,8 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
     private vThrowManager throwManager;
     private vThirdPersonInput tpInput;
     private Vector3 originalThrowStartPosition;
+    private vShooterManager shooterManager;
+    private vEquipArea equipArea;
 
     private void Start()
     {
@@ -61,6 +65,13 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
         if (tpInput == null)
         {
             Debug.LogError("[GrenadeLauncher] vThirdPersonInput not found in parent hierarchy!");
+            return;
+        }
+
+        shooterManager = tpInput.GetComponent<vShooterManager>();
+        if (shooterManager == null)
+        {
+            Debug.LogError("[GrenadeLauncher] vShooterManager not found on character!");
             return;
         }
 
@@ -107,25 +118,144 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
         weapon.onEnableAim.AddListener(OnWeaponAimStart);
         weapon.onDisableAim.AddListener(OnWeaponAimEnd);
         weapon.onInstantiateProjectile.AddListener((vProjectileControl projectile) => OnProjectileInstantiated(projectile.gameObject));
+        weapon.onDisable.AddListener(OnWeaponDisable);
+        shooterManager.onEquipWeapon.AddListener(OnWeaponEquip);
+        shooterManager.onUnequipWeapon.AddListener(OnWeaponUnequip);
+
+        // Find and subscribe to inventory events
+        StartCoroutine(FindAndSubscribeToInventory());
 
         // Apply initial vertical offset
         UpdateThrowStartVerticalOffset();
     }
 
-    private void OnDisable()
+    private IEnumerator FindAndSubscribeToInventory()
     {
-        // Unsubscribe from weapon events
-        if (weapon != null)
+        // Wait for a frame to ensure inventory is initialized
+        yield return null;
+
+        // Find the inventory in parent hierarchy
+        var inventory = GetComponentInParent<vInventory>();
+        if (inventory == null)
         {
-            weapon.onEnableAim.RemoveListener(OnWeaponAimStart);
-            weapon.onDisableAim.RemoveListener(OnWeaponAimEnd);
-            weapon.onInstantiateProjectile.RemoveListener((vProjectileControl projectile) => OnProjectileInstantiated(projectile.gameObject));
+            // Try to find inventory in the character's root object
+            var characterRoot = transform.root;
+            inventory = characterRoot.GetComponentInChildren<vInventory>(true);
+            
+            if (inventory == null)
+            {
+                Debug.LogError("[GrenadeLauncher] vInventory not found in character hierarchy! Make sure the inventory is a child of the character root object.");
+                yield break;
+            }
         }
 
-        // Reset throw start position
-        if (throwManager != null && throwManager.throwStartPoint != null)
+        // Wait for equip areas to be initialized
+        while (inventory.equipAreas == null || inventory.equipAreas.Length == 0)
         {
-            throwManager.throwStartPoint.localPosition = originalThrowStartPosition;
+            yield return null;
+        }
+
+        // Subscribe to all equip areas that could potentially hold this weapon
+        foreach (var area in inventory.equipAreas)
+        {
+            // Subscribe to equip area events
+            area.onEquipItem.AddListener(OnEquipAreaItemEquip);
+            area.onUnequipItem.AddListener(OnEquipAreaItemUnequip);
+        }
+        
+        // Subscribe to inventory events
+        inventory.onEquipItem.AddListener(OnInventoryEquipItem);
+        inventory.onUnequipItem.AddListener(OnInventoryUnequipItem);
+    }
+
+    private void OnEquipAreaItemEquip(vEquipArea area, vItem item)
+    {
+        // Check if this is our weapon
+        if (item.originalObject == gameObject)
+        {
+            equipArea = area; // Store the equip area for this weapon
+            if (showTrajectoryWhenEquipped && throwManager != null)
+            {
+                throwManager.drawTrajectory = true;
+                throwManager.lineRenderer.enabled = true;
+                UpdateTrajectory();
+            }
+        }
+    }
+
+    private void OnEquipAreaItemUnequip(vEquipArea area, vItem item)
+    {
+        // Check if this is our weapon
+        if (item.originalObject == gameObject)
+        {
+            if (throwManager != null)
+            {
+                // Only hide trajectory if we're not re-equipping the same weapon
+                if (area.currentEquippedItem == null || area.currentEquippedItem.originalObject != gameObject)
+                {
+                    throwManager.drawTrajectory = false;
+                    if (throwManager.lineRenderer)
+                    {
+                        throwManager.lineRenderer.enabled = false;
+                    }
+                    if (throwManager.throwEnd)
+                    {
+                        throwManager.throwEnd.SetActive(false);
+                    }
+                }
+            }
+        }
+    }
+
+    private void OnInventoryEquipItem(vEquipArea area, vItem item)
+    {
+        // Check if this is our weapon
+        if (item.originalObject == gameObject)
+        {
+            equipArea = area; // Store the equip area for this weapon
+            if (showTrajectoryWhenEquipped && throwManager != null)
+            {
+                throwManager.drawTrajectory = true;
+                throwManager.lineRenderer.enabled = true;
+                UpdateTrajectory();
+            }
+        }
+    }
+
+    private void OnInventoryUnequipItem(vEquipArea area, vItem item)
+    {
+        // Check if this is our weapon
+        if (item.originalObject == gameObject)
+        {
+            if (throwManager != null)
+            {
+                throwManager.drawTrajectory = false;
+                if (throwManager.lineRenderer)
+                {
+                    throwManager.lineRenderer.enabled = false;
+                }
+                if (throwManager.throwEnd)
+                {
+                    throwManager.throwEnd.SetActive(false);
+                }
+            }
+        }
+    }
+
+    private void OnWeaponDisable()
+    {
+        // Disable trajectory visualization when weapon is disabled
+        if (throwManager != null)
+        {
+            throwManager.drawTrajectory = false;
+            if (throwManager.lineRenderer)
+            {
+                throwManager.lineRenderer.enabled = false;
+            }
+            if (throwManager.throwEnd)
+            {
+                throwManager.throwEnd.SetActive(false);
+            }
         }
     }
 
@@ -167,6 +297,7 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
     {
         if (throwManager == null || !weapon.muzzle)
         {
+            Debug.LogWarning("[GrenadeLauncher] Cannot update trajectory - throwManager or weapon.muzzle is null");
             return;
         }
         throwManager.ForceTrajectoryUpdate();
@@ -235,5 +366,80 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
     {
         throwStartVerticalOffset = offset;
         UpdateThrowStartVerticalOffset();
+    }
+
+    private void OnWeaponEquip(vShooterWeapon newWeapon, bool isLeftWeapon)
+    {
+        if (newWeapon.gameObject == gameObject && showTrajectoryWhenEquipped && throwManager != null)
+        {
+            throwManager.drawTrajectory = true;
+            throwManager.lineRenderer.enabled = true;
+            UpdateTrajectory();
+        }
+    }
+
+    private void OnWeaponUnequip(vShooterWeapon oldWeapon, bool isLeftWeapon)
+    {
+        if (oldWeapon.gameObject == gameObject && throwManager != null)
+        {
+            throwManager.drawTrajectory = false;
+            throwManager.lineRenderer.enabled = false;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeFromEvents();
+    }
+
+    private void OnWeaponDrop()
+    {
+        UnsubscribeFromEvents();
+    }
+
+    private void UnsubscribeFromEvents()
+    {
+        // Unsubscribe from weapon events
+        if (weapon != null)
+        {
+            weapon.onEnableAim.RemoveListener(OnWeaponAimStart);
+            weapon.onDisableAim.RemoveListener(OnWeaponAimEnd);
+            weapon.onInstantiateProjectile.RemoveListener((vProjectileControl projectile) => OnProjectileInstantiated(projectile.gameObject));
+            weapon.onDisable.RemoveListener(OnWeaponDisable);
+        }
+
+        if (shooterManager != null)
+        {
+            shooterManager.onEquipWeapon.RemoveListener(OnWeaponEquip);
+            shooterManager.onUnequipWeapon.RemoveListener(OnWeaponUnequip);
+        }
+
+        // Unsubscribe from inventory events
+        var inventory = GetComponentInParent<vInventory>();
+        if (inventory == null)
+        {
+            var characterRoot = transform.root;
+            inventory = characterRoot.GetComponentInChildren<vInventory>(true);
+        }
+
+        if (inventory != null)
+        {
+            // Unsubscribe from all equip areas
+            foreach (var area in inventory.equipAreas)
+            {
+                area.onEquipItem.RemoveListener(OnEquipAreaItemEquip);
+                area.onUnequipItem.RemoveListener(OnEquipAreaItemUnequip);
+            }
+
+            // Unsubscribe from inventory events
+            inventory.onEquipItem.RemoveListener(OnInventoryEquipItem);
+            inventory.onUnequipItem.RemoveListener(OnInventoryUnequipItem);
+        }
+
+        // Reset throw start position
+        if (throwManager != null && throwManager.throwStartPoint != null)
+        {
+            throwManager.throwStartPoint.localPosition = originalThrowStartPosition;
+        }
     }
 } 
