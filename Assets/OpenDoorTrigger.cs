@@ -11,6 +11,14 @@ public class OpenDoorTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             anim.SetBool("Opened", true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            anim.SetBool("Opened", false);
             anim.SetBool("Actived", true);
         }
     }
