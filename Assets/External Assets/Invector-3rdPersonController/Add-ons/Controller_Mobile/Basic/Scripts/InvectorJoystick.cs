@@ -8,9 +8,16 @@ public class InvectorFloatingJoystick : MonoBehaviour, IPointerDownHandler, IPoi
     public enum AxisOption { Both, OnlyHorizontal, OnlyVertical }
 
     public int MovementRange = 100;
+    [Range(0f, 1f)]
+    public float deadzone = 0.1f; // Deadzone radius (0-1)
+    [Range(0f, 1f)]
+    public float minInputValue = 0.2f; // Minimum input value after deadzone (0-1)
+    [Range(0f, 1f)]
+    public float maxInputValue = 1f; // Maximum input value (0-1)
     public AxisOption axesToUse = AxisOption.Both;
     public string horizontalAxisName = "Horizontal";
     public string verticalAxisName = "Vertical";
+    public bool alwaysVisible = false; // New field to control joystick visibility
 
     public RectTransform joystickBackground; // assign in Inspector
     public RectTransform joystickHandle;     // assign in Inspector
@@ -23,7 +30,7 @@ public class InvectorFloatingJoystick : MonoBehaviour, IPointerDownHandler, IPoi
     private void Start()
     {
         CreateVirtualAxes();
-        joystickBackground.gameObject.SetActive(false); // start hidden
+        joystickBackground.gameObject.SetActive(alwaysVisible); // Show if alwaysVisible is true
     }
 
     private void CreateVirtualAxes()
@@ -67,13 +74,31 @@ public class InvectorFloatingJoystick : MonoBehaviour, IPointerDownHandler, IPoi
         joystickHandle.anchoredPosition = delta;
 
         Vector2 normalized = delta / MovementRange;
+        
+        // Apply deadzone
+        float magnitude = normalized.magnitude;
+        if (magnitude < deadzone)
+        {
+            normalized = Vector2.zero;
+        }
+        else
+        {
+            // Remap the values from deadzone to 1 to minInputValue to maxInputValue
+            float remappedMagnitude = Mathf.Lerp(minInputValue, maxInputValue, 
+                (magnitude - deadzone) / (1f - deadzone));
+            normalized = normalized.normalized * remappedMagnitude;
+        }
+
         if (useX) horizontalVirtualAxis.Update(normalized.x);
         if (useY) verticalVirtualAxis.Update(normalized.y);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        joystickBackground.gameObject.SetActive(false);
+        if (!alwaysVisible)
+        {
+            joystickBackground.gameObject.SetActive(false);
+        }
         joystickHandle.anchoredPosition = Vector2.zero;
 
         if (useX) horizontalVirtualAxis.Update(0);
