@@ -59113,7 +59113,7 @@ MonoBehaviour:
   OnStartAction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6273499533428867093}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -59140,7 +59140,7 @@ MonoBehaviour:
   OnFinishAction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6273499533428867093}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -222725,11 +222725,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5510270009019825883}
   m_CullTransparentMesh: 1
---- !u!1 &6273499533428867093 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7650721964632529455, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
-  m_PrefabInstance: {fileID: 6595137614882481976}
-  m_PrefabAsset: {fileID: 0}
 --- !u!199 &6275970943501351675
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -237275,22 +237270,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6692407316412134033, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6692407316412134033, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7703453938716297557, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1112967660}
-    - target: {fileID: 8071980580080305350, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8077637031517465305, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -237299,10 +237282,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1112967660}
-    - target: {fileID: 8966427978556022261, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
-      propertyPath: indexList
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

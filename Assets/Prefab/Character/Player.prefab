@@ -14779,7 +14779,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 184.91, y: 151.47}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8522133031322551560
@@ -26679,9 +26679,9 @@ RectTransform:
   m_Father: {fileID: 3663777097340454793}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.3178157, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.3178157, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 1.473053}
+  m_SizeDelta: {x: 0, y: 2.946106}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1134735199970140922
 MonoBehaviour:
@@ -26697,12 +26697,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementRange: 100
   deadzone: 0.1
-  minInputValue: 0.2
+  minInputValue: 0.8
   maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
-  alwaysVisible: 0
+  alwaysVisible: 1
   joystickBackground: {fileID: 8039597591719259191}
   joystickHandle: {fileID: 7250981876138302364}
 --- !u!222 &1745746431213894536
