@@ -235,38 +235,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 749067375}
     m_Modifications:
-    - target: {fileID: 523193341307165255, guid: 092023529ae5aa0488c373ee62d54549, type: 3}
-      propertyPath: selectedToolbar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 523193341307165255, guid: 092023529ae5aa0488c373ee62d54549, type: 3}
-      propertyPath: items.Array.data[0].autoEquip
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 523193341307165255, guid: 092023529ae5aa0488c373ee62d54549, type: 3}
-      propertyPath: items.Array.data[0].indexArea
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 523193341307165255, guid: 092023529ae5aa0488c373ee62d54549, type: 3}
-      propertyPath: items.Array.data[0].addToEquipArea
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2843197986650252736, guid: 092023529ae5aa0488c373ee62d54549, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4018256157266090004, guid: 092023529ae5aa0488c373ee62d54549, type: 3}
-      propertyPath: canDoAction
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4018256157266090004, guid: 092023529ae5aa0488c373ee62d54549, type: 3}
-      propertyPath: selectedToolbar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4018256157266101706, guid: 092023529ae5aa0488c373ee62d54549, type: 3}
-      propertyPath: openCloseEvents
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4018256157275831458, guid: 092023529ae5aa0488c373ee62d54549, type: 3}
       propertyPath: m_Name
       value: vStunGrenade_Collectable
@@ -871,18 +839,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2370830, guid: 549113e7ca501ea4daacc3daf503ac3f, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 4d60e1febbb1f224e890029050817085, type: 2}
-    - target: {fileID: 2370830, guid: 549113e7ca501ea4daacc3daf503ac3f, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 6e28447ba2c689044ad64c578428b199, type: 2}
-    - target: {fileID: 3324130, guid: 549113e7ca501ea4daacc3daf503ac3f, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1860331943849371600, guid: e822bc7b2f166504d9019daa78036bb8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -940,18 +896,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2328874, guid: 82e6b2030c96f3441af94c30916590a7, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2328874, guid: 82e6b2030c96f3441af94c30916590a7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f35d33bcf41f79f4a94b13316d8ed068, type: 2}
-    - target: {fileID: 3375568, guid: 82e6b2030c96f3441af94c30916590a7, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: -8947351537825740741, guid: 9fc2146df6bc6cc478fb9bbafc7bda8e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2153,10 +2097,6 @@ PrefabInstance:
     - target: {fileID: 188466, guid: 89dc935a4ecc17743b9710e8d8193ca7, type: 3}
       propertyPath: m_Name
       value: vAmmoGrenadeLauncher_Inventory
-      objectReference: {fileID: 0}
-    - target: {fileID: 188466, guid: 89dc935a4ecc17743b9710e8d8193ca7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 403914, guid: 89dc935a4ecc17743b9710e8d8193ca7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3732,22 +3672,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 459346, guid: f0757531110a1364595c6bd396076c14, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2370830, guid: f0757531110a1364595c6bd396076c14, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f59d38d7fdabd3048a6eec44cfa5365f, type: 2}
-    - target: {fileID: 2370830, guid: f0757531110a1364595c6bd396076c14, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5c7176cef124e1a4793b448ed91b74e1, type: 2}
-    - target: {fileID: 3324130, guid: f0757531110a1364595c6bd396076c14, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300002, guid: 584761fab006d6d42b4d0d8c56a51241, type: 3}
-    - target: {fileID: 11411812, guid: f0757531110a1364595c6bd396076c14, type: 3}
-      propertyPath: selectedToolbar
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

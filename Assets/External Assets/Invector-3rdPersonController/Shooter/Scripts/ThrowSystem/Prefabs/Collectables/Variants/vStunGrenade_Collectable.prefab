@@ -18,15 +18,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 498288, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -7.648967
       objectReference: {fileID: 0}
     - target: {fileID: 498288, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 498288, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.14603543
       objectReference: {fileID: 0}
     - target: {fileID: 498288, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -34,15 +34,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 498288, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 498288, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 498288, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 498288, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -61,6 +61,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11441526, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
+      propertyPath: canDoAction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11441526, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
       propertyPath: openCloseWindow
       value: 1
       objectReference: {fileID: 0}
@@ -72,10 +76,18 @@ PrefabInstance:
       propertyPath: throwableName
       value: Stun Grenade
       objectReference: {fileID: 0}
+    - target: {fileID: 11454632, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
+      propertyPath: openCloseEvents
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1060310398027361144, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 1f3b8e1bda8349946a81d2a5adaaec75, type: 3}
+    - target: {fileID: 1204333767227173026, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3495205890221872933, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -90,6 +102,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3495205890221872933, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
       propertyPath: items.Array.data[0].amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495205890221872933, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
+      propertyPath: items.Array.data[0].autoEquip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495205890221872933, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
+      propertyPath: items.Array.data[0].indexArea
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495205890221872933, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
+      propertyPath: items.Array.data[0].addToEquipArea
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7790053849694453751, guid: 647eec85b879bbf4bb58a125d9bbc66e, type: 3}
