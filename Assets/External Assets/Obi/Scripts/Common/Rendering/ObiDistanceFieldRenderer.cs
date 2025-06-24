@@ -63,7 +63,7 @@ namespace Obi
                 cutawayTexture.hideFlags = HideFlags.HideAndDontSave;
             }
             else
-                cutawayTexture.Reinitialize(sampleCount, sampleCount);
+                cutawayTexture.Resize(sampleCount, sampleCount);
         }
 
         private void CreatePlaneMesh(ObiDistanceField field)
