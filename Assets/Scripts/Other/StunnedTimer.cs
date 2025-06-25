@@ -10,6 +10,8 @@ public class StunnedTimer : MonoBehaviour
 
     public void StartStunned()
     {
+      
+
         _anim.SetBool("AfterShock", true);
         Invoke(nameof(StopStunned), stunnedDelay);
         
