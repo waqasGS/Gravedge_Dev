@@ -8245,7 +8245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5013564785651739530, guid: a06f1c48277abf648a028adf956491c5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8300,6 +8300,10 @@ PrefabInstance:
     - target: {fileID: 120964, guid: 549113e7ca501ea4daacc3daf503ac3f, type: 3}
       propertyPath: m_Name
       value: vCollectibleGrenadeLauncher
+      objectReference: {fileID: 0}
+    - target: {fileID: 120964, guid: 549113e7ca501ea4daacc3daf503ac3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 459346, guid: 549113e7ca501ea4daacc3daf503ac3f, type: 3}
       propertyPath: m_LocalPosition.x
