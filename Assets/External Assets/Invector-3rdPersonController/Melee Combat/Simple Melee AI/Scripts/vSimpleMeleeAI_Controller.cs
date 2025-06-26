@@ -41,9 +41,10 @@ namespace Invector.vCharacterController.AI
 
             if (timer >= destinationRoutineIteration)
             {
-                if (!GetComponent<NinjaAntiGravity>().isGravityActivate || !GetComponent<NinjaAntiGravity>().toStealthKill)
+                if (!GetComponent<NinjaAntiGravity>().isGravityActivate && !GetComponent<NinjaAntiGravity>().toStealthKill)
                 {
 
+                    //Debug.Log("Checing Gravity");
                     CheckGroundDistance();
 
                     if (agent.updatePosition)
@@ -53,6 +54,7 @@ namespace Invector.vCharacterController.AI
 
                     timer = 0f; // reset timer
                 }
+
             }
         }
 
