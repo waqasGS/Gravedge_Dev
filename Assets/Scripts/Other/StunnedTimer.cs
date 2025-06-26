@@ -10,12 +10,12 @@ public class StunnedTimer : MonoBehaviour
 
     public void StartStunned()
     {
-      
+        Debug.Log("StartStunned");
 
         _anim.SetBool("AfterShock", true);
-        Invoke(nameof(StopStunned), stunnedDelay);
-        
         particle.SetActive(true); // Corrected usage of SetActive
+        Invoke(nameof(StopStunned), stunnedDelay);
+
     }
 
     public void StopStunned()
