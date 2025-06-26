@@ -1,10 +1,6 @@
 ﻿using UnityEngine;
 
 public class FreeCamera : MonoBehaviour {
-#if UNITY_EDITOR
-	static Texture2D ms_invisibleCursor;
-#endif
-
 	public bool enableInputCapture = true;
 	public bool holdRightMouseCapture = false;
 
@@ -17,13 +13,6 @@ public class FreeCamera : MonoBehaviour {
 	float	m_pitch;
 	
 	void Awake() {
-#if UNITY_EDITOR
-		if(!ms_invisibleCursor) {
-			ms_invisibleCursor = new Texture2D(0, 0);
-	//		ms_invisibleCursor.SetPixel(0, 0, new Color32(0, 0, 0, 0));
-		}
-#endif
-
 		enabled = enableInputCapture;
 	}
 
@@ -33,13 +22,7 @@ public class FreeCamera : MonoBehaviour {
 	}
 
 	void CaptureInput() {
-		Cursor.lockState = CursorLockMode.Locked;
-
-//#if UNITY_EDITOR
-	//	Cursor.SetCursor(ms_invisibleCursor, Vector2.zero, CursorMode.ForceSoftware);
-//#else
-		Cursor.visible = false;
-//#endif
+		
 		m_inputCaptured = true;
 
 		m_yaw = transform.eulerAngles.y;
@@ -48,11 +31,7 @@ public class FreeCamera : MonoBehaviour {
 
 	void ReleaseInput() {
 		Cursor.lockState = CursorLockMode.None;
-#if UNITY_EDITOR
-		Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-#else
 		Cursor.visible = true;
-#endif
 		m_inputCaptured = false;
 	}
 
