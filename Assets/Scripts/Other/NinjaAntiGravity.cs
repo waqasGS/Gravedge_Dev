@@ -85,16 +85,13 @@ public class NinjaAntiGravity : MonoBehaviour
 
     void Update()
     {
-        if (!isGravityActivate)
+        if (isGravityActivate)
         {
             //navMeshAgent.isStopped = true;
-            navMeshAgent.enabled = true;
-        }
-        else
-        {
+            rb.constraints = RigidbodyConstraints.None;
             navMeshAgent.enabled = false;
         }
-        if (toStealthKill)
+        else if (toStealthKill)
         {
             navMeshAgent.enabled = false;
             rb.constraints = RigidbodyConstraints.None;

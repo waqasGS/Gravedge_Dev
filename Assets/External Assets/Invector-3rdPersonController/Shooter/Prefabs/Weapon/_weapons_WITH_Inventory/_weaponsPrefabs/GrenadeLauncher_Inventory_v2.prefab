@@ -28095,6 +28095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showTrajectoryWhileAiming: 1
+  showTrajectoryWhenEquipped: 1
   throwSettings: {fileID: 0}
   visualSettings: {fileID: 0}
   grenadePrefab: {fileID: 5072132771294544799, guid: e2db650e9dfcbaf429dc1a3e5048431b, type: 3}
@@ -28648,6 +28649,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e822bc7b2f166504d9019daa78036bb8, type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e822bc7b2f166504d9019daa78036bb8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3856175216463455804, guid: e822bc7b2f166504d9019daa78036bb8, type: 3}
       propertyPath: m_Layer
