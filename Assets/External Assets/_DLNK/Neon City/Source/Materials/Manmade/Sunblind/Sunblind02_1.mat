@@ -13,7 +13,6 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _GLOSSYREFLECTIONS_OFF
-  - _METALLICGLOSSMAP
   - _NORMALMAP
   - _PARALLAXMAP
   - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
@@ -30,7 +29,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: af8968e4a29f84b4dbb20a9e987badc9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8f065ea5b1eeb514da9f225c9aa5aa2c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -47,14 +46,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1.53}
+        m_Scale: {x: 1.32, y: 1.98}
         m_Offset: {x: 0, y: -0.09}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 182d26b2222caee4b8edd38da87221ac, type: 3}
-        m_Scale: {x: 1, y: 1.53}
+        m_Texture: {fileID: 2800000, guid: 6f5f23e577157ce40a25ef816187e08b, type: 3}
+        m_Scale: {x: 1.32, y: 1.98}
         m_Offset: {x: 0, y: -0.09}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 182d26b2222caee4b8edd38da87221ac, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
