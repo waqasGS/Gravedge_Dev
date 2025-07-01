@@ -22401,6 +22401,7 @@ GameObject:
   - component: {fileID: 139953762192538899}
   - component: {fileID: 445210476143599632}
   - component: {fileID: 3500045306391462925}
+  - component: {fileID: 2572621121761582899}
   m_Layer: 5
   m_Name: UnmountBike
   m_TagString: Untagged
@@ -22534,10 +22535,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 2572621121761582899}
+        m_TargetAssemblyTypeName: UnmountButton, Assembly-CSharp
+        m_MethodName: Unmount
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -22546,6 +22547,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &2572621121761582899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4694108893635409292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c4238bfccc1dc245a471cf703b7e1c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: {fileID: 0}
 --- !u!1 &4709913931025919616
 GameObject:
   m_ObjectHideFlags: 0
