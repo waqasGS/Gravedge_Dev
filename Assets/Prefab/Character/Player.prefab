@@ -164,9 +164,9 @@ GameObject:
   - component: {fileID: 7836846344605271179}
   - component: {fileID: 3218244328259448124}
   - component: {fileID: 2233346220944760710}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: hitBox
-  m_TagString: Untagged
+  m_TagString: Ignore Ragdoll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10300,6 +10300,7 @@ GameObject:
   - component: {fileID: 4850032877417954192}
   - component: {fileID: 8825230673740252244}
   - component: {fileID: 2083285512200066004}
+  - component: {fileID: 1396919004171122927}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -10426,7 +10427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 1
+  selectedToolbar: 3
   canUseMeleeBlock_H: 1
   canUseMeleeWeakAttack_H: 1
   canUseMeleeStrongAttack_H: 1
@@ -10532,7 +10533,7 @@ MonoBehaviour:
   leftWeaponAmmoDisplayID: 1
   rightWeaponAmmoDisplayID: 1
   applyRecoilToCamera: 1
-  cameraRecoilStability: 0
+  cameraRecoilStability: 1
   useLockOn: 0
   useLockOnMeleeOnly: 1
   hipfireShot: 0
@@ -10590,7 +10591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openCloseEvents: 0
-  openCloseWindow: 0
+  openCloseWindow: 1
   selectedToolbar: 0
   ammoListData: {fileID: 11400000, guid: 63dd85acb3dbe1746ab7200f610a2d5f, type: 2}
   itemManager: {fileID: 0}
@@ -11256,7 +11257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openCloseEvents: 0
-  openCloseWindow: 0
+  openCloseWindow: 1
   selectedToolbar: 0
   Members:
   - transform: {fileID: 3138648009918322312}
@@ -11492,13 +11493,13 @@ MonoBehaviour:
     sprintSpeed: 6
     crouchSpeed: 2
   strafeSpeed:
-    movementSmooth: 6
+    movementSmooth: 8
     animationSmooth: 0.2
     rotationSpeed: 16
     walkByDefault: 0
     rotateWithCamera: 0
-    walkSpeed: 2
-    runningSpeed: 4
+    walkSpeed: 5
+    runningSpeed: 6
     sprintSpeed: 6
     crouchSpeed: 2
   disableAnimations: 0
@@ -12121,8 +12122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openCloseEvents: 0
-  openCloseWindow: 0
-  selectedToolbar: 0
+  openCloseWindow: 1
+  selectedToolbar: 5
   forwardInput:
     useInput: 1
     isAxisInUse: 0
@@ -12198,10 +12199,34 @@ MonoBehaviour:
   chainedAction: Chained-Actions are provided as an option
   OnStartAction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1396919004171122927}
+        m_TargetAssemblyTypeName: WallRunAimController, Assembly-CSharp
+        m_MethodName: OnWallRunStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnFinishAction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1396919004171122927}
+        m_TargetAssemblyTypeName: WallRunAimController, Assembly-CSharp
+        m_MethodName: OnWallRunEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   debugMode: 0
   isAvailable: 0
   isOnAction: 0
@@ -12361,6 +12386,18 @@ MonoBehaviour:
     maxAmount: 3
   defaultMaxAmount: 6
   indexOfCurrentThrowable: 0
+--- !u!114 &1396919004171122927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2581321778397671749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 852381d7b369891409204e2d8bf244c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2582713900909392161
 GameObject:
   m_ObjectHideFlags: 0
@@ -13692,9 +13729,9 @@ GameObject:
   - component: {fileID: 553417786302839219}
   - component: {fileID: 5175189445297332387}
   - component: {fileID: 7097869667266114585}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: hitBox
-  m_TagString: Untagged
+  m_TagString: Ignore Ragdoll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31712,9 +31749,9 @@ GameObject:
   - component: {fileID: 5383911421930031350}
   - component: {fileID: 6390456598524657692}
   - component: {fileID: 7110186213833509227}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: hitBox
-  m_TagString: Untagged
+  m_TagString: Ignore Ragdoll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36355,9 +36392,9 @@ GameObject:
   - component: {fileID: 6782060285102218726}
   - component: {fileID: 307068750447282511}
   - component: {fileID: 8899866256441671119}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: hitBox
-  m_TagString: Untagged
+  m_TagString: Ignore Ragdoll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
