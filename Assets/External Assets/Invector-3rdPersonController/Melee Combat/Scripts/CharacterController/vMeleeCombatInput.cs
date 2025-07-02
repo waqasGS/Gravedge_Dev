@@ -174,15 +174,24 @@ namespace Invector.vCharacterController
         /// <summary>
         /// Override the Sprint method to cancel Sprinting when Attacking
         /// </summary>
+        // public override void SprintInput()
+        // {
+        //     if (sprintInput.useInput)
+        //     {
+        //         bool canSprint = cc.useContinuousSprint ? sprintInput.GetButtonDown() : sprintInput.GetButton();
+        //         cc.Sprint(canSprint && !isAttacking);
+        //     }
+        // }
+
         public override void SprintInput()
         {
             if (sprintInput.useInput)
             {
-                bool canSprint = cc.useContinuousSprint ? sprintInput.GetButtonDown() : sprintInput.GetButton();
+                // Ab sirf button hold karne par sprint hogi
+                bool canSprint = sprintInput.GetButton();
                 cc.Sprint(canSprint && !isAttacking);
             }
         }
-
         #endregion
 
         #region Conditions

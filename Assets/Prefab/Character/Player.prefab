@@ -3135,7 +3135,7 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: Jump
             m_BoolArgument: 0
-          m_CallState: 1
+          m_CallState: 2
   - eventID: 3
     callback:
       m_PersistentCalls:
@@ -3151,7 +3151,7 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: Jump
             m_BoolArgument: 0
-          m_CallState: 1
+          m_CallState: 2
 --- !u!114 &1033698951611063511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11376,7 +11376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 6
+  selectedToolbar: 2
   _isDead: 1
   _currentHealth: 0
   isImmortal: 0
@@ -11483,13 +11483,13 @@ MonoBehaviour:
   moveToDirectionInFree: 0
   _locomotionType: 0
   freeSpeed:
-    movementSmooth: 8
+    movementSmooth: 5
     animationSmooth: 0.2
-    rotationSpeed: 16
+    rotationSpeed: 8
     walkByDefault: 0
     rotateWithCamera: 0
-    walkSpeed: 5
-    runningSpeed: 6
+    walkSpeed: 3
+    runningSpeed: 4
     sprintSpeed: 6
     crouchSpeed: 2
   strafeSpeed:
@@ -12264,6 +12264,7 @@ MonoBehaviour:
   - {fileID: 4110205983220601287}
   - {fileID: 8437832774001819981}
   - {fileID: 6324527076361748221}
+  - {fileID: 4939501990642662615}
 --- !u!114 &2083285512200066004
 MonoBehaviour:
   m_ObjectHideFlags: 0
