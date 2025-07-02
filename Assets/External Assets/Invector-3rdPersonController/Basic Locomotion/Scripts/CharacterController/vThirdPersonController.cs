@@ -92,17 +92,12 @@ namespace Invector.vCharacterController
                     SetControllerMoveSpeed(freeSpeed);
                     SetAnimatorMoveSpeed(freeSpeed);
                     
-                    print("Is Strafling is false");
                 }
                 else if (locomotionType.Equals(LocomotionType.OnlyStrafe) || locomotionType.Equals(LocomotionType.FreeWithStrafe) && isStrafing)
                 {
                     isStrafing = true;
                     SetControllerMoveSpeed(strafeSpeed);
                     SetAnimatorMoveSpeed(strafeSpeed);
-                    
-                  
-                  
-                    print("IsStrafing is true");
                 }
             }
 

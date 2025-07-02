@@ -10427,7 +10427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 3
+  selectedToolbar: 9
   canUseMeleeBlock_H: 1
   canUseMeleeWeakAttack_H: 1
   canUseMeleeStrongAttack_H: 1
@@ -10464,7 +10464,7 @@ MonoBehaviour:
   checkAimCrouchedOffsetEndX: 0
   keepAimingWhenReload: 0
   alwaysAiming: 1
-  onlyWalkWhenAiming: 1
+  onlyWalkWhenAiming: 0
   useDefaultMovesetWhenNotAiming: 1
   armIKSmoothIn: 10
   armIKSmoothOut: 25
@@ -11376,7 +11376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 2
+  selectedToolbar: 6
   _isDead: 1
   _currentHealth: 0
   isImmortal: 0
@@ -12123,7 +12123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 5
+  selectedToolbar: 1
   forwardInput:
     useInput: 1
     isAxisInUse: 0
@@ -22569,7 +22569,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -30067,7 +30067,7 @@ MonoBehaviour:
   showGizmos: 0
   startUsingTargetRotation: 1
   startSmooth: 1
-  startSmoothFactor: 1
+  startSmoothFactor: 2
   autoBehindTarget: 0
   behindTargetDelay: 2
   behindTargetSmoothRotation: 1
@@ -31364,7 +31364,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5588943948334616260
