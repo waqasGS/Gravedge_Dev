@@ -19,8 +19,8 @@ namespace com.mobilin.games
         // 
         [vEditorToolbar("Debug", order = 9)]
         [Header("MIS")]
-        [mvReadOnly] [SerializeField] protected bool ignoreFalling;
-        [mvReadOnly] [SerializeField] protected bool lockGravity;
+        [mvReadOnly][SerializeField] protected bool ignoreFalling;
+        [mvReadOnly][SerializeField] protected bool lockGravity;
 
 
         // ----------------------------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ namespace com.mobilin.games
         }
 
 
-       
+
         private new void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);
@@ -86,6 +86,7 @@ namespace com.mobilin.games
 
         private new void OnTriggerExit(Collider other)
         {
+            base.OnTriggerExit(other);
             if (other.CompareTag("BikeSettingTarget"))
             {
                 OnBikeMountZoneExit?.Invoke();
