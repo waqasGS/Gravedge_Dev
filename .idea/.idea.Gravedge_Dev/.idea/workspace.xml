@@ -6,12 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="9ff36d9a-cd5c-4bb1-8a1d-c90aa7983738" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Gravedge_Dev/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gravedge_Dev/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/External Assets/Invector-3rdPersonController/Basic Locomotion/Scripts/CharacterController/Actions/vGenericAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/External Assets/Invector-3rdPersonController/Basic Locomotion/Scripts/CharacterController/Actions/vGenericAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/External Assets/Invector-3rdPersonController/Basic Locomotion/Scripts/CharacterController/Actions/vTriggerGenericAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/External Assets/Invector-3rdPersonController/Basic Locomotion/Scripts/CharacterController/Actions/vTriggerGenericAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/External Assets/MIS-Packages/Motorcycle/Demo/Animator/Motorcycle@ShooterMelee_WallRun.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/External Assets/MIS-Packages/Motorcycle/Demo/Animator/Motorcycle@ShooterMelee_WallRun.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GamePlay_Zun.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GamePlay_Zun.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/External Assets/Invector-3rdPersonController/Basic Locomotion/Scripts/CharacterController/vThirdPersonController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/External Assets/Invector-3rdPersonController/Basic Locomotion/Scripts/CharacterController/vThirdPersonController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/External Assets/Invector-3rdPersonController/Basic Locomotion/Scripts/CharacterCreator/CameraStates/vShooterMelee@CameraState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/External Assets/Invector-3rdPersonController/Basic Locomotion/Scripts/CharacterCreator/CameraStates/vShooterMelee@CameraState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Character/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Character/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GamePlay Wiki.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GamePlay Wiki.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +23,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/011ccacb58784a80ac4b48b4c50ee0b7176400/88/8ca53cfe/UnityEvent`2.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WallRunAimController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -41,14 +39,15 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "XThreadsFramesViewSplitterKey": "0.61142856",
-    "do_not_show_Android_plugin_suggestion": "true",
-    "git-widget-placeholder": "Parkour__System",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "PUBG-Style-Mechanics",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "advanced.settings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -59,9 +58,6 @@
       <option name="WORKING_DIRECTORY" value="C:\UnityProjects\Gravedge_Dev" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <option name="ENV_FILE_PATHS" value="" />
-      <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
@@ -70,9 +66,6 @@
       <option name="WORKING_DIRECTORY" value="C:\UnityProjects\Gravedge_Dev" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <option name="ENV_FILE_PATHS" value="" />
-      <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
       <method v="2" />
     </configuration>
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
@@ -86,23 +79,19 @@
       <option name="selectedOptions">
         <list />
       </option>
-      <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="34764">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="34764" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />
       </option>
-      <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
   </component>
@@ -130,7 +119,9 @@
       <workItem from="1750050078615" duration="371000" />
       <workItem from="1750050485350" duration="4052000" />
       <workItem from="1750684028447" duration="623000" />
-      <workItem from="1751278704457" duration="2758000" />
+      <workItem from="1751282009032" duration="789000" />
+      <workItem from="1751348523614" duration="7785000" />
+      <workItem from="1751358973481" duration="4395000" />
     </task>
     <servers />
   </component>
@@ -146,5 +137,9 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

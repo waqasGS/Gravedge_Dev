@@ -91,6 +91,7 @@ namespace Invector.vCharacterController
                 {
                     SetControllerMoveSpeed(freeSpeed);
                     SetAnimatorMoveSpeed(freeSpeed);
+                    
                 }
                 else if (locomotionType.Equals(LocomotionType.OnlyStrafe) || locomotionType.Equals(LocomotionType.FreeWithStrafe) && isStrafing)
                 {
