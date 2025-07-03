@@ -495,19 +495,19 @@ namespace Invector.vCharacterController
             }
         }
 
-        // public virtual void SprintInput()
-        // {
-        //     if (sprintInput.useInput)
-        //     {
-        //         cc.Sprint(cc.useContinuousSprint ? sprintInput.GetButtonDown() : sprintInput.GetButton());
-        //     }
-        // }
-
         public virtual void SprintInput()
         {
             if (sprintInput.useInput)
-                cc.Sprint(sprintInput.useInput); // input.sprintInput is true when button is held
+            {
+                cc.Sprint(cc.useContinuousSprint ? sprintInput.GetButtonDown() : sprintInput.GetButton());
+            }
         }
+
+        //public virtual void SprintInput()
+        //{
+        //    if (sprintInput.useInput)
+        //        cc.Sprint(sprintInput.useInput); // input.sprintInput is true when button is held
+        //}
         public virtual void CrouchInput()
         {
             cc.AutoCrouch();
