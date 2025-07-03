@@ -3125,7 +3125,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1033698951611063511}
-          m_TargetAssemblyTypeName: 
+          m_TargetAssemblyTypeName: UnityStandardAssets.CrossPlatformInput.ButtonHandler,
+            Assembly-CSharp
           m_MethodName: SetDownState
           m_Mode: 1
           m_Arguments:
@@ -3135,13 +3136,14 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: Jump
             m_BoolArgument: 0
-          m_CallState: 2
+          m_CallState: 1
   - eventID: 3
     callback:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1033698951611063511}
-          m_TargetAssemblyTypeName: 
+          m_TargetAssemblyTypeName: UnityStandardAssets.CrossPlatformInput.ButtonHandler,
+            Assembly-CSharp
           m_MethodName: SetUpState
           m_Mode: 1
           m_Arguments:
@@ -3151,7 +3153,7 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: Jump
             m_BoolArgument: 0
-          m_CallState: 2
+          m_CallState: 1
 --- !u!114 &1033698951611063511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11488,8 +11490,8 @@ MonoBehaviour:
     rotationSpeed: 8
     walkByDefault: 0
     rotateWithCamera: 0
-    walkSpeed: 3
-    runningSpeed: 4
+    walkSpeed: 5
+    runningSpeed: 6
     sprintSpeed: 6
     crouchSpeed: 2
   strafeSpeed:
@@ -30106,7 +30108,7 @@ MonoBehaviour:
   behindTargetSmoothRotation: 1
   lockCamera: 0
   offsetMouse: {x: 0, y: 0}
-  indexList: 0
+  indexList: 12
   indexLookPoint: 0
   offSetPlayerPivot: 0
   distance: 5
