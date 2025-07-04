@@ -3041,6 +3041,7 @@ GameObject:
   - component: {fileID: 7791572221670517796}
   - component: {fileID: 1033698951611063511}
   - component: {fileID: 6517120558635530296}
+  - component: {fileID: 3210848675684353770}
   m_Layer: 5
   m_Name: SprintButton
   m_TagString: Untagged
@@ -3124,10 +3125,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1033698951611063511}
-          m_TargetAssemblyTypeName: UnityStandardAssets.CrossPlatformInput.ButtonHandler,
-            Assembly-CSharp
-          m_MethodName: SetDownState
+        - m_Target: {fileID: 3210848675684353770}
+          m_TargetAssemblyTypeName: ButtonHold, Assembly-CSharp
+          m_MethodName: OnClickDownButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3141,10 +3141,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1033698951611063511}
-          m_TargetAssemblyTypeName: UnityStandardAssets.CrossPlatformInput.ButtonHandler,
-            Assembly-CSharp
-          m_MethodName: SetUpState
+        - m_Target: {fileID: 3210848675684353770}
+          m_TargetAssemblyTypeName: ButtonHold, Assembly-CSharp
+          m_MethodName: OnClickUpButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3211,6 +3210,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3210848675684353770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799498225588270991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deedaa4572b92bc43ae41f29dee8dfb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonHandler: {fileID: 1033698951611063511}
 --- !u!1 &854870201115420762
 GameObject:
   m_ObjectHideFlags: 0
@@ -11378,12 +11390,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 2
+  selectedToolbar: 0
   _isDead: 1
   _currentHealth: 0
   isImmortal: 0
   fillHealthOnStart: 1
-  _maxHealth: 100
+  _maxHealth: 500
   _healthRecovery: 0
   _healthRecoveryDelay: 0
   checkHealthEvents: []
@@ -11490,8 +11502,8 @@ MonoBehaviour:
     rotationSpeed: 8
     walkByDefault: 0
     rotateWithCamera: 0
-    walkSpeed: 5
-    runningSpeed: 6
+    walkSpeed: 3
+    runningSpeed: 4
     sprintSpeed: 6
     crouchSpeed: 2
   strafeSpeed:
@@ -40355,7 +40367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3422724287189168446, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3443360242525175042, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_IsActive
