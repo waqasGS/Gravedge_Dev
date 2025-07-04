@@ -183,6 +183,15 @@ namespace Invector.vCharacterController
             }
         }
 
+        // public override void SprintInput()
+        // {
+        //     if (sprintInput.useInput)
+        //     {
+        //         // Ab sirf button hold karne par sprint hogi
+        //         bool canSprint = sprintInput.GetButton();
+        //         cc.Sprint(canSprint && !isAttacking);
+        //     }
+        // }
         #endregion
 
         #region Conditions

@@ -15,6 +15,8 @@ public class BikeUI : MonoBehaviour
 
     public void MountBike()
     {
+        Debug.Log("Mounting Bike");
+        
         _mvMotorcycleRiderShooter.EnterInput();
         
         // Store the original enabled state of each GameObject
@@ -31,6 +33,7 @@ public class BikeUI : MonoBehaviour
 
     public void DisMount()
     {
+        Debug.Log("Dismounting Bike");
         _mvMotorcycleRiderShooter.ExitInput();
         
         // Only re-enable GameObjects that were originally enabled

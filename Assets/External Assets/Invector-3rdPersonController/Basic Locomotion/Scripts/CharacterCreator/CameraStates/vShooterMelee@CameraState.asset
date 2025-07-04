@@ -17,19 +17,19 @@ MonoBehaviour:
   - Name: Default
     forward: -0.881
     right: 0.1
-    defaultDistance: 2.7
+    defaultDistance: 2
     maxDistance: 12
     minDistance: 0.6
-    height: 1.6
-    smooth: 10
-    smoothDamp: 20
+    height: 1.35
+    smooth: 5
+    smoothDamp: 2.5
     xMouseSensitivity: 2
     yMouseSensitivity: 2
-    yMinLimit: -70
-    yMaxLimit: 70
+    yMinLimit: -10
+    yMaxLimit: 69.99999
     xMinLimit: -360
     xMaxLimit: 360
-    rotationOffSet: {x: -15.3, y: 0.35, z: -1.3}
+    rotationOffSet: {x: -15, y: -3, z: -1.5}
     cullingHeight: 1.9
     cullingMinDist: 0.01
     fov: 60
@@ -115,24 +115,24 @@ MonoBehaviour:
     lookPoints: []
     cameraMode: 0
   - Name: Aiming
-    forward: -1
-    right: 0.34
-    defaultDistance: 3
+    forward: -0.881
+    right: 0.2
+    defaultDistance: 2
     maxDistance: 1.5
     minDistance: 0.25
-    height: 1.75
-    smooth: 10
-    smoothDamp: 10
-    xMouseSensitivity: 3
-    yMouseSensitivity: 3
-    yMinLimit: -50
+    height: 1.35
+    smooth: 5
+    smoothDamp: 2.5
+    xMouseSensitivity: 2
+    yMouseSensitivity: 2
+    yMinLimit: -10
     yMaxLimit: 70
     xMinLimit: -360
     xMaxLimit: 360
-    rotationOffSet: {x: 0, y: 0, z: 0}
-    cullingHeight: 1.5
+    rotationOffSet: {x: -15, y: -3, z: -1.5}
+    cullingHeight: 1.9
     cullingMinDist: 0.1
-    fov: 40
+    fov: 60
     useZoom: 0
     fixedAngle: {x: 0, y: 0}
     lookPoints: []
@@ -161,24 +161,24 @@ MonoBehaviour:
     lookPoints: []
     cameraMode: 0
   - Name: Strafing
-    forward: -1
-    right: 0.15
-    defaultDistance: 2.8
+    forward: -0.881
+    right: 0.1
+    defaultDistance: 2
     maxDistance: 3
     minDistance: 0.5
-    height: 1.61
-    smooth: 10
-    smoothDamp: 1
-    xMouseSensitivity: 3
-    yMouseSensitivity: 3
-    yMinLimit: -80
-    yMaxLimit: 80
+    height: 1.35
+    smooth: 5
+    smoothDamp: 2.5
+    xMouseSensitivity: 2
+    yMouseSensitivity: 2
+    yMinLimit: -10
+    yMaxLimit: 70
     xMinLimit: -360
     xMaxLimit: 360
-    rotationOffSet: {x: 8, y: 0, z: 0}
+    rotationOffSet: {x: -10, y: -3, z: -1.5}
     cullingHeight: 1.9
     cullingMinDist: 0.1
-    fov: 50
+    fov: 60
     useZoom: 0
     fixedAngle: {x: 0, y: 15}
     lookPoints:
@@ -311,22 +311,22 @@ MonoBehaviour:
       freeRotation: 1
     cameraMode: 2
   - Name: Motorcycle
-    forward: -1
-    right: 0
-    defaultDistance: 3.43
+    forward: -0.5
+    right: 3
+    defaultDistance: 2.7
     maxDistance: 3
     minDistance: 0.5
-    height: 0.22
-    smooth: 10
-    smoothDamp: 0
-    xMouseSensitivity: 3
-    yMouseSensitivity: 3
-    yMinLimit: -10
-    yMaxLimit: 45
+    height: 1.5
+    smooth: 5
+    smoothDamp: 2.5
+    xMouseSensitivity: 2
+    yMouseSensitivity: 2
+    yMinLimit: -15
+    yMaxLimit: 15
     xMinLimit: -360
     xMaxLimit: 360
-    rotationOffSet: {x: 0, y: 0, z: 0}
-    cullingHeight: 0.2
+    rotationOffSet: {x: 32.81, y: -81.3, z: 1.1}
+    cullingHeight: 1.9
     cullingMinDist: 0.1
     fov: 60
     useZoom: 0

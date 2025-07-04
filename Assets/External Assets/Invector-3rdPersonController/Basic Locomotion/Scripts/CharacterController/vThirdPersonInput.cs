@@ -503,6 +503,7 @@ namespace Invector.vCharacterController
             }
         }
 
+
         public virtual void CrouchInput()
         {
             cc.AutoCrouch();
