@@ -16,26 +16,6 @@ public class NodeContainer : MonoBehaviour
     [Range(0f, 1f)]
     public float antivirusChance = 0.5f;
 
-    
-    private void Start()
-    {
-        nodeGrid = new Node[rows, cols];
-        var index = 0;
-
-        for (var row = 0; row < rows; row++)
-        for (var col = 0; col < cols; col++)
-        {
-            nodeGrid[row, col] = transform.GetChild(index).GetComponent<Node>();
-            nodeGrid[row, col].row = row;
-            nodeGrid[row, col].col = col;
-            index++;
-        }
-
-        GenerateConnectedMaze(new Vector2Int(0, 0));
-        AssignStartAndEnd(new Vector2Int(0, 0), 5); // Distance threshold adjustable
-        AssignSpecialNodes();
-    }
-
     public Node GetNode(int row, int col)
     {
         return nodeGrid[row, col];
@@ -233,4 +213,22 @@ public class NodeContainer : MonoBehaviour
     }
 
 
+    public void Init()
+    {
+        nodeGrid = new Node[rows, cols];
+        var index = 0;
+
+        for (var row = 0; row < rows; row++)
+        for (var col = 0; col < cols; col++)
+        {
+            nodeGrid[row, col] = transform.GetChild(index).GetComponent<Node>();
+            nodeGrid[row, col].row = row;
+            nodeGrid[row, col].col = col;
+            index++;
+        }
+
+        GenerateConnectedMaze(new Vector2Int(0, 0));
+        AssignStartAndEnd(new Vector2Int(0, 0), 5); // Distance threshold adjustable
+        AssignSpecialNodes();
+    }
 }

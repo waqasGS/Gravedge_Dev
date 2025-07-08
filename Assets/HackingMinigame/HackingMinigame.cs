@@ -43,6 +43,7 @@ public class HackingMinigame : MonoBehaviour
     {
         AccessLevel = accessLevel;      // to update text
         nodeContainer = GetComponentInChildren<NodeContainer>();
+        nodeContainer.Init();
         SetCurrentNode(0, 0);
         
         onReachedEndNode += OnReachedEndNode;
@@ -50,7 +51,14 @@ public class HackingMinigame : MonoBehaviour
 
     private void OnReachedEndNode()
     {
+        StartCoroutine(AnimateHackSuccess());
+    }
+
+    private IEnumerator AnimateHackSuccess()
+    {
         MessageLine.Instance.ShowMessage("Hack Successfull", Color.green);
+        yield return new WaitForSeconds(1.0f);
+        EndHack();
     }
 
     private void SetCurrentNode(int row, int col)
@@ -219,4 +227,14 @@ public class HackingMinigame : MonoBehaviour
         return null;
     }
 
+    public void OnClick_AbortHack()
+    {
+        EndHack();
+    }
+
+    private void EndHack()
+    {
+        StopAllCoroutines();
+        Destroy(gameObject);
+    }
 }
