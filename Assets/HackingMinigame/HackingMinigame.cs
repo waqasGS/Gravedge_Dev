@@ -19,7 +19,6 @@ public class HackingMinigame : MonoBehaviour
     #endregion
 
     public TextMeshProUGUI accessLevelText;
-    public TextMeshProUGUI messageText;
     
     [Header("Player State")]
     public int accessLevel = 0; // This value determines if the player can pass special nodes
@@ -27,6 +26,8 @@ public class HackingMinigame : MonoBehaviour
     [Header("Runtime")]
     public Node currentNode;
     public NodeContainer nodeContainer;
+    
+    public Action onReachedEndNode;
     
     public int AccessLevel
     {
@@ -43,6 +44,13 @@ public class HackingMinigame : MonoBehaviour
         AccessLevel = accessLevel;      // to update text
         nodeContainer = GetComponentInChildren<NodeContainer>();
         SetCurrentNode(0, 0);
+        
+        onReachedEndNode += OnReachedEndNode;
+    }
+
+    private void OnReachedEndNode()
+    {
+        MessageLine.Instance.ShowMessage("Hack Successfull", Color.green);
     }
 
     private void SetCurrentNode(int row, int col)
@@ -63,7 +71,7 @@ public class HackingMinigame : MonoBehaviour
         if (!TryConsumeAccess(targetNode))
         {
             Debug.Log("Access denied.");
-            messageText.text = "Access denied.";
+            MessageLine.Instance.ShowMessage("Access denied", Color.red);
             return;
         }
         
@@ -77,7 +85,7 @@ public class HackingMinigame : MonoBehaviour
         if (accessLevel < requiredLevel)
         {
             Debug.Log($"Access level {accessLevel} too low for {targetNode.nodeType}. Required: {requiredLevel}");
-            messageText.text = $"Access level {accessLevel} too low for {targetNode.nodeType}. Required: {requiredLevel}";
+            MessageLine.Instance.ShowMessage($"Access level {accessLevel} too low for {targetNode.nodeType}. Required: {requiredLevel}", Color.yellow);
             return false;
         }
         
@@ -88,7 +96,7 @@ public class HackingMinigame : MonoBehaviour
             AccessLevel = Mathf.Max(0, accessLevel);
 
             Debug.Log($"Access level consumed: -{requiredLevel}. Remaining: {accessLevel}");
-            messageText.text = $"Access level consumed: -{requiredLevel}. Remaining: {accessLevel}";
+            MessageLine.Instance.ShowMessage($"Access level consumed: {requiredLevel}. Remaining: {accessLevel}", Color.cyan);
         }
 
         return true;
@@ -139,6 +147,11 @@ public class HackingMinigame : MonoBehaviour
         from.UpdateNodeVisuals();
 
         currentNode = to;
+        
+        if (to.nodeType == NodeType.End)
+        {
+            onReachedEndNode?.Invoke();
+        }
     }
 
 
