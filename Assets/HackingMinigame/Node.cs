@@ -16,6 +16,8 @@ public class Node : MonoBehaviour
     
     public GameObject overlayStart;
     public GameObject overlayEnd;
+    public GameObject overlayFirewall;
+    public GameObject overlayAntivius;
     
     public NodeType nodeType = NodeType.Normal;
     public NodeStatus nodeStatus =  NodeStatus.Unvisited;
@@ -43,19 +45,26 @@ public class Node : MonoBehaviour
 
     public void UpdateNodeVisuals()
     {
+        overlayStart.SetActive(false);
+        overlayEnd.SetActive(false);
+        overlayFirewall.SetActive(false);
+        overlayAntivius.SetActive(false);
+
         switch (nodeType)
         {
             case NodeType.Start:
                 overlayStart.SetActive(true);
-                overlayEnd.SetActive(false);
                 break;
             case NodeType.End:
                 overlayEnd.SetActive(true);
-                overlayStart.SetActive(false);
+                break;
+            case NodeType.Firewall:
+                overlayFirewall.SetActive(true);
+                break;
+            case NodeType.Antivius:
+                overlayAntivius.SetActive(true);
                 break;
             case NodeType.Normal:
-                overlayEnd.SetActive(false);
-                overlayStart.SetActive(false);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -105,7 +114,9 @@ public enum NodeType
 {
     Normal,
     Start,
-    End
+    End,
+    Firewall,
+    Antivius,
 }
 
 public enum NodeStatus

@@ -7,7 +7,16 @@ public class NodeContainer : MonoBehaviour
     public int rows;
     public int cols;
     private Node[,] nodeGrid;
+    
+    [Header("Node Configuration")]
+    public int firewallCount = 3;
+    public int antivirusCount = 3;
+    [Range(0f, 1f)]
+    public float firewallChance = 0.5f;
+    [Range(0f, 1f)]
+    public float antivirusChance = 0.5f;
 
+    
     private void Start()
     {
         nodeGrid = new Node[rows, cols];
@@ -24,6 +33,7 @@ public class NodeContainer : MonoBehaviour
 
         GenerateConnectedMaze(new Vector2Int(0, 0));
         AssignStartAndEnd(new Vector2Int(0, 0), 5); // Distance threshold adjustable
+        AssignSpecialNodes();
     }
 
     public Node GetNode(int row, int col)
@@ -190,4 +200,46 @@ public class NodeContainer : MonoBehaviour
 
         return connected;
     }
+    
+    private void AssignSpecialNodes()
+    {
+        var rand = new Random();
+        var availableNodes = new List<Node>();
+
+        foreach (var node in nodeGrid)
+        {
+            if (node.nodeType == NodeType.Normal)
+                availableNodes.Add(node);
+        }
+
+        ShuffleList(availableNodes, rand);
+
+        int firewallAssigned = 0;
+        int antivirusAssigned = 0;
+
+        foreach (var node in availableNodes)
+        {
+            // Firewall chance
+            if (firewallAssigned < firewallCount && rand.NextDouble() <= firewallChance)
+            {
+                node.nodeType = NodeType.Firewall;
+                node.UpdateNodeVisuals();  // Or set overlayFirewall directly
+                firewallAssigned++;
+                continue;
+            }
+
+            // Antivirus chance
+            if (antivirusAssigned < antivirusCount && rand.NextDouble() <= antivirusChance)
+            {
+                node.nodeType = NodeType.Antivius;
+                node.UpdateNodeVisuals();  // Or set overlayAntivius directly
+                antivirusAssigned++;
+            }
+
+            if (firewallAssigned >= firewallCount && antivirusAssigned >= antivirusCount)
+                break;
+        }
+    }
+
+
 }

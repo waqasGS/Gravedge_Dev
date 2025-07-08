@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class HackingMinigame : MonoBehaviour
 {
+    [Header("Runtime")]
     public Node currentNode;
     public NodeContainer nodeContainer;
 
