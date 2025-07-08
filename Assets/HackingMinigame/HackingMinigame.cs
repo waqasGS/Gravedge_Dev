@@ -19,6 +19,7 @@ public class HackingMinigame : MonoBehaviour
     #endregion
 
     public TextMeshProUGUI accessLevelText;
+    public TextMeshProUGUI messageText;
     
     [Header("Player State")]
     public int accessLevel = 0; // This value determines if the player can pass special nodes
@@ -62,6 +63,7 @@ public class HackingMinigame : MonoBehaviour
         if (!TryConsumeAccess(targetNode))
         {
             Debug.Log("Access denied.");
+            messageText.text = "Access denied.";
             return;
         }
         
@@ -75,6 +77,7 @@ public class HackingMinigame : MonoBehaviour
         if (accessLevel < requiredLevel)
         {
             Debug.Log($"Access level {accessLevel} too low for {targetNode.nodeType}. Required: {requiredLevel}");
+            messageText.text = $"Access level {accessLevel} too low for {targetNode.nodeType}. Required: {requiredLevel}";
             return false;
         }
         
@@ -85,6 +88,7 @@ public class HackingMinigame : MonoBehaviour
             AccessLevel = Mathf.Max(0, accessLevel);
 
             Debug.Log($"Access level consumed: -{requiredLevel}. Remaining: {accessLevel}");
+            messageText.text = $"Access level consumed: -{requiredLevel}. Remaining: {accessLevel}";
         }
 
         return true;
