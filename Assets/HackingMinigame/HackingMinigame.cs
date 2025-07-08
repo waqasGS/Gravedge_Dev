@@ -67,7 +67,7 @@ public class HackingMinigame : MonoBehaviour
         {
             currentNode.nodeCurrentVisual.SetActive(false);
         }
-        currentNode = nodeContainer.GetNode(0, 0);      // Set Starting Node
+        currentNode = nodeContainer.GetNode(row, col);      // Set Starting Node
         currentNode.nodeCurrentVisual.SetActive(true);
     }
 
