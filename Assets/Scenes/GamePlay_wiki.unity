@@ -542,9 +542,9 @@ Transform:
   m_GameObject: {fileID: 208904910}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -17.99, y: -8.4, z: 56.64}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -18.45, y: -7.8, z: 56.64}
+  m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1636101820}
   m_Father: {fileID: 0}
@@ -6015,6 +6015,10 @@ PrefabInstance:
     - target: {fileID: 855310450241295002, guid: c9727e0c2df00a847a81436396382199, type: 3}
       propertyPath: m_Name
       value: NinjaRoot (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6659395547158477714, guid: c9727e0c2df00a847a81436396382199, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8954247339211043732, guid: c9727e0c2df00a847a81436396382199, type: 3}
       propertyPath: m_LocalPosition.x
