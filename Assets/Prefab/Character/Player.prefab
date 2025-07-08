@@ -7674,7 +7674,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -19.999998}
+  m_AnchoredPosition: {x: 0, y: -19.99997}
   m_SizeDelta: {x: 160, y: -40.000004}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1827911544558285777
@@ -10391,6 +10391,7 @@ GameObject:
   - component: {fileID: 2083285512200066004}
   - component: {fileID: 1396919004171122927}
   - component: {fileID: 6343784252063348389}
+  - component: {fileID: 771245680843039054}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -12569,6 +12570,173 @@ MonoBehaviour:
   onZiplineExit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &771245680843039054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2581321778397671749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 782781719e3ab5d478f1229efabf72f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openCloseEvents: 0
+  openCloseWindow: 1
+  selectedToolbar: 3
+  climbSurfaceTags:
+    tags:
+    - FreeClimb
+  climbSurfaceLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  cameraState: Default
+  animatorStateHierarchy: Base Layer.Actions.FreeClimb
+  climbEdgeInput:
+    useInput: 1
+    isAxisInUse: 0
+    isUnityInput: 0
+    keyboard: E
+    keyboardAxis: 0
+    joystick: A
+    joystickAxis: 0
+    mobile: A
+    mobileAxis: 0
+    joystickAxisInvert: 0
+    keyboardAxisInvert: 0
+    mobileAxisInvert: 0
+    timeButtonWasPressed: 0
+    lastTimeTheButtonWasPressed: 0
+    inButtomTimer: 0
+  enterExitInput:
+    useInput: 1
+    isAxisInUse: 0
+    isUnityInput: 0
+    keyboard: Space
+    keyboardAxis: 0
+    joystick: X
+    joystickAxis: 0
+    mobile: X
+    mobileAxis: 0
+    joystickAxisInvert: 0
+    keyboardAxisInvert: 0
+    mobileAxisInvert: 0
+    timeButtonWasPressed: 0
+    lastTimeTheButtonWasPressed: 0
+    inButtomTimer: 0
+  climbJumpInput:
+    useInput: 1
+    isAxisInUse: 0
+    isUnityInput: 0
+    keyboard: Space
+    keyboardAxis: 0
+    joystick: X
+    joystickAxis: 0
+    mobile: X
+    mobileAxis: 0
+    joystickAxisInvert: 0
+    keyboardAxisInvert: 0
+    mobileAxisInvert: 0
+    timeButtonWasPressed: 0
+    lastTimeTheButtonWasPressed: 0
+    inButtomTimer: 0
+  moveUsingRootMotion: 1
+  climbSpeed: 1
+  autoClimbEdge: 1
+  climbStaminaCost: 0
+  jumpClimbStaminaCost: 0
+  staminaRecoveryDelay: 1.5
+  minSurfaceAngle: 35
+  maxSurfaceAngle: 160
+  handTarget: {fileID: 0}
+  offsetHandPositionL: {x: 0, y: -0.02, z: -0.02}
+  offsetHandPositionR: {x: 0, y: -0.02, z: -0.02}
+  climbEnterSpeed: 4
+  climbEnterMaxDistance: 1
+  lastPointDistanceH: 0.4
+  lastPointDistanceVUp: 0.1
+  lastPointDistanceVDown: 1.25
+  offsetHandTarget: 0
+  offsetBase: 0.35
+  climbJumpMinDistance: 0.2
+  climbJumpMaxDistance: 2
+  climbJumpDepth: 2
+  climbUpMinThickness: 0.3
+  climbUpMinSpace: 0.5
+  climbUpHeight: 2
+  climbUpAnimatorState: ClimbUpWall
+  endExitTimeAnimation: 0.8
+  startNormalizeTime: 0.15
+  targetNormalizeTime: 0.4
+  avatarTarget: 4
+  matchTargetX: 0
+  matchTargetY: 1
+  matchTargetZ: 0
+  matchRotation: 0
+  debugRays: 0
+  debugClimbMovement: 1
+  debugClimbUp: 1
+  debugClimbJump: 0
+  debugBaseRotation: 1
+  debugHandIK: 1
+  onEnterClimb:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onExitClimb:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &2582713900909392161
 GameObject:
   m_ObjectHideFlags: 0
@@ -22770,6 +22938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trigger: {fileID: 0}
   motorcycleSetup: {fileID: 0}
+  bikeUI: {fileID: 0}
 --- !u!1 &4709913931025919616
 GameObject:
   m_ObjectHideFlags: 0
@@ -30260,7 +30429,7 @@ MonoBehaviour:
   behindTargetSmoothRotation: 1
   lockCamera: 0
   offsetMouse: {x: 0, y: 0}
-  indexList: 12
+  indexList: 13
   indexLookPoint: 0
   offSetPlayerPivot: 0
   distance: 5
@@ -40383,47 +40552,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2684243853156841276, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2684243853156841276, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2684243853156841276, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 2684243853156841276, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2684243853156841276, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 2684243854664772694, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2684243854664772694, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2684243854664772694, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 2684243854664772694, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2684243854664772694, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 2684243854664772694, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 2803719153974543455, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_IsActive
@@ -40563,27 +40732,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6316505608556240085, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6316505608556240085, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6316505608556240085, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 6316505608556240085, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6316505608556240085, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 6316505608556240085, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 6705863878834875131, guid: 8cff4600ff380fc45910465a0a4d4ab1, type: 3}
       propertyPath: m_IsActive

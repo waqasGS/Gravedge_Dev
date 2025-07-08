@@ -15,12 +15,12 @@ MonoBehaviour:
   Name: 
   tpCameraStates:
   - Name: Default
-    forward: -0.881
-    right: 0.1
-    defaultDistance: 2
+    forward: -1
+    right: 0
+    defaultDistance: 4.69
     maxDistance: 12
     minDistance: 0.6
-    height: 1.35
+    height: 1.15
     smooth: 5
     smoothDamp: 2.5
     xMouseSensitivity: 2
@@ -327,6 +327,29 @@ MonoBehaviour:
     xMaxLimit: 360
     rotationOffSet: {x: 32.81, y: -81.3, z: 1.1}
     cullingHeight: 1.9
+    cullingMinDist: 0.1
+    fov: 60
+    useZoom: 0
+    fixedAngle: {x: 0, y: 0}
+    lookPoints: []
+    cameraMode: 0
+  - Name: Climbing
+    forward: 60
+    right: 0
+    defaultDistance: 1.5
+    maxDistance: 3
+    minDistance: 0.5
+    height: 0
+    smooth: 10
+    smoothDamp: 0
+    xMouseSensitivity: 3
+    yMouseSensitivity: 3
+    yMinLimit: -40
+    yMaxLimit: 80
+    xMinLimit: -360
+    xMaxLimit: 360
+    rotationOffSet: {x: 0, y: 0, z: 0}
+    cullingHeight: 0.2
     cullingMinDist: 0.1
     fov: 60
     useZoom: 0

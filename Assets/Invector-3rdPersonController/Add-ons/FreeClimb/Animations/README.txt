@@ -5,7 +5,7 @@
 
 
 
-DOWNLOAD: https://goo.gl/qcgeU1
+DOWNLOAD: https://drive.google.com/open?id=12gQGdCw7gwxdAqQSn4PLdkldTEpM4qTV
 
 
 
