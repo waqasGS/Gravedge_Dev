@@ -104,28 +104,33 @@ public class NodeContainer : MonoBehaviour
 
     private void EnableEdgeBetween(Node a, Node b)
     {
+        if (!a.connectedNeighbors.Contains(b))
+            a.connectedNeighbors.Add(b);
+        if (!b.connectedNeighbors.Contains(a))
+            b.connectedNeighbors.Add(a);
+
         var dRow = b.row - a.row;
         var dCol = b.col - a.col;
 
         if (dRow == 1) // b is below a
         {
-            a.edgeDown.SetActive(true);
-            b.edgeUp.SetActive(true);
+            a.edgeDown?.SetActive(true);
+            b.edgeUp?.SetActive(true);
         }
         else if (dRow == -1) // b is above a
         {
-            a.edgeUp.SetActive(true);
-            b.edgeDown.SetActive(true);
+            a.edgeUp?.SetActive(true);
+            b.edgeDown?.SetActive(true);
         }
         else if (dCol == 1) // b is to the right of a
         {
-            a.edgeRight.SetActive(true);
-            b.edgeLeft.SetActive(true);
+            a.edgeRight?.SetActive(true);
+            b.edgeLeft?.SetActive(true);
         }
         else if (dCol == -1) // b is to the left of a
         {
-            a.edgeLeft.SetActive(true);
-            b.edgeRight.SetActive(true);
+            a.edgeLeft?.SetActive(true);
+            b.edgeRight?.SetActive(true);
         }
     }
 
@@ -184,21 +189,7 @@ public class NodeContainer : MonoBehaviour
 
     private List<Node> GetConnectedNeighbors(Node node)
     {
-        var connected = new List<Node>();
-
-        var left = GetLeftNeighbor(node.row, node.col);
-        if (left != null && node.edgeLeft.activeSelf) connected.Add(left);
-
-        var right = GetRightNeighbor(node.row, node.col);
-        if (right != null && node.edgeRight.activeSelf) connected.Add(right);
-
-        var top = GetTopNeighbor(node.row, node.col);
-        if (top != null && node.edgeUp.activeSelf) connected.Add(top);
-
-        var bottom = GetBottomNeighbor(node.row, node.col);
-        if (bottom != null && node.edgeDown.activeSelf) connected.Add(bottom);
-
-        return connected;
+        return node.connectedNeighbors;
     }
     
     private void AssignSpecialNodes()

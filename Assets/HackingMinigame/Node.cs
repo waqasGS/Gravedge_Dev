@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Node : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class Node : MonoBehaviour
     public GameObject edgeRight;
     public GameObject edgeDown;
     public GameObject edgeUp;
+    
+    public Image edgeLeftTravel;
+    public Image edgeRightTravel;
+    public Image edgeDownTravel;
+    public Image edgeUpTravel;
     
     public GameObject overlayStart;
     public GameObject overlayEnd;
@@ -27,20 +33,46 @@ public class Node : MonoBehaviour
     public int col;
     public NodeContainer nodeContainer;
 
+    [HideInInspector]
+    public List<Node> connectedNeighbors = new List<Node>();
+    
     private void OnEnable()
     {
         nodeContainer = GetComponentInParent<NodeContainer>();
+        connectedNeighbors.Clear();
         
         edgeDown.SetActive(false);
         edgeUp.SetActive(false);
         edgeLeft.SetActive(false);
         edgeRight.SetActive(false);
         
+        // Then enable edges based on connection data
+        foreach (var neighbor in connectedNeighbors)
+        {
+            var dRow = neighbor.row - row;
+            var dCol = neighbor.col - col;
+
+            if (dRow == 1) edgeDown.SetActive(true);
+            else if (dRow == -1) edgeUp.SetActive(true);
+            else if (dCol == 1) edgeRight.SetActive(true);
+            else if (dCol == -1) edgeLeft.SetActive(true);
+        }
+        
+        edgeDownTravel.fillAmount = 0.0f;
+        edgeUpTravel.fillAmount = 0.0f;
+        edgeLeftTravel.fillAmount = 0.0f;
+        edgeRightTravel.fillAmount = 0.0f;
+        
         nodeCurrentVisual.SetActive(false);
         nodeVisitedVisual.SetActive(false);
         nodeUnvisitedVisual.SetActive(true);
         
         UpdateNodeVisuals();
+    }
+    
+    public void OnClick_Node()
+    {
+        HackingMinigame.Instance.TravelToNode(this);
     }
 
     public void UpdateNodeVisuals()
@@ -83,10 +115,6 @@ public class Node : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-    }
-
-    public void OnClick_Node()
-    {
     }
     
     public Node GetLeftNeighbor()
