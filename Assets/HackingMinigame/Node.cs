@@ -14,7 +14,11 @@ public class Node : MonoBehaviour
     public GameObject edgeDown;
     public GameObject edgeUp;
     
-    public bool isVisited = false;
+    public GameObject overlayStart;
+    public GameObject overlayEnd;
+    
+    public NodeType nodeType = NodeType.Normal;
+    public NodeStatus nodeStatus =  NodeStatus.Unvisited;
 
     [Header("Runtime")]
     public int row;
@@ -33,6 +37,43 @@ public class Node : MonoBehaviour
         nodeCurrentVisual.SetActive(false);
         nodeVisitedVisual.SetActive(false);
         nodeUnvisitedVisual.SetActive(true);
+        
+        UpdateNodeVisuals();
+    }
+
+    public void UpdateNodeVisuals()
+    {
+        switch (nodeType)
+        {
+            case NodeType.Start:
+                overlayStart.SetActive(true);
+                overlayEnd.SetActive(false);
+                break;
+            case NodeType.End:
+                overlayEnd.SetActive(true);
+                overlayStart.SetActive(false);
+                break;
+            case NodeType.Normal:
+                overlayEnd.SetActive(false);
+                overlayStart.SetActive(false);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        switch (nodeStatus)
+        {
+            case NodeStatus.Unvisited:
+                nodeVisitedVisual.SetActive(false);
+                nodeUnvisitedVisual.SetActive(true);
+                break;
+            case NodeStatus.Visited:
+                nodeVisitedVisual.SetActive(true);
+                nodeUnvisitedVisual.SetActive(false);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     public void OnClick_Node()
@@ -58,4 +99,17 @@ public class Node : MonoBehaviour
     {
         return nodeContainer.GetBottomNeighbor(row, col);
     }
+}
+
+public enum NodeType
+{
+    Normal,
+    Start,
+    End
+}
+
+public enum NodeStatus
+{
+    Unvisited,
+    Visited
 }
