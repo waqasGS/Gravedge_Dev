@@ -47,6 +47,7 @@ MonoBehaviour:
   type: 6
   icon: {fileID: 21300000, guid: 4a46b7c6ff6f17a4a95bfb58b3397585, type: 3}
   stackable: 0
+  createNewItem: 1
   maxStack: 1
   amount: 0
   originalObject: {fileID: 1000012874595254, guid: d4ca9135af96d5142987a1f1427b099a, type: 3}
@@ -65,7 +66,9 @@ MonoBehaviour:
     isOpen: 0
     isBool: 0
   isInEquipArea: 0
+  isEquiped: 0
   destroyAfterUse: 0
+  canBeEquipped: 1
   canBeUsed: 0
   canBeDroped: 1
   canBeDestroyed: 1
@@ -95,6 +98,7 @@ MonoBehaviour:
   type: 1
   icon: {fileID: 21300000, guid: 56e79d7e38be01c4c9171802884dfb05, type: 3}
   stackable: 0
+  createNewItem: 1
   maxStack: 1
   amount: 0
   originalObject: {fileID: 1000011247033104, guid: 43ec053b9c111644e80b4ddb5f535508, type: 3}
@@ -117,7 +121,9 @@ MonoBehaviour:
     isOpen: 0
     isBool: 0
   isInEquipArea: 0
+  isEquiped: 0
   destroyAfterUse: 0
+  canBeEquipped: 1
   canBeUsed: 0
   canBeDroped: 1
   canBeDestroyed: 1
@@ -147,6 +153,7 @@ MonoBehaviour:
   type: 1
   icon: {fileID: 21300000, guid: 68199bff0f78a2d4ca77e20ccc91ef76, type: 3}
   stackable: 0
+  createNewItem: 1
   maxStack: 1
   amount: 0
   originalObject: {fileID: 1000014209087140, guid: d03b45803e637bb4fb00a1ca9030d66e, type: 3}
@@ -169,7 +176,9 @@ MonoBehaviour:
     isOpen: 0
     isBool: 0
   isInEquipArea: 0
+  isEquiped: 0
   destroyAfterUse: 0
+  canBeEquipped: 1
   canBeUsed: 0
   canBeDroped: 1
   canBeDestroyed: 1
@@ -199,6 +208,7 @@ MonoBehaviour:
   type: 1
   icon: {fileID: 21300000, guid: 75c369d61ea60a54e877b01a25ae0916, type: 3}
   stackable: 0
+  createNewItem: 1
   maxStack: 1
   amount: 0
   originalObject: {fileID: 1000013423493360, guid: 6bbee781522ce5243a02bf72cd914cf5, type: 3}
@@ -221,7 +231,9 @@ MonoBehaviour:
     isOpen: 0
     isBool: 0
   isInEquipArea: 0
+  isEquiped: 0
   destroyAfterUse: 0
+  canBeEquipped: 1
   canBeUsed: 0
   canBeDroped: 1
   canBeDestroyed: 1
@@ -253,6 +265,7 @@ MonoBehaviour:
   type: 6
   icon: {fileID: 21300000, guid: 40e348f6451ddf7438089a59a033e57f, type: 3}
   stackable: 0
+  createNewItem: 1
   maxStack: 1
   amount: 0
   originalObject: {fileID: 1000010116632662, guid: 2232bbcc5a195274c9744c2c6352e910, type: 3}
@@ -271,7 +284,9 @@ MonoBehaviour:
     isOpen: 0
     isBool: 0
   isInEquipArea: 0
+  isEquiped: 0
   destroyAfterUse: 0
+  canBeEquipped: 1
   canBeUsed: 0
   canBeDroped: 1
   canBeDestroyed: 1
@@ -301,6 +316,7 @@ MonoBehaviour:
   type: 0
   icon: {fileID: 21300000, guid: 686309ee74ddecf4881a11c0f29efcc6, type: 3}
   stackable: 1
+  createNewItem: 1
   maxStack: 99
   amount: 0
   originalObject: {fileID: 0}
@@ -311,7 +327,9 @@ MonoBehaviour:
     isOpen: 0
     isBool: 0
   isInEquipArea: 0
+  isEquiped: 0
   destroyAfterUse: 1
+  canBeEquipped: 1
   canBeUsed: 1
   canBeDroped: 1
   canBeDestroyed: 1
@@ -341,6 +359,7 @@ MonoBehaviour:
   type: 1
   icon: {fileID: 21300000, guid: b2158c09d5bc7284989f53a47f7638e3, type: 3}
   stackable: 0
+  createNewItem: 1
   maxStack: 1
   amount: 0
   originalObject: {fileID: 1000010725870802, guid: 0cf98a7633e41834ba19e8626f1ceadc, type: 3}
@@ -363,7 +382,9 @@ MonoBehaviour:
     isOpen: 0
     isBool: 0
   isInEquipArea: 0
+  isEquiped: 0
   destroyAfterUse: 0
+  canBeEquipped: 1
   canBeUsed: 0
   canBeDroped: 1
   canBeDestroyed: 1
@@ -393,6 +414,7 @@ MonoBehaviour:
   type: 0
   icon: {fileID: 21300000, guid: a7eb39caa37204044ae09aa0c8699270, type: 3}
   stackable: 1
+  createNewItem: 1
   maxStack: 99
   amount: 0
   originalObject: {fileID: 0}
@@ -403,7 +425,9 @@ MonoBehaviour:
     isOpen: 0
     isBool: 0
   isInEquipArea: 0
+  isEquiped: 0
   destroyAfterUse: 1
+  canBeEquipped: 1
   canBeUsed: 1
   canBeDroped: 1
   canBeDestroyed: 1
@@ -433,6 +457,7 @@ MonoBehaviour:
   type: 1
   icon: {fileID: 21300000, guid: 359a7ebb90d1a2c4eba5c493a73ca543, type: 3}
   stackable: 0
+  createNewItem: 1
   maxStack: 1
   amount: 0
   originalObject: {fileID: 1000012884940116, guid: 5dc53aa14e78ec54fbf2281c1abb7f47, type: 3}
@@ -455,7 +480,9 @@ MonoBehaviour:
     isOpen: 1
     isBool: 0
   isInEquipArea: 0
+  isEquiped: 0
   destroyAfterUse: 0
+  canBeEquipped: 1
   canBeUsed: 0
   canBeDroped: 1
   canBeDestroyed: 1
@@ -485,6 +512,7 @@ MonoBehaviour:
   type: 0
   icon: {fileID: 21300000, guid: 862e9f0d31ea667448a05c4d0ec24492, type: 3}
   stackable: 1
+  createNewItem: 1
   maxStack: 10
   amount: 0
   originalObject: {fileID: 0}
@@ -495,7 +523,9 @@ MonoBehaviour:
     isOpen: 1
     isBool: 0
   isInEquipArea: 0
+  isEquiped: 0
   destroyAfterUse: 1
+  canBeEquipped: 1
   canBeUsed: 1
   canBeDroped: 1
   canBeDestroyed: 1
@@ -525,6 +555,7 @@ MonoBehaviour:
   type: 1
   icon: {fileID: 21300000, guid: a568bb7d845ecf140a30a74582d14f45, type: 3}
   stackable: 0
+  createNewItem: 1
   maxStack: 1
   amount: 0
   originalObject: {fileID: 1000012884940116, guid: f0df66e0950da4642afce9f6382ab231, type: 3}
@@ -547,7 +578,9 @@ MonoBehaviour:
     isOpen: 1
     isBool: 0
   isInEquipArea: 0
+  isEquiped: 0
   destroyAfterUse: 0
+  canBeEquipped: 1
   canBeUsed: 0
   canBeDroped: 1
   canBeDestroyed: 1
