@@ -19,6 +19,11 @@ public class HackingMinigame : MonoBehaviour
     #endregion
 
     public TextMeshProUGUI accessLevelText;
+    public Slider timeLeftSlider;
+    
+    [Header("Timer Settings")]
+    public float hackTimeLimit = 60f; // Time limit in seconds
+    public bool isTimerRunning = false;
     
     [Header("Player State")]
     public int accessLevel = 0; // This value determines if the player can pass special nodes
@@ -28,6 +33,9 @@ public class HackingMinigame : MonoBehaviour
     public NodeContainer nodeContainer;
     
     public Action onReachedEndNode;
+    public Action onHackFailed;
+    
+    private float currentTimeLeft;
     
     public int AccessLevel
     {
@@ -42,21 +50,72 @@ public class HackingMinigame : MonoBehaviour
     private void Start()
     {
         AccessLevel = accessLevel;      // to update text
+        InitializeTimer();
+        
         nodeContainer = GetComponentInChildren<NodeContainer>();
         nodeContainer.Init();
         SetCurrentNode(0, 0);
         
         onReachedEndNode += OnReachedEndNode;
+        onHackFailed += OnHackFailed;
+        
+        StartTimer();
+    }
+    
+    private void InitializeTimer()
+    {
+        currentTimeLeft = hackTimeLimit;
+        timeLeftSlider.maxValue = hackTimeLimit;
+        timeLeftSlider.value = hackTimeLimit;
+    }
+    
+    private void StartTimer()
+    {
+        isTimerRunning = true;
+        StartCoroutine(CountdownTimer());
+    }
+    
+    private IEnumerator CountdownTimer()
+    {
+        while (currentTimeLeft > 0f && isTimerRunning)
+        {
+            currentTimeLeft -= Time.deltaTime;
+            timeLeftSlider.value = currentTimeLeft;
+            
+            if (currentTimeLeft <= 0f)
+            {
+                currentTimeLeft = 0f;
+                timeLeftSlider.value = 0f;
+                onHackFailed?.Invoke();
+                break;
+            }
+            
+            yield return null;
+        }
     }
 
     private void OnReachedEndNode()
     {
+        isTimerRunning = false;
         StartCoroutine(AnimateHackSuccess());
+    }
+    
+    private void OnHackFailed()
+    {
+        isTimerRunning = false;
+        StartCoroutine(AnimateHackFailure());
     }
 
     private IEnumerator AnimateHackSuccess()
     {
         MessageLine.Instance.ShowMessage("Hack Successfull", Color.green);
+        yield return new WaitForSeconds(1.0f);
+        EndHack();
+    }
+    
+    private IEnumerator AnimateHackFailure()
+    {
+        MessageLine.Instance.ShowMessage("Hack Failed - Time's Up!", Color.red);
         yield return new WaitForSeconds(1.0f);
         EndHack();
     }
@@ -262,6 +321,7 @@ public class HackingMinigame : MonoBehaviour
 
     private void EndHack()
     {
+        isTimerRunning = false;
         StopAllCoroutines();
         Destroy(gameObject);
     }
