@@ -394,7 +394,7 @@ namespace Invector.vCharacterController.vActions
         protected virtual void ClimbJumpHandle()
         {
             if (TP_Input.enabled || !TP_Input.cc.animator || !dragInfo.inDrag || inClimbUp || inClimbEnter) return;
-            if (climbJumpInput.GetButton() && !inClimbJump && input.magnitude > 0 && !TP_Input.cc.animator.GetCurrentAnimatorStateInfo(0).IsName(animatorStateHierarchy + ".ClimbJump"))
+            if (climbJumpInput.GetButtonDown() && !inClimbJump && input.magnitude > 0 && !TP_Input.cc.animator.GetCurrentAnimatorStateInfo(0).IsName(animatorStateHierarchy + ".ClimbJump"))
             {
                 var angleBetweenCharacterAndCamera = Vector3.Angle(transform.right, Camera.main.transform.right);
                 var rightDirection = angleBetweenCharacterAndCamera > 60 ? Camera.main.transform.right : transform.right;
