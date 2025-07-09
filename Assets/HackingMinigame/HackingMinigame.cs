@@ -97,14 +97,21 @@ public class HackingMinigame : MonoBehaviour
             return false;
         }
         
-        // Consume access level if it's a special node (not Normal, Start, or End)
-        if (targetNode.nodeType == NodeType.Firewall || targetNode.nodeType == NodeType.Antivius)
+        // Consume access level only if it's a special node AND we haven't visited it before
+        if ((targetNode.nodeType == NodeType.Firewall || targetNode.nodeType == NodeType.Antivius) && 
+            targetNode.nodeStatus == NodeStatus.Unvisited)
         {
             AccessLevel -= requiredLevel;
             AccessLevel = Mathf.Max(0, accessLevel);
 
             Debug.Log($"Access level consumed: -{requiredLevel}. Remaining: {accessLevel}");
             MessageLine.Instance.ShowMessage($"Access level consumed: {requiredLevel}. Remaining: {accessLevel}", Color.cyan);
+        }
+        else if ((targetNode.nodeType == NodeType.Firewall || targetNode.nodeType == NodeType.Antivius) && 
+                 targetNode.nodeStatus == NodeStatus.Visited)
+        {
+            Debug.Log($"Already visited {targetNode.nodeType} node. No access consumed.");
+            MessageLine.Instance.ShowMessage($"Already visited {targetNode.nodeType} node. No access consumed.", Color.green);
         }
 
         return true;
