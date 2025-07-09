@@ -688,6 +688,7 @@ GameObject:
   - component: {fileID: 4683396715201521616}
   - component: {fileID: 1019294202717317971}
   - component: {fileID: 8970962934980429050}
+  - component: {fileID: 2564227826443003567}
   m_Layer: 0
   m_Name: Node
   m_TagString: Untagged
@@ -856,6 +857,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2564227826443003567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6909350085311072053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47acda59889f6974dbb07bbb195fdb7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSwipeDistance: 50
+  maxSwipeTime: 0.5
+  showDebugInfo: 1
 --- !u!1 &7563210356110044938
 GameObject:
   m_ObjectHideFlags: 0

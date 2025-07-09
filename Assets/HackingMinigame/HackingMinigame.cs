@@ -119,7 +119,7 @@ public class HackingMinigame : MonoBehaviour
         // Disable all other travel edges on 'from' except the current one
         DisableOtherEdges(from, edgeToAnimate);
 
-        // Fix: Disable from-node's standard edges too (needed for Start node edge visibility)
+        // Disable from-node's standard edges too (needed for Start node edge visibility)
         DisableStandardEdges(from);
         
         // Reset the opposite travel edge on 'to'
@@ -130,8 +130,8 @@ public class HackingMinigame : MonoBehaviour
             oppositeEdge.enabled = false;
         }
 
-        // Disable normal edges on 'to' so the travel edge is fully visible
-        DisableStandardEdges(to);
+        // Only disable the specific standard edge on 'to' that would interfere with travel animation
+        DisableSpecificStandardEdge(to, from);
 
         float duration = 0.3f;
         float elapsed = 0f;
@@ -206,6 +206,27 @@ public class HackingMinigame : MonoBehaviour
         if (node.edgeRight != null) node.edgeRight.SetActive(false);
         if (node.edgeUp != null) node.edgeUp.SetActive(false);
         if (node.edgeDown != null) node.edgeDown.SetActive(false);
+    }
+    
+    private void DisableSpecificStandardEdge(Node node, Node fromNode)
+    {
+        // Determine which direction we're coming from and disable only that specific edge
+        if (fromNode == node.GetLeftNeighbor())
+        {
+            if (node.edgeLeft != null) node.edgeLeft.SetActive(false);
+        }
+        else if (fromNode == node.GetRightNeighbor())
+        {
+            if (node.edgeRight != null) node.edgeRight.SetActive(false);
+        }
+        else if (fromNode == node.GetTopNeighbor())
+        {
+            if (node.edgeUp != null) node.edgeUp.SetActive(false);
+        }
+        else if (fromNode == node.GetBottomNeighbor())
+        {
+            if (node.edgeDown != null) node.edgeDown.SetActive(false);
+        }
     }
     
     private bool IsConnected(Node from, Node to)

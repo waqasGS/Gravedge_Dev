@@ -72,7 +72,12 @@ public class Node : MonoBehaviour
     
     public void OnClick_Node()
     {
-        HackingMinigame.Instance.TravelToNode(this);
+        // Only handle click if we're not currently swiping
+        NodeSwipeHandler swipeHandler = GetComponent<NodeSwipeHandler>();
+        if (swipeHandler == null || !swipeHandler.IsSwiping)
+        {
+            HackingMinigame.Instance.TravelToNode(this);
+        }
     }
 
     public void UpdateNodeVisuals()
