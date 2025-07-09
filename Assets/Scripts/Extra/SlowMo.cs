@@ -13,7 +13,7 @@ public class SlowMo : MonoBehaviour/*, IPointerClickHandler*/
     public Image slowMoSlider;
 
     private bool isSlowMoActive = false;
-    private float slowMoEnergy = 1f;
+    public float slowMoEnergy = 1f;
 
     void Update()
     {
