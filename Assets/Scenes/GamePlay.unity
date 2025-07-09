@@ -1642,6 +1642,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Environment 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4823981466779589954, guid: 7230c5ca172c2274584cfdc0ac24679b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2767,7 +2771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1013793921
 Transform:
   m_ObjectHideFlags: 0
@@ -107435,10 +107439,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1754857043630514031, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -15.000137
-      objectReference: {fileID: 0}
     - target: {fileID: 2572621121761582899, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
       propertyPath: bikeUI
       value: 
@@ -107446,18 +107446,6 @@ PrefabInstance:
     - target: {fileID: 2581321778397671749, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3500045306391462925, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4184444126176738293, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -15.000137
-      objectReference: {fileID: 0}
-    - target: {fileID: 4694108893635409292, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5246285647622375534, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
       propertyPath: m_SizeDelta.x
@@ -107511,10 +107499,6 @@ PrefabInstance:
       propertyPath: ziplineHandler
       value: 
       objectReference: {fileID: 1587891994916305552}
-    - target: {fileID: 8808721766395682510, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -15.000137
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -112904,17 +112888,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 487378691}
     m_Modifications:
-    - target: {fileID: 170853617806385818, guid: c7fca56518b0af34fa64a0372385a54c, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2282827928920128432, guid: c7fca56518b0af34fa64a0372385a54c, type: 3}
       propertyPath: m_Name
       value: jumpover (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4536163531490411800, guid: c7fca56518b0af34fa64a0372385a54c, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7333817610049882649, guid: c7fca56518b0af34fa64a0372385a54c, type: 3}
       propertyPath: m_LocalPosition.x
