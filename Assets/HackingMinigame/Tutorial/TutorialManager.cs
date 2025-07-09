@@ -68,10 +68,17 @@ public class TutorialManager : MonoBehaviour
         {
             HandleNodeTargeting();
         }
-        // Position arrow for UI elements if not using node targeting
-        else if (currentStep.targetElement != null && tutorialUI.arrowImage != null)
+        
+        // Position arrow if showArrow is enabled and we have a target element
+        if (currentStep.showArrow && currentStep.targetElement != null && tutorialUI.arrowImage != null)
         {
             PositionArrow();
+        }
+        
+        // Handle arrow visibility based on showArrow setting
+        if (tutorialUI.arrowImage != null)
+        {
+            tutorialUI.arrowImage.gameObject.SetActive(currentStep.showArrow);
         }
         
         // Position unmask if targeting is enabled or target element is set
@@ -91,7 +98,6 @@ public class TutorialManager : MonoBehaviour
         {
             tutorialUI.arrowImage.rectTransform.position = targetRect.position + (Vector3)currentStep.arrowOffset;
             tutorialUI.arrowImage.color = currentStep.arrowColor;
-            tutorialUI.arrowImage.gameObject.SetActive(true);
         }
     }
     
@@ -152,12 +158,6 @@ public class TutorialManager : MonoBehaviour
             // Set the target element to the node's GameObject for arrow positioning
             currentStep.targetElement = targetNode.gameObject;
             
-            // Position arrow on the node
-            if (tutorialUI.arrowImage != null)
-            {
-                PositionArrow();
-            }
-            
             // Highlight the node if requested
             if (currentStep.highlightTarget)
             {
@@ -175,12 +175,40 @@ public class TutorialManager : MonoBehaviour
         // Get the node container from the hacking minigame
         if (HackingMinigame.Instance != null && HackingMinigame.Instance.nodeContainer != null)
         {
+            // If node type targeting is enabled and a specific node type is set, find the first node of that type
+            if (currentStep.useNodeTargeting && currentStep.targetNodeType != NodeType.Normal)
+            {
+                return FindFirstNodeOfType(currentStep.targetNodeType);
+            }
+            
+            // Otherwise, use the coordinates as before
             int row = Mathf.RoundToInt(currentStep.targetNodeCoords.x);
             int col = Mathf.RoundToInt(currentStep.targetNodeCoords.y);
             
             return HackingMinigame.Instance.nodeContainer.GetNode(row, col);
         }
         
+        return null;
+    }
+    
+    private Node FindFirstNodeOfType(NodeType nodeType)
+    {
+        NodeContainer container = HackingMinigame.Instance.nodeContainer;
+        
+        // Search through all nodes in the grid
+        for (int row = 0; row < container.rows; row++)
+        {
+            for (int col = 0; col < container.cols; col++)
+            {
+                Node node = container.GetNode(row, col);
+                if (node != null && node.nodeType == nodeType)
+                {
+                    return node;
+                }
+            }
+        }
+        
+        Debug.LogWarning($"No node of type {nodeType} found in the grid!");
         return null;
     }
     

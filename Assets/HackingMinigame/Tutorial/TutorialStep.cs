@@ -14,6 +14,7 @@ public class TutorialStep : ScriptableObject
     [Header("Node Targeting")]
     public bool useNodeTargeting = false;
     public Vector2 targetNodeCoords = Vector2.zero; // Grid coordinates (row, col) of the node to highlight
+    public NodeType targetNodeType = NodeType.Normal; // Target a specific node type
     
     [Header("Step Behavior")]
     public TutorialAction requiredAction = TutorialAction.Wait;
@@ -23,6 +24,7 @@ public class TutorialStep : ScriptableObject
     [Header("Visual Settings")]
     public bool highlightTarget = true;
     public bool dimBackground = false;
+    public bool showArrow = true; // Whether to show the arrow for this step
     public Color arrowColor = Color.white;
 }
 

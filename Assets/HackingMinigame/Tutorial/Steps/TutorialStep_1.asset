@@ -15,12 +15,14 @@ MonoBehaviour:
   stepNumber: 1
   messageText: Your Goal is to Breach the network to reach the End Node (flag)
   targetElement: {fileID: 0}
-  arrowOffset: {x: 0, y: 0}
-  useNodeTargeting: 0
+  arrowOffset: {x: 0, y: 75}
+  useNodeTargeting: 1
   targetNodeCoords: {x: 0, y: 0}
+  targetNodeType: 2
   requiredAction: 1
   waitDuration: 0
   nextStepTrigger: 
   highlightTarget: 0
   dimBackground: 1
+  showArrow: 1
   arrowColor: {r: 1, g: 1, b: 1, a: 1}
