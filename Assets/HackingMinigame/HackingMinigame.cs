@@ -50,6 +50,9 @@ public class HackingMinigame : MonoBehaviour
     public float hackFailureShakeStrength = 25f;
     public float hackFailureShakeDuration = 1.0f;
     
+    [Header("Tutorial System")]
+    public TutorialManager tutorialManager;
+    
     private float currentTimeLeft;
     
     public int AccessLevel
@@ -78,6 +81,12 @@ public class HackingMinigame : MonoBehaviour
         if (uiShake == null)
         {
             uiShake = GetComponentInChildren<UIShake>();
+        }
+        
+        // Setup tutorial system
+        if (tutorialManager == null)
+        {
+            tutorialManager = GetComponentInChildren<TutorialManager>();
         }
         
         StartTimer();
@@ -197,6 +206,12 @@ public class HackingMinigame : MonoBehaviour
             }
             
             return;
+        }
+        
+        // Notify tutorial system of navigation
+        if (tutorialManager != null)
+        {
+            tutorialManager.OnNavigationOccurred();
         }
         
         StartCoroutine(AnimateTravel(currentNode, targetNode));
@@ -380,6 +395,15 @@ public class HackingMinigame : MonoBehaviour
     public void OnClick_AbortHack()
     {
         EndHack();
+    }
+    
+    // Method for tutorial system to handle node clicks
+    public void OnNodeClickedForTutorial(GameObject nodeObject)
+    {
+        if (tutorialManager != null)
+        {
+            tutorialManager.OnNodeClicked(nodeObject);
+        }
     }
 
     private void EndHack()
