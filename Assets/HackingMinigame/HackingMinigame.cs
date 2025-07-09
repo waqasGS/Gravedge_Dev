@@ -21,10 +21,13 @@ public class HackingMinigame : MonoBehaviour
 
     public TextMeshProUGUI accessLevelText;
     public Slider timeLeftSlider;
+    public DOTweenAnimation bgRedTintAnimation;
     
     [Header("Timer Settings")]
     public float hackTimeLimit = 60f; // Time limit in seconds
     public bool isTimerRunning = false;
+    public float warningThreshold = 0.2f; // Start warning animation when 20% of time remains
+    public bool warningAnimationStarted = false;
     
     [Header("Player State")]
     public int accessLevel = 0; // This value determines if the player can pass special nodes
@@ -85,6 +88,17 @@ public class HackingMinigame : MonoBehaviour
         currentTimeLeft = hackTimeLimit;
         timeLeftSlider.maxValue = hackTimeLimit;
         timeLeftSlider.value = hackTimeLimit;
+        warningAnimationStarted = false;
+    }
+    
+    private void StartWarningAnimation()
+    {
+        if (bgRedTintAnimation != null && !warningAnimationStarted)
+        {
+            warningAnimationStarted = true;
+            bgRedTintAnimation.DOPlay();
+            Debug.Log("Warning animation started - time is running low!");
+        }
     }
     
     private void StartTimer()
@@ -99,6 +113,12 @@ public class HackingMinigame : MonoBehaviour
         {
             currentTimeLeft -= Time.deltaTime;
             timeLeftSlider.value = currentTimeLeft;
+            
+            // Check if we should start the warning animation
+            if (!warningAnimationStarted && currentTimeLeft <= hackTimeLimit * warningThreshold)
+            {
+                StartWarningAnimation();
+            }
             
             if (currentTimeLeft <= 0f)
             {

@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 5391624172225614854}
   - component: {fileID: 2938994367540955571}
   - component: {fileID: 3269868405527841671}
+  - component: {fileID: 5513505125600835928}
   m_Layer: 0
   m_Name: BG
   m_TagString: Untagged
@@ -379,6 +380,114 @@ MonoBehaviour:
   endValueV3: {x: 0, y: 1, z: 1}
   endValueV2: {x: 0, y: 0}
   endValueColor: {r: 1, g: 1, b: 1, a: 1}
+  endValueString: 
+  endValueRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  endValueTransform: {fileID: 0}
+  optionalBool0: 1
+  optionalBool1: 0
+  optionalFloat0: 0
+  optionalInt0: 0
+  optionalRotationMode: 0
+  optionalScrambleMode: 0
+  optionalShakeRandomnessMode: 0
+  optionalString: 
+--- !u!114 &5513505125600835928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4888050932598048945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0390bd8b8ffd640b34fe25065ff1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateType: 0
+  isSpeedBased: 0
+  hasOnStart: 0
+  hasOnPlay: 0
+  hasOnUpdate: 0
+  hasOnStepComplete: 0
+  hasOnComplete: 0
+  hasOnTweenCreated: 0
+  hasOnRewind: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onTweenCreated:
+    m_PersistentCalls:
+      m_Calls: []
+  onRewind:
+    m_PersistentCalls:
+      m_Calls: []
+  targetIsSelf: 1
+  targetGO: {fileID: 0}
+  tweenTargetIsTargetGO: 1
+  delay: 0
+  duration: 1
+  easeType: 7
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loopType: 1
+  loops: -1
+  id: 
+  isRelative: 0
+  isFrom: 0
+  isIndependentUpdate: 0
+  autoKill: 0
+  autoGenerate: 1
+  isActive: 1
+  isValid: 1
+  target: {fileID: 5391624172225614854}
+  animationType: 6
+  targetType: 3
+  forcedTargetType: 0
+  autoPlay: 0
+  useTargetAsV3: 0
+  endValueFloat: 0
+  endValueV3: {x: 0, y: 1, z: 1}
+  endValueV2: {x: 0, y: 0}
+  endValueColor: {r: 0.4056604, g: 0.14351194, b: 0.14351194, a: 1}
   endValueString: 
   endValueRect:
     serializedVersion: 2
@@ -879,14 +988,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accessLevelText: {fileID: 8346218323577209461}
   timeLeftSlider: {fileID: 7107406662655556312}
+  bgRedTintAnimation: {fileID: 5513505125600835928}
   hackTimeLimit: 60
   isTimerRunning: 0
+  warningThreshold: 0.2
+  warningAnimationStarted: 0
   accessLevel: 5
   currentNode: {fileID: 0}
   nodeContainer: {fileID: 0}
   uiShake: {fileID: 4667309777783116018}
   accessDeniedShakeStrength: 15
   accessDeniedShakeDuration: 0.3
+  accessConsumedShakeStrength: 8
+  accessConsumedShakeDuration: 0.2
   hackSuccessShakeStrength: 20
   hackSuccessShakeDuration: 0.8
   hackFailureShakeStrength: 25
