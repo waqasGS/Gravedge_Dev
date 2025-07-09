@@ -15,6 +15,12 @@ public class NodeContainer : MonoBehaviour
     public float firewallChance = 0.5f;
     [Range(0f, 1f)]
     public float antivirusChance = 0.5f;
+    
+    [Header("Path Generation")]
+    [Range(1, 4)]
+    public int maxConnectionsPerNode = 1; // How many connections each node can have (1-4)
+    [Range(0f, 1f)]
+    public float additionalPathChance = 0.3f; // Chance to add extra paths after initial maze
 
     public Node GetNode(int row, int col)
     {
@@ -69,17 +75,23 @@ public class NodeContainer : MonoBehaviour
             // Shuffle neighbors to randomize path
             ShuffleList(neighbors, rand);
 
+            int connectionsMade = 0;
             foreach (var neighbor in neighbors)
-                if (!visited[neighbor.row, neighbor.col])
+            {
+                if (!visited[neighbor.row, neighbor.col] && connectionsMade < maxConnectionsPerNode)
                 {
                     // Connect nodes
                     EnableEdgeBetween(current, neighbor);
                     visited[neighbor.row, neighbor.col] = true;
                     stack.Push(current);
                     stack.Push(neighbor);
-                    break; // Only one edge per node
+                    connectionsMade++;
                 }
+            }
         }
+        
+        // Add additional paths for more variety
+        AddAdditionalPaths(rand);
     }
 
     private void EnableEdgeBetween(Node a, Node b)
@@ -120,6 +132,53 @@ public class NodeContainer : MonoBehaviour
         {
             var j = rand.Next(i, list.Count);
             (list[i], list[j]) = (list[j], list[i]);
+        }
+    }
+    
+    private void AddAdditionalPaths(Random rand)
+    {
+        // Go through all nodes and potentially add extra connections
+        for (int row = 0; row < rows; row++)
+        {
+            for (int col = 0; col < cols; col++)
+            {
+                var node = nodeGrid[row, col];
+                
+                // Skip if node already has max connections
+                if (node.connectedNeighbors.Count >= maxConnectionsPerNode)
+                    continue;
+                
+                // Check all possible neighbors
+                var possibleNeighbors = new List<Node>();
+                
+                var left = GetLeftNeighbor(row, col);
+                var right = GetRightNeighbor(row, col);
+                var top = GetTopNeighbor(row, col);
+                var bottom = GetBottomNeighbor(row, col);
+                
+                if (left != null && !node.connectedNeighbors.Contains(left) && left.connectedNeighbors.Count < maxConnectionsPerNode)
+                    possibleNeighbors.Add(left);
+                if (right != null && !node.connectedNeighbors.Contains(right) && right.connectedNeighbors.Count < maxConnectionsPerNode)
+                    possibleNeighbors.Add(right);
+                if (top != null && !node.connectedNeighbors.Contains(top) && top.connectedNeighbors.Count < maxConnectionsPerNode)
+                    possibleNeighbors.Add(top);
+                if (bottom != null && !node.connectedNeighbors.Contains(bottom) && bottom.connectedNeighbors.Count < maxConnectionsPerNode)
+                    possibleNeighbors.Add(bottom);
+                
+                // Shuffle and add some additional connections
+                ShuffleList(possibleNeighbors, rand);
+                
+                foreach (var neighbor in possibleNeighbors)
+                {
+                    if (node.connectedNeighbors.Count >= maxConnectionsPerNode)
+                        break;
+                        
+                    if (rand.NextDouble() <= additionalPathChance)
+                    {
+                        EnableEdgeBetween(node, neighbor);
+                    }
+                }
+            }
         }
     }
 
