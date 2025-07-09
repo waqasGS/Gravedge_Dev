@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Invector.vCharacterController.vActions;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnmountButton : MonoBehaviour
 {
@@ -11,13 +12,21 @@ public class UnmountButton : MonoBehaviour
     public MotorcycleSetup motorcycleSetup;
 
     [Header("UI Reference")]
-    public GameObject bikeUI; 
+    public GameObject bikeUI;
 
     public void Unmount()
     {
         if (bikeUI != null)
-            bikeUI.SetActive(false); 
+            bikeUI.SetActive(false);
 
-        motorcycleSetup.Unmount();    
+        motorcycleSetup.Unmount();
+    }
+    public void OnReceiveDamage()
+    {
+        if (motorcycleSetup != null)
+        {
+            GetComponent<Button>().onClick.Invoke();
+
+        }
     }
 }
