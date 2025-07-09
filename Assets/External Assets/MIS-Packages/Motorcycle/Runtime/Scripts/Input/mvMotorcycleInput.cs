@@ -59,6 +59,13 @@ namespace com.mobilin.games
             if (vc != null)
                 vc.Init();
         }
+        void LateUpdate()                     // **ADD transform lock here (optional)**
+        {
+            if (vc == null) return;
+            Vector3 r = vc.transform.eulerAngles;
+            r.x = 0f;
+            vc.transform.eulerAngles = r;
+        }
 
         // ----------------------------------------------------------------------------------------------------
         // 
