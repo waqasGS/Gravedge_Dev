@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class HackingMinigame : MonoBehaviour
 {
@@ -35,6 +36,17 @@ public class HackingMinigame : MonoBehaviour
     public Action onReachedEndNode;
     public Action onHackFailed;
     
+    [Header("UI Shake")]
+    public UIShake uiShake;
+    public float accessDeniedShakeStrength = 15f;
+    public float accessDeniedShakeDuration = 0.3f;
+    public float accessConsumedShakeStrength = 8f;
+    public float accessConsumedShakeDuration = 0.2f;
+    public float hackSuccessShakeStrength = 20f;
+    public float hackSuccessShakeDuration = 0.8f;
+    public float hackFailureShakeStrength = 25f;
+    public float hackFailureShakeDuration = 1.0f;
+    
     private float currentTimeLeft;
     
     public int AccessLevel
@@ -58,6 +70,12 @@ public class HackingMinigame : MonoBehaviour
         
         onReachedEndNode += OnReachedEndNode;
         onHackFailed += OnHackFailed;
+        
+        // Auto-find UIShake component if not assigned
+        if (uiShake == null)
+        {
+            uiShake = GetComponentInChildren<UIShake>();
+        }
         
         StartTimer();
     }
@@ -108,6 +126,12 @@ public class HackingMinigame : MonoBehaviour
 
     private IEnumerator AnimateHackSuccess()
     {
+        // Shake UI for success
+        if (uiShake != null)
+        {
+            uiShake.Shake(hackSuccessShakeStrength, hackSuccessShakeDuration);
+        }
+        
         MessageLine.Instance.ShowMessage("Hack Successfull", Color.green);
         yield return new WaitForSeconds(1.0f);
         EndHack();
@@ -115,6 +139,12 @@ public class HackingMinigame : MonoBehaviour
     
     private IEnumerator AnimateHackFailure()
     {
+        // Shake UI for failure
+        if (uiShake != null)
+        {
+            uiShake.Shake(hackFailureShakeStrength, hackFailureShakeDuration);
+        }
+        
         MessageLine.Instance.ShowMessage("Hack Failed - Time's Up!", Color.red);
         yield return new WaitForSeconds(1.0f);
         EndHack();
@@ -139,6 +169,13 @@ public class HackingMinigame : MonoBehaviour
         {
             Debug.Log("Access denied.");
             MessageLine.Instance.ShowMessage("Access denied", Color.red);
+            
+            // Shake UI for access denied
+            if (uiShake != null)
+            {
+                uiShake.Shake(accessDeniedShakeStrength, accessDeniedShakeDuration);
+            }
+            
             return;
         }
         
@@ -165,6 +202,12 @@ public class HackingMinigame : MonoBehaviour
 
             Debug.Log($"Access level consumed: -{requiredLevel}. Remaining: {accessLevel}");
             MessageLine.Instance.ShowMessage($"Access level consumed: {requiredLevel}. Remaining: {accessLevel}", Color.cyan);
+            
+            // Shake UI when access is consumed
+            if (uiShake != null)
+            {
+                uiShake.Shake(accessConsumedShakeStrength, accessConsumedShakeDuration);
+            }
         }
         else if ((targetNode.nodeType == NodeType.Firewall || targetNode.nodeType == NodeType.Antivius) && 
                  targetNode.nodeStatus == NodeStatus.Visited)
