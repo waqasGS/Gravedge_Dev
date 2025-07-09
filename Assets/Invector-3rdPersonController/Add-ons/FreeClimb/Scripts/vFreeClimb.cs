@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Invector.vCharacterController.vActions
 {
@@ -30,6 +31,7 @@ namespace Invector.vCharacterController.vActions
         public GenericInput climbEdgeInput = new GenericInput("E", "A", "A");
         public GenericInput enterExitInput = new GenericInput("Space", "X", "X");
         public GenericInput climbJumpInput = new GenericInput("Space", "X", "X");
+     
 
         [vSeparator("Movement")]
         public bool moveUsingRootMotion = true;
@@ -188,6 +190,9 @@ namespace Invector.vCharacterController.vActions
                 input = Vector2.zero;
                 TP_Input.cc.animator.SetFloat(vAnimatorParameters.InputHorizontal, 0);
                 TP_Input.cc.animator.SetFloat(vAnimatorParameters.InputVertical, 0);
+
+
+           
             }
         }
 
@@ -394,7 +399,7 @@ namespace Invector.vCharacterController.vActions
         protected virtual void ClimbJumpHandle()
         {
             if (TP_Input.enabled || !TP_Input.cc.animator || !dragInfo.inDrag || inClimbUp || inClimbEnter) return;
-            if (climbJumpInput.GetButton() && !inClimbJump && input.magnitude > 0 && !TP_Input.cc.animator.GetCurrentAnimatorStateInfo(0).IsName(animatorStateHierarchy + ".ClimbJump"))
+            if (climbJumpInput.GetButtonDown() && !inClimbJump && input.magnitude > 0 && !TP_Input.cc.animator.GetCurrentAnimatorStateInfo(0).IsName(animatorStateHierarchy + ".ClimbJump"))
             {
                 var angleBetweenCharacterAndCamera = Vector3.Angle(transform.right, Camera.main.transform.right);
                 var rightDirection = angleBetweenCharacterAndCamera > 60 ? Camera.main.transform.right : transform.right;

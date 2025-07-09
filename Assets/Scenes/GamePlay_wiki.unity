@@ -322,6 +322,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialTrigger (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 120524, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 453802, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1456,6 +1460,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1508679627}
     m_Modifications:
+    - target: {fileID: 120524, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 453802, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2081,6 +2089,10 @@ PrefabInstance:
     - target: {fileID: 120524, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
       propertyPath: m_Name
       value: TutorialTrigger (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 120524, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 453802, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
       propertyPath: m_RootOrder
@@ -8136,6 +8148,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialTrigger (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 120524, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 453802, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -9788,6 +9804,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialTrigger (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 120524, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 453802, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -9982,6 +10002,10 @@ PrefabInstance:
     - target: {fileID: 120524, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
       propertyPath: m_Name
       value: TutorialTrigger (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 120524, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 453802, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
       propertyPath: m_RootOrder
@@ -12516,6 +12540,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialTrigger (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 120524, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 453802, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -12605,6 +12633,10 @@ PrefabInstance:
     - target: {fileID: 120524, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
       propertyPath: m_Name
       value: TutorialTrigger (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 120524, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 453802, guid: ee6b6825a91ae674c9b5887384ed033c, type: 3}
       propertyPath: m_RootOrder
@@ -241970,6 +242002,18 @@ PrefabInstance:
     - target: {fileID: 88252128376882880, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
+      propertyPath: selectedToolbar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
+      propertyPath: climbJumpMaxDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
+      propertyPath: climbJumpMinDistance
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1047173937253735690, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
