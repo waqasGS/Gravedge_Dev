@@ -251,6 +251,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114917062776150692, guid: 90ad93038c349d3448e46d12108d9280, type: 3}
+      propertyPath: selectedToolbar
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -260,6 +264,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4246689966793930, guid: 90ad93038c349d3448e46d12108d9280, type: 3}
   m_PrefabInstance: {fileID: 38101133}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &68897916 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2079709295530937419, guid: 5d018356e1103d942a9cc766fdec2b16, type: 3}
+  m_PrefabInstance: {fileID: 1893281078}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &88822789
 PrefabInstance:
@@ -329,6 +338,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11499780, guid: 7ab728a33f2f6d44c9174d85da7cdd87, type: 3}
+      propertyPath: selectedToolbar
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -342,6 +355,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7955480772578889525}
     m_Modifications:
+    - target: {fileID: 1090255361559597864, guid: 2bb8e2fe72069ce4497740bb116e6a52, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8906972324818415642, guid: 2bb8e2fe72069ce4497740bb116e6a52, type: 3}
       propertyPath: m_Name
       value: vShotgun_NO_Inventory Variant
@@ -389,6 +406,10 @@ PrefabInstance:
     - target: {fileID: 8906972324818653854, guid: 2bb8e2fe72069ce4497740bb116e6a52, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8906972324828668694, guid: 2bb8e2fe72069ce4497740bb116e6a52, type: 3}
+      propertyPath: selectedToolbar
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -694,6 +715,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11491430, guid: 0c9df0b78eaed7045a691ed49c9b34f5, type: 3}
+      propertyPath: selectedToolbar
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -754,6 +779,10 @@ PrefabInstance:
     - target: {fileID: 4881589711078705830, guid: bf8e7b32b76156341ac90d8a8b08c28c, type: 3}
       propertyPath: m_Name
       value: vHandgun_NO_Inventory Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4881589711088506388, guid: bf8e7b32b76156341ac90d8a8b08c28c, type: 3}
+      propertyPath: selectedToolbar
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -948,6 +977,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: vRPG_NO_Inventory Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5123598363639572859, guid: 20ce5c27ce929fd4797cdbeeed1dc214, type: 3}
+      propertyPath: selectedToolbar
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -973,7 +1006,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1103361582
 Transform:
   m_ObjectHideFlags: 0
@@ -1066,6 +1099,10 @@ PrefabInstance:
     - target: {fileID: 462666, guid: 2bc31d30bb728904cb257dc444fa6404, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11425254, guid: 2bc31d30bb728904cb257dc444fa6404, type: 3}
+      propertyPath: selectedToolbar
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1537,6 +1574,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11409438, guid: 27b851a2ffbb8ef41bc5a74bd1a314bb, type: 3}
+      propertyPath: selectedToolbar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11409438, guid: 27b851a2ffbb8ef41bc5a74bd1a314bb, type: 3}
+      propertyPath: actionInput.useInput
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1642,6 +1687,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 10159721584293279, guid: 5d018356e1103d942a9cc766fdec2b16, type: 3}
+      propertyPath: openCloseWindow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10159721584293279, guid: 5d018356e1103d942a9cc766fdec2b16, type: 3}
+      propertyPath: selectedToolbar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 359396858970104330, guid: 5d018356e1103d942a9cc766fdec2b16, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 709767785630273244, guid: 5d018356e1103d942a9cc766fdec2b16, type: 3}
+      propertyPath: openCloseWindow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157433609008337047, guid: 5d018356e1103d942a9cc766fdec2b16, type: 3}
+      propertyPath: openCloseWindow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157433609008337047, guid: 5d018356e1103d942a9cc766fdec2b16, type: 3}
+      propertyPath: selectedToolbar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369549515557064493, guid: 5d018356e1103d942a9cc766fdec2b16, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1635473753955975630, guid: 5d018356e1103d942a9cc766fdec2b16, type: 3}
       propertyPath: m_Name
       value: X_BotCharacter
@@ -1694,6 +1767,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6688278580329571162, guid: 5d018356e1103d942a9cc766fdec2b16, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324569891531421328, guid: 5d018356e1103d942a9cc766fdec2b16, type: 3}
+      propertyPath: joystickHandle
+      value: 
+      objectReference: {fileID: 1995045967}
+    - target: {fileID: 7324569891531421328, guid: 5d018356e1103d942a9cc766fdec2b16, type: 3}
+      propertyPath: joystickBackground
+      value: 
+      objectReference: {fileID: 68897916}
     - target: {fileID: 8146970278143489727, guid: 5d018356e1103d942a9cc766fdec2b16, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1720,6 +1805,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7955480772578889525}
     m_Modifications:
+    - target: {fileID: 2766298328349321803, guid: f50dc0751f90082449ab27c3394e523c, type: 3}
+      propertyPath: selectedToolbar
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2876253696526818505, guid: f50dc0751f90082449ab27c3394e523c, type: 3}
       propertyPath: m_RootOrder
       value: 19
@@ -1897,6 +1986,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &1995045967 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2111396628436865525, guid: 5d018356e1103d942a9cc766fdec2b16, type: 3}
+  m_PrefabInstance: {fileID: 1893281078}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2001767340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 433228, guid: 27b851a2ffbb8ef41bc5a74bd1a314bb, type: 3}
@@ -2022,6 +2116,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: vSniper_NO_Inventory Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1657064300741812934, guid: 64c7c0d4b7d23184e96a257b93f4d12b, type: 3}
+      propertyPath: selectedToolbar
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2082,6 +2180,10 @@ PrefabInstance:
     - target: {fileID: 1804537267582578112, guid: 6eb49b8498aebf14da0f67ba3cc0dddd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804537267589368424, guid: 6eb49b8498aebf14da0f67ba3cc0dddd, type: 3}
+      propertyPath: selectedToolbar
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5419,9 +5521,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 500
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Mouse X
   verticalAxisName: Mouse Y
+  alwaysVisible: 0
+  joystickBackground: {fileID: 0}
+  joystickHandle: {fileID: 0}
 --- !u!114 &2842440220870605808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9629,8 +9737,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openCloseEvents: 1
-  openCloseWindow: 0
-  selectedToolbar: 0
+  openCloseWindow: 1
+  selectedToolbar: 2
   actionTag: Action
   useRootMotion: 1
   debugMode: 0
@@ -9693,7 +9801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openCloseEvents: 0
-  openCloseWindow: 0
+  openCloseWindow: 1
   selectedToolbar: 0
   tagsToFind:
   - Enemy
@@ -21906,9 +22014,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 100
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
+  alwaysVisible: 0
+  joystickBackground: {fileID: 0}
+  joystickHandle: {fileID: 0}
 --- !u!114 &8089576956552502829
 MonoBehaviour:
   m_ObjectHideFlags: 0
