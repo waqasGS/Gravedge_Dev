@@ -32,6 +32,20 @@ namespace Invector.vCharacterController
 
         public vHUDController hud;
 
+        [Header("Input Toggle Settings")]
+        [Tooltip("Key to manually toggle between Keyboard/Mouse and Mobile input")]
+        public KeyCode toggleInputKey = KeyCode.Tab;
+        [Tooltip("Enable manual input switching with key press")]
+        public bool enableManualToggle = true;
+        [Tooltip("Disable automatic input detection when manual toggle is enabled")]
+        public bool disableAutoDetection = false;
+        [Tooltip("Disable automatic detection permanently after manual toggle")]
+        public bool disableAutoAfterManualToggle = true;
+
+        private float lastToggleTime = 0f;
+        private float toggleCooldown = 1f; // 1 second cooldown after manual toggle
+        private bool hasManuallyToggled = false;
+
         void Start()
         {
             if (hud == null) hud = vHUDController.instance;
@@ -50,8 +64,24 @@ namespace Invector.vCharacterController
             }
         }
 
+        void Update()
+        {
+            // Handle manual input toggle
+            if (enableManualToggle && Input.GetKeyDown(toggleInputKey))
+            {
+                lastToggleTime = Time.time;
+                hasManuallyToggled = true;
+                ToggleInputDevice();
+            }
+        }
+
         void OnGUI()
         {
+            // Skip automatic detection if disabled, recently manually toggled, or permanently disabled after manual toggle
+            if (disableAutoDetection || 
+                (Time.time - lastToggleTime) < toggleCooldown || 
+                (disableAutoAfterManualToggle && hasManuallyToggled)) return;
+
             switch (inputDevice)
             {
                 case InputDevice.MouseKeyboard:
@@ -115,6 +145,47 @@ namespace Invector.vCharacterController
                         }
                     }
                     break;
+            }
+        }
+
+        /// <summary>
+        /// Manually toggle between Keyboard/Mouse and Mobile input
+        /// </summary>
+        public void ToggleInputDevice()
+        {
+            InputDevice newDevice;
+            string message;
+
+            switch (inputDevice)
+            {
+                case InputDevice.MouseKeyboard:
+                    newDevice = InputDevice.Mobile;
+                    message = "Control scheme changed to Mobile";
+                    if (hud != null) hud.controllerInput = true;
+                    break;
+                case InputDevice.Mobile:
+                    newDevice = InputDevice.MouseKeyboard;
+                    message = "Control scheme changed to Keyboard/Mouse";
+                    if (hud != null) hud.controllerInput = false;
+                    break;
+                case InputDevice.Joystick:
+                    // If currently on joystick, switch to keyboard/mouse
+                    newDevice = InputDevice.MouseKeyboard;
+                    message = "Control scheme changed to Keyboard/Mouse";
+                    if (hud != null) hud.controllerInput = false;
+                    break;
+                default:
+                    newDevice = InputDevice.MouseKeyboard;
+                    message = "Control scheme changed to Keyboard/Mouse";
+                    if (hud != null) hud.controllerInput = false;
+                    break;
+            }
+
+            inputDevice = newDevice;
+            
+            if (hud != null)
+            {
+                hud.ShowText(message, 2f, 0.5f);
             }
         }
 
