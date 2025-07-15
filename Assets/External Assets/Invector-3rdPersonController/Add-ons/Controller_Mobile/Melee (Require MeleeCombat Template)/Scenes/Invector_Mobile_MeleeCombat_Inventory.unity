@@ -12943,6 +12943,7 @@ MonoBehaviour:
     debug: 0
     animator: {fileID: 0}
     stateInfos: []
+  misRider: {fileID: 0}
   misWallRun: {fileID: 0}
   randomIdleCount: 0
   ignoreFalling: 0
@@ -14795,7 +14796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1944634940
 Transform:
   m_ObjectHideFlags: 0
@@ -49923,9 +49924,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 100
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
+  alwaysVisible: 0
+  joystickBackground: {fileID: 0}
+  joystickHandle: {fileID: 0}
 --- !u!114 &2641821624409335063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79903,9 +79910,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 100
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
+  alwaysVisible: 0
+  joystickBackground: {fileID: 0}
+  joystickHandle: {fileID: 0}
 --- !u!1 &6226756976294529363
 GameObject:
   m_ObjectHideFlags: 0
@@ -95857,6 +95870,7 @@ MonoBehaviour:
     debug: 0
     animator: {fileID: 0}
     stateInfos: []
+  misRider: {fileID: 0}
   misWallRun: {fileID: 0}
   randomIdleCount: 0
   ignoreFalling: 0
@@ -101722,6 +101736,7 @@ MonoBehaviour:
     debug: 0
     animator: {fileID: 0}
     stateInfos: []
+  misRider: {fileID: 0}
   misWallRun: {fileID: 0}
   randomIdleCount: 0
   ignoreFalling: 0

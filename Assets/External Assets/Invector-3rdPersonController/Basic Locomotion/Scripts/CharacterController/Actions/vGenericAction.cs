@@ -53,6 +53,9 @@ namespace Invector.vCharacterController.vActions
         protected bool finishRotationMatch;
         protected bool finishPositionXZMatch;
         protected bool finishPositionYMatch;
+        protected Vector3 animationStartPosition;
+        protected Vector3 animationRootMotionDelta;
+        protected Vector3 playerModelStartPosition;
         protected virtual Vector3 screenCenter
         {
             get
@@ -290,6 +293,12 @@ namespace Invector.vCharacterController.vActions
 
             if (playingAnimation)
             {
+                // Track root motion delta if snap to animation root is enabled
+                if (triggerAction.snapToAnimationRoot && tpInput != null && tpInput.cc != null && tpInput.cc.animator != null)
+                {
+                    animationRootMotionDelta += tpInput.cc.animator.deltaPosition;
+                }
+                
                 if (triggerAction.matchTarget != null)
                 {
                     if (debugMode)
@@ -365,6 +374,11 @@ namespace Invector.vCharacterController.vActions
                 localRelativeToTarget.x = triggerAction.matchTarget.InverseTransformPoint(transform.position).x;
             }
 
+            if (!triggerAction.useLocalY)
+            {
+                localRelativeToTarget.y = triggerAction.matchTarget.InverseTransformPoint(transform.position).y;
+            }
+
             if (!triggerAction.useLocalZ)
             {
                 localRelativeToTarget.z = triggerAction.matchTarget.InverseTransformPoint(transform.position).z;
@@ -429,6 +443,44 @@ namespace Invector.vCharacterController.vActions
             OnEndAction.Invoke(triggerAction);
 
             var trigger = triggerAction;
+            
+            // Snap to animation root position if enabled
+            if (trigger.snapToAnimationRoot)
+            {
+                if (debugMode)
+                {
+                    Debug.Log($"<b>GenericAction: </b>snapToAnimationRoot is enabled, calculating final position...");
+                }
+                
+                Vector3 oldPosition = transform.position;
+                Vector3 finalPosition;
+                
+                // Use player model position if available, otherwise fall back to root motion calculation
+                if (trigger.playerModel != null)
+                {
+                    finalPosition = trigger.playerModel.position;
+                    if (debugMode)
+                    {
+                        Debug.Log($"<b>GenericAction: </b>Using player model final position: {finalPosition} (was: {oldPosition})");
+                    }
+                }
+                else
+                {
+                    finalPosition = animationStartPosition + animationRootMotionDelta;
+                    if (debugMode)
+                    {
+                        Debug.Log($"<b>GenericAction: </b>Using calculated final position: {finalPosition} (start: {animationStartPosition}, delta: {animationRootMotionDelta}, was: {oldPosition})");
+                    }
+                }
+                
+                transform.position = finalPosition;
+                
+                if (debugMode)
+                {
+                    Debug.Log($"<b>GenericAction: </b>Snapped to final position: {finalPosition} (was: {oldPosition})");
+                }
+            }
+            
             // triggers the OnEndAnimation Event
             trigger.OnEndAnimation.Invoke();
             // Exit the trigger
@@ -807,6 +859,29 @@ namespace Invector.vCharacterController.vActions
 
                     actionStarted = true;
                     playingAnimation = true;
+                    
+                    // Capture the start position if we need to snap to animation root
+                    if (triggerAction.snapToAnimationRoot)
+                    {
+                        animationStartPosition = transform.position;
+                        animationRootMotionDelta = Vector3.zero; // Reset the accumulated delta
+                        
+                        // Capture player model start position if available
+                        if (triggerAction.playerModel != null)
+                        {
+                            playerModelStartPosition = triggerAction.playerModel.position;
+                            if (debugMode)
+                            {
+                                Debug.Log($"<b>GenericAction: </b>Captured player model start position: {playerModelStartPosition}");
+                            }
+                        }
+                        
+                        if (debugMode)
+                        {
+                            Debug.Log($"<b>GenericAction: </b>Captured animation start position: {animationStartPosition}");
+                        }
+                    }
+                    
                     tpInput.cc.animator.CrossFadeInFixedTime(triggerAction.playAnimation, triggerAction.crossFadeTransition, triggerAction.animatorLayer);    // trigger the action animation clip
                     if (!string.IsNullOrEmpty(triggerAction.customCameraState))
                     {
