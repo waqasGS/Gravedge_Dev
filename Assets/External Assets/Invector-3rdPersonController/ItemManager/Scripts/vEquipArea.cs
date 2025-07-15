@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,14 +9,18 @@ namespace Invector.vItemManager
     public class vEquipArea : vMonoBehaviour
     {
         public delegate void OnPickUpItem(vEquipArea area, vItemSlot slot);
+
         public OnPickUpItem onPickUpItemCallBack;
 
         public vInventory inventory;
         public vItemWindow itemPicker;
+
         [Tooltip("Set current equipped slot when submit an slot of this area")]
         public bool setEquipSlotWhenSubmit;
+
         [Tooltip("Skip empty slots when switching between slots")]
         public bool skipEmptySlots;
+
         public List<vEquipSlot> equipSlots;
         public string equipPointName;
 
@@ -27,6 +32,7 @@ namespace Invector.vItemManager
 
         [vHelpBox("You can ignore display Attributes using this property")]
         public List<vItemAttributes> ignoreAttributes;
+
         public UnityEngine.Events.UnityEvent onInitPickUpItem, onFinishPickUpItem;
         public InputField.OnChangeEvent onChangeName;
         public InputField.OnChangeEvent onChangeType;
@@ -40,9 +46,9 @@ namespace Invector.vItemManager
         public OnSelectEquipArea onSelectEquipArea;
         public UnityEngine.UI.Toggle.ToggleEvent onSetLockToEquip;
 
-        [HideInInspector]
-        public virtual vEquipSlot currentSelectedSlot { get; protected set; }
+        [HideInInspector] public virtual vEquipSlot currentSelectedSlot { get; protected set; }
         public virtual vEquipSlot lastSelectedSlot { get; protected set; }
+
         [HideInInspector]
         public virtual int indexOfEquippedItem
         {
@@ -57,16 +63,15 @@ namespace Invector.vItemManager
                 }
             }
         }
+
         protected bool equipSlotUpdated;
         protected int _indexOfEquippedSlot;
         public virtual vItem lastEquippedItem { get; protected set; }
         protected bool _isLockedToEquip { get; set; }
+
         public bool isLockedToEquip
         {
-            get
-            {
-                return _isLockedToEquip;
-            }
+            get { return _isLockedToEquip; }
             set
             {
                 if (_isLockedToEquip != value) onSetLockToEquip.Invoke(value);
@@ -75,6 +80,7 @@ namespace Invector.vItemManager
         }
 
         public bool ignoreEquipEvents { get; set; }
+
         /// <summary>
         /// used to ignore <see cref="onEquipItem"/> event. if true, the inventory will just add the equipment to area but dont will send to Equip the item. you will nedd to call <see cref="EquipCurrentSlot"/> to equip the item in the area.     
         /// </summary>  
@@ -97,6 +103,7 @@ namespace Invector.vItemManager
                     var equipSlotsArray = GetComponentsInChildren<vEquipSlot>(true);
                     equipSlots = equipSlotsArray.vToList();
                 }
+
                 foreach (vEquipSlot slot in equipSlots)
                 {
                     slot.onSubmitSlotCallBack = OnSubmitSlot;
@@ -116,10 +123,14 @@ namespace Invector.vItemManager
         {
             get
             {
-                return equipSlots[indexOfEquippedItem];
-
+                if (indexOfEquippedItem >= 0 && indexOfEquippedItem < equipSlots.Count)
+                {
+                    return equipSlots[indexOfEquippedItem];
+                }
+                return null;
             }
         }
+
 
         /// <summary>
         /// Item in Current Equipped Slot
@@ -128,9 +139,10 @@ namespace Invector.vItemManager
         {
             get
             {
-                return currentEquippedSlot.item;
+                return currentEquippedSlot != null ? currentEquippedSlot.item : null;
             }
         }
+
 
         /// <summary>
         /// All valid slot <seealso cref="vItemSlot.isValid"/>
@@ -164,6 +176,7 @@ namespace Invector.vItemManager
                 {
                     SetEquipSlot(equipSlots.IndexOf(currentSelectedSlot));
                 }
+
                 itemPicker.gameObject.SetActive(true);
                 itemPicker.onCancelSlot.RemoveAllListeners();
                 itemPicker.onCancelSlot.AddListener(CancelCurrentSlot);
@@ -312,6 +325,7 @@ namespace Invector.vItemManager
                 currentSelectedSlot.AddItem(slot.item);
                 if (!ignoreEquipEvents) onEquipItem.Invoke(this, currentSelectedSlot.item);
             }
+
             currentSelectedSlot.OnCancel();
             currentSelectedSlot = null;
             lastSelectedSlot = null;
@@ -408,6 +422,7 @@ namespace Invector.vItemManager
                     {
                         onEquipItem.Invoke(this, currentEquippedItem);
                     }
+
                     if (currentEquippedItem != lastEquippedItem)
                         onUnequipItem.Invoke(this, lastEquippedItem);
                 }
@@ -419,7 +434,8 @@ namespace Invector.vItemManager
         /// </summary>
         public virtual void EquipCurrentSlot()
         {
-            if (!currentEquippedSlot || (currentEquippedSlot.item != null && currentEquippedSlot.item.isEquiped)) return;
+            if (!currentEquippedSlot ||
+                (currentEquippedSlot.item != null && currentEquippedSlot.item.isEquiped)) return;
             if (currentEquippedItem) onEquipItem.Invoke(this, currentEquippedItem);
             else if (lastEquippedItem) onUnequipItem.Invoke(this, lastEquippedItem);
         }
@@ -535,6 +551,7 @@ namespace Invector.vItemManager
                     if (lastSlot != null)
                         lastSlot.RemoveItem();
                 }
+
                 slot.AddItem(item);
                 if (!ignoreEquipEvents) onEquipItem.Invoke(this, item);
             }
@@ -551,20 +568,61 @@ namespace Invector.vItemManager
             onUnequipItem.Invoke(this, lastEquippedItem);
         }
 
+        //public void SwitchToNextWeapon()
+        //{
+        //    if (equipSlots == null || equipSlots.Count == 0) return;
+
+
+        //    // Find the next valid slot
+        //    int currentIndex = indexOfEquippedItem;
+        //    int nextIndex = currentIndex;
+        //    bool foundValidSlot = false;
+
+        //    // Try to find the next valid slot
+        //    for (int i = 0; i < equipSlots.Count; i++)
+        //    {
+        //        nextIndex = (currentIndex + 1 + i) % equipSlots.Count;
+
+        //        if (equipSlots[nextIndex].isValid && (!skipEmptySlots || equipSlots[nextIndex].item != null))
+        //        {
+        //            foundValidSlot = true;
+        //            break;
+        //        }
+        //    }
+
+        //    if (foundValidSlot)
+        //    {
+
+        //        lastEquippedItem = currentEquippedItem;
+        //        indexOfEquippedItem = nextIndex;
+
+        //        // Always trigger unequip for the previous item
+        //        if (lastEquippedItem != null)
+        //        {
+        //            onUnequipItem.Invoke(this, lastEquippedItem);
+        //        }
+
+        //        // Always trigger equip for the new item if it exists, regardless of ignoreEquipEvents
+        //        if (currentEquippedItem != null)
+        //        {
+        //            onEquipItem.Invoke(this, currentEquippedItem);
+        //        }
+        //    }
+        //}
+
+
         public void SwitchToNextWeapon()
-    {
-        if (equipSlots == null || equipSlots.Count == 0) return;
-
-
-        // Find the next valid slot
-        int currentIndex = indexOfEquippedItem;
-        int nextIndex = currentIndex;
-        bool foundValidSlot = false;
-
-        // Try to find the next valid slot
-        for (int i = 0; i < equipSlots.Count; i++)
         {
-            nextIndex = (currentIndex + 1 + i) % equipSlots.Count;
+            if (equipSlots == null || equipSlots.Count == 0) return;
+
+            int totalSlots = equipSlots.Count;
+            int currentIndex = indexOfEquippedItem;
+            int nextIndex = currentIndex;
+            bool foundValidSlot = false;
+
+            for (int i = 1; i <= totalSlots; i++) // wraparound
+            {
+                nextIndex = (currentIndex + i) % totalSlots;
 
                 if (equipSlots[nextIndex].isValid && (!skipEmptySlots || equipSlots[nextIndex].item != null))
                 {
@@ -573,24 +631,34 @@ namespace Invector.vItemManager
                 }
             }
 
-        if (foundValidSlot)
-        {
-          
-            lastEquippedItem = currentEquippedItem;
-            indexOfEquippedItem = nextIndex;
-
-            // Always trigger unequip for the previous item
-            if (lastEquippedItem != null)
+            if (foundValidSlot && equipSlots[nextIndex].item != null)
             {
-                onUnequipItem.Invoke(this, lastEquippedItem);
+                lastEquippedItem = currentEquippedItem;
+                indexOfEquippedItem = nextIndex;
+
+                if (lastEquippedItem != null && lastEquippedItem != currentEquippedItem)
+                    onUnequipItem.Invoke(this, lastEquippedItem);
+
+                if (currentEquippedItem != null && !ignoreEquipEvents)
+                    onEquipItem.Invoke(this, currentEquippedItem);
             }
-
-            // Always trigger equip for the new item if it exists, regardless of ignoreEquipEvents
-            if (currentEquippedItem != null)
+            else
             {
-                onEquipItem.Invoke(this, currentEquippedItem);
+                // ❌ Do NOT remove the item
+                lastEquippedItem = currentEquippedItem;
+
+                if (lastEquippedItem != null)
+                {
+                    // Fire unequip event only
+                    onUnequipItem.Invoke(this, lastEquippedItem);
+                }
+
+                // Set index to -1 to represent "Arm"/empty
+                indexOfEquippedItem = -1;
             }
         }
-    }
+
+
+
     }
 }
