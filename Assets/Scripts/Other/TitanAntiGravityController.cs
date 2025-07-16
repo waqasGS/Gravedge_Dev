@@ -52,12 +52,6 @@ public class TitanAntiGravityController : MonoBehaviour
     {
         if (currentState != State.Idle || rotationRoot == null) return;
         isGravityActivate = true;
-        rotationRoot.localPosition = transform.position + setOff;
-
-        originalLocalPosition = rotationRoot.localPosition;
-        originalRotation = rotationRoot.localRotation;
-        targetLocalUpPosition = originalLocalPosition + new Vector3(0f, targetHeight, 0f);
-
         if (animator) animator.enabled = false;
 
         if (rb)
@@ -66,7 +60,16 @@ public class TitanAntiGravityController : MonoBehaviour
             rb.isKinematic = true;
         }
         //navMeshAgent.isStopped = true;
-        navMeshAgent.enabled = false;
+        StartCoroutine(WaitToDisableAnimator());
+    }
+    IEnumerator WaitToDisableAnimator()
+    {
+        yield return new WaitForEndOfFrame();
+        rotationRoot.position = transform.position + setOff;
+        originalLocalPosition = rotationRoot.position;
+        originalRotation = rotationRoot.localRotation;
+        targetLocalUpPosition = originalLocalPosition + new Vector3(0f, targetHeight, 0f);
+
         //playerDetection.enabled = false;
         transform.localPosition = -setOff;
         rotationAxis = Random.onUnitSphere.normalized;
