@@ -60,6 +60,8 @@ namespace Invector.vCharacterController.vActions
         public float offsetHandTarget = -0.2f;
         [Tooltip("Start Point of RayCast to check Base Rotation")]
         public float offsetBase = 0.35f;
+        [Tooltip("Height offset for horizontal movement raycasts (negative values lower the raycast position)")]
+        public float horizontalRaycastHeightOffset = -0.5f;
 
 
         [vEditorToolbar("Climb Jump")]
@@ -348,7 +350,8 @@ namespace Invector.vCharacterController.vActions
             }
             var h = lastInput.x > 0 ? 1 * lastPointDistanceH : lastInput.x < 0 ? -1 * lastPointDistanceH : 0;
             var v = lastInput.z > 0 ? 1 * lastPointDistanceVUp : lastInput.z < 0 ? -1 * lastPointDistanceVDown : 0;
-            var centerCharacter = handTargetPosition + transform.up * offsetHandTarget;
+            // Fix: Position raycast at shoulder/chest level instead of above the head
+            var centerCharacter = handTargetPosition + transform.up * (offsetHandTarget + horizontalRaycastHeightOffset); // Use configurable height offset
             var targetPosNormalized = centerCharacter + (transform.right * h) + (transform.up * v);
             var targetPos = centerCharacter + (transform.right * lastInput.x) + (transform.up * lastInput.z);
             var castDir = (targetPosNormalized - handTargetPosition + (transform.forward * -0.5f)).normalized;
@@ -547,9 +550,10 @@ namespace Invector.vCharacterController.vActions
 
         private void CheckClimbUp(bool ignoreInput = false)
         {
-            var climbUpConditions = autoClimbEdge ? vertical > 0f : climbEdgeInput.GetButtonDown();
+            // If autoClimbEdge is false, we need manual input regardless of ignoreInput parameter
+            var climbUpConditions = autoClimbEdge ? (ignoreInput || vertical > 0f) : climbEdgeInput.GetButtonDown();
 
-            if (!canMoveClimb && !inClimbUp && (climbUpConditions || ignoreInput))
+            if (!canMoveClimb && !inClimbUp && (climbUpConditions || (ignoreInput && autoClimbEdge)))
             {
                 var dir = transform.forward;
 
@@ -853,7 +857,7 @@ namespace Invector.vCharacterController.vActions
             else if (inClimbUp || climbEnterGrounded || climbEnterAir)
             {
                 if (!inClimbUp)
-                    CheckClimbUp(true);
+                    CheckClimbUp(autoClimbEdge);
 
                 ApplyRootMotion();
             }
@@ -949,7 +953,8 @@ namespace Invector.vCharacterController.vActions
         {
             var h = lastInput.x;
             var v = lastInput.z;
-            var characterBase = transform.position + transform.up * (TP_Input.cc._capsuleCollider.radius + offsetBase);
+            // Fix: Position raycast at shoulder/chest level instead of too high
+            var characterBase = transform.position + transform.up * (TP_Input.cc._capsuleCollider.radius + offsetBase + horizontalRaycastHeightOffset); // Use configurable height offset
             var directionPoint = characterBase + transform.right * (h * lastPointDistanceH) + transform.up * (v * lastPointDistanceVUp);
 
             RaycastHit rotationHit;
@@ -987,7 +992,8 @@ namespace Invector.vCharacterController.vActions
         bool CheckBasePoint(out RaycastHit baseHit)
         {
             var forward = new Vector3(transform.forward.x, 0, transform.forward.z);
-            var characterBase = transform.position + transform.up * (TP_Input.cc._capsuleCollider.radius + offsetBase) - forward * (TP_Input.cc._capsuleCollider.radius * 2);
+            // Fix: Position raycast at shoulder/chest level instead of too high
+            var characterBase = transform.position + transform.up * (TP_Input.cc._capsuleCollider.radius + offsetBase + horizontalRaycastHeightOffset) - forward * (TP_Input.cc._capsuleCollider.radius * 2); // Use configurable height offset
 
             var targetPoint = transform.position + forward * (1 + TP_Input.cc._capsuleCollider.radius);
             vLine baseLine = new vLine(characterBase, targetPoint);

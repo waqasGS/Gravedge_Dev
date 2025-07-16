@@ -107791,8 +107791,36 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
+      propertyPath: debugRays
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
+      propertyPath: avatarTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
+      propertyPath: autoClimbEdge
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
+      propertyPath: maxSurfaceAngle
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
+      propertyPath: minSurfaceAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
+      propertyPath: openCloseWindow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
       propertyPath: selectedToolbar
-      value: 5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
+      propertyPath: horizontalRaycastHeightOffset
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1244164079574552073, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
       propertyPath: selectedToolbar
@@ -108115,6 +108143,14 @@ PrefabInstance:
     - target: {fileID: 758246755352425448, guid: 4b2129b8ad59a0c4898e94dc29943fb5, type: 3}
       propertyPath: m_Name
       value: baseCube (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1515079296788477391, guid: 4b2129b8ad59a0c4898e94dc29943fb5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.021026582
+      objectReference: {fileID: 0}
+    - target: {fileID: 1515079296788477391, guid: 4b2129b8ad59a0c4898e94dc29943fb5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.4784
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
