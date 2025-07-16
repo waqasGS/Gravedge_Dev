@@ -221,8 +221,10 @@ namespace Invector.vItemManager
         /// </summary>
         public virtual void UnequipCurrentItem()
         {
+            Debug.Log("In A");
             if (currentSelectedSlot && currentSelectedSlot.item)
             {
+                Debug.Log("IN A1");
                 var _item = currentSelectedSlot.item;
                 if (equipSlots[indexOfEquippedItem].item == _item) lastEquippedItem = _item;
                 currentSelectedSlot.RemoveItem();

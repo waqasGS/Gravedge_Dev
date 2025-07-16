@@ -1,10 +1,11 @@
-using UnityEngine;
-using Invector.vShooter;
 using Invector.Throw;
 using Invector.vCharacterController;
 using Invector.vItemManager;
+using Invector.vShooter;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 [RequireComponent(typeof(vShooterWeapon))]
 public class GrenadeLauncherTrajectory : MonoBehaviour
@@ -193,15 +194,23 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
                 // Only hide trajectory if we're not re-equipping the same weapon
                 if (area.currentEquippedItem == null || area.currentEquippedItem.originalObject != gameObject)
                 {
-                    throwManager.drawTrajectory = false;
-                    if (throwManager.lineRenderer)
+                    //throwManager.drawTrajectory = false;
+                    if (throwManager.lineRenderer && throwManager.lineRenderer.gameObject.activeInHierarchy)
                     {
-                        throwManager.lineRenderer.enabled = false;
+                        throwManager.lineRenderer.gameObject.SetActive(false);
                     }
-                    if (throwManager.throwEnd)
+                    //if (throwManager.lineRenderer)
+                    //{
+                    //    throwManager.lineRenderer.enabled = false;
+                    //}
+                    if (throwManager.throwEnd && throwManager.throwEnd.activeSelf)
                     {
                         throwManager.throwEnd.SetActive(false);
                     }
+                    //if (throwManager.throwEnd)
+                    //{
+                    //    throwManager.throwEnd.SetActive(false);
+                    //}
                 }
             }
         }
@@ -229,15 +238,23 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
         {
             if (throwManager != null)
             {
-                throwManager.drawTrajectory = false;
-                if (throwManager.lineRenderer)
+                //throwManager.drawTrajectory = false;
+                if (throwManager.lineRenderer && throwManager.lineRenderer.gameObject.activeInHierarchy)
                 {
-                    throwManager.lineRenderer.enabled = false;
+                    throwManager.lineRenderer.gameObject.SetActive(false);
                 }
-                if (throwManager.throwEnd)
+                //if (throwManager.lineRenderer)
+                //{
+                //    throwManager.lineRenderer.enabled = false;
+                //}
+                if (throwManager.throwEnd && throwManager.throwEnd.activeSelf)
                 {
                     throwManager.throwEnd.SetActive(false);
                 }
+                //if (throwManager.throwEnd)
+                //{
+                //    throwManager.throwEnd.SetActive(false);
+                //}
             }
         }
     }
@@ -247,15 +264,23 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
         // Disable trajectory visualization when weapon is disabled
         if (throwManager != null)
         {
-            throwManager.drawTrajectory = false;
-            if (throwManager.lineRenderer)
+            //throwManager.drawTrajectory = false;
+            if (throwManager.lineRenderer && throwManager.lineRenderer.gameObject.activeInHierarchy)
             {
-                throwManager.lineRenderer.enabled = false;
+                throwManager.lineRenderer.gameObject.SetActive(false);
             }
-            if (throwManager.throwEnd)
+            //if (throwManager.lineRenderer)
+            //{
+            //    throwManager.lineRenderer.enabled = false;
+            //}
+            if (throwManager.throwEnd && throwManager.throwEnd.activeSelf)
             {
                 throwManager.throwEnd.SetActive(false);
             }
+            //if (throwManager.throwEnd)
+            //{
+            //    throwManager.throwEnd.SetActive(false);
+            //}
         }
     }
 
@@ -272,15 +297,23 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
     {
         if (showTrajectoryWhileAiming && throwManager != null)
         {
-            throwManager.drawTrajectory = false;
-            if (throwManager.lineRenderer)
+            //throwManager.drawTrajectory = false;
+            if (throwManager.lineRenderer && throwManager.lineRenderer.gameObject.activeInHierarchy)
             {
-                throwManager.lineRenderer.enabled = false;
+                throwManager.lineRenderer.gameObject.SetActive(false);
             }
-            if (throwManager.throwEnd)
+            //if (throwManager.lineRenderer)
+            //{
+            //    throwManager.lineRenderer.enabled = false;
+            //}
+            if (throwManager.throwEnd && throwManager.throwEnd.activeSelf)
             {
                 throwManager.throwEnd.SetActive(false);
             }
+            //if (throwManager.throwEnd)
+            //{
+            //    throwManager.throwEnd.SetActive(false);
+            //}
         }
     }
 
@@ -300,6 +333,7 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
             Debug.LogWarning("[GrenadeLauncher] Cannot update trajectory - throwManager or weapon.muzzle is null");
             return;
         }
+        throwManager.throwStartRightOffsetMultiplier = throwStartRightOffset;
         throwManager.ForceTrajectoryUpdate();
     }
 
@@ -382,8 +416,23 @@ public class GrenadeLauncherTrajectory : MonoBehaviour
     {
         if (oldWeapon.gameObject == gameObject && throwManager != null)
         {
-            throwManager.drawTrajectory = false;
-            throwManager.lineRenderer.enabled = false;
+            //throwManager.drawTrajectory = false;
+            if (throwManager.lineRenderer && throwManager.lineRenderer.gameObject.activeInHierarchy)
+            {
+                throwManager.lineRenderer.gameObject.SetActive(false);
+            }
+            //if (throwManager.lineRenderer)
+            //{
+            //    throwManager.lineRenderer.enabled = false;
+            //}
+            if (throwManager.throwEnd && throwManager.throwEnd.activeSelf)
+            {
+                throwManager.throwEnd.SetActive(false);
+            }
+            //if (throwManager.throwEnd)
+            //{
+            //    throwManager.throwEnd.SetActive(false);
+            //}
         }
     }
 

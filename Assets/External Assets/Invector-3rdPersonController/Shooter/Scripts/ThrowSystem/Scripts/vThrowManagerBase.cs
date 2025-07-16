@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace Invector.Throw
 {
     using Invector.vCharacterController;
+    using Invector.vItemManager;
     public abstract class vThrowManagerBase : vMonoBehaviour
     {
         [System.Serializable]
@@ -19,7 +21,7 @@ namespace Invector.Throw
         {
             ThirdPerson, TopDown, SideScroll
         }
-
+        
         [vEditorToolbar("Settings")]
         public CameraStyle cameraStyle;
 
@@ -38,6 +40,8 @@ namespace Invector.Throw
         public LayerMask obstacles = 1 << 0;
         public vThrowSettings defaultSettings;
         public vThrowVisualSettings defaultVisualSettings;
+
+        public float offSetStartAim;
 
         [Tooltip("Set ignore collision to the grenade to not collide with the Player")]
         public bool setIgnoreCollision;
@@ -167,6 +171,8 @@ namespace Invector.Throw
 
         #endregion
 
+        
+
         protected virtual IEnumerator Start()
         {
             yield return new WaitForEndOfFrame();
@@ -269,9 +275,12 @@ namespace Invector.Throw
 
             if (isAiming)
             {
+                //Debug.Log("G1");
+
                 tpInput.CrouchInput();
                 wasAiming = true;
                 tpInput.SetWalkByDefault(walkWhileAiming);
+                throwStartRightOffsetMultiplier = offSetStartAim;
                 if (string.IsNullOrEmpty(cameraState) == false && tpInput.customCameraState != cameraState) tpInput.ChangeCameraStateWithLerp(cameraState);
                 CalculateAimPoint();
                 if (drawTrajectory) DrawTrajectory();
@@ -279,6 +288,7 @@ namespace Invector.Throw
             }
             else if (!inEnterThrowMode)
             {
+                //Debug.Log("G2");
                 if (wasAiming)
                 {
                     tpInput.ResetWalkByDefault();
@@ -298,6 +308,7 @@ namespace Invector.Throw
 
             if (pressThrowInput)
             {
+
                 isThrowing = true;
                 pressThrowInput = false;
                 tpInput.animator.SetBool("IsAiming", false);

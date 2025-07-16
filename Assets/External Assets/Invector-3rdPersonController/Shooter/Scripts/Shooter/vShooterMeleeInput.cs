@@ -1412,7 +1412,7 @@ namespace Invector.vCharacterController
             if (IsAiming != wasAiming)
             {
                 wasAiming = IsAiming;
-                if (IsAiming) shooterManager.onEnableAim.Invoke(shooterManager.CurrentWeapon);
+                if (IsAiming) {shooterManager.onEnableAim.Invoke(shooterManager.CurrentWeapon);}
                 else shooterManager.onDisableAim.Invoke(shooterManager.CurrentWeapon);
             }
             if (isUsingScopeView != wasAimingWithScope)
