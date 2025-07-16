@@ -119,6 +119,7 @@ namespace Invector.vCharacterController.vActions
 
         public override void OnActionExit(Collider other)
         {
+            //Debug.Log("D");
             if (other.gameObject.CompareTag(ziplineTag) && isUsingZipline)
             {
                 inExitZipline = false;
