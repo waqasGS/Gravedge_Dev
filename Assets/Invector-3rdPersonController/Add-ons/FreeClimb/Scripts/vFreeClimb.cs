@@ -273,7 +273,9 @@ namespace Invector.vCharacterController.vActions
             {
                 if (Physics.Raycast(handTargetPosition, transform.forward, out hit, climbEnterMaxDistance, climbSurfaceLayers))
                 {
-                    if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag))
+                    // Additional check: ensure the object has the correct tag AND is in the correct layer
+                    if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag) && 
+                        climbSurfaceTags.Contains(hit.collider.transform.gameObject.tag))
                     {
                         if (debugRays) Debug.DrawRay(handTargetPosition, transform.forward * climbEnterMaxDistance, Color.green);
                         dragInfo.canGo = true;
@@ -290,6 +292,13 @@ namespace Invector.vCharacterController.vActions
             }
             if (dragInfo.canGo && !inClimbEnter && Physics.SphereCast(handTargetPosition + transform.forward * -TP_Input.cc._capsuleCollider.radius * 0.5f, TP_Input.cc._capsuleCollider.radius * 0.5f, transform.forward, out hit, climbEnterMaxDistance, climbSurfaceLayers))
             {
+                // Additional check: ensure the object has the correct tag
+                if (!climbSurfaceTags.Contains(hit.collider.transform.gameObject.tag))
+                {
+                    dragInfo.canGo = false;
+                    return;
+                }
+                
                 dragInfo.collider = hit.collider;
                 var hitPointLocal = transform.InverseTransformPoint(hit.point);
                 hitPointLocal.y = handTarget.localPosition.y;
@@ -355,7 +364,8 @@ namespace Invector.vCharacterController.vActions
             climbLine.Draw(Color.green, draw: debugRays && debugClimbMovement);
             if (Physics.Linecast(climbLine.p1, climbLine.p2, out hit, climbSurfaceLayers))
             {
-                if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag))
+                if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag) && 
+                    climbSurfaceTags.Contains(hit.collider.transform.gameObject.tag))
                 {
                     dragInfo.collider = hit.collider;
                     dragInfo.normal = hit.normal;
@@ -368,7 +378,8 @@ namespace Invector.vCharacterController.vActions
             climbLine.Draw(Color.yellow, draw: debugRays && debugClimbMovement);
             if (Physics.Linecast(climbLine.p1, climbLine.p2, out hit, climbSurfaceLayers))
             {
-                if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag))
+                if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag) && 
+                    climbSurfaceTags.Contains(hit.collider.transform.gameObject.tag))
                 {
                     dragInfo.collider = hit.collider;
                     dragInfo.normal = hit.normal;
@@ -381,7 +392,8 @@ namespace Invector.vCharacterController.vActions
             climbLine.Draw(Color.red, draw: debugRays && debugClimbMovement);
             if (Physics.Linecast(climbLine.p1, climbLine.p2, out hit, climbSurfaceLayers))
             {
-                if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag))
+                if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag) && 
+                    climbSurfaceTags.Contains(hit.collider.transform.gameObject.tag))
                 {
                     dragInfo.normal = hit.normal;
                     dragInfo.collider = hit.collider;
@@ -437,7 +449,9 @@ namespace Invector.vCharacterController.vActions
 
                 bool isValidHit = false;
                 TP_Input.cc._capsuleCollider.CheckCapsule(inputDirection, obstacleLayers, true);
-                if (Physics.Linecast(handTargetPosition + (transform.forward * -0.5f), pos360, out hit, climbSurfaceLayers) && IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag))
+                if (Physics.Linecast(handTargetPosition + (transform.forward * -0.5f), pos360, out hit, climbSurfaceLayers) && 
+                    IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag) && 
+                    climbSurfaceTags.Contains(hit.collider.transform.gameObject.tag))
                 {
                     isValidHit = true;
                     UnityEngine.Debug.DrawLine(handTargetPosition + (transform.forward * -0.5f), pos360, Color.cyan, 10f);
@@ -466,14 +480,17 @@ namespace Invector.vCharacterController.vActions
                             {
                                 UnityEngine.Debug.DrawRay(pos360 - inputDirection.normalized * (i * 0.1f), transform.forward * climbJumpDepth, Color.grey, 10f);
 
-                                if (Physics.Raycast(pos360 - inputDirection.normalized * (i * 0.1f), transform.forward, out hit, climbJumpDepth, climbSurfaceLayers) && IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag))
+                                if (Physics.Raycast(pos360 - inputDirection.normalized * (i * 0.1f), transform.forward, out hit, climbJumpDepth, climbSurfaceLayers) && 
+                                    IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag) && 
+                                    climbSurfaceTags.Contains(hit.collider.transform.gameObject.tag))
                                 {
                                     isValidHit = true;
                                     break;
                                 }
                             }
                         }
-                        else if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag))
+                        else if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag) && 
+                                 climbSurfaceTags.Contains(hit.collider.transform.gameObject.tag))
                         {
                             UnityEngine.Debug.DrawRay(pos360, transform.forward * climbJumpDepth, Color.red, 10f);
                             isValidHit = true;
@@ -737,7 +754,8 @@ namespace Invector.vCharacterController.vActions
 
                 if (enterGrounded && Physics.Raycast(handTargetPosition, transform.forward, out hit, climbEnterMaxDistance, climbSurfaceLayers))
                 {
-                    if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag))
+                    if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag) && 
+                        climbSurfaceTags.Contains(hit.collider.transform.gameObject.tag))
                     {
                         _position = transform.position;
                         if (debugRays) Debug.DrawRay(handTargetPosition, transform.forward * climbEnterMaxDistance, Color.green);
@@ -1035,7 +1053,8 @@ namespace Invector.vCharacterController.vActions
             }
             if (Physics.Raycast(handTargetPosition + (transform.forward * -0.5f), transform.forward, out hit, 1, climbSurfaceLayers))
             {
-                if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag))
+                if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag) && 
+                    climbSurfaceTags.Contains(hit.collider.transform.gameObject.tag))
                 {
                     dragInfo.canGo = true;
                     dragInfo.collider = hit.collider;
