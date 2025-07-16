@@ -1588,6 +1588,8 @@ namespace Invector.vCharacterController
             }
 
             bool useIkConditions = false;
+            cc.inputMagnitude = 0.5f; // Force full movement speed
+
             var animatorInput = System.Math.Round(cc.inputMagnitude, 1);
             if(!useIK)
             {

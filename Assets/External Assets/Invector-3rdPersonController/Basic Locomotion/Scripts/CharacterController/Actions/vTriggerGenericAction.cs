@@ -57,6 +57,10 @@ namespace Invector.vCharacterController.vActions
         public float destroyDelay = 0f;
         [vHelpBox("Change your CameraState to a Custom State while playing the animation")]
         public string customCameraState;
+        [vHelpBox("At the end of the animation, change the player's position to the animated model's root location")]
+        public bool snapToAnimationRoot = false;
+        [vHelpBox("Reference to the player model (child of child of child of player)")]
+        public Transform playerModel;
 
         [vEditorToolbar("Animation", order = 2)]
 
@@ -86,6 +90,7 @@ namespace Invector.vCharacterController.vActions
         public AvatarTarget avatarTarget;
         [Header("Curve Match target system")]
         public bool useLocalX = false;
+        public bool useLocalY = false;
         public bool useLocalZ = true;
         public AnimationCurve matchPositionXZCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(.5f, 1), new Keyframe(1, 1));
         public AnimationCurve matchPositionYCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(.5f, 1), new Keyframe(1, 1));
@@ -131,6 +136,8 @@ namespace Invector.vCharacterController.vActions
         }
         protected virtual void Start()
         {
+            // get the player model, find player using find object of type vThirdPersonController
+            playerModel = FindObjectOfType<vThirdPersonController>().transform.GetChild(0).GetChild(0).GetChild(0);
             this.gameObject.tag = actionTag;
             this.gameObject.layer = LayerMask.NameToLayer("Triggers");
             _collider = GetComponent<Collider>();
