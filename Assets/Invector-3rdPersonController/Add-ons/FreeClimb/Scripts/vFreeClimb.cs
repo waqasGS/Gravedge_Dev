@@ -62,6 +62,10 @@ namespace Invector.vCharacterController.vActions
         public float offsetBase = 0.35f;
         [Tooltip("Height offset for horizontal movement raycasts (negative values lower the raycast position)")]
         public float horizontalRaycastHeightOffset = -0.5f;
+        [Tooltip("Optional bone to use as reference for horizontal raycast height. If set, horizontalRaycastHeightOffset will be relative to this bone's position")]
+        public Transform horizontalRaycastBoneReference;
+        [Tooltip("When using bone reference, this offset is added to the bone's Y position")]
+        public float horizontalRaycastBoneOffset = 0f;
 
 
         [vEditorToolbar("Climb Jump")]
@@ -162,6 +166,20 @@ namespace Invector.vCharacterController.vActions
             get
             {
                 return transform.TransformPoint(handTarget.localPosition.x, handTarget.localPosition.y, 0);
+            }
+        }
+
+        protected float GetHorizontalRaycastHeight()
+        {
+            if (horizontalRaycastBoneReference != null)
+            {
+                // Use bone reference position plus offset
+                return horizontalRaycastBoneReference.position.y - transform.position.y + horizontalRaycastBoneOffset;
+            }
+            else
+            {
+                // Use the original offsetHandTarget + horizontalRaycastHeightOffset
+                return offsetHandTarget + horizontalRaycastHeightOffset;
             }
         }
 
@@ -351,7 +369,7 @@ namespace Invector.vCharacterController.vActions
             var h = lastInput.x > 0 ? 1 * lastPointDistanceH : lastInput.x < 0 ? -1 * lastPointDistanceH : 0;
             var v = lastInput.z > 0 ? 1 * lastPointDistanceVUp : lastInput.z < 0 ? -1 * lastPointDistanceVDown : 0;
             // Fix: Position raycast at shoulder/chest level instead of above the head
-            var centerCharacter = handTargetPosition + transform.up * (offsetHandTarget + horizontalRaycastHeightOffset); // Use configurable height offset
+            var centerCharacter = handTargetPosition + transform.up * GetHorizontalRaycastHeight(); // Use configurable height offset
             var targetPosNormalized = centerCharacter + (transform.right * h) + (transform.up * v);
             var targetPos = centerCharacter + (transform.right * lastInput.x) + (transform.up * lastInput.z);
             var castDir = (targetPosNormalized - handTargetPosition + (transform.forward * -0.5f)).normalized;
@@ -363,9 +381,24 @@ namespace Invector.vCharacterController.vActions
             }
 
             if (inClimbJump || inClimbUp) return false;
-            vLine climbLine = new vLine(centerCharacter, targetPosNormalized);
-            climbLine.Draw(Color.green, draw: debugRays && debugClimbMovement);
-            if (Physics.Linecast(climbLine.p1, climbLine.p2, out hit, climbSurfaceLayers))
+            
+            // Use SphereCast for better detection during movement
+            float sphereRadius = TP_Input.cc._capsuleCollider.radius * 0.3f; // Smaller radius for precise detection
+            
+            // First check: Direct movement direction
+            Vector3 direction = (targetPosNormalized - centerCharacter).normalized;
+            float distance = Vector3.Distance(centerCharacter, targetPosNormalized);
+            
+            if (debugRays && debugClimbMovement)
+            {
+                Debug.DrawRay(centerCharacter, direction * distance, Color.green, 0.1f);
+                // Draw sphere radius indicators
+                Debug.DrawLine(centerCharacter + Vector3.up * sphereRadius, centerCharacter - Vector3.up * sphereRadius, Color.green, 0.1f);
+                Debug.DrawLine(centerCharacter + Vector3.right * sphereRadius, centerCharacter - Vector3.right * sphereRadius, Color.green, 0.1f);
+                Debug.DrawLine(centerCharacter + Vector3.forward * sphereRadius, centerCharacter - Vector3.forward * sphereRadius, Color.green, 0.1f);
+            }
+            
+            if (Physics.SphereCast(centerCharacter, sphereRadius, direction, out hit, distance, climbSurfaceLayers))
             {
                 if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag) && 
                     climbSurfaceTags.Contains(hit.collider.transform.gameObject.tag))
@@ -376,10 +409,22 @@ namespace Invector.vCharacterController.vActions
                 }
             }
 
-            climbLine.p1 = climbLine.p2;
-            climbLine.p2 = climbLine.p1 + transform.forward * TP_Input.cc._capsuleCollider.radius * 2f;
-            climbLine.Draw(Color.yellow, draw: debugRays && debugClimbMovement);
-            if (Physics.Linecast(climbLine.p1, climbLine.p2, out hit, climbSurfaceLayers))
+            // Second check: Forward direction from target position
+            Vector3 forwardStart = targetPosNormalized;
+            Vector3 forwardEnd = forwardStart + transform.forward * TP_Input.cc._capsuleCollider.radius * 2f;
+            Vector3 forwardDirection = (forwardEnd - forwardStart).normalized;
+            float forwardDistance = Vector3.Distance(forwardStart, forwardEnd);
+            
+            if (debugRays && debugClimbMovement)
+            {
+                Debug.DrawRay(forwardStart, forwardDirection * forwardDistance, Color.yellow, 0.1f);
+                // Draw sphere radius indicators
+                Debug.DrawLine(forwardStart + Vector3.up * sphereRadius, forwardStart - Vector3.up * sphereRadius, Color.yellow, 0.1f);
+                Debug.DrawLine(forwardStart + Vector3.right * sphereRadius, forwardStart - Vector3.right * sphereRadius, Color.yellow, 0.1f);
+                Debug.DrawLine(forwardStart + Vector3.forward * sphereRadius, forwardStart - Vector3.forward * sphereRadius, Color.yellow, 0.1f);
+            }
+            
+            if (Physics.SphereCast(forwardStart, sphereRadius, forwardDirection, out hit, forwardDistance, climbSurfaceLayers))
             {
                 if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag) && 
                     climbSurfaceTags.Contains(hit.collider.transform.gameObject.tag))
@@ -390,10 +435,22 @@ namespace Invector.vCharacterController.vActions
                 }
             }
 
-            climbLine.p1 += transform.forward * TP_Input.cc._capsuleCollider.radius * 0.5f;
-            climbLine.p2 += (transform.right * (TP_Input.cc._capsuleCollider.radius + lastPointDistanceH) * -input.x) + (transform.up * -v) + transform.forward * TP_Input.cc._capsuleCollider.radius;
-            climbLine.Draw(Color.red, draw: debugRays && debugClimbMovement);
-            if (Physics.Linecast(climbLine.p1, climbLine.p2, out hit, climbSurfaceLayers))
+            // Third check: Adjusted position for edge cases
+            Vector3 adjustedStart = forwardStart + transform.forward * TP_Input.cc._capsuleCollider.radius * 0.5f;
+            Vector3 adjustedEnd = adjustedStart + (transform.right * (TP_Input.cc._capsuleCollider.radius + lastPointDistanceH) * -input.x) + (transform.up * -v) + transform.forward * TP_Input.cc._capsuleCollider.radius;
+            Vector3 adjustedDirection = (adjustedEnd - adjustedStart).normalized;
+            float adjustedDistance = Vector3.Distance(adjustedStart, adjustedEnd);
+            
+            if (debugRays && debugClimbMovement)
+            {
+                Debug.DrawRay(adjustedStart, adjustedDirection * adjustedDistance, Color.red, 0.1f);
+                // Draw sphere radius indicators
+                Debug.DrawLine(adjustedStart + Vector3.up * sphereRadius, adjustedStart - Vector3.up * sphereRadius, Color.red, 0.1f);
+                Debug.DrawLine(adjustedStart + Vector3.right * sphereRadius, adjustedStart - Vector3.right * sphereRadius, Color.red, 0.1f);
+                Debug.DrawLine(adjustedStart + Vector3.forward * sphereRadius, adjustedStart - Vector3.forward * sphereRadius, Color.red, 0.1f);
+            }
+            
+            if (Physics.SphereCast(adjustedStart, sphereRadius, adjustedDirection, out hit, adjustedDistance, climbSurfaceLayers))
             {
                 if (IsValidPoint(hit.normal, hit.collider.transform.gameObject.tag) && 
                     climbSurfaceTags.Contains(hit.collider.transform.gameObject.tag))
@@ -954,7 +1011,7 @@ namespace Invector.vCharacterController.vActions
             var h = lastInput.x;
             var v = lastInput.z;
             // Fix: Position raycast at shoulder/chest level instead of too high
-            var characterBase = transform.position + transform.up * (TP_Input.cc._capsuleCollider.radius + offsetBase + horizontalRaycastHeightOffset); // Use configurable height offset
+            var characterBase = transform.position + transform.up * (TP_Input.cc._capsuleCollider.radius + offsetBase + GetHorizontalRaycastHeight()); // Use configurable height offset
             var directionPoint = characterBase + transform.right * (h * lastPointDistanceH) + transform.up * (v * lastPointDistanceVUp);
 
             RaycastHit rotationHit;
@@ -993,7 +1050,7 @@ namespace Invector.vCharacterController.vActions
         {
             var forward = new Vector3(transform.forward.x, 0, transform.forward.z);
             // Fix: Position raycast at shoulder/chest level instead of too high
-            var characterBase = transform.position + transform.up * (TP_Input.cc._capsuleCollider.radius + offsetBase + horizontalRaycastHeightOffset) - forward * (TP_Input.cc._capsuleCollider.radius * 2); // Use configurable height offset
+            var characterBase = transform.position + transform.up * (TP_Input.cc._capsuleCollider.radius + offsetBase + GetHorizontalRaycastHeight()) - forward * (TP_Input.cc._capsuleCollider.radius * 2); // Use configurable height offset
 
             var targetPoint = transform.position + forward * (1 + TP_Input.cc._capsuleCollider.radius);
             vLine baseLine = new vLine(characterBase, targetPoint);
