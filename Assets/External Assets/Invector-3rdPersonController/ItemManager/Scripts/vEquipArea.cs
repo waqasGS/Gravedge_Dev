@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Invector.vShooter;
 namespace Invector.vItemManager
 {
     [vClassHeader("Equip Area", openClose = false)]
     public class vEquipArea : vMonoBehaviour
     {
+        private vShooterManager shooterManager;
         public delegate void OnPickUpItem(vEquipArea area, vItemSlot slot);
 
         public OnPickUpItem onPickUpItemCallBack;
@@ -209,7 +210,6 @@ namespace Invector.vItemManager
                 vItem item = slot.item;
                 if (equipSlots[indexOfEquippedItem].item == item)
                     lastEquippedItem = item;
-                slot.RemoveItem();
                 onUnequipItem.Invoke(this, item);
             }
         }
@@ -605,6 +605,13 @@ namespace Invector.vItemManager
         }
 
 
-
+        public void EquipGun_ExitClimb()
+        {
+            EquipCurrentSlot();
+        }
+        public void UnEquipGun_EnterClimb()
+        {
+            UnequipItem(equipSlots[indexOfEquippedItem]);
+        }
     }
 }
