@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Invector.vItemManager
@@ -43,26 +44,46 @@ namespace Invector.vItemManager
         {
             bool _isEquipped = check._itemsID.Exists(t => itemManager.ItemIsEquipped(t));
 
+            //Debug.Log($"[CheckItemID] Is Equipped: {_isEquipped} | Was Equipped: {check.isEquipped}");
+
             if (_isEquipped != check.isEquipped)
             {
                 check.isEquipped = _isEquipped;
+
                 if (check.isEquipped)
+                {
+                    //Debug.Log($"[CheckItemID] Item Equipped: Invoking onIsItemEquipped for {check.name}");
                     check.onIsItemEquipped.Invoke();
+                }
                 else
+                {
+                   // Debug.Log($"[CheckItemID] Item Unequipped: Invoking onIsItemUnequipped for {check.name}");
                     check.onIsItemUnequipped.Invoke();
+                }
             }
         }
 
         private void CheckItemType(CheckItemTypeEvent check)
         {
+
             bool _isEquipped = check.itemTypes.Exists(t => itemManager.ItemTypeIsEquipped(t));
+
+            //Debug.Log($"[CheckItemType] Is Equipped: {_isEquipped} | Was Equipped: {check.isEquipped}");
+
             if (_isEquipped != check.isEquipped)
             {
                 check.isEquipped = _isEquipped;
+
                 if (check.isEquipped)
+                {
+                    //Debug.Log($"[CheckItemType] Item Type Equipped: Invoking onIsItemEquipped for {check.name}");
                     check.onIsItemEquipped.Invoke();
+                }
                 else
+                {
+                    //Debug.Log($"[CheckItemType] Item Type Unequipped: Invoking onIsItemUnequipped for {check.name}");
                     check.onIsItemUnequipped.Invoke();
+                }
             }
         }
 

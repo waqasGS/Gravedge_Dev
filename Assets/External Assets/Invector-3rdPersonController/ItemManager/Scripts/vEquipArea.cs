@@ -568,93 +568,39 @@ namespace Invector.vItemManager
             onUnequipItem.Invoke(this, lastEquippedItem);
         }
 
-        //public void SwitchToNextWeapon()
-        //{
-        //    if (equipSlots == null || equipSlots.Count == 0) return;
-
-
-        //    // Find the next valid slot
-        //    int currentIndex = indexOfEquippedItem;
-        //    int nextIndex = currentIndex;
-        //    bool foundValidSlot = false;
-
-        //    // Try to find the next valid slot
-        //    for (int i = 0; i < equipSlots.Count; i++)
-        //    {
-        //        nextIndex = (currentIndex + 1 + i) % equipSlots.Count;
-
-        //        if (equipSlots[nextIndex].isValid && (!skipEmptySlots || equipSlots[nextIndex].item != null))
-        //        {
-        //            foundValidSlot = true;
-        //            break;
-        //        }
-        //    }
-
-        //    if (foundValidSlot)
-        //    {
-
-        //        lastEquippedItem = currentEquippedItem;
-        //        indexOfEquippedItem = nextIndex;
-
-        //        // Always trigger unequip for the previous item
-        //        if (lastEquippedItem != null)
-        //        {
-        //            onUnequipItem.Invoke(this, lastEquippedItem);
-        //        }
-
-        //        // Always trigger equip for the new item if it exists, regardless of ignoreEquipEvents
-        //        if (currentEquippedItem != null)
-        //        {
-        //            onEquipItem.Invoke(this, currentEquippedItem);
-        //        }
-        //    }
-        //}
 
 
         public void SwitchToNextWeapon()
         {
             if (equipSlots == null || equipSlots.Count == 0) return;
-
-            int totalSlots = equipSlots.Count;
+            // Find the next valid slot
             int currentIndex = indexOfEquippedItem;
             int nextIndex = currentIndex;
             bool foundValidSlot = false;
-
-            for (int i = 1; i <= totalSlots; i++) // wraparound
+            // Try to find the next valid slot
+            for (int i = 0; i < equipSlots.Count; i++)
             {
-                nextIndex = (currentIndex + i) % totalSlots;
-
+                nextIndex = (currentIndex + 1 + i) % equipSlots.Count;
                 if (equipSlots[nextIndex].isValid && (!skipEmptySlots || equipSlots[nextIndex].item != null))
                 {
                     foundValidSlot = true;
                     break;
                 }
             }
-
-            if (foundValidSlot && equipSlots[nextIndex].item != null)
+            if (foundValidSlot)
             {
                 lastEquippedItem = currentEquippedItem;
                 indexOfEquippedItem = nextIndex;
-
-                if (lastEquippedItem != null && lastEquippedItem != currentEquippedItem)
-                    onUnequipItem.Invoke(this, lastEquippedItem);
-
-                if (currentEquippedItem != null && !ignoreEquipEvents)
-                    onEquipItem.Invoke(this, currentEquippedItem);
-            }
-            else
-            {
-                // ❌ Do NOT remove the item
-                lastEquippedItem = currentEquippedItem;
-
+                // Always trigger unequip for the previous item
                 if (lastEquippedItem != null)
                 {
-                    // Fire unequip event only
                     onUnequipItem.Invoke(this, lastEquippedItem);
                 }
-
-                // Set index to -1 to represent "Arm"/empty
-                indexOfEquippedItem = -1;
+                // Always trigger equip for the new item if it exists, regardless of ignoreEquipEvents
+                if (currentEquippedItem != null)
+                {
+                    onEquipItem.Invoke(this, currentEquippedItem);
+                }
             }
         }
 
