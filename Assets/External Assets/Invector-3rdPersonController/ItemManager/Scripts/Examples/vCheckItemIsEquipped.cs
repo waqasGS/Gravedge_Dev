@@ -38,7 +38,7 @@ namespace Invector.vItemManager
 
         private void CheckIsEquipped(vEquipArea area, vItem item)
         {
-            Debug.Log($"[vCheckItemIsEquipped] Checking equipment change: {item.name} in {area.name}");
+            //Debug.Log($"[vCheckItemIsEquipped] Checking equipment change: {item.name} in {area.name}");
 
             for (int i = 0; i < itemIDEvents.Count; i++)
             {
@@ -95,10 +95,10 @@ namespace Invector.vItemManager
                 bool individualCheck = itemManager.ItemTypeIsEquipped(type);
                 //Debug.Log($"[CheckItemType] Checking item type: {type} => IsEquipped: {individualCheck}");
             }
-            Debug.Log("check.isEquipped " + check.isEquipped);
+            //Debug.Log("check.isEquipped " + check.isEquipped);
 
             bool _isEquipped = check.itemTypes.Exists(t => itemManager.ItemTypeIsEquipped(t));
-            Debug.Log($"[CheckItemType] Group '{check.name}' - Previous isEquipped: {check.isEquipped}, Current: {_isEquipped}");
+            //Debug.Log($"[CheckItemType] Group '{check.name}' - Previous isEquipped: {check.isEquipped}, Current: {_isEquipped}");
 
             if (_isEquipped != check.isEquipped)
             {
@@ -106,12 +106,12 @@ namespace Invector.vItemManager
 
                 if (check.isEquipped)
                 {
-                    Debug.Log($"[CheckItemType] => Item type group '{check.name}' is now EQUIPPED.");
+                    //Debug.Log($"[CheckItemType] => Item type group '{check.name}' is now EQUIPPED.");
                     check.onIsItemEquipped.Invoke();
                 }
                 else
                 {
-                    Debug.Log($"[CheckItemType] => Item type group '{check.name}' is now UNEQUIPPED.");
+                    //Debug.Log($"[CheckItemType] => Item type group '{check.name}' is now UNEQUIPPED.");
                     check.onIsItemUnequipped.Invoke();
                 }
             }

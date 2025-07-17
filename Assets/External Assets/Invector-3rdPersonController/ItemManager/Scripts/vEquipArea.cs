@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
+using Image = UnityEngine.UI.Image;
+
 
 namespace Invector.vItemManager
 {
@@ -14,13 +18,23 @@ namespace Invector.vItemManager
 
         public vInventory inventory;
         public vItemWindow itemPicker;
+        public bool gunEquiped;
+        public Image gunImage;
+        public GameObject unarmed;
+        public GameObject combet;
+        public GameObject defense;
+        public Image selectedGunImage;
+        public UnityEngine.Color equipColor;
+        public UnityEngine.Color unequipColor;
 
         [Tooltip("Set current equipped slot when submit an slot of this area")]
         public bool setEquipSlotWhenSubmit;
 
         [Tooltip("Skip empty slots when switching between slots")]
         public bool skipEmptySlots;
-
+        public vCheckItemIsEquipped vCheckItemIsEquipped;
+        public GrenadeSwitch grenadeSwitch;
+        public vEquipmentDisplay gunSlot;
         public List<vEquipSlot> equipSlots;
         public string equipPointName;
 
@@ -209,7 +223,9 @@ namespace Invector.vItemManager
                 vItem item = slot.item;
                 if (equipSlots[indexOfEquippedItem].item == item)
                     lastEquippedItem = item;
-                slot.RemoveItem();
+                gunEquiped = false;
+                selectedGunImage.color = unequipColor;
+                //slot.RemoveItem();
                 onUnequipItem.Invoke(this, item);
             }
         }
@@ -234,6 +250,8 @@ namespace Invector.vItemManager
         /// </summary>
         public virtual void UnequipCurrentItem()
         {
+            Debug.Log($"currentSelectedSlot != null: {currentSelectedSlot != null}");
+            Debug.Log($"_item: {currentSelectedSlot.item.name}");
             Debug.Log("In A");
             if (currentSelectedSlot && currentSelectedSlot.item)
             {
@@ -436,11 +454,36 @@ namespace Invector.vItemManager
         /// </summary>
         public virtual void EquipCurrentSlot()
         {
+            //Debug.Log("G1");
+            //Debug.Log($"currentEquippedSlot: {(currentEquippedSlot != null)}");
+            //Debug.Log($"currentEquippedSlot.item: {(currentEquippedSlot.item != null)}");
+            //Debug.Log($"currentEquippedSlot.item.isEquiped: {currentEquippedSlot.item.isEquiped}");
             if (!currentEquippedSlot ||
                 (currentEquippedSlot.item != null && currentEquippedSlot.item.isEquiped)) return;
+            //Debug.Log("G2");
+            gunEquiped = true;
+
             if (currentEquippedItem) onEquipItem.Invoke(this, currentEquippedItem);
             else if (lastEquippedItem) onUnequipItem.Invoke(this, lastEquippedItem);
+            //EquipedColor();
+            //Invoke(nameof(EquipedColor), 0.5f);
+
+
+            try
+            {
+                selectedGunImage.color = equipColor;
+            }
+            catch (Exception ex)
+            { }
+
         }
+
+
+        //public /*async*/ void EquipedColor()
+        //{
+        //    //await Task.Delay(500);
+        //    selectedGunImage.color = equipColor;
+        //}
 
         /// <summary>
         /// Add an item to an slot
@@ -570,61 +613,20 @@ namespace Invector.vItemManager
             onUnequipItem.Invoke(this, lastEquippedItem);
         }
 
-        //public void SwitchToNextWeapon()
-        //{
-        //    if (equipSlots == null || equipSlots.Count == 0) return;
-
-
-        //    // Find the next valid slot
-        //    int currentIndex = indexOfEquippedItem;
-        //    int nextIndex = currentIndex;
-        //    bool foundValidSlot = false;
-
-        //    // Try to find the next valid slot
-        //    for (int i = 0; i < equipSlots.Count; i++)
-        //    {
-        //        nextIndex = (currentIndex + 1 + i) % equipSlots.Count;
-
-        //        if (equipSlots[nextIndex].isValid && (!skipEmptySlots || equipSlots[nextIndex].item != null))
-        //        {
-        //            foundValidSlot = true;
-        //            break;
-        //        }
-        //    }
-
-        //    if (foundValidSlot)
-        //    {
-
-        //        lastEquippedItem = currentEquippedItem;
-        //        indexOfEquippedItem = nextIndex;
-
-        //        // Always trigger unequip for the previous item
-        //        if (lastEquippedItem != null)
-        //        {
-        //            onUnequipItem.Invoke(this, lastEquippedItem);
-        //        }
-
-        //        // Always trigger equip for the new item if it exists, regardless of ignoreEquipEvents
-        //        if (currentEquippedItem != null)
-        //        {
-        //            onEquipItem.Invoke(this, currentEquippedItem);
-        //        }
-        //    }
-        //}
-
-
         public void SwitchToNextWeapon()
         {
             if (equipSlots == null || equipSlots.Count == 0) return;
 
-            int totalSlots = equipSlots.Count;
+
+            // Find the next valid slot
             int currentIndex = indexOfEquippedItem;
             int nextIndex = currentIndex;
             bool foundValidSlot = false;
 
-            for (int i = 1; i <= totalSlots; i++) // wraparound
+            // Try to find the next valid slot
+            for (int i = 0; i < equipSlots.Count; i++)
             {
-                nextIndex = (currentIndex + i) % totalSlots;
+                nextIndex = (currentIndex + 1 + i) % equipSlots.Count;
 
                 if (equipSlots[nextIndex].isValid && (!skipEmptySlots || equipSlots[nextIndex].item != null))
                 {
@@ -633,34 +635,145 @@ namespace Invector.vItemManager
                 }
             }
 
-            if (foundValidSlot && equipSlots[nextIndex].item != null)
+            if (foundValidSlot)
             {
+
                 lastEquippedItem = currentEquippedItem;
                 indexOfEquippedItem = nextIndex;
 
-                if (lastEquippedItem != null && lastEquippedItem != currentEquippedItem)
-                    onUnequipItem.Invoke(this, lastEquippedItem);
-
-                if (currentEquippedItem != null && !ignoreEquipEvents)
-                    onEquipItem.Invoke(this, currentEquippedItem);
-            }
-            else
-            {
-                // ❌ Do NOT remove the item
-                lastEquippedItem = currentEquippedItem;
-
+                // Always trigger unequip for the previous item
                 if (lastEquippedItem != null)
                 {
-                    // Fire unequip event only
                     onUnequipItem.Invoke(this, lastEquippedItem);
                 }
 
-                // Set index to -1 to represent "Arm"/empty
-                indexOfEquippedItem = -1;
+                // Always trigger equip for the new item if it exists, regardless of ignoreEquipEvents
+                if (currentEquippedItem != null)
+                {
+                    //gunEquiped = true;
+
+                    Debug.Log("color equip");
+                    gunEquiped = true;
+                    selectedGunImage.color = equipColor;
+                    onEquipItem.Invoke(this, currentEquippedItem);
+                }
+                else
+                {
+                    Debug.Log("uncolorequip");
+                    gunEquiped = false;
+                    selectedGunImage.color = unequipColor;
+                }
             }
         }
 
 
+        //public void SwitchToNextWeapon()
+        //{
+        //    if (equipSlots == null || equipSlots.Count == 0) return;
+
+        //    int totalSlots = equipSlots.Count;
+        //    int currentIndex = indexOfEquippedItem;
+        //    int nextIndex = currentIndex;
+        //    bool foundValidSlot = false;
+
+        //    for (int i = 1; i <= totalSlots; i++) // wraparound
+        //    {
+        //        nextIndex = (currentIndex + i) % totalSlots;
+
+        //        if (equipSlots[nextIndex].isValid && (!skipEmptySlots || equipSlots[nextIndex].item != null))
+        //        {
+        //            foundValidSlot = true;
+        //            break;
+        //        }
+        //    }
+
+        //    if (foundValidSlot && equipSlots[nextIndex].item != null)
+        //    {
+        //        lastEquippedItem = currentEquippedItem;
+        //        indexOfEquippedItem = nextIndex;
+
+        //        if (lastEquippedItem != null && lastEquippedItem != currentEquippedItem)
+        //            onUnequipItem.Invoke(this, lastEquippedItem);
+
+        //        if (currentEquippedItem != null && !ignoreEquipEvents)
+        //            onEquipItem.Invoke(this, currentEquippedItem);
+        //    }
+        //    else
+        //    {
+        //        vCheckItemIsEquipped.UnEquipingUI();
+        //        // ❌ Do NOT remove the item
+        //        lastEquippedItem = currentEquippedItem;
+
+        //        if (lastEquippedItem != null)
+        //        {
+        //            // Fire unequip event only
+        //            onUnequipItem.Invoke(this, lastEquippedItem);
+        //        }
+        //        if (currentEquippedItem != null)
+        //        {
+        //            onEquipItem.Invoke(this, currentEquippedItem);
+        //        }
+
+        //        // Set index to -1 to represent "Arm"/empty
+        //        indexOfEquippedItem = -1;
+        //    }
+        //}
+
+        public void EquipedAndUequiped()
+        {
+
+            if (gunEquiped)
+            {
+                UnEquipGun();
+                //Invoke(nameof(UnequipGun), 0.1f);
+            }
+            else
+            {
+                if (equipSlots[indexOfEquippedItem].item != null)
+                {
+                    if (grenadeSwitch.isGrenadeEquip)
+                    {
+                        grenadeSwitch.GrenadButtonClick();
+
+                    }
+                    Invoke(nameof(EquipGun), 0.57f);
+                }
+            }
+
+        }
+
+        public void EquipGun()
+        {
+            UnityEngine.Color color = gunImage.color;
+            //selectedGunImage.color = equipColor;
+            color.a = 1f;
+            EquipCurrentSlot();
+            unarmed.SetActive(false);
+            defense.SetActive(false);
+            combet.SetActive(true);
+            gunImage.color = color;
+
+        }
+        public void UnEquipGun()
+        {
+            UnityEngine.Color color = gunImage.color;
+            //selectedGunImage.color = unequipColor;
+            if (gunImage.sprite != null)
+            {
+                color.a = 0.5f;
+
+            }
+            else
+            {
+                color.a = 0;
+            }
+            vCheckItemIsEquipped.UnEquipingUI();
+            UnequipItem(equipSlots[indexOfEquippedItem]);
+            unarmed.SetActive(true);
+            defense.SetActive(true);
+            combet.SetActive(false);
+            gunImage.color = color;
+        }
 
     }
 }
