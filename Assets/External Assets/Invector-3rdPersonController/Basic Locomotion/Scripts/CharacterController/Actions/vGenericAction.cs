@@ -56,6 +56,9 @@ namespace Invector.vCharacterController.vActions
         protected Vector3 animationStartPosition;
         protected Vector3 animationRootMotionDelta;
         protected Vector3 playerModelStartPosition;
+        protected bool hasSnappedToRoot;
+        protected float snapToRootDelayTimer;
+        protected bool isWaitingForSnapDelay;
         protected virtual Vector3 screenCenter
         {
             get
@@ -297,7 +300,16 @@ namespace Invector.vCharacterController.vActions
                 if (triggerAction.snapToAnimationRoot && tpInput != null && tpInput.cc != null && tpInput.cc.animator != null)
                 {
                     animationRootMotionDelta += tpInput.cc.animator.deltaPosition;
+                    
+                    // Check if we should snap to root at this point in the animation (for values < 1)
+                    float normalizedTime = tpInput.cc.animatorStateInfos.GetCurrentNormalizedTime(triggerAction.animatorLayer);
+                    if (triggerAction.snapToRootTime < 1f && normalizedTime >= triggerAction.snapToRootTime && !hasSnappedToRoot)
+                    {
+                        SnapToAnimationRoot();
+                    }
                 }
+                
+
                 
                 if (triggerAction.matchTarget != null)
                 {
@@ -331,6 +343,44 @@ namespace Invector.vCharacterController.vActions
             }
             else if (doingAction && actionStarted && (triggerAction == null || !triggerAction.endActionManualy))
             {
+                if (debugMode)
+                {
+                    Debug.Log($"<b>GenericAction: </b>Else if block - doingAction: {doingAction}, actionStarted: {actionStarted}, isWaitingForSnapDelay: {isWaitingForSnapDelay}");
+                }
+                
+                // Handle delay timer countdown when waiting for snap delay (moved from playingAnimation block)
+                if (isWaitingForSnapDelay && snapToRootDelayTimer > 0f)
+                {
+                    float oldTimer = snapToRootDelayTimer;
+                    snapToRootDelayTimer -= Time.deltaTime;
+                    if (debugMode)
+                    {
+                        Debug.Log($"<b>GenericAction: </b>Snap delay countdown: {snapToRootDelayTimer:F2}s remaining (was {oldTimer:F2}s), isWaitingForSnapDelay: {isWaitingForSnapDelay}");
+                    }
+                    if (snapToRootDelayTimer <= 0f)
+                    {
+                        // Delay finished, snap now
+                        if (debugMode)
+                        {
+                            Debug.Log($"<b>GenericAction: </b>Snap delay finished, snapping to root");
+                        }
+                        SnapToAnimationRoot();
+                        isWaitingForSnapDelay = false;
+                        return; // Don't end action yet, let SnapToAnimationRoot handle it
+                    }
+                    return; // Don't end action yet, wait for delay to finish
+                }
+                
+                // Don't end action if we're waiting for snap delay
+                if (isWaitingForSnapDelay)
+                {
+                    if (debugMode)
+                    {
+                        Debug.Log($"<b>GenericAction: </b>Skipping EndAction because waiting for snap delay");
+                    }
+                    return;
+                }
+                
                 //when using a GetButtonTimer the ResetTriggerSettings will be automatically called at the end of the timer or by releasing the input
                 if (triggerAction != null && (triggerAction.inputType == vTriggerGenericAction.InputType.GetButtonTimer && triggerAction.playAnimationWhileHoldingButton))
                 {
@@ -444,41 +494,41 @@ namespace Invector.vCharacterController.vActions
 
             var trigger = triggerAction;
             
-            // Snap to animation root position if enabled
-            if (trigger.snapToAnimationRoot)
+            // Handle delay for snapToRootTime = 1
+            if (trigger.snapToAnimationRoot && trigger.snapToRootTime >= 1f && !hasSnappedToRoot)
             {
-                if (debugMode)
+                if (trigger.snapToRootDelay > 0f)
                 {
-                    Debug.Log($"<b>GenericAction: </b>snapToAnimationRoot is enabled, calculating final position...");
-                }
-                
-                Vector3 oldPosition = transform.position;
-                Vector3 finalPosition;
-                
-                // Use player model position if available, otherwise fall back to root motion calculation
-                if (trigger.playerModel != null)
-                {
-                    finalPosition = trigger.playerModel.position;
+                    // Start the delay timer
+                    snapToRootDelayTimer = trigger.snapToRootDelay;
+                    isWaitingForSnapDelay = true;
                     if (debugMode)
                     {
-                        Debug.Log($"<b>GenericAction: </b>Using player model final position: {finalPosition} (was: {oldPosition})");
+                        Debug.Log($"<b>GenericAction: </b>Animation finished, starting snap delay timer: {snapToRootDelayTimer}s, isWaitingForSnapDelay set to: {isWaitingForSnapDelay}");
                     }
+                    
+                    // Don't end the action yet, wait for delay to finish
+                    // triggers the OnEndAnimation Event
+                    trigger.OnEndAnimation.Invoke();
+                    // Exit the trigger
+                    OnExitTriggerAction.Invoke(triggerAction);
+                    
+                    if (debugMode)
+                    {
+                        Debug.Log($"<b>GenericAction: </b>Waiting for snap delay to finish...");
+                    }
+                    return; // Exit early, don't reset settings yet
                 }
                 else
                 {
-                    finalPosition = animationStartPosition + animationRootMotionDelta;
-                    if (debugMode)
-                    {
-                        Debug.Log($"<b>GenericAction: </b>Using calculated final position: {finalPosition} (start: {animationStartPosition}, delta: {animationRootMotionDelta}, was: {oldPosition})");
-                    }
+                    // No delay, snap immediately
+                    SnapToAnimationRoot();
                 }
-                
-                transform.position = finalPosition;
-                
-                if (debugMode)
-                {
-                    Debug.Log($"<b>GenericAction: </b>Snapped to final position: {finalPosition} (was: {oldPosition})");
-                }
+            }
+            else if (trigger.snapToAnimationRoot && !hasSnappedToRoot)
+            {
+                // For other snapToRootTime values, snap immediately
+                SnapToAnimationRoot();
             }
             
             // triggers the OnEndAnimation Event
@@ -497,6 +547,76 @@ namespace Invector.vCharacterController.vActions
             if (debugMode)
             {
                 Debug.Log($"<b>GenericAction: </b>End Action ");
+            }
+        }
+
+        protected virtual void SnapToAnimationRoot()
+        {
+            if (triggerAction == null || !triggerAction.snapToAnimationRoot)
+                return;
+
+            if (debugMode)
+            {
+                Debug.Log($"<b>GenericAction: </b>Snapping to animation root at {triggerAction.snapToRootTime * 100}% of animation...");
+            }
+            
+            Vector3 oldPosition = transform.position;
+            Vector3 finalPosition;
+            
+            // Use player model position if available, otherwise fall back to root motion calculation
+            if (triggerAction.playerModel != null)
+            {
+                finalPosition = triggerAction.playerModel.position;
+                if (debugMode)
+                {
+                    Debug.Log($"<b>GenericAction: </b>Using player model position: {finalPosition} (was: {oldPosition})");
+                }
+            }
+            else
+            {
+                finalPosition = animationStartPosition + animationRootMotionDelta;
+                if (debugMode)
+                {
+                    Debug.Log($"<b>GenericAction: </b>Using calculated position: {finalPosition} (start: {animationStartPosition}, delta: {animationRootMotionDelta}, was: {oldPosition})");
+                }
+            }
+            
+            transform.position = finalPosition;
+            hasSnappedToRoot = true;
+            
+            if (debugMode)
+            {
+                Debug.Log($"<b>GenericAction: </b>Snapped to position: {finalPosition} (was: {oldPosition})");
+            }
+            
+            // If we were waiting for delay, now finish the action
+            if (isWaitingForSnapDelay)
+            {
+                FinishDelayedAction();
+            }
+        }
+        
+        protected virtual void FinishDelayedAction()
+        {
+            var trigger = triggerAction;
+            
+            if (debugMode)
+            {
+                Debug.Log($"<b>GenericAction: </b>Finishing delayed action...");
+            }
+            
+            // reset GenericAction variables so you can use it again
+            ResetTriggerSettings();
+
+            // Destroy trigger after reset all settings
+            if (trigger.destroyAfter)
+            {
+                StartCoroutine(DestroyActionDelay(trigger));
+            }
+
+            if (debugMode)
+            {
+                Debug.Log($"<b>GenericAction: </b>Delayed action finished");
             }
         }
 
@@ -865,6 +985,9 @@ namespace Invector.vCharacterController.vActions
                     {
                         animationStartPosition = transform.position;
                         animationRootMotionDelta = Vector3.zero; // Reset the accumulated delta
+                        hasSnappedToRoot = false; // Reset the snap flag
+                        snapToRootDelayTimer = 0f; // Reset the delay timer
+                        isWaitingForSnapDelay = false; // Reset the delay waiting flag
                         
                         // Capture player model start position if available
                         if (triggerAction.playerModel != null)
@@ -928,6 +1051,11 @@ namespace Invector.vCharacterController.vActions
             triggerAction = null;
             doingAction = false;
             actionStarted = false;
+            if (debugMode && isWaitingForSnapDelay)
+            {
+                Debug.Log($"<b>GenericAction: </b>Resetting isWaitingForSnapDelay from true to false in ResetTriggerSettings");
+            }
+            isWaitingForSnapDelay = false; // Reset the delay waiting flag
         }
 
         public virtual void DisablePlayerGravityAndCollision()

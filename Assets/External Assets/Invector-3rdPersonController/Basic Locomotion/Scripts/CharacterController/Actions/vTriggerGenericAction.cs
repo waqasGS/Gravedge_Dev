@@ -59,6 +59,12 @@ namespace Invector.vCharacterController.vActions
         public string customCameraState;
         [vHelpBox("At the end of the animation, change the player's position to the animated model's root location")]
         public bool snapToAnimationRoot = false;
+        [vHelpBox("Percentage of animation completion (0-1) when to snap to root. 0 = start, 1 = end (waits for animation to completely finish including any lerping back)")]
+        [Range(0f, 1f)]
+        public float snapToRootTime = 1f;
+        [vHelpBox("Delay in seconds after animation completes before snapping to root (only applies when snapToRootTime = 1)")]
+        [Range(0f, 5f)]
+        public float snapToRootDelay = 0f;
         [vHelpBox("Reference to the player model (child of child of child of player)")]
         public Transform playerModel;
 
