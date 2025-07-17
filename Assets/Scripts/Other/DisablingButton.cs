@@ -7,7 +7,7 @@ public class DisablingButton : MonoBehaviour
 {
     public float delayTime;
     public List<Button> buttons;
-
+    
     public void StartToDisable()
     {
         StartCoroutine(DisableAndEnable());
