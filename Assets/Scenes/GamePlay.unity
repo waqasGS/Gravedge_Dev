@@ -107786,6 +107786,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
+      propertyPath: selectedToolbar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
+      propertyPath: climbEdgeInput.mobile
+      value: X
+      objectReference: {fileID: 0}
+    - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
+      propertyPath: climbEdgeInput.joystick
+      value: X
+      objectReference: {fileID: 0}
+    - target: {fileID: 771245680843039054, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
+      propertyPath: climbEdgeInput.keyboard
+      value: Space
+      objectReference: {fileID: 0}
     - target: {fileID: 2572621121761582899, guid: 5efc40b6eaa945f4cb13f08298ce93ba, type: 3}
       propertyPath: bikeUI
       value: 
@@ -108045,12 +108061,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 487378691}
     m_Modifications:
     - target: {fileID: 346060383281607785, guid: 4b2129b8ad59a0c4898e94dc29943fb5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.8746545
+      objectReference: {fileID: 0}
+    - target: {fileID: 346060383281607785, guid: 4b2129b8ad59a0c4898e94dc29943fb5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 54.78
       objectReference: {fileID: 0}
     - target: {fileID: 346060383281607785, guid: 4b2129b8ad59a0c4898e94dc29943fb5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.1075406
+      value: 5.0449
       objectReference: {fileID: 0}
     - target: {fileID: 346060383281607785, guid: 4b2129b8ad59a0c4898e94dc29943fb5, type: 3}
       propertyPath: m_LocalPosition.z
