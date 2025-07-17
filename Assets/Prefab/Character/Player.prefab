@@ -11658,7 +11658,7 @@ Transform:
   m_GameObject: {fileID: 1413078670392360829}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.65, z: 0.40000004}
+  m_LocalPosition: {x: 0, y: 1.65, z: 0.185}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23805,7 +23805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openCloseEvents: 0
-  openCloseWindow: 1
+  openCloseWindow: 0
   selectedToolbar: 0
   holders:
   - {fileID: 4219648048235028500}
@@ -23827,10 +23827,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 2
+  selectedToolbar: 1
   actionTag: Action
   useRootMotion: 1
-  debugMode: 0
+  debugMode: 1
   _playingAnimation: 0
   actionStarted: 0
   isLockTriggerEvents: 0
@@ -24510,7 +24510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 9
+  selectedToolbar: 0
   _isDead: 1
   _currentHealth: 0
   isImmortal: 0
@@ -25702,12 +25702,12 @@ MonoBehaviour:
     inButtomTimer: 0
   moveUsingRootMotion: 1
   climbSpeed: 1
-  autoClimbEdge: 1
+  autoClimbEdge: 0
   climbStaminaCost: 0
   jumpClimbStaminaCost: 0
   staminaRecoveryDelay: 1.5
-  minSurfaceAngle: 35
-  maxSurfaceAngle: 160
+  minSurfaceAngle: 0
+  maxSurfaceAngle: 180
   handTarget: {fileID: 1272145613119032980}
   offsetHandPositionL: {x: 0, y: -0.02, z: -0.02}
   offsetHandPositionR: {x: 0, y: -0.02, z: -0.02}
@@ -25718,6 +25718,9 @@ MonoBehaviour:
   lastPointDistanceVDown: 1.25
   offsetHandTarget: 0.79
   offsetBase: 0.35
+  horizontalRaycastHeightOffset: 0
+  horizontalRaycastBoneReference: {fileID: 1272145613119032980}
+  horizontalRaycastBoneOffset: -1.63
   climbJumpMinDistance: 0.2
   climbJumpMaxDistance: 3
   climbJumpDepth: 2
@@ -25728,12 +25731,12 @@ MonoBehaviour:
   endExitTimeAnimation: 0.8
   startNormalizeTime: 0.15
   targetNormalizeTime: 0.4
-  avatarTarget: 4
+  avatarTarget: 0
   matchTargetX: 0
   matchTargetY: 1
   matchTargetZ: 0
   matchRotation: 0
-  debugRays: 0
+  debugRays: 1
   debugClimbMovement: 1
   debugClimbUp: 1
   debugClimbJump: 0
@@ -42446,7 +42449,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -49.242188, y: 237.5}
+  m_AnchoredPosition: {x: -49.240234, y: 237.5}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4665437419697548839

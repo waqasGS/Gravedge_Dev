@@ -735,7 +735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 2
+  selectedToolbar: 1
   inputType: 0
   actionInput:
     useInput: 1
@@ -769,7 +769,9 @@ MonoBehaviour:
   destroyAfter: 0
   destroyDelay: 0
   customCameraState: Default
-  snapToAnimationRoot: 0
+  snapToAnimationRoot: 1
+  snapToRootTime: 1
+  snapToRootDelay: 0
   playerModel: {fileID: 0}
   playAnimation: JumpOver
   crossFadeTransition: 0.3
@@ -782,22 +784,13 @@ MonoBehaviour:
   avatarTarget: 0
   useLocalX: 0
   useLocalY: 0
-  useLocalZ: 1
+  useLocalZ: 0
   matchPositionXZCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.6531792
-      value: 1.0017544
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -829,15 +822,6 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 0
@@ -854,19 +838,10 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -875,7 +850,7 @@ MonoBehaviour:
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -1525,7 +1500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 3
+  selectedToolbar: 1
   inputType: 0
   actionInput:
     useInput: 1
@@ -1559,7 +1534,9 @@ MonoBehaviour:
   destroyAfter: 0
   destroyDelay: 0
   customCameraState: Default
-  snapToAnimationRoot: 0
+  snapToAnimationRoot: 1
+  snapToRootTime: 1
+  snapToRootDelay: 0
   playerModel: {fileID: 0}
   playAnimation: JumpOver
   crossFadeTransition: 0.3
@@ -1572,22 +1549,13 @@ MonoBehaviour:
   avatarTarget: 0
   useLocalX: 0
   useLocalY: 0
-  useLocalZ: 1
+  useLocalZ: 0
   matchPositionXZCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.6531792
-      value: 1.0017544
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1619,15 +1587,6 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 0
@@ -1644,19 +1603,10 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -1665,7 +1615,7 @@ MonoBehaviour:
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
