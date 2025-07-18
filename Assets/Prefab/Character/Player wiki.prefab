@@ -9220,6 +9220,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9166846003579037794}
+  - {fileID: 6767093315017457988}
   - {fileID: 3735784913291997876}
   m_Father: {fileID: 1077071503775403563}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18465,6 +18466,7 @@ GameObject:
   - component: {fileID: 3735784913291997876}
   - component: {fileID: 1845203420840393675}
   - component: {fileID: 6325524936852804341}
+  - component: {fileID: 5008279326546263680}
   m_Layer: 5
   m_Name: MobileUI_ShooterMelee_Inventory
   m_TagString: Untagged
@@ -18500,7 +18502,6 @@ RectTransform:
   - {fileID: 1875655722316188087}
   - {fileID: 8131386156497975708}
   - {fileID: 5231553627983949077}
-  - {fileID: 6767093315017457988}
   - {fileID: 9190553717318464830}
   - {fileID: 5048367751289648286}
   m_Father: {fileID: 6598547355454220628}
@@ -18896,6 +18897,24 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+--- !u!114 &5008279326546263680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967252511190059895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8577d7d27badcb14d8020ce932831ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionButtons:
+  - {fileID: 6369468241151107519}
+  - {fileID: 2732719020724683367}
+  - {fileID: 2341518026720083343}
+  - {fileID: 6870795478468650677}
+  - {fileID: 5462378950688406533}
 --- !u!1 &1995484026789652486
 GameObject:
   m_ObjectHideFlags: 0
@@ -32623,7 +32642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.7490196}
+  m_Color: {r: 0.16981131, g: 0.11294054, b: 0.11294054, a: 0.7490196}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -32699,7 +32718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8784314}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -32748,7 +32767,7 @@ RectTransform:
   - {fileID: 6168860053047857006}
   - {fileID: 524961952920790553}
   - {fileID: 6956455139066883872}
-  m_Father: {fileID: 3735784913291997876}
+  m_Father: {fileID: 6598547355454220628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -39170,7 +39189,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: GoToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -40900,7 +40919,6 @@ GameObject:
   - component: {fileID: 7986182770066298233}
   - component: {fileID: 4566147099458204464}
   - component: {fileID: 7316972773582623853}
-  - component: {fileID: 3908217448435763604}
   m_Layer: 5
   m_Name: Reload
   m_TagString: Untagged
@@ -40984,18 +41002,6 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2556369124967561778}
-          m_TargetAssemblyTypeName: GrenadeSwitch, Assembly-CSharp
-          m_MethodName: SwitchGrenad
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 4566147099458204464}
           m_TargetAssemblyTypeName: 
           m_MethodName: SetDownState
@@ -41080,46 +41086,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2393073887272080957}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3908217448435763604}
-        m_TargetAssemblyTypeName: ShootButtonActivate, Assembly-CSharp
-        m_MethodName: ToShowShootButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6846343204263029578}
-        m_TargetAssemblyTypeName: Invector.Throw.vThrowManager, Assembly-CSharp
-        m_MethodName: DisableAim
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &3908217448435763604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289837185170195397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95df32326332389468c6e8b74460cabc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonClick: {fileID: 0}
-  shootButton: {fileID: 142626514518525643}
-  unArmedButton: {fileID: 2341518026720083343}
+      m_Calls: []
 --- !u!1 &4296834500521040534
 GameObject:
   m_ObjectHideFlags: 0
@@ -61785,7 +61752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 4
+  selectedToolbar: 2
   canUseMeleeBlock_H: 1
   canUseMeleeWeakAttack_H: 1
   canUseMeleeStrongAttack_H: 1
@@ -62029,7 +61996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openCloseEvents: 0
-  openCloseWindow: 0
+  openCloseWindow: 1
   selectedToolbar: 0
   holders:
   - {fileID: 6288208952097388715}
@@ -62051,7 +62018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 1
+  selectedToolbar: 2
   actionTag: Action
   useRootMotion: 1
   debugMode: 1
@@ -62734,7 +62701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 2
+  selectedToolbar: 9
   _isDead: 1
   _currentHealth: 0
   isImmortal: 0
@@ -62775,7 +62742,43 @@ MonoBehaviour:
         m_CallState: 2
   _onDead:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1967252511190059895}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3594255039600778250}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6362304996493022549}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onChangeHealth:
     m_PersistentCalls:
       m_Calls: []
@@ -63303,7 +63306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 3
+  selectedToolbar: 0
   horizontalInput:
     useInput: 1
     isAxisInUse: 0
@@ -63618,6 +63621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipArea: {fileID: 2522328636609065241}
+  grenadeSwitch: {fileID: 1091020006496716621}
   disableInBikeMode:
   - {fileID: 6369468241151107519}
   - {fileID: 2732719020724683367}
@@ -63800,7 +63804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f672585e602dbfb4cbfdff3aa0ddaffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openCloseEvents: 0
+  openCloseEvents: 1
   openCloseWindow: 1
   selectedToolbar: 0
   maxSpeed: 10
@@ -63939,9 +63943,9 @@ MonoBehaviour:
   offsetHandPositionR: {x: 0, y: -0.02, z: -0.02}
   climbEnterSpeed: 4
   climbEnterMaxDistance: 1
-  lastPointDistanceH: 0.4
+  lastPointDistanceH: 0.45
   lastPointDistanceVUp: 0.1
-  lastPointDistanceVDown: 1.25
+  lastPointDistanceVDown: 0.1
   offsetHandTarget: 0.79
   offsetBase: 0.35
   horizontalRaycastHeightOffset: 0
@@ -63983,12 +63987,60 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5008279326546263680}
+        m_TargetAssemblyTypeName: DisableActionButton, Assembly-CSharp
+        m_MethodName: ToDisableActionButtons
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1091020006496716621}
+        m_TargetAssemblyTypeName: GrenadeSwitch, Assembly-CSharp
+        m_MethodName: GrenadButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onExitClimb:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2522328636609065241}
         m_TargetAssemblyTypeName: Invector.vItemManager.vEquipArea, Assembly-CSharp
         m_MethodName: EquipGun_Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5008279326546263680}
+        m_TargetAssemblyTypeName: DisableActionButton, Assembly-CSharp
+        m_MethodName: ToEnableActionButtons
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1091020006496716621}
+        m_TargetAssemblyTypeName: GrenadeSwitch, Assembly-CSharp
+        m_MethodName: GrenadButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

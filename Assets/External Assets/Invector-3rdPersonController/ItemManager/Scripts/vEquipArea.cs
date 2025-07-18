@@ -14,6 +14,7 @@ namespace Invector.vItemManager
     public class vEquipArea : vMonoBehaviour
     {
         private vShooterManager shooterManager;
+
         public delegate void OnPickUpItem(vEquipArea area, vItemSlot slot);
 
         public OnPickUpItem onPickUpItemCallBack;
@@ -34,6 +35,7 @@ namespace Invector.vItemManager
 
         [Tooltip("Skip empty slots when switching between slots")]
         public bool skipEmptySlots;
+
         public vCheckItemIsEquipped vCheckItemIsEquipped;
         public GrenadeSwitch grenadeSwitch;
         public vEquipmentDisplay gunSlot;
@@ -143,6 +145,7 @@ namespace Invector.vItemManager
                 {
                     return equipSlots[indexOfEquippedItem];
                 }
+
                 return null;
             }
         }
@@ -153,10 +156,7 @@ namespace Invector.vItemManager
         /// </summary>
         public virtual vItem currentEquippedItem
         {
-            get
-            {
-                return currentEquippedSlot != null ? currentEquippedSlot.item : null;
-            }
+            get { return currentEquippedSlot != null ? currentEquippedSlot.item : null; }
         }
 
 
@@ -387,7 +387,6 @@ namespace Invector.vItemManager
                     onEquipItem.Invoke(this, currentEquippedItem);
                 onUnequipItem.Invoke(this, lastEquippedItem);
             }
-
         }
 
         /// <summary>
@@ -415,7 +414,6 @@ namespace Invector.vItemManager
                     indexOfEquippedItem = index;
                     break;
                 }
-
             }
 
 
@@ -476,8 +474,8 @@ namespace Invector.vItemManager
                 selectedGunImage.color = equipColor;
             }
             catch (Exception ex)
-            { }
-
+            {
+            }
         }
 
 
@@ -634,9 +632,9 @@ namespace Invector.vItemManager
                     break;
                 }
             }
+
             if (foundValidSlot)
             {
-
                 lastEquippedItem = currentEquippedItem;
                 indexOfEquippedItem = nextIndex;
                 // Always trigger unequip for the previous item
@@ -719,7 +717,6 @@ namespace Invector.vItemManager
 
         public void EquipedAndUequiped()
         {
-
             if (gunEquiped)
             {
                 UnEquipGun();
@@ -732,12 +729,11 @@ namespace Invector.vItemManager
                     if (grenadeSwitch.isGrenadeEquip)
                     {
                         grenadeSwitch.GrenadButtonClick();
-
                     }
+
                     Invoke(nameof(EquipGun), 0.57f);
                 }
             }
-
         }
 
         public void EquipGun()
@@ -750,8 +746,8 @@ namespace Invector.vItemManager
             defense.SetActive(false);
             combet.SetActive(true);
             gunImage.color = color;
-
         }
+
         public void UnEquipGun()
         {
             UnityEngine.Color color = gunImage.color;
@@ -759,20 +755,23 @@ namespace Invector.vItemManager
             if (gunImage.sprite != null)
             {
                 color.a = 0.5f;
-
             }
             else
             {
                 color.a = 0;
             }
+
             vCheckItemIsEquipped.UnEquipingUI();
-            UnequipItem(equipSlots[indexOfEquippedItem]);
+            if (gunSlot.item != null)
+            {
+                UnequipItem(equipSlots[indexOfEquippedItem]);
+            }
+
             unarmed.SetActive(true);
             defense.SetActive(true);
             combet.SetActive(false);
             gunImage.color = color;
         }
-
 
 
         public void UnEquipGun_Enter()
@@ -784,6 +783,5 @@ namespace Invector.vItemManager
         {
             EquipCurrentSlot();
         }
-
     }
 }

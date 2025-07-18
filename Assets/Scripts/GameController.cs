@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
             StartCoroutine(FadeIn());
         }
 
-        SpawnEnemies(); // Spawn enemies at start
+       // SpawnEnemies(); // Spawn enemies at start
     }
 
     public void PauseGame()

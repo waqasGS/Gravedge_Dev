@@ -21,12 +21,23 @@ public class MotorcycleSetup : MonoBehaviour
     public void Mount()
     {
         bikeUI.MountBike();
-        unmountBikeButton.gameObject.SetActive(true);
         unmountBikeButton.trigger = genericAction;
         unmountBikeButton.motorcycleSetup = this;
+        
+        Invoke(nameof(InvokeMount), 1.5f);
+    }
+
+    private void InvokeMount()
+    {
+        unmountBikeButton.gameObject.SetActive(true);
     }
 
     public void Unmount()
+    {
+        Invoke(nameof(InvokeUnmount), 1.5f);
+    }
+
+    private void InvokeUnmount()
     {
         genericAction.gameObject.SetActive(true);
     }
