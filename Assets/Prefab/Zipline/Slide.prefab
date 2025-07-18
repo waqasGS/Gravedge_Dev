@@ -830,8 +830,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 2
-  inputType: 3
+  selectedToolbar: 0
+  inputType: 0
   actionInput:
     useInput: 1
     isAxisInUse: 0
@@ -864,6 +864,8 @@ MonoBehaviour:
   destroyAfter: 0
   destroyDelay: 0
   customCameraState: Default
+  snapToAnimationRoot: 0
+  playerModel: {fileID: 0}
   playAnimation: SlideUnder+2
   crossFadeTransition: 0.1
   animatorLayer: 0
@@ -874,6 +876,7 @@ MonoBehaviour:
   matchTarget: {fileID: 8580600403610156528}
   avatarTarget: 0
   useLocalX: 1
+  useLocalY: 0
   useLocalZ: 0
   matchPositionXZCurve:
     serializedVersion: 2
@@ -1236,8 +1239,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 3
-  inputType: 3
+  selectedToolbar: 0
+  inputType: 0
   actionInput:
     useInput: 1
     isAxisInUse: 0
@@ -1270,6 +1273,8 @@ MonoBehaviour:
   destroyAfter: 0
   destroyDelay: 0
   customCameraState: Default
+  snapToAnimationRoot: 0
+  playerModel: {fileID: 0}
   playAnimation: SlideUnder+2
   crossFadeTransition: 0.1
   animatorLayer: 0
@@ -1280,6 +1285,7 @@ MonoBehaviour:
   matchTarget: {fileID: 5329722326330030419}
   avatarTarget: 0
   useLocalX: 1
+  useLocalY: 0
   useLocalZ: 0
   matchPositionXZCurve:
     serializedVersion: 2
