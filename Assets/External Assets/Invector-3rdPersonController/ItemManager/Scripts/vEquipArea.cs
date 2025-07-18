@@ -773,5 +773,17 @@ namespace Invector.vItemManager
             gunImage.color = color;
         }
 
+
+
+        public void UnEquipGun_Enter()
+        {
+            UnequipItem(equipSlots[indexOfEquippedItem]);
+        }
+
+        public void EquipGun_Exit()
+        {
+            EquipCurrentSlot();
+        }
+
     }
 }

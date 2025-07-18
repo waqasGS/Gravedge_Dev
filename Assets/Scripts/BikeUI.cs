@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using com.mobilin.games;
 using UnityEngine;
-
+using Invector.vItemManager;
 public class BikeUI : MonoBehaviour
 {
+    public vEquipArea equipArea;
     private mvMotorcycleRiderShooter _mvMotorcycleRiderShooter;
     public List<GameObject> disableInBikeMode = new List<GameObject>();
     private Dictionary<GameObject, bool> originalStates = new Dictionary<GameObject, bool>();
@@ -16,7 +17,13 @@ public class BikeUI : MonoBehaviour
     public void MountBike()
     {
         Debug.Log("Mounting Bike");
+       equipArea.UnEquipGun_Enter();
         
+      Invoke(nameof(InvokeMountBike), 1f);
+    }
+
+    private void InvokeMountBike()
+    {
         _mvMotorcycleRiderShooter.EnterInput();
         
         // Store the original enabled state of each GameObject
@@ -44,5 +51,15 @@ public class BikeUI : MonoBehaviour
                 item.SetActive(originalStates[item]);
             }
         }
+        
+        
+        Invoke(nameof(InvokeDisMount), 1f);
+    }
+
+
+
+    private void InvokeDisMount()
+    {
+        equipArea.EquipGun_Exit();
     }
 }

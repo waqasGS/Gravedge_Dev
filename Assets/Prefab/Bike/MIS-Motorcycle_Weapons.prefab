@@ -63833,6 +63833,7 @@ MonoBehaviour:
   maxForwardStiffness: 1.5
   minSidewaysStiffness: 0.75
   maxSidewaysStiffness: 1.5
+  enableSkidmarks: 0
   skidmarkManagerPrefab: {fileID: 8712074094603836494, guid: c681199a5af9ee64ea02e3c06267fa52, type: 3}
   rearAxle: {fileID: 0}
   rearShockAbsorber: {fileID: 0}
@@ -114515,6 +114516,10 @@ MonoBehaviour:
   destroyAfter: 0
   destroyDelay: 0
   customCameraState: 
+  snapToAnimationRoot: 0
+  snapToRootTime: 1
+  snapToRootDelay: 0
+  playerModel: {fileID: 0}
   playAnimation: 
   crossFadeTransition: 0.25
   animatorLayer: 0
@@ -114525,6 +114530,7 @@ MonoBehaviour:
   matchTarget: {fileID: 0}
   avatarTarget: 0
   useLocalX: 0
+  useLocalY: 0
   useLocalZ: 1
   matchPositionXZCurve:
     serializedVersion: 2
@@ -120259,6 +120265,7 @@ MonoBehaviour:
   maxForwardStiffness: 1
   minSidewaysStiffness: 0.75
   maxSidewaysStiffness: 1
+  enableSkidmarks: 0
   skidmarkManagerPrefab: {fileID: 8712074094603836494, guid: c681199a5af9ee64ea02e3c06267fa52, type: 3}
   rearAxle: {fileID: 0}
   rearShockAbsorber: {fileID: 0}
@@ -136115,7 +136122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 4
+  selectedToolbar: 2
   _isDead: 1
   _currentHealth: 0
   isImmortal: 0
