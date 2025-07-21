@@ -182,6 +182,7 @@ namespace Invector.vItemManager
         /// <param name="slot"></param>
         public virtual void OnSubmitSlot(vItemSlot slot)
         {
+            Debug.Log("Grenade 6");
             lastSelectedSlot = currentSelectedSlot;
             if (itemPicker != null)
             {
@@ -424,13 +425,35 @@ namespace Invector.vItemManager
                 onUnequipItem.Invoke(this, lastEquippedItem);
             }
         }
-
+        int _indexOfSlot;
         /// <summary>
         /// Equip slot <see cref="currentEquippedItem"/>
         /// </summary>
         /// <param name="indexOfSlot">index of target slot</param>
         public virtual void SetEquipSlot(int indexOfSlot)
         {
+            if (grenadeSwitch.isGrenadeEquip)
+            {
+
+                //Debug.Log("Grenade 3");
+                _indexOfSlot = indexOfSlot;
+                grenadeSwitch.GrenadButtonClick();
+                Invoke(nameof(WaitToUnEquipGrenade), 0.57f);
+            }
+            else
+            {
+                //Debug.Log("Grenade 4");
+
+                _indexOfSlot = indexOfSlot;
+                WaitToUnEquipGrenade();
+            }
+
+        }
+
+        public void WaitToUnEquipGrenade()
+        {
+            //Debug.Log("Grenade 5");
+            int indexOfSlot = _indexOfSlot;
             if (equipSlots == null || equipSlots.Count == 0) return;
             if (indexOfSlot < equipSlots.Count && indexOfSlot >= 0 && equipSlots[indexOfSlot].isValid)
             {
@@ -458,17 +481,23 @@ namespace Invector.vItemManager
             //Debug.Log($"currentEquippedSlot: {(currentEquippedSlot != null)}");
             //Debug.Log($"currentEquippedSlot.item: {(currentEquippedSlot.item != null)}");
             //Debug.Log($"currentEquippedSlot.item.isEquiped: {currentEquippedSlot.item.isEquiped}");
-            if (!currentEquippedSlot ||
-                (currentEquippedSlot.item != null && currentEquippedSlot.item.isEquiped)) return;
-            //Debug.Log("G2");
+            //try
+            //{
+            //    if (grenadeSwitch.isGrenadeEquip)
+            //    {
+            //        Debug.Log("Greande 7");
+
+            //        Invoke(nameof(Wait_ToUnEquipGrenade), 0.57f);
+            //    }
+            //    else
+            //    {
+            //        Debug.Log("Greande 8");
+            //        Wait_ToUnEquipGrenade();
+            //    }
+            //}
+
+            //catch { }
             gunEquiped = true;
-
-            if (currentEquippedItem) onEquipItem.Invoke(this, currentEquippedItem);
-            else if (lastEquippedItem) onUnequipItem.Invoke(this, lastEquippedItem);
-            //EquipedColor();
-            //Invoke(nameof(EquipedColor), 0.5f);
-
-
             try
             {
                 selectedGunImage.color = equipColor;
@@ -476,8 +505,21 @@ namespace Invector.vItemManager
             catch (Exception ex)
             { }
 
-        }
+            //Debug.Log("Grenade 7");
+            if (!currentEquippedSlot ||
+                (currentEquippedSlot.item != null && currentEquippedSlot.item.isEquiped)) return;
+            //Debug.Log("G2");
+           
 
+            if (currentEquippedItem) onEquipItem.Invoke(this, currentEquippedItem);
+            else if (lastEquippedItem) onUnequipItem.Invoke(this, lastEquippedItem);
+            //EquipedColor();
+            //Invoke(nameof(EquipedColor), 0.5f);
+
+
+           
+        }
+      
 
         //public /*async*/ void EquipedColor()
         //{
@@ -528,10 +570,17 @@ namespace Invector.vItemManager
 
                     item.isInEquipArea = true;
                     slot.AddItem(item);
+
                     if (autoEquip)
+                    {
+                        Debug.Log("Grenade 1");
                         SetEquipSlot(indexOfSlot);
+                    }
                     else if (!ignoreEquipEvents)
+                    {
                         onEquipItem.Invoke(this, item);
+                        Debug.Log("Grenade 2");
+                    }
                 }
             }
         }
@@ -734,7 +783,7 @@ namespace Invector.vItemManager
                     if (grenadeSwitch.isGrenadeEquip)
                     {
                         grenadeSwitch.GrenadButtonClick();
-
+                        //currentEquippedSlot.item.isEquiped = false;
                     }
                     Invoke(nameof(EquipGun), 0.57f);
                 }
@@ -768,7 +817,11 @@ namespace Invector.vItemManager
                 color.a = 0;
             }
             vCheckItemIsEquipped.UnEquipingUI();
-            UnequipItem(equipSlots[indexOfEquippedItem]);
+            if (gunSlot.item != null)
+            {
+
+                UnequipItem(equipSlots[indexOfEquippedItem]);
+            }
             unarmed.SetActive(true);
             defense.SetActive(true);
             combet.SetActive(false);

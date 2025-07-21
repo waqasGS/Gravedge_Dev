@@ -43,7 +43,7 @@ public class PA_DroneShooterEnemy : MonoBehaviour
                     targetPlayer = other.transform;
                     playerHealth = tempHealth;
                     droneAnimator.SetBool("PlayerEnter", false);
-                    Debug.Log("Player detected: " + other.name);
+                    //Debug.Log("Player detected: " + other.name);
                 }
                 //else
                 //{
