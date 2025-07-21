@@ -778,7 +778,7 @@ namespace Invector.vCharacterController.vActions
         {
             print("EnterClimb");
             
-            equipArea.EquipGun_Exit();
+            equipArea.EquipedAndUequiped();
             GetComponent<Animator>().speed = 2;
             Invoke(nameof(EnterClimbInvoke), 0.5f);
            
@@ -910,7 +910,7 @@ namespace Invector.vCharacterController.vActions
         void ExitClimbInvoke()
         {
             print("ExitClimb");
-            equipArea.EquipGun_Exit();
+            equipArea.EquipedAndUequiped();
             
         }
 
