@@ -744,6 +744,7 @@ namespace Invector.vItemManager
             {
                 if (equipSlots[indexOfEquippedItem].item != null)
                 {
+                    print("I am here");
                     if (grenadeSwitch.isGrenadeEquip)
                     {
                         grenadeSwitch.GrenadButtonClick();
