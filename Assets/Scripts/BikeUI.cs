@@ -16,7 +16,7 @@ public class BikeUI : MonoBehaviour
     }
 
     public void MountBike()
-    {
+    { 
         Debug.Log("Mounting Bike");
        equipArea.UnEquipGun_Enter();
        grenadeSwitch.GrenadButtonClick();

@@ -1788,7 +1788,8 @@ namespace Invector.vItemManager
                 }
 
                 area.ignoreEquipEvents = false;
-                area.EquipCurrentSlot();
+               // area.EquipCurrentSlot();
+               area.EquipedAndUequiped();
                 if (area.isLockedToEquip)
                 {
                     temporarilyIgnoreItemAnimation = false;
