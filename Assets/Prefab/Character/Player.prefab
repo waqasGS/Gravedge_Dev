@@ -1550,7 +1550,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -249.5, y: -15.000153}
+  m_AnchoredPosition: {x: -249.5, y: -15.000183}
   m_SizeDelta: {x: 250, y: -30}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &5700686402605336755
@@ -9648,7 +9648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -249.5, y: -15.000153}
+  m_AnchoredPosition: {x: -249.5, y: -15.000183}
   m_SizeDelta: {x: 250, y: -30}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &9220369200173635021
@@ -23642,7 +23642,7 @@ MonoBehaviour:
   selectedToolbar: 1
   actionTag: Action
   useRootMotion: 1
-  debugMode: 1
+  debugMode: 0
   _playingAnimation: 0
   actionStarted: 0
   isLockTriggerEvents: 0
@@ -25468,11 +25468,11 @@ MonoBehaviour:
     useInput: 1
     isAxisInUse: 0
     isUnityInput: 0
-    keyboard: E
+    keyboard: Space
     keyboardAxis: 0
-    joystick: A
+    joystick: X
     joystickAxis: 0
-    mobile: A
+    mobile: X
     mobileAxis: 0
     joystickAxisInvert: 0
     keyboardAxisInvert: 0
@@ -25525,9 +25525,9 @@ MonoBehaviour:
   offsetHandPositionR: {x: 0, y: -0.02, z: -0.02}
   climbEnterSpeed: 4
   climbEnterMaxDistance: 1
-  lastPointDistanceH: 0.4
-  lastPointDistanceVUp: 0.1
-  lastPointDistanceVDown: 1.25
+  lastPointDistanceH: 0.45
+  lastPointDistanceVUp: 0.3
+  lastPointDistanceVDown: 0.2
   offsetHandTarget: 0.79
   offsetBase: 0.35
   horizontalRaycastHeightOffset: 0
@@ -25551,16 +25551,16 @@ MonoBehaviour:
   debugRays: 1
   debugClimbMovement: 1
   debugClimbUp: 1
-  debugClimbJump: 0
+  debugClimbJump: 1
   debugBaseRotation: 1
   debugHandIK: 1
   onEnterClimb:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: set_enabled
-        m_Mode: 6
+      - m_Target: {fileID: 7041313564546997384}
+        m_TargetAssemblyTypeName: DisableActionButton, Assembly-CSharp
+        m_MethodName: ToDisableActionButtons
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -25584,10 +25584,10 @@ MonoBehaviour:
   onExitClimb:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: set_enabled
-        m_Mode: 6
+      - m_Target: {fileID: 7041313564546997384}
+        m_TargetAssemblyTypeName: DisableActionButton, Assembly-CSharp
+        m_MethodName: ToEnableActionButtons
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -40860,7 +40860,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -249.5, y: -15.000153}
+  m_AnchoredPosition: {x: -249.5, y: -15.000183}
   m_SizeDelta: {x: 250, y: -30}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &4187605228299658987
@@ -53993,6 +53993,7 @@ GameObject:
   - component: {fileID: 3663777097340454793}
   - component: {fileID: 738061240504852015}
   - component: {fileID: 6782452568668754991}
+  - component: {fileID: 7041313564546997384}
   m_Layer: 5
   m_Name: MobileUI_ShooterMelee_Inventory
   m_TagString: Untagged
@@ -54399,6 +54400,24 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+--- !u!114 &7041313564546997384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5355028879250763244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1db2ae990ab0554e99790e74f4ea007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionButtons:
+  - {fileID: 4459964389674790663}
+  - {fileID: 799498225588270991}
+  - {fileID: 2414345510538272171}
+  - {fileID: 6284432651873052707}
+  - {fileID: 7420571745081706541}
 --- !u!1 &5355891916073185551
 GameObject:
   m_ObjectHideFlags: 0

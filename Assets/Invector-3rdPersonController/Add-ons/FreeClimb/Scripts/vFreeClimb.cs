@@ -314,7 +314,7 @@ namespace Invector.vCharacterController.vActions
                     dragInfo.canGo = false;
                 }
             }
-            if (dragInfo.canGo && !inClimbEnter && Physics.SphereCast(handTargetPosition + transform.forward * -TP_Input.cc._capsuleCollider.radius * 0.5f, TP_Input.cc._capsuleCollider.radius * 0.5f, transform.forward, out hit, climbEnterMaxDistance, climbSurfaceLayers))
+            if (dragInfo.canGo && !inClimbEnter && Physics.SphereCast(handTargetPosition + transform.forward * -TP_Input.cc._capsuleCollider.radius * 0.25f, TP_Input.cc._capsuleCollider.radius * 0.25f, transform.forward, out hit, climbEnterMaxDistance, climbSurfaceLayers))
             {
                 // Additional check: ensure the object has the correct tag
                 if (!climbSurfaceTags.Contains(hit.collider.transform.gameObject.tag))
