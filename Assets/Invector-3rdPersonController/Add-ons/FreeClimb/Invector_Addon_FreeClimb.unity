@@ -5869,8 +5869,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f715700ee5868294f8fd21f7e20b4e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vCheckItemIsEquipped: {fileID: 0}
   buttonHandler: {fileID: 693325896}
   isGrenadeEquip: 0
+  shootEquip: {fileID: 0}
+  rightDisplay: {fileID: 0}
 --- !u!114 &693325895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23781,6 +23784,7 @@ MonoBehaviour:
   openCloseEvents: 0
   openCloseWindow: 1
   selectedToolbar: 1
+  equipArea: {fileID: 0}
   climbSurfaceTags:
     tags:
     - FreeClimb
@@ -23858,6 +23862,9 @@ MonoBehaviour:
   lastPointDistanceVDown: 1.25
   offsetHandTarget: 0
   offsetBase: 0.35
+  horizontalRaycastHeightOffset: -0.5
+  horizontalRaycastBoneReference: {fileID: 0}
+  horizontalRaycastBoneOffset: 0
   climbJumpMinDistance: 0.2
   climbJumpMaxDistance: 2
   climbJumpDepth: 2
