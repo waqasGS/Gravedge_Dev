@@ -545,7 +545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &208904911
 Transform:
   m_ObjectHideFlags: 0
@@ -41776,6 +41776,10 @@ PrefabInstance:
     - target: {fileID: 2520176752290455129, guid: c987efa9edc71d540a3453d55e36abb1, type: 3}
       propertyPath: m_Name
       value: ClimbMovable
+      objectReference: {fileID: 0}
+    - target: {fileID: 2520176752290455129, guid: c987efa9edc71d540a3453d55e36abb1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8376285719744033772, guid: c987efa9edc71d540a3453d55e36abb1, type: 3}
       propertyPath: m_LocalPosition.x
