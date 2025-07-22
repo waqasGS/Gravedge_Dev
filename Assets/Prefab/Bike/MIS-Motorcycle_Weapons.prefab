@@ -34209,7 +34209,7 @@ Transform:
   m_GameObject: {fileID: 1389525420399912330}
   serializedVersion: 2
   m_LocalRotation: {x: 0.31199366, y: -0.23859666, z: 0.120647684, w: 0.91168845}
-  m_LocalPosition: {x: -0.227, y: 0.425, z: -0.179}
+  m_LocalPosition: {x: -0.3652, y: 0.2756, z: -0.0296}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -63822,7 +63822,7 @@ MonoBehaviour:
   wheelCollider: {fileID: 0}
   wheelModelCollider: {fileID: 0}
   suspension: {fileID: 1848151866174361969}
-  suspensionExpensionSpeed: 2
+  suspensionExpensionSpeed: 0
   isFrontWheel: 0
   hasSteer: 0
   hasPower: 1
@@ -63833,6 +63833,7 @@ MonoBehaviour:
   maxForwardStiffness: 1.5
   minSidewaysStiffness: 0.75
   maxSidewaysStiffness: 1.5
+  enableSkidmarks: 0
   skidmarkManagerPrefab: {fileID: 8712074094603836494, guid: c681199a5af9ee64ea02e3c06267fa52, type: 3}
   rearAxle: {fileID: 0}
   rearShockAbsorber: {fileID: 0}
@@ -84404,7 +84405,7 @@ Transform:
   m_GameObject: {fileID: 4121283997326933228}
   serializedVersion: 2
   m_LocalRotation: {x: 0.37460655, y: 0, z: 0, w: 0.9271839}
-  m_LocalPosition: {x: 0.246, y: 0.405, z: -0.2}
+  m_LocalPosition: {x: 0.368, y: 0.521, z: -0.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -114515,6 +114516,10 @@ MonoBehaviour:
   destroyAfter: 0
   destroyDelay: 0
   customCameraState: 
+  snapToAnimationRoot: 0
+  snapToRootTime: 1
+  snapToRootDelay: 0
+  playerModel: {fileID: 0}
   playAnimation: 
   crossFadeTransition: 0.25
   animatorLayer: 0
@@ -114525,6 +114530,7 @@ MonoBehaviour:
   matchTarget: {fileID: 0}
   avatarTarget: 0
   useLocalX: 0
+  useLocalY: 0
   useLocalZ: 1
   matchPositionXZCurve:
     serializedVersion: 2
@@ -120248,7 +120254,7 @@ MonoBehaviour:
   wheelCollider: {fileID: 0}
   wheelModelCollider: {fileID: 0}
   suspension: {fileID: 1145194395195484046}
-  suspensionExpensionSpeed: 2
+  suspensionExpensionSpeed: 0
   isFrontWheel: 1
   hasSteer: 1
   hasPower: 1
@@ -120259,6 +120265,7 @@ MonoBehaviour:
   maxForwardStiffness: 1
   minSidewaysStiffness: 0.75
   maxSidewaysStiffness: 1
+  enableSkidmarks: 0
   skidmarkManagerPrefab: {fileID: 8712074094603836494, guid: c681199a5af9ee64ea02e3c06267fa52, type: 3}
   rearAxle: {fileID: 0}
   rearShockAbsorber: {fileID: 0}
@@ -136115,7 +136122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 4
+  selectedToolbar: 2
   _isDead: 1
   _currentHealth: 0
   isImmortal: 0
@@ -136172,7 +136179,7 @@ MonoBehaviour:
     origin: 40
     now: 20
   maxSpeed:
-    min: 2.5
+    min: 10
     max: 150
     now: 0
   boostSpeed:
@@ -136408,7 +136415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 0
+  selectedToolbar: 2
   audioMixerGroup: {fileID: -3165942800488051908, guid: 4dc7f34918629094488d8a80024f6323, type: 2}
   inSidevolume: 0.5
   outSidevolume: 1

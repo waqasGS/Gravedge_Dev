@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Invector.vItemManager;
 
 namespace Invector.vCharacterController.vActions
 {
+   
     [vClassHeader("FREE CLIMB ADD-ON", "Make sure the mesh you want to climb is assigned with the 'FreeClimb' Tag", iconName = "climbIcon")]
     public class vFreeClimb : vMonoBehaviour
     {
+        public vEquipArea equipArea;
         #region Public variables
 
         [vEditorToolbar("General Settings")]
@@ -188,6 +191,7 @@ namespace Invector.vCharacterController.vActions
 
         protected virtual void Start()
         {
+           
             dragInfo = new vDragInfo();
 
             jumDragInfo = new vDragInfo();
@@ -772,6 +776,17 @@ namespace Invector.vCharacterController.vActions
 
         protected virtual void EnterClimb()
         {
+            print("EnterClimb");
+            
+            equipArea.EquipedAndUequiped();
+            GetComponent<Animator>().speed = 2;
+            Invoke(nameof(EnterClimbInvoke), 0.5f);
+           
+        }
+
+        void EnterClimbInvoke()
+        {
+            GetComponent<Animator>().speed = 1;
             oldInput = Time.time;
             TP_Input.cc.enabled = false;
             TP_Input.enabled = false;
@@ -840,6 +855,8 @@ namespace Invector.vCharacterController.vActions
 
         protected virtual void ExitClimb(bool exitOnGround = false)
         {
+            
+            
             TP_Input.cc.ResetCapsule();
             TP_Input.cc.onActionStay.RemoveListener(OnTriggerStayEvent);
             oldInput = Time.time;
@@ -885,8 +902,17 @@ namespace Invector.vCharacterController.vActions
 
             if (transform.parent != null && dragInfo.collider && dragInfo.collider.transform.parent && transform.parent == dragInfo.collider.transform.parent) transform.parent = null;
             onExitClimb.Invoke();
+            
+            
+            Invoke(nameof(ExitClimbInvoke), 0.5f);
         }
 
+        void ExitClimbInvoke()
+        {
+            print("ExitClimb");
+            equipArea.EquipedAndUequiped();
+            
+        }
 
         #endregion
 

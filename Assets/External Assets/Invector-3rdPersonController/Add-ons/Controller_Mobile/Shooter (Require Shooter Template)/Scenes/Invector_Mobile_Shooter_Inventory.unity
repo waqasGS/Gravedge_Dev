@@ -13819,9 +13819,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 500
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Mouse X
   verticalAxisName: Mouse Y
+  alwaysVisible: 0
+  joystickBackground: {fileID: 1186496392}
+  joystickHandle: {fileID: 135243210}
 --- !u!114 &135243215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18463,9 +18469,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 500
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Mouse X
   verticalAxisName: Mouse Y
+  alwaysVisible: 0
+  joystickBackground: {fileID: 0}
+  joystickHandle: {fileID: 0}
 --- !u!114 &181713284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41707,9 +41719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46bbc9909b71de644b8cb8c6618c9c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MvMotorcycleRiderShooter: {fileID: 414671800}
-  MountButton: {fileID: 1201061648}
-  DisMountButton: {fileID: 1892654363}
+  disableInBikeMode: []
 --- !u!114 &414671798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49022,9 +49032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46bbc9909b71de644b8cb8c6618c9c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MvMotorcycleRiderShooter: {fileID: 484245990}
-  MountButton: {fileID: 2125306249}
-  DisMountButton: {fileID: 155922994}
+  disableInBikeMode: []
 --- !u!114 &484245989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79119,9 +79127,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 100
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
+  alwaysVisible: 0
+  joystickBackground: {fileID: 0}
+  joystickHandle: {fileID: 0}
 --- !u!114 &796833651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105360,7 +105374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1103361582
 Transform:
   m_ObjectHideFlags: 0
@@ -128288,9 +128302,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 500
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Mouse X
   verticalAxisName: Mouse Y
+  alwaysVisible: 0
+  joystickBackground: {fileID: 0}
+  joystickHandle: {fileID: 0}
 --- !u!114 &1336156718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148583,9 +148603,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 100
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
+  alwaysVisible: 0
+  joystickBackground: {fileID: 0}
+  joystickHandle: {fileID: 0}
 --- !u!114 &1530976561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177701,9 +177727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46bbc9909b71de644b8cb8c6618c9c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MvMotorcycleRiderShooter: {fileID: 0}
-  MountButton: {fileID: 0}
-  DisMountButton: {fileID: 0}
+  disableInBikeMode: []
 --- !u!1 &1821975947
 GameObject:
   m_ObjectHideFlags: 0
@@ -180324,9 +180348,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 100
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
+  alwaysVisible: 0
+  joystickBackground: {fileID: 228937837}
+  joystickHandle: {fileID: 1846247366}
 --- !u!114 &1846247368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210893,9 +210923,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 100
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
+  alwaysVisible: 0
+  joystickBackground: {fileID: 0}
+  joystickHandle: {fileID: 0}
 --- !u!1 &79415066967338298
 GameObject:
   m_ObjectHideFlags: 0
@@ -236593,9 +236629,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 100
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
+  alwaysVisible: 0
+  joystickBackground: {fileID: 0}
+  joystickHandle: {fileID: 0}
 --- !u!224 &1264630484936850854
 RectTransform:
   m_ObjectHideFlags: 0
@@ -236757,9 +236799,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 500
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Mouse X
   verticalAxisName: Mouse Y
+  alwaysVisible: 0
+  joystickBackground: {fileID: 0}
+  joystickHandle: {fileID: 0}
 --- !u!222 &1274571856881529959
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -316194,9 +316242,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 500
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Mouse X
   verticalAxisName: Mouse Y
+  alwaysVisible: 0
+  joystickBackground: {fileID: 0}
+  joystickHandle: {fileID: 0}
 --- !u!114 &5050155327118660007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333730,9 +333784,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 100
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
+  alwaysVisible: 0
+  joystickBackground: {fileID: 0}
+  joystickHandle: {fileID: 0}
 --- !u!114 &5783453651514275263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342760,9 +342820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46bbc9909b71de644b8cb8c6618c9c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MvMotorcycleRiderShooter: {fileID: 5898304740059919694}
-  MountButton: {fileID: 74889891}
-  DisMountButton: {fileID: 1943999951}
+  disableInBikeMode: []
 --- !u!222 &5898674843128694341
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -456450,6 +456508,7 @@ MonoBehaviour:
   maxForwardStiffness: 1.5
   minSidewaysStiffness: 0.75
   maxSidewaysStiffness: 1.5
+  enableSkidmarks: 1
   skidmarkManagerPrefab: {fileID: 8712074094603836494, guid: c681199a5af9ee64ea02e3c06267fa52, type: 3}
   rearAxle: {fileID: 0}
   rearShockAbsorber: {fileID: 0}
@@ -472114,6 +472173,7 @@ MonoBehaviour:
   maxForwardStiffness: 1
   minSidewaysStiffness: 0.75
   maxSidewaysStiffness: 1
+  enableSkidmarks: 1
   skidmarkManagerPrefab: {fileID: 8712074094603836494, guid: c681199a5af9ee64ea02e3c06267fa52, type: 3}
   rearAxle: {fileID: 0}
   rearShockAbsorber: {fileID: 0}
@@ -496075,9 +496135,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 500
+  deadzone: 0.1
+  minInputValue: 0.2
+  maxInputValue: 1
   axesToUse: 0
   horizontalAxisName: Mouse X
   verticalAxisName: Mouse Y
+  alwaysVisible: 0
+  joystickBackground: {fileID: 0}
+  joystickHandle: {fileID: 0}
 --- !u!222 &7883629131314479807
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -527180,9 +527246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46bbc9909b71de644b8cb8c6618c9c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MvMotorcycleRiderShooter: {fileID: 6264563836496078783}
-  MountButton: {fileID: 4272338663046515339}
-  DisMountButton: {fileID: 8417078775429000059}
+  disableInBikeMode: []
 --- !u!224 &9212098568132648683
 RectTransform:
   m_ObjectHideFlags: 0

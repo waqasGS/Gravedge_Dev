@@ -472,6 +472,10 @@ MonoBehaviour:
   destroyAfter: 1
   destroyDelay: 0
   customCameraState: Default
+  snapToAnimationRoot: 0
+  snapToRootTime: 1
+  snapToRootDelay: 0
+  playerModel: {fileID: 0}
   playAnimation: 
   crossFadeTransition: 0.25
   animatorLayer: 0
@@ -482,6 +486,7 @@ MonoBehaviour:
   matchTarget: {fileID: 0}
   avatarTarget: 0
   useLocalX: 0
+  useLocalY: 0
   useLocalZ: 1
   matchPositionXZCurve:
     serializedVersion: 2
@@ -669,7 +674,7 @@ MonoBehaviour:
       isOpen: 0
       isBool: 0
     - name: 9
-      value: 0
+      value: 1500
       isOpen: 0
       isBool: 0
     changeAttributes: 1

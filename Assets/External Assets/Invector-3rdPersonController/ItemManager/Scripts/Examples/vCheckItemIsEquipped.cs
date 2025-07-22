@@ -65,6 +65,8 @@ namespace Invector.vItemManager
             bool _isEquipped = check._itemsID.Exists(t => itemManager.ItemIsEquipped(t));
             //Debug.Log($"[CheckItemID] Group '{check.name}' - Previous isEquipped: {check.isEquipped}, Current: {_isEquipped}");
 
+            //Debug.Log($"[CheckItemID] Is Equipped: {_isEquipped} | Was Equipped: {check.isEquipped}");
+
             if (_isEquipped != check.isEquipped)
             {
                 check.isEquipped = _isEquipped;
