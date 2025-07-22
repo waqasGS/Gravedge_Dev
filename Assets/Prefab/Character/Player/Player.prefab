@@ -2325,7 +2325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 6
+  selectedToolbar: 2
   equipArea: {fileID: 2522328636609065241}
   climbSurfaceTags:
     tags:
@@ -2400,8 +2400,8 @@ MonoBehaviour:
   climbEnterSpeed: 4
   climbEnterMaxDistance: 1
   lastPointDistanceH: 0.45
-  lastPointDistanceVUp: 0.1
-  lastPointDistanceVDown: 0.1
+  lastPointDistanceVUp: 0
+  lastPointDistanceVDown: 0.25
   offsetHandTarget: 0.79
   offsetBase: 0.35
   horizontalRaycastHeightOffset: 0
@@ -2648,6 +2648,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2522328636609065241}
+    - target: {fileID: 5004959337076263813, guid: 9e4fac89f4db3e24d9fabaea1f4db43b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -134.45117
+      objectReference: {fileID: 0}
     - target: {fileID: 5872698164164414489, guid: 9e4fac89f4db3e24d9fabaea1f4db43b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2940,6 +2944,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3166885599830971010}
     m_Modifications:
+    - target: {fileID: 136920018996110020, guid: b6f4e7ebacf5e6549a03e6f821034be2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -15.000061
+      objectReference: {fileID: 0}
+    - target: {fileID: 919970267584930024, guid: b6f4e7ebacf5e6549a03e6f821034be2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -15.000061
+      objectReference: {fileID: 0}
     - target: {fileID: 3071853428289791924, guid: b6f4e7ebacf5e6549a03e6f821034be2, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -2947,6 +2959,10 @@ PrefabInstance:
     - target: {fileID: 3071853428289791924, guid: b6f4e7ebacf5e6549a03e6f821034be2, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588680508966461475, guid: b6f4e7ebacf5e6549a03e6f821034be2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -15.000061
       objectReference: {fileID: 0}
     - target: {fileID: 5141737753944614428, guid: b6f4e7ebacf5e6549a03e6f821034be2, type: 3}
       propertyPath: combet
