@@ -11,7 +11,7 @@ namespace Invector.vShooter
         public RectTransform canvas;
         public List<vAimCanvas> aimCanvasCollection = new List<vAimCanvas>();
         public bool useAimCorrectionSmooth = true;
-        public float aimCorrectionSmooth=20f;
+        public float aimCorrectionSmooth = 20f;
         public Camera scopeBackgroundCamera;
         public bool isScopeCameraActive { get => scopeBackgroundCamera && scopeBackgroundCamera.gameObject.activeInHierarchy; set { if (scopeBackgroundCamera) scopeBackgroundCamera.gameObject.SetActive(value); } }
         public bool isValid { get { if (!currentAimCanvas) return false; return currentAimCanvas.isValid; } set { currentAimCanvas.isValid = value; } }
@@ -48,8 +48,8 @@ namespace Invector.vShooter
         protected virtual bool scopeActive { get; set; }
         float scopeCameraTargetZoom;
         float scopeCameraOriginZoom => mainCamera.fieldOfView;
-        Vector3 scopeCameraTargetDir;
-        Vector3 scopeCameraUpDir;
+        public Vector3 scopeCameraTargetDir;
+        public Vector3 scopeCameraUpDir;
         Quaternion scopeCameraOriginRot => mainCamera.transform.rotation;
         Vector3 scopeCameraTargetPos;
         Vector3 scopeCameraOriginPos => mainCamera.transform.position;
@@ -74,8 +74,18 @@ namespace Invector.vShooter
         {
             scopeBackgroundCamera.transform.position = Vector3.Lerp(scopeCameraOriginPos, scopeCameraTargetPos, scopeCameraTransformWeight);
 
+            //if (scopeCameraTargetDir.magnitude > 0.01f)
+            //    scopeBackgroundCamera.transform.rotation = Quaternion.Lerp(scopeCameraOriginRot, Quaternion.LookRotation(scopeCameraTargetDir, scopeCameraUpDir), scopeCameraTransformWeight);
             if (scopeCameraTargetDir.magnitude > 0.01f)
-                scopeBackgroundCamera.transform.rotation = Quaternion.Lerp(scopeCameraOriginRot, Quaternion.LookRotation(scopeCameraTargetDir,scopeCameraUpDir), scopeCameraTransformWeight);
+            {
+                Quaternion targetRot = Quaternion.LookRotation(scopeCameraTargetDir, scopeCameraUpDir);
+                Quaternion lerpedRot = Quaternion.Lerp(scopeCameraOriginRot, targetRot, scopeCameraTransformWeight);
+
+                // Convert to Euler angles, zero out Z (roll), and convert back to Quaternion
+                Vector3 euler = lerpedRot.eulerAngles;
+                euler.z = 0f;
+                scopeBackgroundCamera.transform.rotation = Quaternion.Euler(euler);
+            }
 
             scopeBackgroundCamera.fieldOfView = Mathf.Lerp(scopeCameraOriginZoom, scopeCameraTargetZoom, scopeCameraTransformWeight);
 
@@ -125,7 +135,7 @@ namespace Invector.vShooter
 
             if (aimTarget)
             {
-                aimTarget.anchoredPosition = Vector2.Lerp(aimTarget.anchoredPosition,Vector2.zero, useAimCorrectionSmooth ? aimCorrectionSmooth * Time.fixedDeltaTime : 1f);
+                aimTarget.anchoredPosition = Vector2.Lerp(aimTarget.anchoredPosition, Vector2.zero, useAimCorrectionSmooth ? aimCorrectionSmooth * Time.fixedDeltaTime : 1f);
             }
             if (currentAimCanvas.aimCenterToAimTarget && aimCenter)
             {
@@ -150,16 +160,16 @@ namespace Invector.vShooter
                 else onCheckInvalidAim.Invoke();
             }
 
-        
+
 
             Vector2 ViewportPosition = mainCamera.WorldToViewportPoint(wordPosition);
             Vector2 WorldObject_ScreenPosition = new Vector2(
             ((ViewportPosition.x * canvas.sizeDelta.x) - (canvas.sizeDelta.x * 0.5f)),
             ((ViewportPosition.y * canvas.sizeDelta.y) - (canvas.sizeDelta.y * 0.5f)));
-         
+
             if (currentAimCanvas.aimCenterToAimTarget && aimCenter)
-            {                
-                aimCenter.anchoredPosition = Vector2.Lerp(aimCenter.anchoredPosition, WorldObject_ScreenPosition, useAimCorrectionSmooth?aimCorrectionSmooth * Time.fixedDeltaTime:1f);
+            {
+                aimCenter.anchoredPosition = Vector2.Lerp(aimCenter.anchoredPosition, WorldObject_ScreenPosition, useAimCorrectionSmooth ? aimCorrectionSmooth * Time.fixedDeltaTime : 1f);
             }
             if (aimTarget)
             {
@@ -209,10 +219,10 @@ namespace Invector.vShooter
             float scale = 1f;
             if (scaleAimWithMovement && (cc.input.magnitude > movementSensibility || Mathf.Abs(Input.GetAxis("Mouse X")) > movementSensibility || Mathf.Abs(Input.GetAxis("Mouse Y")) > movementSensibility))
             {
-                scale = scaleWithMovement;               
+                scale = scaleWithMovement;
             }
-           if(aimCenter) aimCenter.sizeDelta = Vector2.Lerp(aimCenter.sizeDelta, sizeDeltaCenter * Mathf.Abs(scale), smoothChangeScale * Time.fixedDeltaTime);
-           if(aimTarget) aimTarget.sizeDelta = Vector2.Lerp(aimTarget.sizeDelta, sizeDeltaTarget * Mathf.Abs(scale), smoothChangeScale * Time.fixedDeltaTime);
+            if (aimCenter) aimCenter.sizeDelta = Vector2.Lerp(aimCenter.sizeDelta, sizeDeltaCenter * Mathf.Abs(scale), smoothChangeScale * Time.fixedDeltaTime);
+            if (aimTarget) aimTarget.sizeDelta = Vector2.Lerp(aimTarget.sizeDelta, sizeDeltaTarget * Mathf.Abs(scale), smoothChangeScale * Time.fixedDeltaTime);
         }
 
         /// <summary>
@@ -227,16 +237,16 @@ namespace Invector.vShooter
 
                 isAimActive = value;
                 if (value)
-                {                  
-                    isValid = true;                   
+                {
+                    isValid = true;
                     onEnableAim.Invoke();
                 }
                 else
-                {                  
-                    onDisableAim.Invoke();                   
+                {
+                    onDisableAim.Invoke();
                 }
             }
-        
+
         }
 
         public void DisableScopeCamera()
@@ -262,7 +272,7 @@ namespace Invector.vShooter
         {
             if (currentAimCanvas == null || !scopeBackgroundCamera) return;
 
-         
+
             if (scopeActive != value || isScopeUIActive != useUI)
             {
                 isScopeUIActive = useUI;
@@ -276,8 +286,8 @@ namespace Invector.vShooter
                         isScopeUIActive = true;
                     }
                     else
-                    {                       
-                        onDisableScopeUI.Invoke();                     
+                    {
+                        onDisableScopeUI.Invoke();
                         isScopeUIActive = false;
                     }
                 }
@@ -285,7 +295,7 @@ namespace Invector.vShooter
                 {
                     scopeActive = false;
                     isScopeUIActive = false;
-                    onDisableScopeUI.Invoke();  
+                    onDisableScopeUI.Invoke();
                 }
             }
         }
