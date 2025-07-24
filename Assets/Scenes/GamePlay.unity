@@ -1089,6 +1089,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1808273648074610889, guid: c6b835a3a0a7cb14c89f2200e2b963ef, type: 3}
+      propertyPath: selectedToolbar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808273648074610889, guid: c6b835a3a0a7cb14c89f2200e2b963ef, type: 3}
+      propertyPath: freeSpeed.walkSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808273648074610889, guid: c6b835a3a0a7cb14c89f2200e2b963ef, type: 3}
+      propertyPath: freeSpeed.runningSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2583290084851051212, guid: c6b835a3a0a7cb14c89f2200e2b963ef, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1137,6 +1149,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5659278757540083253, guid: c6b835a3a0a7cb14c89f2200e2b963ef, type: 3}
+      propertyPath: selectedToolbar
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659278757540083253, guid: c6b835a3a0a7cb14c89f2200e2b963ef, type: 3}
+      propertyPath: applyRecoilToCamera
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5691258912774484145, guid: c6b835a3a0a7cb14c89f2200e2b963ef, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -1145,9 +1165,21 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6167554697321641766, guid: c6b835a3a0a7cb14c89f2200e2b963ef, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -15
+      objectReference: {fileID: 0}
     - target: {fileID: 6506459405431100370, guid: c6b835a3a0a7cb14c89f2200e2b963ef, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330861497785169345, guid: c6b835a3a0a7cb14c89f2200e2b963ef, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7538576817861933037, guid: c6b835a3a0a7cb14c89f2200e2b963ef, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
