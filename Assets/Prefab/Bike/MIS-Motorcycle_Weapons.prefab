@@ -61,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 60106753660576304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-  m_LocalPosition: {x: 0, y: 0, z: 1.9}
+  m_LocalPosition: {x: 0, y: 0.452, z: 1.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34243,7 +34243,7 @@ Transform:
   m_GameObject: {fileID: 1420945215981051091}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.2, y: 0.22, z: -0.5}
+  m_LocalPosition: {x: 0.114, y: 0.22, z: -0.448}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -68868,7 +68868,7 @@ Transform:
   m_GameObject: {fileID: 2836173825732080665}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-  m_LocalPosition: {x: 0, y: 0, z: -0.54}
+  m_LocalPosition: {x: 2.1678666e-14, y: 0.45200014, z: -0.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -136180,11 +136180,11 @@ MonoBehaviour:
     now: 20
   maxSpeed:
     min: 10
-    max: 70
+    max: 20
     now: 0
   boostSpeed:
     min: 15
-    max: 70
+    max: 20
     now: 0
   gear: 0
   engineRPM:
@@ -136205,8 +136205,8 @@ MonoBehaviour:
   throttleInputAbs: 0
   steerInputAbs: 0
   steeringSmoothDamp:
-    min: 50
-    max: 80
+    min: 3
+    max: 5
     now: 10
   brakeInput: 0
   handBrakeInput: 0
@@ -141806,7 +141806,7 @@ Transform:
   m_GameObject: {fileID: 7244004258630367195}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.2, y: 0.22, z: -0.5}
+  m_LocalPosition: {x: -0.14, y: 0.22, z: -0.441}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -162192,7 +162192,7 @@ Transform:
   m_GameObject: {fileID: 8279986000564251262}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.829, z: -0.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
