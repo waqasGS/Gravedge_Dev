@@ -507,7 +507,7 @@ namespace Invector.vItemManager
             if (!currentEquippedSlot ||
                 (currentEquippedSlot.item != null && currentEquippedSlot.item.isEquiped)) return;
             //Debug.Log("G2");
-           
+
 
             if (currentEquippedItem) onEquipItem.Invoke(this, currentEquippedItem);
             else if (lastEquippedItem) onUnequipItem.Invoke(this, lastEquippedItem);
@@ -515,9 +515,9 @@ namespace Invector.vItemManager
             //Invoke(nameof(EquipedColor), 0.5f);
 
 
-           
+
         }
-      
+
 
         //public /*async*/ void EquipedColor()
         //{
@@ -572,7 +572,15 @@ namespace Invector.vItemManager
                     if (autoEquip)
                     {
                         Debug.Log("Grenade 1");
-                        SetEquipSlot(indexOfSlot);
+                        if (equipSlots[indexOfSlot].item != null)
+                        {
+                            SetEquipSlot(indexOfSlot);
+
+                        }
+                        else
+                        {
+                            onEquipItem.Invoke(this, item);
+                        }
                     }
                     else if (!ignoreEquipEvents)
                     {
@@ -695,7 +703,7 @@ namespace Invector.vItemManager
                 {
                     //gunEquiped = true;
 
-                   // Debug.Log("color equip");
+                    // Debug.Log("color equip");
                     gunEquiped = true;
                     selectedGunImage.color = equipColor;
                     onEquipItem.Invoke(this, currentEquippedItem);
