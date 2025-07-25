@@ -728,19 +728,20 @@ namespace Invector.vCharacterController
 
             if (controlAimCanvas)
             {
-                if (!isUsingScopeView)
-                {
-
-                    if (IsAiming && !controlAimCanvas.isAimActive)
-                    {
-                        controlAimCanvas.SetActiveAim(true);
-                    }
-
-                    if (!IsAiming && controlAimCanvas.isAimActive)
-                    {
-                        controlAimCanvas.SetActiveAim(false);
-                    }
-                }
+                controlAimCanvas.SetActiveAim(true);
+                // if (!isUsingScopeView)
+                // {
+                //
+                //     if (IsAiming && !controlAimCanvas.isAimActive)
+                //     {
+                //         controlAimCanvas.SetActiveAim(true);
+                //     }
+                //
+                //     if (!IsAiming && controlAimCanvas.isAimActive)
+                //     {
+                //         controlAimCanvas.SetActiveAim(false);
+                //     }
+                // }
             }
             if (shooterManager.rWeapon)
             {
@@ -1412,8 +1413,9 @@ namespace Invector.vCharacterController
             if (IsAiming != wasAiming)
             {
                 wasAiming = IsAiming;
-                if (IsAiming) {shooterManager.onEnableAim.Invoke(shooterManager.CurrentWeapon);}
-                else shooterManager.onDisableAim.Invoke(shooterManager.CurrentWeapon);
+                shooterManager.onEnableAim.Invoke(shooterManager.CurrentWeapon);
+                // if (IsAiming) {shooterManager.onEnableAim.Invoke(shooterManager.CurrentWeapon);}
+                // else shooterManager.onDisableAim.Invoke(shooterManager.CurrentWeapon);
             }
             if (isUsingScopeView != wasAimingWithScope)
             {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 namespace Invector.vShooter
 {
@@ -13,151 +14,188 @@ namespace Invector.vShooter
         #region Variables
 
         [System.Serializable]
-        public class WeaponEvent : UnityEngine.Events.UnityEvent<vShooterWeapon> { }
+        public class WeaponEvent : UnityEngine.Events.UnityEvent<vShooterWeapon>
+        {
+        }
+
         /// <summary>
         /// Event called when equip or unequip a weapon, (Weapon, isLeftWeapon)
         /// </summary>
         [System.Serializable]
-        public class EquipWeaponEvent : UnityEngine.Events.UnityEvent<vShooterWeapon,bool> { }
+        public class EquipWeaponEvent : UnityEngine.Events.UnityEvent<vShooterWeapon, bool>
+        {
+        }
+
         public delegate void AmmoHandle(int ammoID, ref int ammo);
 
         [vEditorToolbar("Melee Overrides")]
-
         [vHelpBox("Behaviour when Shooter Weapon is Disabled (equipped but disabled)")]
         public bool canUseMeleeBlock_H = true;
+
         public bool canUseMeleeWeakAttack_H = true;
         public bool canUseMeleeStrongAttack_H = true;
+
         [vHelpBox("Behaviour when Shooter Weapon is Enabled (equipped and enabled)")]
         public bool canUseMeleeBlock_E = false;
+
         public bool canUseMeleeWeakAttack_E = true;
         public bool canUseMeleeStrongAttack_E = false;
         public bool canUseMeleeAiming = false;
 
-        [vEditorToolbar("Damage Layers")]
-
-        [Tooltip("Layer to aim and apply damage")]
+        [vEditorToolbar("Damage Layers")] [Tooltip("Layer to aim and apply damage")]
         public LayerMask damageLayer = 1 << 0;
+
         [Tooltip("Tags to ignore (auto add this gameObject tag to avoid damage your self)")]
         public vTagMask ignoreTags = new vTagMask("Player");
-        [Tooltip("Layer to block aim")]
-        public LayerMask blockAimLayer = 1 << 0;
+
+        [Tooltip("Layer to block aim")] public LayerMask blockAimLayer = 1 << 0;
 
         [vEditorToolbar("Cancel Reload")]
-
-        [vHelpBox("You can call the <b>CancelReload</b> method using events to interrupt the reload routine and animation, for example, when doing an Custom Action or receiving a specific hitReaction ID")]
+        [vHelpBox(
+            "You can call the <b>CancelReload</b> method using events to interrupt the reload routine and animation, for example, when doing an Custom Action or receiving a specific hitReaction ID")]
         [Tooltip("It will always automatically use the CancelReload")]
         public bool useCancelReload = true;
+
         [Tooltip("This is a list of HitReaction ID that will be ignored by the CancelReload routine")]
         public List<int> ignoreReacionIDList = new List<int>() { -1 };
 
         [vEditorToolbar("Aim")]
-        [Tooltip("The min distance that Hit point can be, the min distance will be used to indicate the target point in the crosshair")]
-        public float maxAimHitPointIndicator=30f;
-        [Tooltip("The min distance that Hit point can be, the min distance will be used to calculate the point using camera position and camera forward relative to muzzle position")]
+        [Tooltip(
+            "The min distance that Hit point can be, the min distance will be used to indicate the target point in the crosshair")]
+        public float maxAimHitPointIndicator = 30f;
+
+        [Tooltip(
+            "The min distance that Hit point can be, the min distance will be used to calculate the point using camera position and camera forward relative to muzzle position")]
         public float minAimHitPointDistance;
+
         [Tooltip("If the Aim Hit point is behind weapon muzzle, the aim point will be the default point")]
         public bool ignoreBackAimPoint = true;
+
         [Tooltip("Offset for check if aim point is behind weapon muzzle")]
         public float backAimPointOffset = 0;
 
-        [vSeparator("Float Values")]
-        public bool useCheckAim = true;
+        [vSeparator("Float Values")] public bool useCheckAim = true;
         public float checkAimRadius = 0.1f;
         public float checkAimOffsetZ = 0;
         public float checkAimOffsetSmooth = 2f;
 
-        [vSeparator("Standing")]
-        public float checkAimStandingOffsetStartY = 0;
+        [vSeparator("Standing")] public float checkAimStandingOffsetStartY = 0;
         public float checkAimStandingOffsetStartX = 0.2f;
         public float checkAimStandingOffsetEndY = 0;
         public float checkAimStandingOffsetEndX = 0f;
 
-        [vSeparator("Crouching")]
-        public float checkAimCrouchedOffsetStartY = 0;
+        [vSeparator("Crouching")] public float checkAimCrouchedOffsetStartY = 0;
         public float checkAimCrouchedOffsetStartX = 0.2f;
         public float checkAimCrouchedOffsetEndY = 0;
         public float checkAimCrouchedOffsetEndX = 0;
 
         [vSeparator("Shooter Settings")]
-
         [Tooltip("The Aim stays active when reload, including animator parameter and camera state")]
         public bool keepAimingWhenReload;
+
         [Tooltip("Check true to make the character always aim and walk on strafe mode")]
         public bool alwaysAiming;
+
         public bool onlyWalkWhenAiming = true;
         public bool useDefaultMovesetWhenNotAiming = true;
 
-        [vEditorToolbar("IK Adjust")]
-
-        public float armIKSmoothIn = 10, armIKSmoothOut = 25f;
+        [vEditorToolbar("IK Adjust")] public float armIKSmoothIn = 10, armIKSmoothOut = 25f;
         public AnimationCurve armIKCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1));
+
         [Tooltip("Control the speed of the Animator Layer OnlyArms Weight")]
         public float onlyArmsSpeed = 25f;
-        [Tooltip("Alignment smooth method\nIf Yes. The smooth will be applied to the target alignment point (Aim Position) of the Arm \nIf NOT. the smooth will be applied to the additive rotation  based on target alignment point (Aim Position)")]
+
+        [Tooltip(
+            "Alignment smooth method\nIf Yes. The smooth will be applied to the target alignment point (Aim Position) of the Arm \nIf NOT. the smooth will be applied to the additive rotation  based on target alignment point (Aim Position)")]
         public bool smoothIKAlignmentPoint = false;
+
         [Tooltip("smooth of the right hand when correcting the aim")]
         public float smoothArmIKRotation = 30f;
+
         [Tooltip("Limit the maxAngle for the arm Alignment")]
         public float maxVerticalAimAngle = 60f;
+
         [Tooltip("Limit the maxAngle for the arm Alignment")]
         public float maxHorizontalAimAngle = 20f;
+
         [Tooltip("smooth of the right arm when correcting the aim")]
         public float smoothArmWeight = 24f;
+
         [Tooltip("Sync the weapon aim to the camera aim")]
         public bool raycastAimTarget = true;
+
         [Tooltip("rotate arm ik to aim hit point, if false the arms will rotate to  camera forward distance 100")]
-        public bool alignArmToHitPoint = true;     
+        public bool alignArmToHitPoint = true;
+
         [Tooltip("Check this to use IK on the left hand")]
         public bool useLeftIK = true, useRightIK = true;
+
         [vSeparator("--- Start PlayMode to edit the IK Adjust ---")]
         public vWeaponIKAdjustList weaponIKAdjustList;
+
         public float ikAdjustSmooth = 20;
-        public AnimationCurve ikAdjustWeightCurve = new AnimationCurve(new Keyframe(0,0),new Keyframe(1, 1)); 
-        [vEditorToolbar("Ammo")]
-        [SerializeField] protected bool allAmmoInfinity;
+        public AnimationCurve ikAdjustWeightCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1));
+
+        [vEditorToolbar("Ammo")] [SerializeField]
+        protected bool allAmmoInfinity;
+
         [Tooltip("Use the vAmmoDisplay to shot ammo count")]
         public bool useAmmoDisplay = true;
+
         [Tooltip("ID to find ammoDisplay for leftWeapon")]
         public int leftWeaponAmmoDisplayID = -1;
+
         [Tooltip("ID to find ammoDisplay for rightWeapon")]
         public int rightWeaponAmmoDisplayID = 1;
 
-        [vEditorToolbar("Recoil")]
-
-        [Tooltip("Move camera angle when shot using recoil properties of weapon")]
+        [vEditorToolbar("Recoil")] [Tooltip("Move camera angle when shot using recoil properties of weapon")]
         public bool applyRecoilToCamera = true;
+
         [Tooltip("The camera recoil stability"), Range(0, 1)]
         public float cameraRecoilStability = 0f;
 
         [vEditorToolbar("LockOn")]
-
         [vSeparator("LockOn (need the shooter lockon component)")]
         [Tooltip("Allow the use of the LockOn or not")]
         public bool useLockOn = false;
+
         [Tooltip("Allow the use of the LockOn only with a Melee Weapon")]
         public bool useLockOnMeleeOnly = true;
 
         [vEditorToolbar("HipFire")]
-
         [vSeparator("HipFire Options")]
         [Tooltip("If enable, remember to change your weak attack input to other input - this allows shot without aim")]
         public bool hipfireShot = false;
+
         [Tooltip("Precision of the weapon when shooting using hipfire (without aiming)")]
         public float hipfireDispersion = 0.5f;
-        [Tooltip("Time to keep aiming after shot")]
-        [SerializeField] public float hipfireAimTime = 2f;
+
+        [Tooltip("Time to keep aiming after shot")] [SerializeField]
+        public float hipfireAimTime = 2f;
+
         [vEditorToolbar("Camera Sway")]
         [vSeparator("Camera Sway Settings")]
         [Tooltip("Camera Sway movement while aiming")]
         public float cameraMaxSwayAmount = 2f;
+
         [Tooltip("Camera Sway Speed while aiming")]
         public float cameraSwaySpeed = .5f;
 
-        [vEditorToolbar("Weapons")]
+        [vEditorToolbar("Weapons")] [SerializeField]
+        protected vShooterWeapon _rWeapon, _lWeapon;
 
-        [SerializeField] protected vShooterWeapon _rWeapon, _lWeapon;
-        public virtual vShooterWeapon rWeapon { get { return _rWeapon; } set { _rWeapon = value; } }
-        public virtual vShooterWeapon lWeapon { get { return _lWeapon; } set { _lWeapon = value; } }
+        public virtual vShooterWeapon rWeapon
+        {
+            get { return _rWeapon; }
+            set { _rWeapon = value; }
+        }
+
+        public virtual vShooterWeapon lWeapon
+        {
+            get { return _lWeapon; }
+            set { _lWeapon = value; }
+        }
+
         public int reloadAnimatorLayer = 4;
         public WeaponEvent onEnableAim;
         public WeaponEvent onDisableAim;
@@ -190,14 +228,17 @@ namespace Invector.vShooter
         /// The Shot layer of the animation
         /// </summary>
         public virtual int ShotLayer { get; protected set; }
+
         /// <summary>
         /// Animator Hash for IsShoot parameter 
         /// </summary>
         internal readonly int IsShoot = Animator.StringToHash("Shoot");
+
         /// <summary>
         /// Animator Hash for Reload parameter 
         /// </summary>
         internal readonly int Reload = Animator.StringToHash("Reload");
+
         /// <summary>
         /// Animator Hash for ReloadID parameter 
         /// </summary>
@@ -205,10 +246,9 @@ namespace Invector.vShooter
 
         protected int extraAmmo;
 
-        public virtual int ExtraAmmo => extraAmmo;      
-      
-        [vEditorToolbar("Debug")]
-        public bool showCheckAimGizmos;
+        public virtual int ExtraAmmo => extraAmmo;
+
+        [vEditorToolbar("Debug")] public bool showCheckAimGizmos;
 
         #endregion
 
@@ -219,6 +259,7 @@ namespace Invector.vShooter
             {
                 tpCamera = FindObjectOfType<vCamera.vThirdPersonCamera>();
             }
+
             ammoManager = GetComponent<vAmmoManager>();
             if (ammoManager != null)
             {
@@ -273,19 +314,14 @@ namespace Invector.vShooter
                     ammoDisplayL.UpdateDisplay("");
                 }
             }
+
             UpdateTotalAmmo();
         }
 
         public virtual bool AllAmmoInfinity
         {
-            get
-            {
-                return allAmmoInfinity;
-            }
-            set
-            {
-                allAmmoInfinity = value;
-            }
+            get { return allAmmoInfinity; }
+            set { allAmmoInfinity = value; }
         }
 
         public virtual void SetLeftWeapon(GameObject weapon)
@@ -304,7 +340,6 @@ namespace Invector.vShooter
 
         protected virtual void SetLeftWeapon(vShooterWeapon weapon)
         {
-         
             if (weapon)
             {
                 lWeapon = weapon;
@@ -355,18 +390,16 @@ namespace Invector.vShooter
             {
                 var w = weapon.GetComponent<vShooterWeapon>();
                 SetRightWeapon(w);
-             
             }
             else
             {
-                if(rWeapon) onUnequipWeapon.Invoke(rWeapon, false);
+                if (rWeapon) onUnequipWeapon.Invoke(rWeapon, false);
                 rWeapon = null;
             }
         }
 
         protected virtual void SetRightWeapon(vShooterWeapon weapon)
         {
-          
             if (weapon)
             {
                 rWeapon = weapon;
@@ -404,10 +437,9 @@ namespace Invector.vShooter
                 onEquipWeapon.Invoke(weapon, false);
             }
             else
-            {                
+            {
                 if (rWeapon) onUnequipWeapon.Invoke(rWeapon, false);
                 rWeapon = null;
-                
             }
         }
 
@@ -447,12 +479,11 @@ namespace Invector.vShooter
         {
             if (usingThirdPersonController)
             {
-                var ammoDisplay = rWeapon != null && otherGameObject == rWeapon.gameObject ?
-                    ammoDisplayR : lWeapon != null && otherGameObject == lWeapon.gameObject ? ammoDisplayL : null;
+                var ammoDisplay = rWeapon != null && otherGameObject == rWeapon.gameObject ? ammoDisplayR :
+                    lWeapon != null && otherGameObject == lWeapon.gameObject ? ammoDisplayL : null;
 
                 HideAmmoDisplay(ammoDisplay);
             }
-
         }
 
         protected virtual void GetAmmoDisplays()
@@ -552,11 +583,7 @@ namespace Invector.vShooter
 
         public virtual float HipfireAimTime
         {
-            get
-            {
-                return hipfireAimTime + (CurrentWeapon ? CurrentWeapon.shootFrequency : 0);
-
-            }
+            get { return hipfireAimTime + (CurrentWeapon ? CurrentWeapon.shootFrequency : 0); }
         }
 
         public virtual bool WeaponHasLoadedAmmo()
@@ -592,7 +619,8 @@ namespace Invector.vShooter
 
             UpdateTotalAmmo();
 
-            if (weapon.ammoCount < weapon.clipSize && ((weapon.isInfinityAmmo || AllAmmoInfinity) || WeaponHasUnloadedAmmo()) && !weapon.dontUseReload)
+            if (weapon.ammoCount < weapon.clipSize &&
+                ((weapon.isInfinityAmmo || AllAmmoInfinity) || WeaponHasUnloadedAmmo()) && !weapon.dontUseReload)
             {
                 onStartReloadWeapon.Invoke(weapon);
 
@@ -601,6 +629,7 @@ namespace Invector.vShooter
                     animator.SetInteger(ReloadID, GetReloadID());
                     animator.SetTrigger(Reload);
                 }
+
                 if (CurrentWeapon && CurrentWeapon.gameObject.activeInHierarchy)
                 {
                     StartCoroutine(AddAmmoToWeapon(CurrentWeapon, CurrentWeapon.reloadTime));
@@ -613,7 +642,9 @@ namespace Invector.vShooter
             isReloading = true;
             isReloadingWeapon = true;
             reloadStartTime = Time.time;
-            if (weapon.ammoCount < weapon.clipSize && ((weapon.isInfinityAmmo || AllAmmoInfinity) || WeaponHasUnloadedAmmo()) && !weapon.dontUseReload && !cancelReload)
+            if (weapon.ammoCount < weapon.clipSize &&
+                ((weapon.isInfinityAmmo || AllAmmoInfinity) || WeaponHasUnloadedAmmo()) && !weapon.dontUseReload &&
+                !cancelReload)
             {
                 weapon.ReloadEffect();
                 yield return new WaitForSeconds(delayTime);
@@ -628,13 +659,16 @@ namespace Invector.vShooter
                     }
                     else
                     {
-                        if (!(weapon.isInfinityAmmo || AllAmmoInfinity)&& WeaponAmmo(weapon).count < needAmmo)
+                        if (!(weapon.isInfinityAmmo || AllAmmoInfinity) && WeaponAmmo(weapon).count < needAmmo)
                         {
                             needAmmo = WeaponAmmo(weapon).count;
                         }
 
                         weapon.AddAmmo(needAmmo);
-                        WeaponAmmo(weapon).Use(needAmmo);
+                        Debug.Log("Weapon" +  weapon);
+                        Debug.Log("needAmmo" + needAmmo);
+                        var sManager = WeaponAmmo(weapon);
+                        sManager.Use(needAmmo);
                     }
 
                     if (weapon.reloadOneByOne && weapon.ammoCount < weapon.clipSize && WeaponHasUnloadedAmmo())
@@ -647,7 +681,6 @@ namespace Invector.vShooter
                         }
                         else
                         {
-
                             isReloadingWeapon = true;
 
                             if (!cancelReload)
@@ -665,8 +698,10 @@ namespace Invector.vShooter
                         onFinishReloadWeapon.Invoke(weapon);
                     }
                 }
+
                 UpdateTotalAmmo();
             }
+
             isReloading = false;
         }
 
@@ -688,7 +723,8 @@ namespace Invector.vShooter
 
         protected virtual IEnumerator CancelReloadRoutine()
         {
-            if (CurrentWeapon != null /*&& (Time.time - reloadStartTime) >= Mathf.Min(0.5f, CurrentWeapon.reloadTime * 0.5f)*/)
+            if (CurrentWeapon !=
+                null /*&& (Time.time - reloadStartTime) >= Mathf.Min(0.5f, CurrentWeapon.reloadTime * 0.5f)*/)
             {
                 animator.SetTrigger("CancelReload");
                 animator.ResetTrigger("Reload");
@@ -698,6 +734,7 @@ namespace Invector.vShooter
                 {
                     CurrentWeapon.CancelReload();
                 }
+
                 yield return new WaitForSeconds(CurrentWeapon.reloadTime + 0.1f);
                 cancelReload = false;
                 if (isReloadingWeapon)
@@ -708,6 +745,7 @@ namespace Invector.vShooter
                         onFinishReloadWeapon.Invoke(CurrentWeapon);
                     }
                 }
+
                 animator.ResetTrigger("CancelReload");
                 UpdateTotalAmmo();
             }
@@ -721,7 +759,8 @@ namespace Invector.vShooter
             }
 
             UpdateTotalAmmo();
-            if (weapon.ammoCount < weapon.clipSize && ((weapon.isInfinityAmmo || AllAmmoInfinity) || WeaponHasUnloadedAmmo()))
+            if (weapon.ammoCount < weapon.clipSize &&
+                ((weapon.isInfinityAmmo || AllAmmoInfinity) || WeaponHasUnloadedAmmo()))
             {
                 var needAmmo = weapon.clipSize - weapon.ammoCount;
                 if ((weapon.isInfinityAmmo || AllAmmoInfinity))
@@ -738,6 +777,7 @@ namespace Invector.vShooter
                     weapon.AddAmmo(needAmmo);
                     WeaponAmmo(weapon).Use(needAmmo);
                 }
+
                 weapon.onReload.Invoke();
             }
         }
@@ -754,6 +794,7 @@ namespace Invector.vShooter
             {
                 ammo = ammoManager.GetAmmo(weapon.ammoID);
             }
+
             return ammo;
         }
 
@@ -771,10 +812,7 @@ namespace Invector.vShooter
         {
             get
             {
-                var _weapon = rWeapon ?
-                    rWeapon :
-                    lWeapon ?
-                    lWeapon : null;
+                var _weapon = rWeapon ? rWeapon : lWeapon ? lWeapon : null;
                 return _weapon != null ? _weapon : null;
             }
         }
@@ -790,10 +828,7 @@ namespace Invector.vShooter
 
         public virtual vWeaponIKAdjust CurrentWeaponIK
         {
-            get
-            {
-                return currentWeaponIKAdjust;
-            }
+            get { return currentWeaponIKAdjust; }
         }
 
         public virtual void UpdateWeaponIK()
@@ -808,8 +843,7 @@ namespace Invector.vShooter
         {
             get
             {
-                var isLeftWp = (rWeapon == null) ?
-                    (lWeapon) : rWeapon.isLeftWeapon;
+                var isLeftWp = (rWeapon == null) ? (lWeapon) : rWeapon.isLeftWeapon;
                 return isLeftWp;
             }
         }
@@ -824,8 +858,8 @@ namespace Invector.vShooter
                     LoadAllAmmo(CurrentWeapon);
                     needUpdateAmmo = false;
                 }
-
             }
+
             if (needUpdateAmmo)
             {
                 UpdateTotalAmmo();
@@ -878,6 +912,7 @@ namespace Invector.vShooter
                     ammoCount += ammo.count;
                 }
             }
+
             targetTotalAmmo = ammoCount;
             UpdateAmmoDisplay(displayId);
         }
@@ -899,8 +934,14 @@ namespace Invector.vShooter
 
             if (useAmmoDisplay && ammoDisplay)
             {
-                string textA = weapon.dontUseReload ? (weapon.isInfinityAmmo || AllAmmoInfinity) ? "∞" : (weapon.ammoCount + extraAmmo).ToString("00") : weapon.ammoCount.ToString("00"); ;
-                string textB = weapon.dontUseReload && (weapon.isInfinityAmmo || AllAmmoInfinity) ? "" : !weapon.dontUseReload && (weapon.isInfinityAmmo || AllAmmoInfinity) ? "∞" : weapon.dontUseReload && !(weapon.isInfinityAmmo && AllAmmoInfinity) ? "" : (extraAmmo).ToString("00");
+                string textA = weapon.dontUseReload
+                    ? (weapon.isInfinityAmmo || AllAmmoInfinity) ? "∞" : (weapon.ammoCount + extraAmmo).ToString("00")
+                    : weapon.ammoCount.ToString("00");
+                ;
+                string textB = weapon.dontUseReload && (weapon.isInfinityAmmo || AllAmmoInfinity) ? "" :
+                    !weapon.dontUseReload && (weapon.isInfinityAmmo || AllAmmoInfinity) ? "∞" :
+                    weapon.dontUseReload && !(weapon.isInfinityAmmo && AllAmmoInfinity) ? "" :
+                    (extraAmmo).ToString("00");
                 ammoDisplay.UpdateDisplay(textA, textB, weapon.ammoID);
             }
         }
@@ -930,7 +971,8 @@ namespace Invector.vShooter
 
             var _aimPos = applyHipfirePrecision ? aimPosition + HipFirePrecision(aimPosition) : aimPosition;
             var sucessfulShot = false;
-            weapon.Shoot(weapon.muzzle.position, _aimPos, transform, (bool sucessful) => { sucessfulShot = sucessful; });
+            weapon.Shoot(weapon.muzzle.position, _aimPos, transform,
+                (bool sucessful) => { sucessfulShot = sucessful; });
 
             if (sucessfulShot)
             {
@@ -966,7 +1008,9 @@ namespace Invector.vShooter
 
             hipfirePrecisionAngle = UnityEngine.Random.Range(-1000, 1000);
             hipfirePrecision = Random.Range(-hipfireDispersion, hipfireDispersion);
-            var dir = (Quaternion.AngleAxis(hipfirePrecisionAngle, _aimPosition - weapon.muzzle.position) * (Vector3.up)).normalized * hipfirePrecision;
+            var dir =
+                (Quaternion.AngleAxis(hipfirePrecisionAngle, _aimPosition - weapon.muzzle.position) * (Vector3.up))
+                .normalized * hipfirePrecision;
             return dir;
         }
 
@@ -1004,7 +1048,7 @@ namespace Invector.vShooter
         }
 
 
-        #region Recoil        
+        #region Recoil
 
         protected Vector3 targetPosition, currentPosition;
         protected Vector3 currentRotation, targetRotation;
@@ -1015,10 +1059,12 @@ namespace Invector.vShooter
         /// Weapon recoil offset position 
         /// </summary>
         public virtual Vector3 recoilPositionOffset { get; protected set; }
+
         /// <summary>
         /// Weapon recoil offset angle
         /// </summary>
         public virtual Vector3 recoilRotationOffset { get; protected set; }
+
         /// <summary>
         /// Spine recoil offset angle
         /// </summary>
@@ -1036,7 +1082,8 @@ namespace Invector.vShooter
         protected virtual void ApplyCameraRecoil()
         {
             if (!applyRecoilToCamera || CurrentWeapon == null || tpCamera == null) return;
-            var cameraRecoilHorizontal = Random.Range(CurrentWeapon.recoilLeft, CurrentWeapon.recoilRight) * cameraRecoilPower;
+            var cameraRecoilHorizontal =
+                Random.Range(CurrentWeapon.recoilLeft, CurrentWeapon.recoilRight) * cameraRecoilPower;
             var cameraRecoilUp = Random.Range(0, CurrentWeapon.recoilUp) * cameraRecoilPower;
 
             if (tpCamera != null)
@@ -1054,5 +1101,49 @@ namespace Invector.vShooter
         }
 
         #endregion
+
+        public void EnableAim()
+        {
+            alwaysAiming = true;
+        }
+
+        public void DisableAim()
+        {
+            alwaysAiming = false;
+        }
+
+        public void buttonUp()
+        {
+            CrossPlatformInputManager.SetButtonUp("RB");
+        }
+
+        public bool enableScope = false;
+
+        public void ScopeAimToggle()
+        {
+            if (enableScope)
+            {
+                enableScope = false;
+                CrossPlatformInputManager.SetButtonDown("RB");
+                Invoke(nameof(buttonUp), 0.5f);
+                Invoke((nameof(DisableAim)), 0.52f);
+            }
+            else
+            {
+                if (!alwaysAiming)
+                {
+                    EnableAim();
+                }
+
+                enableScope = true;
+                CrossPlatformInputManager.SetButtonDown("RB");
+                Invoke(nameof(buttonUp), 0.5f);
+            }
+        }
+
+        public void DisablingScopeBool()
+        {
+            enableScope = false;
+        }
     }
 }

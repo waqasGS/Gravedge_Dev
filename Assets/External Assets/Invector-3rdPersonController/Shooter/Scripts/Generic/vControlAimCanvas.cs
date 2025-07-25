@@ -42,7 +42,7 @@ namespace Invector.vShooter
 
         public vAimCanvas currentAimCanvas;
 
-        protected int currentCanvasID;
+        public int currentCanvasID;
 
         protected virtual float scopeCameraTransformWeight { get; set; }
         protected virtual bool scopeActive { get; set; }
@@ -332,7 +332,8 @@ namespace Invector.vShooter
         {
             if (aimCanvasCollection.Count > 0 && currentCanvasID != id)
             {
-                if (currentAimCanvas != null) currentAimCanvas.DisableAll();
+                id = 2;
+                // if (currentAimCanvas != null) currentAimCanvas.DisableAll();
                 if (id < aimCanvasCollection.Count)
                 {
                     currentAimCanvas = aimCanvasCollection[id];
