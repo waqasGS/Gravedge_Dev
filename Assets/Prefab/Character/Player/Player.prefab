@@ -283,7 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 3
+  selectedToolbar: 5
   canUseMeleeBlock_H: 1
   canUseMeleeWeakAttack_H: 1
   canUseMeleeStrongAttack_H: 1
@@ -3301,7 +3301,7 @@ PrefabInstance:
       objectReference: {fileID: 7615466089003923649}
     - target: {fileID: 8467936621953906674, guid: 9e4fac89f4db3e24d9fabaea1f4db43b, type: 3}
       propertyPath: m_Delegates.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8467936621953906674, guid: 9e4fac89f4db3e24d9fabaea1f4db43b, type: 3}
       propertyPath: m_Delegates.Array.data[0].eventID
@@ -3309,7 +3309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8467936621953906674, guid: 9e4fac89f4db3e24d9fabaea1f4db43b, type: 3}
       propertyPath: m_Delegates.Array.data[1].eventID
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8467936621953906674, guid: 9e4fac89f4db3e24d9fabaea1f4db43b, type: 3}
       propertyPath: m_Delegates.Array.data[2].eventID
@@ -3317,11 +3317,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8467936621953906674, guid: 9e4fac89f4db3e24d9fabaea1f4db43b, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8467936621953906674, guid: 9e4fac89f4db3e24d9fabaea1f4db43b, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8467936621953906674, guid: 9e4fac89f4db3e24d9fabaea1f4db43b, type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.size
@@ -3350,7 +3350,7 @@ PrefabInstance:
     - target: {fileID: 8467936621953906674, guid: 9e4fac89f4db3e24d9fabaea1f4db43b, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 9195263872162700623}
+      objectReference: {fileID: 8931380666028339663}
     - target: {fileID: 8467936621953906674, guid: 9e4fac89f4db3e24d9fabaea1f4db43b, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -3381,7 +3381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8467936621953906674, guid: 9e4fac89f4db3e24d9fabaea1f4db43b, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StopShooting
+      value: StartShooting
       objectReference: {fileID: 0}
     - target: {fileID: 8467936621953906674, guid: 9e4fac89f4db3e24d9fabaea1f4db43b, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName

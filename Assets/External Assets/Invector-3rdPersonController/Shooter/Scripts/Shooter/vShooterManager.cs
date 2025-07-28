@@ -42,7 +42,8 @@ namespace Invector.vShooter
         public bool canUseMeleeStrongAttack_E = false;
         public bool canUseMeleeAiming = false;
 
-        [vEditorToolbar("Damage Layers")] [Tooltip("Layer to aim and apply damage")]
+        [vEditorToolbar("Damage Layers")]
+        [Tooltip("Layer to aim and apply damage")]
         public LayerMask damageLayer = 1 << 0;
 
         [Tooltip("Tags to ignore (auto add this gameObject tag to avoid damage your self)")]
@@ -136,7 +137,8 @@ namespace Invector.vShooter
         public float ikAdjustSmooth = 20;
         public AnimationCurve ikAdjustWeightCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1));
 
-        [vEditorToolbar("Ammo")] [SerializeField]
+        [vEditorToolbar("Ammo")]
+        [SerializeField]
         protected bool allAmmoInfinity;
 
         [Tooltip("Use the vAmmoDisplay to shot ammo count")]
@@ -148,7 +150,8 @@ namespace Invector.vShooter
         [Tooltip("ID to find ammoDisplay for rightWeapon")]
         public int rightWeaponAmmoDisplayID = 1;
 
-        [vEditorToolbar("Recoil")] [Tooltip("Move camera angle when shot using recoil properties of weapon")]
+        [vEditorToolbar("Recoil")]
+        [Tooltip("Move camera angle when shot using recoil properties of weapon")]
         public bool applyRecoilToCamera = true;
 
         [Tooltip("The camera recoil stability"), Range(0, 1)]
@@ -170,7 +173,8 @@ namespace Invector.vShooter
         [Tooltip("Precision of the weapon when shooting using hipfire (without aiming)")]
         public float hipfireDispersion = 0.5f;
 
-        [Tooltip("Time to keep aiming after shot")] [SerializeField]
+        [Tooltip("Time to keep aiming after shot")]
+        [SerializeField]
         public float hipfireAimTime = 2f;
 
         [vEditorToolbar("Camera Sway")]
@@ -181,7 +185,8 @@ namespace Invector.vShooter
         [Tooltip("Camera Sway Speed while aiming")]
         public float cameraSwaySpeed = .5f;
 
-        [vEditorToolbar("Weapons")] [SerializeField]
+        [vEditorToolbar("Weapons")]
+        [SerializeField]
         protected vShooterWeapon _rWeapon, _lWeapon;
 
         public virtual vShooterWeapon rWeapon
@@ -665,7 +670,7 @@ namespace Invector.vShooter
                         }
 
                         weapon.AddAmmo(needAmmo);
-                        Debug.Log("Weapon" +  weapon);
+                        Debug.Log("Weapon" + weapon);
                         Debug.Log("needAmmo" + needAmmo);
                         var sManager = WeaponAmmo(weapon);
                         sManager.Use(needAmmo);
@@ -703,6 +708,7 @@ namespace Invector.vShooter
             }
 
             isReloading = false;
+            alwaysAiming = false; enableScope = false;
         }
 
         public virtual void CancelReload()
@@ -1109,7 +1115,11 @@ namespace Invector.vShooter
 
         public void DisableAim()
         {
-            alwaysAiming = false;
+            if (!enableScope)
+            {
+
+                alwaysAiming = false;
+            }
         }
 
         public void buttonUp()
@@ -1126,7 +1136,7 @@ namespace Invector.vShooter
                 enableScope = false;
                 CrossPlatformInputManager.SetButtonDown("RB");
                 Invoke(nameof(buttonUp), 0.5f);
-                Invoke((nameof(DisableAim)), 0.52f);
+                Invoke((nameof(DisableAim)), 0.5f);
             }
             else
             {

@@ -17,7 +17,7 @@ public class DelayInAimToShoot : MonoBehaviour
 
     public void StopShooting()
     {
-        shooterManager.DisableAim();
+        //shooterManager.DisableAim();
         //GetComponent<ButtonHandler>().SetUpState();
         StartCoroutine(OnStopShoot());
     }
@@ -32,9 +32,10 @@ public class DelayInAimToShoot : MonoBehaviour
 
     IEnumerator OnStopShoot()
     {
+        yield return new WaitForSeconds(0.11f);
         StopCoroutine(OnStartShoot());
         shooterManager.DisableAim();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         GetComponent<ButtonHandler>().SetUpState();
     }
 }
