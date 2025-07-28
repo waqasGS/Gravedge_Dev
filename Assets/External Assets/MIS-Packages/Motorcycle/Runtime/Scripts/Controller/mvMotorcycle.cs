@@ -392,7 +392,9 @@ namespace com.mobilin.games
             throttleInputAbs = Mathf.Abs(input.z);
 
             // Steer Input
-            steerInputAbs = Mathf.Abs(input.x);
+            //steerInputAbs = Mathf.Lerp(throttleInputSmooth, input.x, 0.15f * deltaTime);
+            //if (steerInputAbs > 1)
+                steerInputAbs = Mathf.Abs(input.x);
 
             // Brake Input
             if (input.z < -0.2f)
@@ -412,7 +414,7 @@ namespace com.mobilin.games
 
             moveDirection = input.x * transform.right + input.z/*throttleInputSmooth*/ * transform.forward;
 
-            UpdateSteeringWheel(deltaTime);
+            UpdateSteeringWheel(steerInputAbs, deltaTime);
             UpdateGear(deltaTime);
             UpdateUI(deltaTime);
 
@@ -448,24 +450,27 @@ namespace com.mobilin.games
         // ----------------------------------------------------------------------------------------------------
         // 
         // ----------------------------------------------------------------------------------------------------
-        protected virtual void UpdateSteeringWheel(float deltaTime)
+        protected virtual void UpdateSteeringWheel(float steerInputAbs,float deltaTime)
         {
-            steeringAngle.now = Mathf.LerpAngle(steeringAngle.now, input.x * steeringAngle.origin, handBrakeInput ? steeringSmoothDamp.max : steeringSmoothDamp.min);
+            float smoothSteerSpeed = handBrakeInput ? steeringSmoothDamp.max : steeringSmoothDamp.min;
+            steeringAngle.now = Mathf.LerpAngle(steeringAngle.now, input.x * steeringAngle.origin, smoothSteerSpeed * deltaTime);
+
+            //steeringAngle.now = Mathf.LerpAngle(steeringAngle.now, input.x * steeringAngle.origin, handBrakeInput ? steeringSmoothDamp.max : steeringSmoothDamp.min);
 
             if (steeringWheel == null)
                 return;
 
             switch (steeringWheelAxis)
             {
-            case Axis.X:
-                steeringWheel.localRotation = orginSteeringWheelRotation * Quaternion.Euler(steeringAngle.now, 0f, 0f);
-                break;
-            case Axis.Y:
-                steeringWheel.localRotation = orginSteeringWheelRotation * Quaternion.Euler(0f, steeringAngle.now, 0f);
-                break;
-            case Axis.Z:
-                steeringWheel.localRotation = orginSteeringWheelRotation * Quaternion.Euler(0f, 0f, steeringAngle.now);
-                break;
+                case Axis.X:
+                    steeringWheel.localRotation = orginSteeringWheelRotation * Quaternion.Euler(steeringAngle.now, 0f, 0f);
+                    break;
+                case Axis.Y:
+                    steeringWheel.localRotation = orginSteeringWheelRotation * Quaternion.Euler(0f, steeringAngle.now, 0f);
+                    break;
+                case Axis.Z:
+                    steeringWheel.localRotation = orginSteeringWheelRotation * Quaternion.Euler(0f, 0f, steeringAngle.now);
+                    break;
             }
         }
 
