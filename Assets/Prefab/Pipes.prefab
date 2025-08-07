@@ -424,6 +424,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7116082695560076971}
+  - component: {fileID: 6799383118254850419}
   m_Layer: 0
   m_Name: Pipes
   m_TagString: Untagged
@@ -449,6 +450,18 @@ Transform:
   - {fileID: 6428284046931042026}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6799383118254850419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3680443523109725579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f0afaae2e463943b63d8fc8b8a67dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4077938323967723757
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,7 +645,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f0afaae2e463943b63d8fc8b8a67dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1
 --- !u!1 &5122657145360302479
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,7 +745,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f0afaae2e463943b63d8fc8b8a67dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1
 --- !u!1 &5795610681215350101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,7 +1088,6 @@ GameObject:
   - component: {fileID: 6688674572315653090}
   - component: {fileID: 7815818810870815268}
   - component: {fileID: 2435408581176997899}
-  - component: {fileID: 721033697346035724}
   m_Layer: 0
   m_Name: Box010 (2)
   m_TagString: Untagged
@@ -1154,19 +1164,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &721033697346035724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7091591011373575752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97f0afaae2e463943b63d8fc8b8a67dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 1
 --- !u!1 &7864149207338826233
 GameObject:
   m_ObjectHideFlags: 0

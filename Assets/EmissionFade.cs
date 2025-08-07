@@ -1,41 +1,83 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using DG.Tweening;
 
-public class EmissionFade : MonoBehaviour
+public class EmissionFadeMachine : MonoBehaviour
 {
     private static readonly int Emission = Shader.PropertyToID("_EmissionColor");
-    
+    private List<Material> allMats = new List<Material>();
+    public MeshRenderer[] renderers;
+    private Color startColor;
+    public float startFade;
+    public Light spotLight;
+
     private void Start()
     {
-        var mat = GetComponent<MeshRenderer>().material;
-        
-        Color startColor = mat.GetColor(Emission);
+        // Collect all materials
+        //MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
+        foreach (var renderer in renderers)
+        {
+            foreach (var mat in renderer.materials)
+            {
+                if (!allMats.Contains(mat))
+                {
+                    mat.EnableKeyword("_EMISSION");
+                    allMats.Add(mat);
+                }
+            }
+        }
 
-        Sequence seq = DOTween.Sequence();
+        if (allMats.Count == 0) return;
 
-        seq.AppendInterval(Random.Range(5.0f, 25f));
-        seq.Append(
-            DOTween.To(
-                () => mat.GetColor(Emission),
-                val => mat.SetColor(Emission, val),
-                Color.black,
-                Random.Range(0.1f, 0.5f)
-            ).SetEase(Ease.InOutQuad)
-        );
-        seq.AppendInterval(Random.Range(0.1f, 2.0f));
-        seq.Append(
-            DOTween.To(
-                () => mat.GetColor(Emission),
-                val => mat.SetColor(Emission, val),
-                startColor,
-                Random.Range(0.1f, 2.0f)
-            ).SetEase(Ease.Linear)
-        );
+        // Use first mat's emission as base color
+        startColor = allMats[0].GetColor(Emission);
 
-        seq.SetLoops(-1); // Default is LoopType.Restart, so we alternate manually
+        // Start machine
+        StartCoroutine(FadeMachine());
+    }
+
+    private IEnumerator FadeMachine()
+    {
+        yield return new WaitForSeconds(startFade);
+        while (true)
+        {
+            //  STEP 1: Fade-in each material one by one (staggered)
+            foreach (var mat in allMats)
+            {
+                DOTween.To(
+                    () => mat.GetColor(Emission),
+                    c => mat.SetColor(Emission, c),
+                    startColor,
+                    0.5f
+                ).SetEase(Ease.OutQuad);
+
+                //yield return new WaitForSeconds(0.2f); // delay between each
+            }
+            //  Also fade in spotlight intensity
+            if (spotLight != null)
+            {
+                DOTween.To(() => spotLight.intensity, x => spotLight.intensity = x, 1.07f, 0.5f);
+            }
+            //  STEP 2: Wait a bit, then fade out ALL at once
+            yield return new WaitForSeconds(Random.Range(5.0f, 25f)); // delay before fade-out
+
+            foreach (var mat in allMats)
+            {
+                DOTween.To(
+                    () => mat.GetColor(Emission),
+                    c => mat.SetColor(Emission, c),
+                    Color.black,
+                    0.25f
+                ).SetEase(Ease.InOutQuad);
+            }
+            if (spotLight != null)
+            {
+                DOTween.To(() => spotLight.intensity, x => spotLight.intensity = x, 0f, 0.25f);
+            }
+            // STEP 3: Wait before looping
+            yield return new WaitForSeconds(Random.Range(2.0f, 5.5f)); // delay before next round
+        }
     }
 }
