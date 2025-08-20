@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958140067274536115}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.96, y: -0.5519999, z: -10.295}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -227,7 +227,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.27813563, b: 0.16470587, a: 1}
+      maxColor: {r: 0.9843137, g: 0.46752474, b: 0.050980363, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4781,7 +4781,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0153253dee1c55945abc95d9be9e19df, type: 2}
+  - {fileID: 2100000, guid: 6adc3f36cf95a8a41b4887cd0350238b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4806,10 +4806,10 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 0.01
   m_CameraVelocityScale: 0
-  m_VelocityScale: 0.05
-  m_LengthScale: 2
+  m_VelocityScale: 0.03
+  m_LengthScale: 1
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
@@ -4884,7 +4884,7 @@ MonoBehaviour:
   - light: {fileID: 4767317326558275276}
     loop: 0
     animateIntensity: 1
-    intensityStart: 4
+    intensityStart: 1.8778619
     intensityEnd: 0
     intensityDuration: 0.9
     intensityCurve:
@@ -4900,13 +4900,13 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.08
-        value: 1
-        inSlope: 1.0835805
-        outSlope: 1.0835805
+        time: 0.212956
+        value: 1.8098476
+        inSlope: 2.3293152
+        outSlope: 2.3293152
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.5278166
         outWeight: 0.06408808
       - serializedVersion: 3
         time: 1
@@ -9808,10 +9808,10 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 1
   m_CameraVelocityScale: 0
-  m_VelocityScale: 0.05
-  m_LengthScale: 0.5
+  m_VelocityScale: 0.01
+  m_LengthScale: 1
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
@@ -10059,7 +10059,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.48066857, b: 0.11764705, a: 0.5411765}
+      maxColor: {r: 0.47991616, g: 1, b: 0.013207495, a: 0.3019608}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -14671,7 +14671,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0153253dee1c55945abc95d9be9e19df, type: 2}
+  - {fileID: 2100000, guid: 6b8a7889e97548a4db7397de61a909cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14695,8 +14695,8 @@ ParticleSystemRenderer:
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
-  m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MinParticleSize: 0.44
+  m_MaxParticleSize: 2.78
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -14750,7 +14750,7 @@ Transform:
   m_GameObject: {fileID: 7845112807963970122}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.13, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14769,7 +14769,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.99215686, g: 0.86176467, b: 0.47058818, a: 1}
   m_Intensity: 0
-  m_Range: 72
+  m_Range: 9.5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
