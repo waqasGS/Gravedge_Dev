@@ -12,6 +12,9 @@ public class EmissionFadeMachine : MonoBehaviour
     private Color startColor;
     public float startFade;
     public Light spotLight;
+    public AudioSource bulbSparkSound;
+    public AudioClip bulbOffClip;
+    public AudioClip bulbOnClip;
 
     private void Start()
     {
@@ -40,9 +43,13 @@ public class EmissionFadeMachine : MonoBehaviour
 
     private IEnumerator FadeMachine()
     {
+
         yield return new WaitForSeconds(startFade);
         while (true)
         {
+            bulbSparkSound.clip = bulbOnClip;
+            bulbSparkSound.Play();
+            //yield return new WaitForSeconds(startFade);
             //  STEP 1: Fade-in each material one by one (staggered)
             foreach (var mat in allMats)
             {
@@ -60,11 +67,15 @@ public class EmissionFadeMachine : MonoBehaviour
             {
                 DOTween.To(() => spotLight.intensity, x => spotLight.intensity = x, 1.07f, 0.5f);
             }
+
             //  STEP 2: Wait a bit, then fade out ALL at once
             yield return new WaitForSeconds(Random.Range(5.0f, 25f)); // delay before fade-out
-
+            bulbSparkSound.clip = bulbOffClip;
+            bulbSparkSound.Play();
+            yield return new WaitForSeconds(startFade);
             foreach (var mat in allMats)
             {
+                bulbSparkSound.Stop();
                 DOTween.To(
                     () => mat.GetColor(Emission),
                     c => mat.SetColor(Emission, c),

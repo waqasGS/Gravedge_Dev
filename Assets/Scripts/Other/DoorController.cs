@@ -18,6 +18,8 @@ public class DoorController : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     private Coroutine moveRoutine;
 
+    public AudioSource doorSound;
+
     private void Start()
     {
         initialPos = door.transform.localPosition;
@@ -57,6 +59,7 @@ public class DoorController : MonoBehaviour
 
     private System.Collections.IEnumerator MoveDoor()
     {
+        doorSound.Play();
         while ((door.transform.localPosition - targetPos).sqrMagnitude > 0.001f)
         {
             door.transform.localPosition = Vector3.SmoothDamp(
@@ -70,5 +73,6 @@ public class DoorController : MonoBehaviour
 
         // exact target pe snap kar do (floating point issues avoid karne ke liye)
         door.transform.localPosition = targetPos;
+        doorSound.Stop();
     }
 }
