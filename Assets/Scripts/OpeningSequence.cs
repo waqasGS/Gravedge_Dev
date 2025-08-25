@@ -26,12 +26,21 @@ public class OpeningSequence : MonoBehaviour
     public float maxWaitTime = 1.0f;
 
     [Header("Tank Light Flicker Settings")]
-    public float minTankLightInterval = 0.5f;
-    public float maxTankLightInterval = 3f;
-    public float minTankLightIntensity = 0.1f;
-    public float maxTankLightIntensity = 2f;
-    public float minTankLightDuration = 0.05f;
-    public float maxTankLightDuration = 0.2f;
+    [Header("Tank Light 1 Settings")]
+    public float minTankLight1Interval = 0.5f;
+    public float maxTankLight1Interval = 3f;
+    public float minTankLight1Intensity = 0.1f;
+    public float maxTankLight1Intensity = 2f;
+    public float minTankLight1Duration = 0.05f;
+    public float maxTankLight1Duration = 0.2f;
+    
+    [Header("Tank Light 2 Settings")]
+    public float minTankLight2Interval = 0.8f;
+    public float maxTankLight2Interval = 4f;
+    public float minTankLight2Intensity = 0.1f;
+    public float maxTankLight2Intensity = 2f;
+    public float minTankLight2Duration = 0.08f;
+    public float maxTankLight2Duration = 0.25f;
 
     IEnumerator Start()
     {
@@ -43,8 +52,9 @@ public class OpeningSequence : MonoBehaviour
         // Start the repeating glitch effect
         StartCoroutine(RepeatGlitchEffect());
         
-        // Start the tank light flicker effect
-        StartCoroutine(FlickerTankLights());
+        // Start the tank light flicker effects (separate for each light)
+        StartCoroutine(FlickerTankLight1());
+        StartCoroutine(FlickerTankLight2());
 
         yield return new WaitForSeconds(1f);
 
@@ -107,35 +117,59 @@ public class OpeningSequence : MonoBehaviour
         }
     }
 
-    IEnumerator FlickerTankLights()
+    IEnumerator FlickerTankLight1()
     {
         while (true)
         {
             // Wait for random interval
-            float waitTime = Random.Range(minTankLightInterval, maxTankLightInterval);
+            float waitTime = Random.Range(minTankLight1Interval, maxTankLight1Interval);
             yield return new WaitForSeconds(waitTime);
             
             // Random flicker duration
-            float flickerDuration = Random.Range(minTankLightDuration, maxTankLightDuration);
+            float flickerDuration = Random.Range(minTankLight1Duration, maxTankLight1Duration);
             
-            // Random intensity for both lights
-            float randomIntensity1 = Random.Range(minTankLightIntensity, maxTankLightIntensity);
-            float randomIntensity2 = Random.Range(minTankLightIntensity, maxTankLightIntensity);
+            // Random intensity for light 1
+            float randomIntensity = Random.Range(minTankLight1Intensity, maxTankLight1Intensity);
             
-            // Store original intensities
-            float originalIntensity1 = tankLight1.intensity;
-            float originalIntensity2 = tankLight2.intensity;
+            // Store original intensity
+            float originalIntensity = tankLight1.intensity;
             
-            // Flicker both lights to random intensity
-            tankLight1.intensity = randomIntensity1;
-            tankLight2.intensity = randomIntensity2;
+            // Flicker light 1 to random intensity
+            tankLight1.intensity = randomIntensity;
             
             // Wait for flicker duration
             yield return new WaitForSeconds(flickerDuration);
             
             // Return to original intensity
-            tankLight1.intensity = originalIntensity1;
-            tankLight2.intensity = originalIntensity2;
+            tankLight1.intensity = originalIntensity;
+        }
+    }
+
+    IEnumerator FlickerTankLight2()
+    {
+        while (true)
+        {
+            // Wait for random interval
+            float waitTime = Random.Range(minTankLight2Interval, maxTankLight2Interval);
+            yield return new WaitForSeconds(waitTime);
+            
+            // Random flicker duration
+            float flickerDuration = Random.Range(minTankLight2Duration, maxTankLight2Duration);
+            
+            // Random intensity for light 2
+            float randomIntensity = Random.Range(minTankLight2Intensity, maxTankLight2Intensity);
+            
+            // Store original intensity
+            float originalIntensity = tankLight2.intensity;
+            
+            // Flicker light 2 to random intensity
+            tankLight2.intensity = randomIntensity;
+            
+            // Wait for flicker duration
+            yield return new WaitForSeconds(flickerDuration);
+            
+            // Return to original intensity
+            tankLight2.intensity = originalIntensity;
         }
     }
 }

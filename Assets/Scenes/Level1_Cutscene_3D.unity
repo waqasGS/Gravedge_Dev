@@ -73096,15 +73096,21 @@ MonoBehaviour:
   minFadeDuration: 0.1
   maxFadeDuration: 0.4
   minAlpha: 0.2
-  maxAlpha: 0.8
+  maxAlpha: 0.6
   minWaitTime: 0.2
   maxWaitTime: 1
-  minTankLightInterval: 1
-  maxTankLightInterval: 5
-  minTankLightIntensity: 0.5
-  maxTankLightIntensity: 4.5
-  minTankLightDuration: 1
-  maxTankLightDuration: 5
+  minTankLight1Interval: 1
+  maxTankLight1Interval: 3
+  minTankLight1Intensity: 4.5
+  maxTankLight1Intensity: 7.5
+  minTankLight1Duration: 1
+  maxTankLight1Duration: 5
+  minTankLight2Interval: 1
+  maxTankLight2Interval: 4
+  minTankLight2Intensity: 4.5
+  maxTankLight2Intensity: 7.5
+  minTankLight2Duration: 1
+  maxTankLight2Duration: 5
 --- !u!1 &513018017
 GameObject:
   m_ObjectHideFlags: 0
@@ -118588,7 +118594,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &897071254
 Transform:
   m_ObjectHideFlags: 0
@@ -234217,7 +234223,7 @@ Transform:
   m_GameObject: {fileID: 2028546642}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.62, y: 4.13, z: 21.48}
+  m_LocalPosition: {x: 0.273, y: 3.335, z: 29.882}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -234235,8 +234241,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0
-  m_Range: 7.982402
+  m_Intensity: 0.58
+  m_Range: 1
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -266676,7 +266682,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 503bbbca9735d43719ce540dba97096e, type: 2}
+  - {fileID: 2100000, guid: 2f63bf515670e7c4e947ae72a3b7de9d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -267227,7 +267233,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
+      scalar: 0.5
       minScalar: 0.1
       maxCurve:
         serializedVersion: 2
@@ -267694,7 +267700,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1.5568243, y: 1.6000769, z: 0.27286178}
+    m_Scale: {x: 0.3208804, y: 1.6000769, z: 0.27286178}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -267892,7 +267898,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 40
+      scalar: 20
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -267998,12 +268004,12 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
-      minScalar: 1
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -268054,7 +268060,7 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -268107,7 +268113,7 @@ ParticleSystem:
         m_RotationOrder: 4
     z:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -270250,9 +270256,9 @@ ParticleSystem:
     enabled: 0
     curve:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
-      minScalar: 1
+      minScalar: 0.94
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -270303,7 +270309,7 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -270356,7 +270362,7 @@ ParticleSystem:
         m_RotationOrder: 4
     z:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -270407,7 +270413,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    range: {x: 0, y: 1}
+    range: {x: 1, y: 0.5}
     separateAxes: 0
   RotationBySpeedModule:
     enabled: 0
@@ -288403,7 +288409,7 @@ Transform:
   m_GameObject: {fileID: 7543642447255536182}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.65199995, z: 0}
+  m_LocalPosition: {x: 0.639, y: 1.871, z: -0.045}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
