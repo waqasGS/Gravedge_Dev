@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class OpeningSequence : MonoBehaviour
 {
+    public TextMeshProUGUI instructionText;
     public Image glitchImage;
     public float minGlitchInterval = 2f;
     public float maxGlitchInterval = 8f;
@@ -23,6 +25,11 @@ public class OpeningSequence : MonoBehaviour
         
         // Start the repeating glitch effect
         StartCoroutine(RepeatGlitchEffect());
+
+        yield return new WaitForSeconds(1f);
+
+        instructionText.text = "Drag to look around";
+        yield return new WaitForSeconds(1f);
         
         Debug.Log("Coroutine finished!");
     }
