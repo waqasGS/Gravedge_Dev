@@ -15,6 +15,7 @@ public class DragAndMove : MonoBehaviour
     [SerializeField] private bool useDragThreshold = false;
     [SerializeField] private float dragThreshold = 2f;
     [SerializeField] private bool thresholdReached = false;
+    [SerializeField] private bool useAccumulatedTravel = true; // New option to choose between accumulated travel and direct distance
     
     [Header("Movement Constraints")]
     [SerializeField] private bool lockX = false;
@@ -36,6 +37,8 @@ public class DragAndMove : MonoBehaviour
     private Vector3 originalPosition;
     private float originalZ;
     private Vector3 dragStartPosition;
+    private Vector3 lastDragPosition; // Track the last position for accumulated travel
+    private float accumulatedTravelDistance = 0f; // Track total distance traveled
     
     void Start()
     {
@@ -112,6 +115,8 @@ public class DragAndMove : MonoBehaviour
             Vector3 worldPoint = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, originalZ));
             offset = transform.position - worldPoint;
             dragStartPosition = transform.position;
+            lastDragPosition = transform.position;
+            accumulatedTravelDistance = 0f;
             return;
         }
         
@@ -127,6 +132,8 @@ public class DragAndMove : MonoBehaviour
                 Vector3 worldPoint = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, originalZ));
                 offset = transform.position - worldPoint;
                 dragStartPosition = transform.position;
+                lastDragPosition = transform.position;
+                accumulatedTravelDistance = 0f;
             }
         }
         else
@@ -136,6 +143,8 @@ public class DragAndMove : MonoBehaviour
             Vector3 worldPoint = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, originalZ));
             offset = transform.position - worldPoint;
             dragStartPosition = transform.position;
+            lastDragPosition = transform.position;
+            accumulatedTravelDistance = 0f;
         }
     }
     
@@ -177,6 +186,16 @@ public class DragAndMove : MonoBehaviour
         
         transform.position = newPosition;
         
+        // Track accumulated travel distance AFTER position update
+        if (isDragging && useAccumulatedTravel)
+        {
+            float frameDistance = Vector3.Distance(transform.position, lastDragPosition);
+            accumulatedTravelDistance += frameDistance;
+        }
+        
+        // Update last position for next frame
+        lastDragPosition = transform.position;
+        
         // Check drag threshold if enabled
         if (useDragThreshold)
         {
@@ -187,6 +206,9 @@ public class DragAndMove : MonoBehaviour
     void EndDrag()
     {
         isDragging = false;
+        
+        // Reset accumulated travel
+        accumulatedTravelDistance = 0f;
         
         // Reset threshold when drag ends
         if (useDragThreshold && thresholdReached)
@@ -200,7 +222,18 @@ public class DragAndMove : MonoBehaviour
     {
         if (!isDragging) return;
         
-        float dragDistance = Vector3.Distance(transform.position, dragStartPosition);
+        float dragDistance;
+        
+        if (useAccumulatedTravel)
+        {
+            // Use accumulated travel distance
+            dragDistance = accumulatedTravelDistance;
+        }
+        else
+        {
+            // Use direct distance from start position
+            dragDistance = Vector3.Distance(transform.position, dragStartPosition);
+        }
         
         if (!thresholdReached && dragDistance >= dragThreshold)
         {
@@ -317,6 +350,8 @@ public class DragAndMove : MonoBehaviour
             OnDragThresholdReset?.Invoke();
         }
         dragStartPosition = transform.position;
+        lastDragPosition = transform.position;
+        accumulatedTravelDistance = 0f;
     }
     
     public void SetDragSpeed(float speed)
@@ -375,12 +410,37 @@ public class DragAndMove : MonoBehaviour
     public float GetCurrentDragDistance()
     {
         if (!isDragging) return 0f;
-        return Vector3.Distance(transform.position, dragStartPosition);
+        
+        if (useAccumulatedTravel)
+        {
+            return accumulatedTravelDistance;
+        }
+        else
+        {
+            return Vector3.Distance(transform.position, dragStartPosition);
+        }
+    }
+    
+    public float GetAccumulatedTravelDistance()
+    {
+        return accumulatedTravelDistance;
     }
     
     public float GetDragThreshold()
     {
         return dragThreshold;
+    }
+    
+    public void SetAccumulatedTravelMode(bool enabled)
+    {
+        useAccumulatedTravel = enabled;
+        // Reset accumulated travel when switching modes
+        accumulatedTravelDistance = 0f;
+    }
+    
+    public bool IsAccumulatedTravelMode()
+    {
+        return useAccumulatedTravel;
     }
     
     // Gizmos for debugging
