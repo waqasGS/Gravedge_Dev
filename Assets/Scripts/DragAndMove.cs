@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DragAndMove : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class DragAndMove : MonoBehaviour
     [SerializeField] private bool snapToGrid = false;
     [SerializeField] private float gridSize = 1f;
     
+    [Header("Drag Threshold")]
+    [SerializeField] private bool useDragThreshold = false;
+    [SerializeField] private float dragThreshold = 2f;
+    [SerializeField] private bool thresholdReached = false;
+    
     [Header("Movement Constraints")]
     [SerializeField] private bool lockX = false;
     [SerializeField] private bool lockY = false;
@@ -20,11 +26,16 @@ public class DragAndMove : MonoBehaviour
     [SerializeField] private Vector3 minPosition = Vector3.zero;
     [SerializeField] private Vector3 maxPosition = Vector3.zero;
     
+    [Header("Events")]
+    public UnityEvent OnDragThresholdReached;
+    public UnityEvent OnDragThresholdReset;
+    
     private Camera mainCamera;
     private bool isDragging = false;
     private Vector3 offset;
     private Vector3 originalPosition;
     private float originalZ;
+    private Vector3 dragStartPosition;
     
     void Start()
     {
@@ -100,6 +111,7 @@ public class DragAndMove : MonoBehaviour
             isDragging = true;
             Vector3 worldPoint = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, originalZ));
             offset = transform.position - worldPoint;
+            dragStartPosition = transform.position;
             return;
         }
         
@@ -114,6 +126,7 @@ public class DragAndMove : MonoBehaviour
                 isDragging = true;
                 Vector3 worldPoint = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, originalZ));
                 offset = transform.position - worldPoint;
+                dragStartPosition = transform.position;
             }
         }
         else
@@ -122,6 +135,7 @@ public class DragAndMove : MonoBehaviour
             isDragging = true;
             Vector3 worldPoint = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, originalZ));
             offset = transform.position - worldPoint;
+            dragStartPosition = transform.position;
         }
     }
     
@@ -162,11 +176,42 @@ public class DragAndMove : MonoBehaviour
         }
         
         transform.position = newPosition;
+        
+        // Check drag threshold if enabled
+        if (useDragThreshold)
+        {
+            CheckDragThreshold();
+        }
     }
     
     void EndDrag()
     {
         isDragging = false;
+        
+        // Reset threshold when drag ends
+        if (useDragThreshold && thresholdReached)
+        {
+            thresholdReached = false;
+            OnDragThresholdReset?.Invoke();
+        }
+    }
+    
+    void CheckDragThreshold()
+    {
+        if (!isDragging) return;
+        
+        float dragDistance = Vector3.Distance(transform.position, dragStartPosition);
+        
+        if (!thresholdReached && dragDistance >= dragThreshold)
+        {
+            thresholdReached = true;
+            OnDragThresholdReached?.Invoke();
+        }
+        else if (thresholdReached && dragDistance < dragThreshold)
+        {
+            thresholdReached = false;
+            OnDragThresholdReset?.Invoke();
+        }
     }
     
     Vector3 ConstrainToScreenBounds(Vector3 position)
@@ -255,6 +300,23 @@ public class DragAndMove : MonoBehaviour
     public void ResetToOriginalPosition()
     {
         transform.position = originalPosition;
+        
+        // Reset threshold state
+        if (useDragThreshold && thresholdReached)
+        {
+            thresholdReached = false;
+            OnDragThresholdReset?.Invoke();
+        }
+    }
+    
+    public void ResetDragThreshold()
+    {
+        if (useDragThreshold && thresholdReached)
+        {
+            thresholdReached = false;
+            OnDragThresholdReset?.Invoke();
+        }
+        dragStartPosition = transform.position;
     }
     
     public void SetDragSpeed(float speed)
@@ -287,6 +349,38 @@ public class DragAndMove : MonoBehaviour
     public Vector3 GetMaxPosition()
     {
         return maxPosition;
+    }
+    
+    // Drag threshold methods
+    public void SetDragThresholdEnabled(bool enabled)
+    {
+        useDragThreshold = enabled;
+        if (!enabled && thresholdReached)
+        {
+            thresholdReached = false;
+            OnDragThresholdReset?.Invoke();
+        }
+    }
+    
+    public void SetDragThreshold(float threshold)
+    {
+        dragThreshold = Mathf.Max(0.1f, threshold);
+    }
+    
+    public bool IsThresholdReached()
+    {
+        return thresholdReached;
+    }
+    
+    public float GetCurrentDragDistance()
+    {
+        if (!isDragging) return 0f;
+        return Vector3.Distance(transform.position, dragStartPosition);
+    }
+    
+    public float GetDragThreshold()
+    {
+        return dragThreshold;
     }
     
     // Gizmos for debugging
