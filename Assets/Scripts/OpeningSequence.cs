@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using Cinemachine;
 
 public class OpeningSequence : MonoBehaviour
 {
@@ -14,6 +15,19 @@ public class OpeningSequence : MonoBehaviour
 
     public Light tankLight1;
     public Light tankLight2;
+    
+    [Header("Struggle Camera Shake")]
+    public CinemachineImpulseSource impulseSource;
+    public float minShakeInterval = 0.08f;
+    public float maxShakeInterval = 0.2f;
+    public float shakeDuration = 0.12f;
+    
+    [Header("Impulse Force Settings")]
+   public Vector2 velocityRangeX = new Vector2(0.5f, 2.0f);
+   public Vector2 velocityRangeY = new Vector2(0.5f, 2.0f);
+   public Vector2 velocityRangeZ = new Vector2(0.5f, 2.0f);
+    
+    Coroutine struggleShakeRoutine;
  
     [Header("Glitch Effect Settings")]
     public float minGlitchInterval = 2f;
@@ -70,7 +84,11 @@ public class OpeningSequence : MonoBehaviour
         tapProgressManager.ResetProgress();
         instructionText.text = "Tap repeatedly to Struggle";
         tapProgressManager.OnProgressComplete.AddListener(OnProgressComplete);
+        tapProgressManager.OnSessionStart.AddListener(StartStruggleShake);
+        tapProgressManager.OnSessionEnd.AddListener(StopStruggleShake);
         tapProgressManager.SetProgressBarActive(true); 
+
+        
         
         Debug.Log("Coroutine finished!");
     }
@@ -88,6 +106,52 @@ public class OpeningSequence : MonoBehaviour
     {
         instructionText.text = "";
         tapProgressManager.SetProgressBarActive(false); 
+        StopStruggleShake();
+    }
+
+    void StartStruggleShake()
+    {
+        // Prevent duplicates
+        if (struggleShakeRoutine != null)
+            return;
+        struggleShakeRoutine = StartCoroutine(StruggleShakeLoop());
+    }
+
+    void StopStruggleShake()
+    {
+        if (struggleShakeRoutine != null)
+        {
+            StopCoroutine(struggleShakeRoutine);
+            struggleShakeRoutine = null;
+        }
+    }
+
+    IEnumerator StruggleShakeLoop()
+    {
+        while (true)
+        {
+            float waitTime = Random.Range(minShakeInterval, maxShakeInterval);
+            yield return new WaitForSeconds(waitTime);
+            yield return StartCoroutine(ShakeOnce());
+        }
+    }
+
+    IEnumerator ShakeOnce()
+    {
+        if (impulseSource == null)
+            yield break;
+            
+        // Generate random velocity and force for this impulse (x, y, z)
+        float randomVelocityX = Random.Range(velocityRangeX.x, velocityRangeX.y);
+        float randomVelocityY = Random.Range(velocityRangeY.x, velocityRangeY.y);
+        float randomVelocityZ = Random.Range(velocityRangeZ.x, velocityRangeZ.y);
+        
+        // Generate the impulse with updated settings
+        impulseSource.GenerateImpulse(new Vector3(randomVelocityX, randomVelocityY, randomVelocityZ));
+
+        
+        // Wait for shake duration
+        yield return new WaitForSeconds(shakeDuration);
     }
 
     IEnumerator RepeatGlitchEffect()
