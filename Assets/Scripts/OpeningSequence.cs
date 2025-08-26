@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 using Cinemachine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class OpeningSequence : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class OpeningSequence : MonoBehaviour
     public DragAndMove dragAndMove;
     public TapProgressManager tapProgressManager;
     public Animator animator;
+    public PostProcessVolume postProcessVolume;
 
     public Light tankLight1;
     public Light tankLight2;
@@ -72,6 +74,20 @@ public class OpeningSequence : MonoBehaviour
         if (tankCrack4 != null) tankCrack4.SetActive(false);
 
         FadeEffect.Instance.FadeIn(1f);
+
+        var vignette = postProcessVolume.profile.GetSetting<Vignette>();
+        float startIntensity = vignette.intensity.value;
+        float targetIntensity = 1f;
+
+        Sequence vignetteSequence = DOTween.Sequence();
+        vignetteSequence.Append(
+            DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, targetIntensity, 1f)
+        );
+        vignetteSequence.AppendInterval(2f);
+        vignetteSequence.Append(
+            DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, startIntensity, 3f)
+        );
+
         yield return new WaitForSeconds(1f);
         
         // Start the repeating glitch effect
@@ -81,7 +97,7 @@ public class OpeningSequence : MonoBehaviour
         StartCoroutine(FlickerTankLight1());
         StartCoroutine(FlickerTankLight2());
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(6f);
 
         dragAndMove.enabled = true;
         instructionText.text = "Drag to look around";
