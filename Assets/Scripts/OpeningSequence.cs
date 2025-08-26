@@ -11,6 +11,11 @@ public class OpeningSequence : MonoBehaviour
 {
     public TextMeshProUGUI instructionText;
     public Image glitchImage;
+    public AudioSource glitchAudioSource; // Audio source for glitch effect
+    public AudioSource tankLight1AudioSource; // Audio source for tank light 1
+    public AudioSource tankLight1OffAudioSource; // Audio source for tank light 1 turning off
+    public AudioSource tankLight2AudioSource; // Audio source for tank light 2
+    public AudioSource tankLight2OffAudioSource; // Audio source for tank light 2 turning off
     public DragAndMove dragAndMove;
     public TapProgressManager tapProgressManager;
     public Animator animator;
@@ -45,6 +50,7 @@ public class OpeningSequence : MonoBehaviour
     public float maxAlpha = 0.8f;
     public float minWaitTime = 0.2f;
     public float maxWaitTime = 1.0f;
+    public float audioThresholdGlitch = 0.1f; // Threshold for when audio should start/stop based on transparency
 
     [Header("Tank Light Flicker Settings")]
     [Header("Tank Light 1 Settings")]
@@ -62,6 +68,14 @@ public class OpeningSequence : MonoBehaviour
     public float maxTankLight2Intensity = 2f;
     public float minTankLight2Duration = 0.08f;
     public float maxTankLight2Duration = 0.25f;
+    
+    [Header("Audio Thresholds")]
+    public float tankLight1AudioThreshold = 0.5f; // Threshold for tank light 1 intensity to trigger audio
+    public float tankLight2AudioThreshold = 0.5f; // Threshold for tank light 2 intensity to trigger audio
+    
+    // Private variables to track audio state for tank lights
+    private bool tankLight1AudioShouldPlay = true;
+    private bool tankLight2AudioShouldPlay = true;
 
     IEnumerator Start()
     {
@@ -85,10 +99,19 @@ public class OpeningSequence : MonoBehaviour
         );
         vignetteSequence.AppendInterval(2f);
         vignetteSequence.Append(
-            DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, startIntensity, 3f)
+            DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, 0.4f, 3f)
         );
 
         yield return new WaitForSeconds(1f);
+        
+        // Initialize glitch audio source to be paused initially
+        if (glitchAudioSource != null)
+        {
+            glitchAudioSource.Play();
+            glitchAudioSource.Pause();
+        }
+        
+        // Tank light audio sources will use PlayOneShot, so no initialization needed
         
         // Start the repeating glitch effect
         StartCoroutine(RepeatGlitchEffect());
@@ -202,11 +225,24 @@ public class OpeningSequence : MonoBehaviour
             float randomWaitTime = Random.Range(minWaitTime, maxWaitTime);
             
             // Fade in glitch effect smoothly (random duration and alpha)
-            glitchImage.DOFade(randomAlpha, fadeInDuration);
+            glitchImage.DOFade(randomAlpha, fadeInDuration).OnUpdate(() => {
+                // Check if transparency crosses the threshold to start audio
+                if (glitchAudioSource != null && !glitchAudioSource.isPlaying && glitchImage.color.a >= audioThresholdGlitch)
+                {
+                    glitchAudioSource.UnPause();
+                }
+            });
+            
             yield return new WaitForSeconds(randomWaitTime);
             
             // Fade out glitch effect smoothly (random duration)
-            glitchImage.DOFade(0f, fadeOutDuration);
+            glitchImage.DOFade(0f, fadeOutDuration).OnUpdate(() => {
+                // Check if transparency crosses the threshold to pause audio
+                if (glitchAudioSource != null && glitchAudioSource.isPlaying && glitchImage.color.a < audioThresholdGlitch)
+                {
+                    glitchAudioSource.Pause();
+                }
+            });
         }
     }
 
@@ -230,11 +266,39 @@ public class OpeningSequence : MonoBehaviour
             // Flicker light 1 to random intensity
             tankLight1.intensity = randomIntensity;
             
+            // Control audio based on intensity threshold using PlayOneShot
+            if (tankLight1AudioSource != null)
+            {
+                if (randomIntensity >= tankLight1AudioThreshold && tankLight1AudioShouldPlay)
+                {
+                    tankLight1AudioSource.PlayOneShot(tankLight1AudioSource.clip);
+                    tankLight1AudioShouldPlay = false; // Prevent repeated playing while above threshold
+                }
+                else if (randomIntensity < tankLight1AudioThreshold)
+                {
+                    tankLight1AudioShouldPlay = true; // Allow playing again when below threshold
+                }
+            }
+            
+            // Don't play off audio here - wait until we actually return to original intensity
+            
             // Wait for flicker duration
             yield return new WaitForSeconds(flickerDuration);
             
             // Return to original intensity
             tankLight1.intensity = originalIntensity;
+            
+            // Play "off" audio when returning to original intensity if it's below threshold
+            if (tankLight1OffAudioSource != null && originalIntensity < tankLight1AudioThreshold)
+            {
+                tankLight1OffAudioSource.PlayOneShot(tankLight1OffAudioSource.clip);
+            }
+            
+            // Reset audio state when returning to original intensity if it's below threshold
+            if (originalIntensity < tankLight1AudioThreshold)
+            {
+                tankLight1AudioShouldPlay = true;
+            }
         }
     }
 
@@ -258,11 +322,39 @@ public class OpeningSequence : MonoBehaviour
             // Flicker light 2 to random intensity
             tankLight2.intensity = randomIntensity;
             
+            // Control audio based on intensity threshold using PlayOneShot
+            if (tankLight2AudioSource != null)
+            {
+                if (randomIntensity >= tankLight2AudioThreshold && tankLight2AudioShouldPlay)
+                {
+                    tankLight2AudioSource.PlayOneShot(tankLight2AudioSource.clip);
+                    tankLight2AudioShouldPlay = false; // Prevent repeated playing while above threshold
+                }
+                else if (randomIntensity < tankLight2AudioThreshold)
+                {
+                    tankLight2AudioShouldPlay = true; // Allow playing again when below threshold
+                }
+            }
+            
+            // Don't play off audio here - wait until we actually return to original intensity
+            
             // Wait for flicker duration
             yield return new WaitForSeconds(flickerDuration);
             
             // Return to original intensity
             tankLight2.intensity = originalIntensity;
+            
+            // Play "off" audio when returning to original intensity if it's below threshold
+            if (tankLight2OffAudioSource != null && originalIntensity < tankLight2AudioThreshold)
+            {
+                tankLight2OffAudioSource.PlayOneShot(tankLight2OffAudioSource.clip);
+            }
+            
+            // Reset audio state when returning to original intensity if it's below threshold
+            if (originalIntensity < tankLight2AudioThreshold)
+            {
+                tankLight2AudioShouldPlay = true;
+            }
         }
     }
 
