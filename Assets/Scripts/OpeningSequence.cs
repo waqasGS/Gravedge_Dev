@@ -73,9 +73,24 @@ public class OpeningSequence : MonoBehaviour
     public float tankLight1AudioThreshold = 0.5f; // Threshold for tank light 1 intensity to trigger audio
     public float tankLight2AudioThreshold = 0.5f; // Threshold for tank light 2 intensity to trigger audio
     
+    [Header("Audio Volume Variation")]
+    public float tankLight1VolumeMin = 0.7f; // Minimum volume multiplier for tank light 1 (percentage of max)
+    public float tankLight1VolumeMax = 1.0f; // Maximum volume multiplier for tank light 1 (percentage of max)
+    public float tankLight2VolumeMin = 0.7f; // Minimum volume multiplier for tank light 2 (percentage of max)
+    public float tankLight2VolumeMax = 1.0f; // Maximum volume multiplier for tank light 2 (percentage of max)
+    public float glitchVolumeMin = 0.6f; // Minimum volume multiplier for glitch audio (percentage of max)
+    public float glitchVolumeMax = 1.0f; // Maximum volume multiplier for glitch audio (percentage of max)
+    
     // Private variables to track audio state for tank lights
     private bool tankLight1AudioShouldPlay = true;
     private bool tankLight2AudioShouldPlay = true;
+    
+    // Private variables to store original volumes
+    private float tankLight1OriginalVolume;
+    private float tankLight1OffOriginalVolume;
+    private float tankLight2OriginalVolume;
+    private float tankLight2OffOriginalVolume;
+    private float glitchOriginalVolume;
 
     IEnumerator Start()
     {
@@ -104,14 +119,33 @@ public class OpeningSequence : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         
-        // Initialize glitch audio source to be paused initially
+        // Store original volumes and initialize glitch audio source to be paused initially
         if (glitchAudioSource != null)
         {
+            glitchOriginalVolume = glitchAudioSource.volume;
             glitchAudioSource.Play();
             glitchAudioSource.Pause();
         }
         
-        // Tank light audio sources will use PlayOneShot, so no initialization needed
+        if (tankLight1AudioSource != null)
+        {
+            tankLight1OriginalVolume = tankLight1AudioSource.volume;
+        }
+        
+        if (tankLight1OffAudioSource != null)
+        {
+            tankLight1OffOriginalVolume = tankLight1OffAudioSource.volume;
+        }
+        
+        if (tankLight2AudioSource != null)
+        {
+            tankLight2OriginalVolume = tankLight2AudioSource.volume;
+        }
+        
+        if (tankLight2OffAudioSource != null)
+        {
+            tankLight2OffOriginalVolume = tankLight2OffAudioSource.volume;
+        }
         
         // Start the repeating glitch effect
         StartCoroutine(RepeatGlitchEffect());
@@ -142,6 +176,16 @@ public class OpeningSequence : MonoBehaviour
         StartCoroutine(MonitorProgressForTankCracks());
         
         Debug.Log("Coroutine finished!");
+    }
+    
+    // Helper method to set random volume for an audio source based on original volume and range
+    private void SetRandomVolume(AudioSource audioSource, float originalVolume, float minMultiplier, float maxMultiplier)
+    {
+        if (audioSource != null)
+        {
+            float randomMultiplier = Random.Range(minMultiplier, maxMultiplier);
+            audioSource.volume = originalVolume * randomMultiplier;
+        }
     }
 
     IEnumerator WaitForDragThreshold()
@@ -229,6 +273,8 @@ public class OpeningSequence : MonoBehaviour
                 // Check if transparency crosses the threshold to start audio
                 if (glitchAudioSource != null && !glitchAudioSource.isPlaying && glitchImage.color.a >= audioThresholdGlitch)
                 {
+                    // Set random volume before unpausing
+                    SetRandomVolume(glitchAudioSource, glitchOriginalVolume, glitchVolumeMin, glitchVolumeMax);
                     glitchAudioSource.UnPause();
                 }
             });
@@ -271,6 +317,8 @@ public class OpeningSequence : MonoBehaviour
             {
                 if (randomIntensity >= tankLight1AudioThreshold && tankLight1AudioShouldPlay)
                 {
+                    // Set random volume before playing
+                    SetRandomVolume(tankLight1AudioSource, tankLight1OriginalVolume, tankLight1VolumeMin, tankLight1VolumeMax);
                     tankLight1AudioSource.PlayOneShot(tankLight1AudioSource.clip);
                     tankLight1AudioShouldPlay = false; // Prevent repeated playing while above threshold
                 }
@@ -291,6 +339,8 @@ public class OpeningSequence : MonoBehaviour
             // Play "off" audio when returning to original intensity if it's below threshold
             if (tankLight1OffAudioSource != null && originalIntensity < tankLight1AudioThreshold)
             {
+                // Set random volume before playing
+                SetRandomVolume(tankLight1OffAudioSource, tankLight1OffOriginalVolume, tankLight1VolumeMin, tankLight1VolumeMax);
                 tankLight1OffAudioSource.PlayOneShot(tankLight1OffAudioSource.clip);
             }
             
@@ -327,6 +377,8 @@ public class OpeningSequence : MonoBehaviour
             {
                 if (randomIntensity >= tankLight2AudioThreshold && tankLight2AudioShouldPlay)
                 {
+                    // Set random volume before playing
+                    SetRandomVolume(tankLight2AudioSource, tankLight2OriginalVolume, tankLight2VolumeMin, tankLight2VolumeMax);
                     tankLight2AudioSource.PlayOneShot(tankLight2AudioSource.clip);
                     tankLight2AudioShouldPlay = false; // Prevent repeated playing while above threshold
                 }
@@ -347,6 +399,8 @@ public class OpeningSequence : MonoBehaviour
             // Play "off" audio when returning to original intensity if it's below threshold
             if (tankLight2OffAudioSource != null && originalIntensity < tankLight2AudioThreshold)
             {
+                // Set random volume before playing
+                SetRandomVolume(tankLight2OffAudioSource, tankLight2OffOriginalVolume, tankLight2VolumeMin, tankLight2VolumeMax);
                 tankLight2OffAudioSource.PlayOneShot(tankLight2OffAudioSource.clip);
             }
             
