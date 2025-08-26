@@ -12,6 +12,7 @@ public class OpeningSequence : MonoBehaviour
     public Image glitchImage;
     public DragAndMove dragAndMove;
     public TapProgressManager tapProgressManager;
+    public Animator animator;
 
     public Light tankLight1;
     public Light tankLight2;
@@ -21,6 +22,10 @@ public class OpeningSequence : MonoBehaviour
     public float minShakeInterval = 0.08f;
     public float maxShakeInterval = 0.2f;
     public float shakeDuration = 0.12f;
+    public GameObject tankCrack1;
+    public GameObject tankCrack2;
+    public GameObject tankCrack3;
+    public GameObject tankCrack4;
     
     [Header("Impulse Force Settings")]
    public Vector2 velocityRangeX = new Vector2(0.5f, 2.0f);
@@ -60,6 +65,12 @@ public class OpeningSequence : MonoBehaviour
     {
         dragAndMove.enabled = false;
 
+        // Hide tank cracks by default
+        if (tankCrack1 != null) tankCrack1.SetActive(false);
+        if (tankCrack2 != null) tankCrack2.SetActive(false);
+        if (tankCrack3 != null) tankCrack3.SetActive(false);
+        if (tankCrack4 != null) tankCrack4.SetActive(false);
+
         FadeEffect.Instance.FadeIn(1f);
         yield return new WaitForSeconds(1f);
         
@@ -88,7 +99,8 @@ public class OpeningSequence : MonoBehaviour
         tapProgressManager.OnSessionEnd.AddListener(StopStruggleShake);
         tapProgressManager.SetProgressBarActive(true); 
 
-        
+        // Start monitoring progress for tank cracks
+        StartCoroutine(MonitorProgressForTankCracks());
         
         Debug.Log("Coroutine finished!");
     }
@@ -149,6 +161,7 @@ public class OpeningSequence : MonoBehaviour
         // Generate the impulse with updated settings
         impulseSource.GenerateImpulse(new Vector3(randomVelocityX, randomVelocityY, randomVelocityZ));
 
+        animator.Play("JabCross");
         
         // Wait for shake duration
         yield return new WaitForSeconds(shakeDuration);
@@ -234,6 +247,64 @@ public class OpeningSequence : MonoBehaviour
             
             // Return to original intensity
             tankLight2.intensity = originalIntensity;
+        }
+    }
+
+    IEnumerator MonitorProgressForTankCracks()
+    {
+        while (true)
+        {
+            float currentProgress = tapProgressManager.CurrentProgress;
+
+            if (tankCrack1 != null)
+            {
+                if (currentProgress >= 20f)
+                {
+                    tankCrack1.SetActive(true);
+                }
+                else
+                {
+                    tankCrack1.SetActive(false);
+                }
+            }
+
+            if (tankCrack2 != null)
+            {
+                if (currentProgress >= 40f)
+                {
+                    tankCrack2.SetActive(true);
+                }
+                else
+                {
+                    tankCrack2.SetActive(false);
+                }
+            }
+
+            if (tankCrack3 != null)
+            {
+                if (currentProgress >= 60f)
+                {
+                    tankCrack3.SetActive(true);
+                }
+                else
+                {
+                    tankCrack3.SetActive(false);
+                }
+            }
+
+            if (tankCrack4 != null)
+            {
+                if (currentProgress >= 80f)
+                {
+                    tankCrack4.SetActive(true);
+                }
+                else
+                {
+                    tankCrack4.SetActive(false);
+                }
+            }
+
+            yield return null;
         }
     }
 }
