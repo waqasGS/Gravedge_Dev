@@ -16,6 +16,7 @@ public class DragAndMove : MonoBehaviour
     [SerializeField] private float dragThreshold = 2f;
     [SerializeField] private bool thresholdReached = false;
     [SerializeField] private bool useAccumulatedTravel = true; // New option to choose between accumulated travel and direct distance
+    [SerializeField] private bool resetAccumulatedDistanceOnDragEnd = true; // New option to control whether accumulated distance resets on drag end
     
     [Header("Movement Constraints")]
     [SerializeField] private bool lockX = false;
@@ -116,7 +117,11 @@ public class DragAndMove : MonoBehaviour
             offset = transform.position - worldPoint;
             dragStartPosition = transform.position;
             lastDragPosition = transform.position;
-            accumulatedTravelDistance = 0f;
+            // Only reset accumulated distance if the option is enabled
+            if (resetAccumulatedDistanceOnDragEnd)
+            {
+                accumulatedTravelDistance = 0f;
+            }
             return;
         }
         
@@ -133,7 +138,11 @@ public class DragAndMove : MonoBehaviour
                 offset = transform.position - worldPoint;
                 dragStartPosition = transform.position;
                 lastDragPosition = transform.position;
-                accumulatedTravelDistance = 0f;
+                // Only reset accumulated distance if the option is enabled
+                if (resetAccumulatedDistanceOnDragEnd)
+                {
+                    accumulatedTravelDistance = 0f;
+                }
             }
         }
         else
@@ -144,7 +153,11 @@ public class DragAndMove : MonoBehaviour
             offset = transform.position - worldPoint;
             dragStartPosition = transform.position;
             lastDragPosition = transform.position;
-            accumulatedTravelDistance = 0f;
+            // Only reset accumulated distance if the option is enabled
+            if (resetAccumulatedDistanceOnDragEnd)
+            {
+                accumulatedTravelDistance = 0f;
+            }
         }
     }
     
@@ -208,7 +221,10 @@ public class DragAndMove : MonoBehaviour
         isDragging = false;
         
         // Reset accumulated travel
-        accumulatedTravelDistance = 0f;
+        if (resetAccumulatedDistanceOnDragEnd)
+        {
+            accumulatedTravelDistance = 0f;
+        }
         
         // Reset threshold when drag ends
         if (useDragThreshold && thresholdReached)
@@ -441,6 +457,16 @@ public class DragAndMove : MonoBehaviour
     public bool IsAccumulatedTravelMode()
     {
         return useAccumulatedTravel;
+    }
+
+    public void SetResetAccumulatedDistanceOnDragEnd(bool enabled)
+    {
+        resetAccumulatedDistanceOnDragEnd = enabled;
+    }
+
+    public bool GetResetAccumulatedDistanceOnDragEnd()
+    {
+        return resetAccumulatedDistanceOnDragEnd;
     }
     
     // Gizmos for debugging
