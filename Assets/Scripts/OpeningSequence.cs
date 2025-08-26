@@ -21,6 +21,8 @@ public class OpeningSequence : MonoBehaviour
     public Animator animator;
     public PostProcessVolume postProcessVolume;
 
+    public AudioSource audioSourceInitialBreathing;
+
     public Light tankLight1;
     public Light tankLight2;
     
@@ -113,6 +115,9 @@ public class OpeningSequence : MonoBehaviour
             DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, targetIntensity, 1f)
         );
         vignetteSequence.AppendInterval(2f);
+        vignetteSequence.AppendCallback(() => {
+            audioSourceInitialBreathing.Play();
+        });
         vignetteSequence.Append(
             DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, 0.4f, 3f)
         );
