@@ -22,6 +22,7 @@ public class OpeningSequence : MonoBehaviour
     public PostProcessVolume postProcessVolume;
 
     public AudioSource audioSourceInitialBreathing;
+    public AudioSource audioSourceAIInitialVoice;
 
     public Light tankLight1;
     public Light tankLight2;
@@ -83,6 +84,11 @@ public class OpeningSequence : MonoBehaviour
     public float glitchVolumeMin = 0.6f; // Minimum volume multiplier for glitch audio (percentage of max)
     public float glitchVolumeMax = 1.0f; // Maximum volume multiplier for glitch audio (percentage of max)
     
+    [Header("Typewriter Effect Settings")]
+    public float typewriterSpeed = 0.05f; // Time between each character appearing
+    public bool useTypewriterEffect = true; // Toggle to enable/disable typewriter effect
+    public AudioSource typewriterKeySound; // Audio source for the key sound
+    
     // Private variables to track audio state for tank lights
     private bool tankLight1AudioShouldPlay = true;
     private bool tankLight2AudioShouldPlay = true;
@@ -114,6 +120,9 @@ public class OpeningSequence : MonoBehaviour
         vignetteSequence.Append(
             DOTween.To(() => vignette.intensity.value, x => vignette.intensity.value = x, targetIntensity, 1f)
         );
+        vignetteSequence.AppendCallback(() => {
+            audioSourceAIInitialVoice.Play();
+        });
         vignetteSequence.AppendInterval(2f);
         vignetteSequence.AppendCallback(() => {
             audioSourceInitialBreathing.Play();
@@ -162,7 +171,7 @@ public class OpeningSequence : MonoBehaviour
         yield return new WaitForSeconds(6f);
 
         dragAndMove.enabled = true;
-        instructionText.text = "Drag to look around";
+        yield return StartCoroutine(TypewriterEffect("Drag to look around"));
         
         yield return new WaitForSeconds(2.5f);
         yield return StartCoroutine(WaitForDragThreshold());
@@ -171,7 +180,7 @@ public class OpeningSequence : MonoBehaviour
         
         dragAndMove.ResetToOriginalPosition();
         tapProgressManager.ResetProgress();
-        instructionText.text = "Tap repeatedly to Struggle";
+        yield return StartCoroutine(TypewriterEffect("Tap repeatedly to Struggle"));
         tapProgressManager.OnProgressComplete.AddListener(OnProgressComplete);
         tapProgressManager.OnSessionStart.AddListener(StartStruggleShake);
         tapProgressManager.OnSessionEnd.AddListener(StopStruggleShake);
@@ -190,6 +199,31 @@ public class OpeningSequence : MonoBehaviour
         {
             float randomMultiplier = Random.Range(minMultiplier, maxMultiplier);
             audioSource.volume = originalVolume * randomMultiplier;
+        }
+    }
+
+    // Typewriter effect coroutine
+    private IEnumerator TypewriterEffect(string text)
+    {
+        if (!useTypewriterEffect)
+        {
+            instructionText.text = text;
+            yield break;
+        }
+
+        instructionText.text = "";
+        
+        for (int i = 0; i < text.Length; i++)
+        {
+            instructionText.text += text[i];
+            
+            // Play key sound for each character
+            if (typewriterKeySound != null)
+            {
+                typewriterKeySound.PlayOneShot(typewriterKeySound.clip);
+            }
+            
+            yield return new WaitForSeconds(typewriterSpeed);
         }
     }
 
