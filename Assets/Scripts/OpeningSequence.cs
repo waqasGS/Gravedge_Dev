@@ -6,6 +6,7 @@ using DG.Tweening;
 using TMPro;
 using Cinemachine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Playables;
 
 public class OpeningSequence : MonoBehaviour
 {
@@ -188,8 +189,17 @@ public class OpeningSequence : MonoBehaviour
 
         // Start monitoring progress for tank cracks
         StartCoroutine(MonitorProgressForTankCracks());
-        
+                
         Debug.Log("Coroutine finished!");
+    }
+
+    void OnDisable()
+    {
+        tapProgressManager.OnProgressComplete.RemoveListener(OnProgressComplete);
+        tapProgressManager.OnSessionStart.RemoveListener(StartStruggleShake);
+        tapProgressManager.OnSessionEnd.RemoveListener(StopStruggleShake);
+        StopAllCoroutines();
+        FadeEffect.Instance.FadeOut(1f);
     }
     
     // Helper method to set random volume for an audio source based on original volume and range
@@ -241,6 +251,9 @@ public class OpeningSequence : MonoBehaviour
         instructionText.text = "";
         tapProgressManager.SetProgressBarActive(false); 
         StopStruggleShake();
+        StopAllCoroutines();
+        GetComponent<PlayableDirector>().enabled = true;
+        FadeEffect.Instance.FadeOut(1f);
     }
 
     void StartStruggleShake()
