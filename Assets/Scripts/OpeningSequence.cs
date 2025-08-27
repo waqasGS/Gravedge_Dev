@@ -7,6 +7,7 @@ using TMPro;
 using Cinemachine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class OpeningSequence : MonoBehaviour
 {
@@ -189,7 +190,7 @@ public class OpeningSequence : MonoBehaviour
 
         // Start monitoring progress for tank cracks
         StartCoroutine(MonitorProgressForTankCracks());
-                
+
         Debug.Log("Coroutine finished!");
     }
 
@@ -200,6 +201,17 @@ public class OpeningSequence : MonoBehaviour
         tapProgressManager.OnSessionEnd.RemoveListener(StopStruggleShake);
         StopAllCoroutines();
         FadeEffect.Instance.FadeOut(1f);
+        FadeEffect.Instance.Invoke(() => {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.LoadScene("Level1");
+        }, 0.8f);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // You can add any logic here that should run after the scene is loaded
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        FadeEffect.Instance.FadeIn();
     }
     
     // Helper method to set random volume for an audio source based on original volume and range
