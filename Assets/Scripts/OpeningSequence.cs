@@ -194,13 +194,20 @@ public class OpeningSequence : MonoBehaviour
         Debug.Log("Coroutine finished!");
     }
 
+    public void OnSequenceComplete()
+    {
+        FadeEffect.Instance.FadeOut(1f);
+        FadeEffect.Instance.Invoke(() => {
+           gameObject.SetActive(false);
+        }, 1f);
+    }
+
     void OnDisable()
     {
         tapProgressManager.OnProgressComplete.RemoveListener(OnProgressComplete);
         tapProgressManager.OnSessionStart.RemoveListener(StartStruggleShake);
         tapProgressManager.OnSessionEnd.RemoveListener(StopStruggleShake);
         StopAllCoroutines();
-        FadeEffect.Instance.FadeOut(1f);
         FadeEffect.Instance.Invoke(() => {
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadScene("Level1");

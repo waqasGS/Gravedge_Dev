@@ -189,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153791057002591448}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0053047887, y: 0.75248975, z: -0.13072722, w: -0.6454778}
+  m_LocalRotation: {x: -0.0053048003, y: 0.7524897, z: -0.13072722, w: -0.6454778}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1821,7 +1821,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2752899757909494815}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.018145662, y: 0.75674176, z: -0.10330678, w: -0.6452445}
+  m_LocalRotation: {x: 0.018145667, y: 0.7567418, z: -0.103306785, w: -0.6452444}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3047,7 +3047,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4330974607655876105}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0053047887, y: 0.75248975, z: -0.13072722, w: -0.6454778}
+  m_LocalRotation: {x: -0.0053048003, y: 0.7524897, z: -0.13072722, w: -0.6454778}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3354,8 +3354,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4520817572389255837}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21340254, y: -0.32967052, z: 0.16461684, w: 0.9048083}
-  m_LocalPosition: {x: 2.0553372, y: 1.1727324, z: -0.037271738}
+  m_LocalRotation: {x: 0.021748938, y: -0.8906397, z: 0.44472975, w: 0.09221368}
+  m_LocalPosition: {x: 1.3004807, y: 1.9255344, z: 3.1563249}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3943,7 +3943,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 11
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 4742477358435984784}
   m_Follow: {fileID: 0}
@@ -5097,7 +5097,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2709408321146378532}
   - component: {fileID: 8091016881921394572}
-  - component: {fileID: 390492671410115956}
   m_Layer: 0
   m_Name: Shot4
   m_TagString: Untagged
@@ -5114,7 +5113,7 @@ Transform:
   m_GameObject: {fileID: 6606715988372329274}
   serializedVersion: 2
   m_LocalRotation: {x: -0.021188432, y: 0.97644836, z: -0.113529615, w: -0.18223801}
-  m_LocalPosition: {x: 1.0853256, y: 3.5754113, z: 34.130314}
+  m_LocalPosition: {x: 1.1030302, y: 3.5754113, z: 32.139584}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5163,29 +5162,6 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 118287808562537493}
---- !u!114 &390492671410115956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6606715988372329274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ApplyAfter: 2
-  m_ChannelMask: 1
-  m_Gain: 1
-  m_Use2DDistance: 0
-  m_UseCameraSpace: 1
-  m_ReactionSettings:
-    m_SecondaryNoise: {fileID: 0}
-    m_AmplitudeGain: 1
-    m_FrequencyGain: 1
-    m_Duration: 1
-    m_NoiseOffsets: {x: -277.05154, y: -760.7219, z: 670.5775}
 --- !u!1 &6754532613120599234
 GameObject:
   m_ObjectHideFlags: 0
@@ -5266,6 +5242,8 @@ PlayableDirector:
   - key: {fileID: -848365559338627853, guid: cfc62c5c4ab596648803529c5ef62a7a, type: 2}
     value: {fileID: 8394883031010611428}
   - key: {fileID: 670936441271976819, guid: cfc62c5c4ab596648803529c5ef62a7a, type: 2}
+    value: {fileID: 5667817312090027226}
+  - key: {fileID: -9167151647482583035, guid: cfc62c5c4ab596648803529c5ef62a7a, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References:
@@ -5408,10 +5386,10 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6754532613120599234}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
+        - m_Target: {fileID: 7797568648063717924}
+          m_TargetAssemblyTypeName: OpeningSequence, Assembly-CSharp
+          m_MethodName: OnSequenceComplete
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5445,8 +5423,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6860757678011064942}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18353632, y: -0.29555723, z: 0.1344002, w: 0.92784536}
-  m_LocalPosition: {x: 1.842543, y: 1.1309333, z: -0.21459436}
+  m_LocalRotation: {x: 0.16367906, y: -0.48895958, z: 0.22234695, w: 0.82745975}
+  m_LocalPosition: {x: 3.453019, y: 0.9584634, z: -0.9462602}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5776,8 +5754,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7560017262089094593}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12545833, y: -0.43113947, z: 0.1689728, w: 0.87739795}
-  m_LocalPosition: {x: 2.4625704, y: 1.2810047, z: 0.42204964}
+  m_LocalRotation: {x: 0.02458153, y: -0.916901, z: 0.35935295, w: 0.17191213}
+  m_LocalPosition: {x: 1.7607081, y: 1.8963757, z: 3.032625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6016,10 +5994,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1947140731474705725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 192}
-  m_SizeDelta: {x: 1181.5181, y: 130.7486}
+  m_AnchorMin: {x: 0.268, y: 0.08400001}
+  m_AnchorMax: {x: 0.7317396, y: 0.158}
+  m_AnchoredPosition: {x: -1, y: -0.12408447}
+  m_SizeDelta: {x: -2, y: -0.24819946}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5682814902880782925
 CanvasRenderer:
@@ -6076,8 +6054,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.83
-  m_fontSizeBase: 71.83
+  m_fontSize: 42.81
+  m_fontSizeBase: 42.81
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6221,7 +6199,7 @@ MonoBehaviour:
   snapToGrid: 0
   gridSize: 1
   useDragThreshold: 1
-  dragThreshold: 60
+  dragThreshold: 80
   thresholdReached: 0
   useAccumulatedTravel: 1
   resetAccumulatedDistanceOnDragEnd: 0
