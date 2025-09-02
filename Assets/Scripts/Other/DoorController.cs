@@ -20,6 +20,10 @@ public class DoorController : MonoBehaviour
 
     public AudioSource doorSound;
 
+    public bool isDoorOpen = false; // track door state
+    public bool toReuse = true;
+    bool doorReuse = true;
+
     private void Start()
     {
         initialPos = door.transform.localPosition;
@@ -30,7 +34,8 @@ public class DoorController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SetTarget(openValue);
+            if (isDoorOpen) return;
+            SetTarget(openValue, true); // open karna
         }
     }
 
@@ -38,28 +43,35 @@ public class DoorController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SetTarget(closeValue);
+            if (!isDoorOpen) return;
+            doorReuse = toReuse;
+            SetTarget(closeValue, false); // close karna
         }
     }
 
-    void SetTarget(float value)
+    public void SetTarget(float value, bool opening)
     {
+        // agar door already same state me hai to kuch na karo
+
+
+
         targetPos = initialPos;
 
         if (moveX) targetPos.x = initialPos.x + value;
         if (moveY) targetPos.y = initialPos.y + value;
         if (moveZ) targetPos.z = initialPos.z + value;
 
-        // agar pehle se koi coroutine chal rahi ho to usse stop kar do
+        // pehle se chal rahi coroutine stop kar do
         if (moveRoutine != null) StopCoroutine(moveRoutine);
 
         // nayi coroutine start karo
-        moveRoutine = StartCoroutine(MoveDoor());
+        moveRoutine = StartCoroutine(MoveDoor(opening));
     }
 
-    private System.Collections.IEnumerator MoveDoor()
+    private System.Collections.IEnumerator MoveDoor(bool opening)
     {
         doorSound.Play();
+        isDoorOpen = opening;
         while ((door.transform.localPosition - targetPos).sqrMagnitude > 0.001f)
         {
             door.transform.localPosition = Vector3.SmoothDamp(
@@ -68,11 +80,18 @@ public class DoorController : MonoBehaviour
                 ref velocity,
                 smoothTime
             );
-            yield return null; // next frame tak ruk
+            yield return null;
         }
 
-        // exact target pe snap kar do (floating point issues avoid karne ke liye)
+        // final snap
         door.transform.localPosition = targetPos;
         doorSound.Stop();
+        if (!doorReuse)
+        {
+            Destroy(GetComponent<BoxCollider>());
+            Destroy(this);
+        }
+        // state update karo
+
     }
 }

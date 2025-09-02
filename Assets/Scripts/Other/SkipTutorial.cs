@@ -38,11 +38,13 @@ public class SkipTutorial : MonoBehaviour
 
         // Fade complete -> timeline stop karo
         timeLine.Stop();
+        Debug.Log("NextSceneStart");
         LoadNextScene();
     }
 
     public void LoadNextScene()
     {
+        Debug.Log("NextSceneStart1");
         SceneManager.LoadScene(nextSceneName);
     }
 }
