@@ -18,6 +18,10 @@ namespace Invector.vCharacterController.AI
         public UnityEngine.Events.UnityEvent onIdle;
         public UnityEngine.Events.UnityEvent onChase;
         public UnityEngine.Events.UnityEvent onPatrol;
+
+        public UnityEngine.Events.UnityEvent OnTargetAcquired;
+        public UnityEngine.Events.UnityEvent OnTargetLost;
+
         protected AIStates oldState;
         protected float ignorePatrolTimer;
         protected float _moveToSpeed;
@@ -113,8 +117,14 @@ namespace Invector.vCharacterController.AI
                     var vChar = sphereSensor.GetTargetvCharacter();
                     if (vChar != null && vChar.currentHealth > 0)
                     {
+                        // ontarget
+                        OnTargetAcquired.Invoke();
                         currentTarget.transform = vChar.transform;
                         currentTarget.character = vChar;
+                    }
+                    else
+                    {
+                        OnTargetLost.Invoke();
                     }
                 }
 

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,10 +26,18 @@ public class Tutorial1 : MonoBehaviour
     public GameObject rightEquip;
     public GameObject leftEquip;
     public GameObject ammoDisplay;
+    public GameObject stealthTutorial;
+    public GameObject stealthImage1;
+    public GameObject stealthImage2;
+
+
     public DoorController doorOpening;
 
     public float delayToStartTutorial;
     public float delayToStartCameraTutorial;
+    public float delayInFirstImage;
+    public float delayInSecondImage;
+
 
 
     public void Start()
@@ -49,6 +58,9 @@ public class Tutorial1 : MonoBehaviour
         combatButton.gameObject.SetActive(false);
         defenseButton.gameObject.SetActive(false);
         slowMoButton.gameObject.SetActive(false);
+        stealthTutorial.SetActive(false);
+        stealthTutorial.transform.DOLocalMoveX(981.8182f, 0.1f);
+
         Invoke(nameof(CameraMovement), delayToStartTutorial);
     }
 
@@ -94,7 +106,32 @@ public class Tutorial1 : MonoBehaviour
     {
         healthTutorial.SetActive(false);
     }
+    public void ActivateStealthTutorial()
+    {
+        //stealthTutorial.GetComponent<CanvasGroup>().alpha = 0.0f;
+        stealthImage1.GetComponent<CanvasGroup>().alpha = 0.0f;
+        stealthImage2.GetComponent<CanvasGroup>().alpha = 0.0f;
+        stealthTutorial.SetActive(true);
+        StartCoroutine(StartFadingStealthTutorial());
 
+    }
+    IEnumerator StartFadingStealthTutorial()
+    {
+        //healthBar.SetActive(false);
+        stealthTutorial.transform.DOLocalMoveX(581f, 0.5f);
+        yield return new WaitForSeconds(0.15f);
+        stealthImage1.GetComponent<CanvasGroup>().DOFade(1f, 0.5f);
+        yield return new WaitForSeconds(delayInFirstImage);
+        stealthImage1.GetComponent<CanvasGroup>().DOFade(0f, 0.5f);
+        stealthImage2.GetComponent<CanvasGroup>().DOFade(1f, 0.5f);
+        yield return new WaitForSeconds(delayInSecondImage);
+        stealthImage2.GetComponent<CanvasGroup>().DOFade(0f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        stealthTutorial.transform.DOLocalMoveX(981.8182f, 0.5f).OnComplete(() => { stealthTutorial.SetActive(false);  });
+
+
+
+    }
     public void OnClickUseButton()
     {
         movingArrow.SetActive(false);
