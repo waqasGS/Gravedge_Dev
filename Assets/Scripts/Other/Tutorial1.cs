@@ -118,7 +118,7 @@ public class Tutorial1 : MonoBehaviour
     IEnumerator StartFadingStealthTutorial()
     {
         //healthBar.SetActive(false);
-        stealthTutorial.transform.DOLocalMoveX(581f, 0.5f);
+        stealthTutorial.transform.DOLocalMoveX(643.3333f, 0.5f);
         yield return new WaitForSeconds(0.15f);
         stealthImage1.GetComponent<CanvasGroup>().DOFade(1f, 0.5f);
         yield return new WaitForSeconds(delayInFirstImage);
@@ -127,11 +127,9 @@ public class Tutorial1 : MonoBehaviour
         yield return new WaitForSeconds(delayInSecondImage);
         stealthImage2.GetComponent<CanvasGroup>().DOFade(0f, 0.5f);
         yield return new WaitForSeconds(0.5f);
-        stealthTutorial.transform.DOLocalMoveX(981.8182f, 0.5f).OnComplete(() => { stealthTutorial.SetActive(false);  });
-
-
-
+        ClosingStealthTutorial();
     }
+    public void ClosingStealthTutorial() { stealthTutorial.transform.DOLocalMoveX(981.8182f, 0.5f).OnComplete(() => { stealthTutorial.SetActive(false); }); }
     public void OnClickUseButton()
     {
         movingArrow.SetActive(false);
