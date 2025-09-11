@@ -13,6 +13,7 @@ public class HackTrigger : MonoBehaviour
         {
             GameObject instance = Resources.Load<GameObject>("HackingMinigame");
             Instantiate(instance, Vector3.zero, Quaternion.identity);
+            //hacking.onReachedEndNode+=
         }
     }
 }

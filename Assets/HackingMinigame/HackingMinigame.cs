@@ -22,23 +22,23 @@ public class HackingMinigame : MonoBehaviour
     public TextMeshProUGUI accessLevelText;
     public Slider timeLeftSlider;
     public DOTweenAnimation bgRedTintAnimation;
-    
+
     [Header("Timer Settings")]
     public float hackTimeLimit = 60f; // Time limit in seconds
     public bool isTimerRunning = false;
     public float warningThreshold = 0.2f; // Start warning animation when 20% of time remains
     public bool warningAnimationStarted = false;
-    
+
     [Header("Player State")]
     public int accessLevel = 0; // This value determines if the player can pass special nodes
-    
+
     [Header("Runtime")]
     public Node currentNode;
     public NodeContainer nodeContainer;
-    
+
     public Action onReachedEndNode;
     public Action onHackFailed;
-    
+
     [Header("UI Shake")]
     public UIShake uiShake;
     public float accessDeniedShakeStrength = 15f;
@@ -49,12 +49,13 @@ public class HackingMinigame : MonoBehaviour
     public float hackSuccessShakeDuration = 0.8f;
     public float hackFailureShakeStrength = 25f;
     public float hackFailureShakeDuration = 1.0f;
-    
+
     [Header("Tutorial System")]
     public TutorialManager tutorialManager;
-    
+    public bool useTutorial = true; //  yeh bool control karega tutorial ko
+
     private float currentTimeLeft;
-    
+
     public int AccessLevel
     {
         get => accessLevel;
@@ -65,33 +66,68 @@ public class HackingMinigame : MonoBehaviour
         }
     }
 
-    private void Start()
+    //private void Start()
+    //{
+    //    AccessLevel = accessLevel;      // to update text
+    //    InitializeTimer();
+
+    //    nodeContainer = GetComponentInChildren<NodeContainer>();
+    //    nodeContainer.Init();
+    //    SetCurrentNode(0, 0);
+
+    //    onReachedEndNode += OnReachedEndNode;
+    //    onHackFailed += OnHackFailed;
+
+    //    // Auto-find UIShake component if not assigned
+    //    if (uiShake == null)
+    //    {
+    //        uiShake = GetComponentInChildren<UIShake>();
+    //    }
+
+    //    // Setup tutorial system
+    //    if (tutorialManager == null)
+    //    {
+    //        tutorialManager = GetComponentInChildren<TutorialManager>();
+    //    }
+
+    //    StartTimer();
+    //}
+
+    public void StartMiniGame()
     {
         AccessLevel = accessLevel;      // to update text
         InitializeTimer();
-        
+
         nodeContainer = GetComponentInChildren<NodeContainer>();
         nodeContainer.Init();
         SetCurrentNode(0, 0);
-        
+
         onReachedEndNode += OnReachedEndNode;
         onHackFailed += OnHackFailed;
-        
+
         // Auto-find UIShake component if not assigned
         if (uiShake == null)
         {
             uiShake = GetComponentInChildren<UIShake>();
         }
-        
+
         // Setup tutorial system
         if (tutorialManager == null)
         {
             tutorialManager = GetComponentInChildren<TutorialManager>();
         }
-        
+        if (useTutorial)
+        {
+            tutorialManager.tutorialUI.gameObject.SetActive(true);
+        }
+        else
+        {
+            tutorialManager.SkipTutorial();
+        }
+
         StartTimer();
     }
-    
+
     private void InitializeTimer()
     {
         currentTimeLeft = hackTimeLimit;
@@ -99,7 +135,7 @@ public class HackingMinigame : MonoBehaviour
         timeLeftSlider.value = hackTimeLimit;
         warningAnimationStarted = false;
     }
-    
+
     private void StartWarningAnimation()
     {
         if (bgRedTintAnimation != null && !warningAnimationStarted)
@@ -109,26 +145,26 @@ public class HackingMinigame : MonoBehaviour
             Debug.Log("Warning animation started - time is running low!");
         }
     }
-    
+
     private void StartTimer()
     {
         isTimerRunning = true;
         StartCoroutine(CountdownTimer());
     }
-    
+
     private IEnumerator CountdownTimer()
     {
         while (currentTimeLeft > 0f && isTimerRunning)
         {
             currentTimeLeft -= Time.deltaTime;
             timeLeftSlider.value = currentTimeLeft;
-            
+
             // Check if we should start the warning animation
             if (!warningAnimationStarted && currentTimeLeft <= hackTimeLimit * warningThreshold)
             {
                 StartWarningAnimation();
             }
-            
+
             if (currentTimeLeft <= 0f)
             {
                 currentTimeLeft = 0f;
@@ -136,7 +172,7 @@ public class HackingMinigame : MonoBehaviour
                 onHackFailed?.Invoke();
                 break;
             }
-            
+
             yield return null;
         }
     }
@@ -146,7 +182,7 @@ public class HackingMinigame : MonoBehaviour
         isTimerRunning = false;
         StartCoroutine(AnimateHackSuccess());
     }
-    
+
     private void OnHackFailed()
     {
         isTimerRunning = false;
@@ -160,12 +196,12 @@ public class HackingMinigame : MonoBehaviour
         {
             uiShake.Shake(hackSuccessShakeStrength, hackSuccessShakeDuration);
         }
-        
+
         MessageLine.Instance.ShowMessage("Hack Successfull", Color.green);
         yield return new WaitForSeconds(1.0f);
         EndHack();
     }
-    
+
     private IEnumerator AnimateHackFailure()
     {
         // Shake UI for failure
@@ -173,7 +209,7 @@ public class HackingMinigame : MonoBehaviour
         {
             uiShake.Shake(hackFailureShakeStrength, hackFailureShakeDuration);
         }
-        
+
         MessageLine.Instance.ShowMessage("Hack Failed - Time's Up!", Color.red);
         yield return new WaitForSeconds(1.0f);
         EndHack();
@@ -193,30 +229,30 @@ public class HackingMinigame : MonoBehaviour
     {
         if (!IsConnected(currentNode, targetNode))
             return;
-        
+
         if (!TryConsumeAccess(targetNode))
         {
             Debug.Log("Access denied.");
             MessageLine.Instance.ShowMessage("Access denied", Color.red);
-            
+
             // Shake UI for access denied
             if (uiShake != null)
             {
                 uiShake.Shake(accessDeniedShakeStrength, accessDeniedShakeDuration);
             }
-            
+
             return;
         }
-        
+
         // Notify tutorial system of navigation
-        if (tutorialManager != null)
+        if (useTutorial && tutorialManager != null)
         {
             tutorialManager.OnNavigationOccurred();
         }
-        
+
         StartCoroutine(AnimateTravel(currentNode, targetNode));
     }
-    
+
     private bool TryConsumeAccess(Node targetNode)
     {
         // Enforce access restriction based on node type
@@ -227,9 +263,9 @@ public class HackingMinigame : MonoBehaviour
             MessageLine.Instance.ShowMessage($"Access level {accessLevel} too low for {targetNode.nodeType}. Required: {requiredLevel}", Color.yellow);
             return false;
         }
-        
+
         // Consume access level only if it's a special node AND we haven't visited it before
-        if ((targetNode.nodeType == NodeType.Firewall || targetNode.nodeType == NodeType.Antivius) && 
+        if ((targetNode.nodeType == NodeType.Firewall || targetNode.nodeType == NodeType.Antivius) &&
             targetNode.nodeStatus == NodeStatus.Unvisited)
         {
             AccessLevel -= requiredLevel;
@@ -237,14 +273,14 @@ public class HackingMinigame : MonoBehaviour
 
             Debug.Log($"Access level consumed: -{requiredLevel}. Remaining: {accessLevel}");
             MessageLine.Instance.ShowMessage($"Access level consumed: {requiredLevel}. Remaining: {accessLevel}", Color.cyan);
-            
+
             // Shake UI when access is consumed
             if (uiShake != null)
             {
                 uiShake.Shake(accessConsumedShakeStrength, accessConsumedShakeDuration);
             }
         }
-        else if ((targetNode.nodeType == NodeType.Firewall || targetNode.nodeType == NodeType.Antivius) && 
+        else if ((targetNode.nodeType == NodeType.Firewall || targetNode.nodeType == NodeType.Antivius) &&
                  targetNode.nodeStatus == NodeStatus.Visited)
         {
             Debug.Log($"Already visited {targetNode.nodeType} node. No access consumed.");
@@ -253,7 +289,7 @@ public class HackingMinigame : MonoBehaviour
 
         return true;
     }
-    
+
     private IEnumerator AnimateTravel(Node from, Node to)
     {
         Image edgeToAnimate = GetEdgeTravelBetween(from, to);
@@ -265,7 +301,7 @@ public class HackingMinigame : MonoBehaviour
 
         // Disable from-node's standard edges too (needed for Start node edge visibility)
         DisableStandardEdges(from);
-        
+
         // Reset the opposite travel edge on 'to'
         Image oppositeEdge = GetEdgeTravelBetween(to, from);
         if (oppositeEdge != null)
@@ -299,7 +335,7 @@ public class HackingMinigame : MonoBehaviour
         from.UpdateNodeVisuals();
 
         currentNode = to;
-        
+
         if (to.nodeType == NodeType.End)
         {
             onReachedEndNode?.Invoke();
@@ -326,7 +362,7 @@ public class HackingMinigame : MonoBehaviour
             }
         }
     }
-    
+
     private int GetRequiredAccessForNodeType(NodeType type)
     {
         switch (type)
@@ -343,7 +379,7 @@ public class HackingMinigame : MonoBehaviour
                 return 0;
         }
     }
-    
+
     private void DisableStandardEdges(Node node)
     {
         if (node.edgeLeft != null) node.edgeLeft.SetActive(false);
@@ -351,7 +387,7 @@ public class HackingMinigame : MonoBehaviour
         if (node.edgeUp != null) node.edgeUp.SetActive(false);
         if (node.edgeDown != null) node.edgeDown.SetActive(false);
     }
-    
+
     private void DisableSpecificStandardEdge(Node node, Node fromNode)
     {
         // Determine which direction we're coming from and disable only that specific edge
@@ -372,12 +408,12 @@ public class HackingMinigame : MonoBehaviour
             if (node.edgeDown != null) node.edgeDown.SetActive(false);
         }
     }
-    
+
     private bool IsConnected(Node from, Node to)
     {
         return from.connectedNeighbors.Contains(to);
     }
-    
+
     private Image GetEdgeTravelBetween(Node from, Node to)
     {
         if (to == from.GetLeftNeighbor())
@@ -396,11 +432,11 @@ public class HackingMinigame : MonoBehaviour
     {
         EndHack();
     }
-    
+
     // Method for tutorial system to handle node clicks
     public void OnNodeClickedForTutorial(GameObject nodeObject)
     {
-        if (tutorialManager != null)
+        if (useTutorial && tutorialManager != null)
         {
             tutorialManager.OnNodeClicked(nodeObject);
         }

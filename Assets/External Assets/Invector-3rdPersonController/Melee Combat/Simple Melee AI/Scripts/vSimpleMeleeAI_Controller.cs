@@ -118,12 +118,21 @@ namespace Invector.vCharacterController.AI
                     if (vChar != null && vChar.currentHealth > 0)
                     {
                         // ontarget
-                        OnTargetAcquired.Invoke();
+                        if (currentHealth > 0)
+                        {
+                            OnTargetAcquired.Invoke();
+
+                        }
+                        else
+                        {
+                            OnTargetLost.Invoke();
+                        }
                         currentTarget.transform = vChar.transform;
                         currentTarget.character = vChar;
                     }
                     else
                     {
+
                         OnTargetLost.Invoke();
                     }
                 }

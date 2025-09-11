@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Tutorial1 : MonoBehaviour
 {
+    public static Tutorial1 Instance;
     public GameObject tutorialHud;
     public GameObject joyStick;
     public GameObject tutorialForJoyStick;
@@ -29,7 +30,10 @@ public class Tutorial1 : MonoBehaviour
     public GameObject stealthTutorial;
     public GameObject stealthImage1;
     public GameObject stealthImage2;
-
+    public GameObject aggressiveImage1;
+    public GameObject aggressiveImage2;
+    public GameObject notificationPanel;
+    public GameObject notificationImage;
 
     public DoorController doorOpening;
 
@@ -38,10 +42,13 @@ public class Tutorial1 : MonoBehaviour
     public float delayInFirstImage;
     public float delayInSecondImage;
 
+    public List<string> computerHackText;
+
 
 
     public void Start()
     {
+        Instance = this;
         tutorialHud.SetActive(false);
         joyStick.gameObject.SetActive(false);
         analogCameraMovement.gameObject.SetActive(false);
@@ -58,12 +65,21 @@ public class Tutorial1 : MonoBehaviour
         combatButton.gameObject.SetActive(false);
         defenseButton.gameObject.SetActive(false);
         slowMoButton.gameObject.SetActive(false);
-        stealthTutorial.SetActive(false);
+        stealthTutorial.SetActive(false); notificationPanel.SetActive(false);
+        ClosingAllTutorialImages();
         stealthTutorial.transform.DOLocalMoveX(981.8182f, 0.1f);
+        notificationImage.transform.DOLocalMoveX(-157.7926f, 0.1f);
+
 
         Invoke(nameof(CameraMovement), delayToStartTutorial);
     }
-
+    public void ClosingAllTutorialImages()
+    {
+        stealthImage1.GetComponent<CanvasGroup>().alpha = 0.0f;
+        stealthImage2.GetComponent<CanvasGroup>().alpha = 0.0f;
+        aggressiveImage1.GetComponent<CanvasGroup>().alpha = 0f;
+        aggressiveImage2.GetComponent<CanvasGroup>().alpha = 0f;
+    }
     public void JoystickObject()
     {
 
@@ -108,9 +124,7 @@ public class Tutorial1 : MonoBehaviour
     }
     public void ActivateStealthTutorial()
     {
-        //stealthTutorial.GetComponent<CanvasGroup>().alpha = 0.0f;
-        stealthImage1.GetComponent<CanvasGroup>().alpha = 0.0f;
-        stealthImage2.GetComponent<CanvasGroup>().alpha = 0.0f;
+        ClosingAllTutorialImages();
         stealthTutorial.SetActive(true);
         StartCoroutine(StartFadingStealthTutorial());
 
@@ -129,7 +143,43 @@ public class Tutorial1 : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         ClosingStealthTutorial();
     }
-    public void ClosingStealthTutorial() { stealthTutorial.transform.DOLocalMoveX(981.8182f, 0.5f).OnComplete(() => { stealthTutorial.SetActive(false); }); }
+    public void ClosingStealthTutorial() { stealthTutorial.transform.DOLocalMoveX(981.8182f, 0.5f).OnComplete(() => { ClosingAllTutorialImage(); stealthTutorial.SetActive(false); }); }
+    public void ClosingAllTutorialImage()
+    {
+        stealthImage1.GetComponent<CanvasGroup>().alpha = 0.0f;
+        stealthImage2.GetComponent<CanvasGroup>().alpha = 0.0f;
+        aggressiveImage1.GetComponent<CanvasGroup>().alpha = 0f;
+        aggressiveImage2.GetComponent<CanvasGroup>().alpha = 0f;
+    }
+    public void ActivateaggressiveAttack()
+    {
+        ClosingAllTutorialImages();
+        stealthTutorial.SetActive(true);
+        StartCoroutine(StartFadingAggressive());
+    }
+    IEnumerator StartFadingAggressive()
+    {
+        stealthTutorial.transform.DOLocalMoveX(643.3333f, 0.5f);
+        yield return new WaitForSeconds(0.15f);
+        aggressiveImage1.GetComponent<CanvasGroup>().DOFade(1f, 0.5f);
+        yield return new WaitForSeconds(delayInFirstImage);
+        aggressiveImage1.GetComponent<CanvasGroup>().DOFade(0f, 0.5f);
+        aggressiveImage2.GetComponent<CanvasGroup>().DOFade(1f, 0.5f);
+        yield return new WaitForSeconds(delayInSecondImage);
+        aggressiveImage2.GetComponent<CanvasGroup>().DOFade(0f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        ClosingStealthTutorial();
+        yield return new WaitForSeconds(0.5f);
+        unarmedButton.SetActive(true);
+        defenseButton.SetActive(true);
+    }
+
+    public void StartNotification(int value)
+    {
+        notificationPanel.SetActive(true); 
+        notificationPanel.GetComponent<TypeWriter>().StartTyping(computerHackText[value]);
+    }
+
     public void OnClickUseButton()
     {
         movingArrow.SetActive(false);
