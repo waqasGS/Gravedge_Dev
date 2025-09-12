@@ -370,7 +370,7 @@ public class HackingMinigame : MonoBehaviour
             case NodeType.Firewall:
                 return 2;
             case NodeType.Antivius:
-                return 3;
+                return 2;
             case NodeType.Start:
             case NodeType.End:
                 return 0; // Always accessible

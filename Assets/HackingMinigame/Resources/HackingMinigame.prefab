@@ -1958,6 +1958,7 @@ MonoBehaviour:
   hackFailureShakeStrength: 25
   hackFailureShakeDuration: 1
   tutorialManager: {fileID: 5438920124909251534}
+  useTutorial: 1
 --- !u!1 &7769004644892071511
 GameObject:
   m_ObjectHideFlags: 0
@@ -4136,7 +4137,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2909264484962910498, guid: bfccb5aca977d5244b223788a0584ce9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2909264484962910498, guid: bfccb5aca977d5244b223788a0584ce9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2909264484962910498, guid: bfccb5aca977d5244b223788a0584ce9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2909264484962910498, guid: bfccb5aca977d5244b223788a0584ce9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4186,9 +4195,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2909264484962910498, guid: bfccb5aca977d5244b223788a0584ce9, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5922909791881697791, guid: bfccb5aca977d5244b223788a0584ce9, type: 3}
       propertyPath: m_Name
       value: MessageLine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5922909791881697791, guid: bfccb5aca977d5244b223788a0584ce9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8191079050699315001, guid: bfccb5aca977d5244b223788a0584ce9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4581,6 +4602,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3094709195050893715}
     m_Modifications:
+    - target: {fileID: 2841573536217994025, guid: 5f93e85c6e87f1d438f296f16bb446e9, type: 3}
+      propertyPath: m_text
+      value: 'Access Level :'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841573536217994025, guid: 5f93e85c6e87f1d438f296f16bb446e9, type: 3}
+      propertyPath: m_wordSpacing
+      value: -10.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841573536217994025, guid: 5f93e85c6e87f1d438f296f16bb446e9, type: 3}
+      propertyPath: m_characterSpacing
+      value: -2.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841573536217994025, guid: 5f93e85c6e87f1d438f296f16bb446e9, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3113120024756759999, guid: 5f93e85c6e87f1d438f296f16bb446e9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 88.3264
+      objectReference: {fileID: 0}
+    - target: {fileID: 3113120024756759999, guid: 5f93e85c6e87f1d438f296f16bb446e9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 93.72104
+      objectReference: {fileID: 0}
     - target: {fileID: 8830976790286217216, guid: 5f93e85c6e87f1d438f296f16bb446e9, type: 3}
       propertyPath: m_Name
       value: AccessLevelCounter
