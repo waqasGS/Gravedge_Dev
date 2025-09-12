@@ -43,6 +43,9 @@ public class Tutorial1 : MonoBehaviour
     public float delayInSecondImage;
 
     public List<string> computerHackText;
+    public List<GameObject> hackMachineTrigger;
+    public List<GameObject> hackMachineDirectionArrow;
+    public List<GameObject> hackMachineParticles;
 
 
 
@@ -176,8 +179,17 @@ public class Tutorial1 : MonoBehaviour
 
     public void StartNotification(int value)
     {
-        notificationPanel.SetActive(true); 
+        notificationPanel.SetActive(true);
         notificationPanel.GetComponent<TypeWriter>().StartTyping(computerHackText[value]);
+        hackMachineDirectionArrow[value].SetActive(false);
+        hackMachineTrigger[value].SetActive(false);
+        hackMachineParticles[value].SetActive(true);
+        if ((value + 1) <= hackMachineTrigger.Count - 1)
+        {
+
+            hackMachineDirectionArrow[value + 1].SetActive(true);
+            hackMachineTrigger[value + 1].SetActive(true);
+        }
     }
 
     public void OnClickUseButton()
