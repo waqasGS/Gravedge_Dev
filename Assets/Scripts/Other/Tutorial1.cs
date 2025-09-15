@@ -34,6 +34,7 @@ public class Tutorial1 : MonoBehaviour
     public GameObject aggressiveImage2;
     public GameObject notificationPanel;
     public GameObject notificationImage;
+    public GameObject alarmSound;
 
     public DoorController doorOpening;
 
@@ -72,6 +73,7 @@ public class Tutorial1 : MonoBehaviour
         ClosingAllTutorialImages();
         stealthTutorial.transform.DOLocalMoveX(981.8182f, 0.1f);
         notificationImage.transform.DOLocalMoveX(-157.7926f, 0.1f);
+        alarmSound.SetActive(false);
 
 
         Invoke(nameof(CameraMovement), delayToStartTutorial);
@@ -189,6 +191,11 @@ public class Tutorial1 : MonoBehaviour
 
             hackMachineDirectionArrow[value + 1].SetActive(true);
             hackMachineTrigger[value + 1].SetActive(true);
+
+        }
+        if (value + 1 == hackMachineTrigger.Count)
+        {
+            alarmSound.SetActive(true);
         }
     }
 
