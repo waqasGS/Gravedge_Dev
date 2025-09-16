@@ -12,37 +12,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: SB_Chair00_00 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1879006643049528, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930491032010596, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4557319704009418, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4557319704009418, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.124
+      value: 0.802
       objectReference: {fileID: 0}
     - target: {fileID: 4557319704009418, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.203
+      value: -3.212
       objectReference: {fileID: 0}
     - target: {fileID: 4557319704009418, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -22.139
+      value: 4.656
       objectReference: {fileID: 0}
     - target: {fileID: 4557319704009418, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.69776917
+      value: 0.42340913
       objectReference: {fileID: 0}
     - target: {fileID: 4557319704009418, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000000044908425
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4557319704009418, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.71632266
+      value: 0.9059386
       objectReference: {fileID: 0}
     - target: {fileID: 4557319704009418, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000002435836
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4557319704009418, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -50,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4557319704009418, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 91.503
+      value: 129.9
       objectReference: {fileID: 0}
     - target: {fileID: 4557319704009418, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -93,22 +101,22 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1879006643049528, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 1930491032010596, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6283014827091111171}
+      addedObject: {fileID: 2725934799093975315}
   m_SourcePrefab: {fileID: 100100000, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
---- !u!1 &3479801720881496235 stripped
+--- !u!1 &3479815820868479991 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1879006643049528, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1930491032010596, guid: 411f18882cee402498828e5c7435ae0b, type: 3}
   m_PrefabInstance: {fileID: 3480176163388789907}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &6283014827091111171
-CapsuleCollider:
+--- !u!65 &2725934799093975315
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3479801720881496235}
+  m_GameObject: {fileID: 3479815820868479991}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -120,8 +128,6 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.34
-  m_Height: 1.45
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.66, z: 0}
+  serializedVersion: 3
+  m_Size: {x: 0.9639683, y: 1.1355276, z: 2.4679904}
+  m_Center: {x: -0.000022888184, y: 0.08577198, z: 1.2219284}

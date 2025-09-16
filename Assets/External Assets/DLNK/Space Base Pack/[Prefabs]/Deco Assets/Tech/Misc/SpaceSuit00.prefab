@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 5340795172146282290}
   - component: {fileID: 7827718889821315249}
   - component: {fileID: 7450105686792974041}
+  - component: {fileID: 7690183838067539668}
   m_Layer: 0
   m_Name: SpaceSuit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5340795172146282290
 Transform:
@@ -83,6 +84,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7690183838067539668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173715482084584323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49cd98d710deb524a80c8ea17718f797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDistance: 0.25
+  duration: 5
+  easeType: 4
 --- !u!1 &721392502791820574
 GameObject:
   m_ObjectHideFlags: 0

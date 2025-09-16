@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 33099877584990708}
   - component: {fileID: 23225854629075168}
   - component: {fileID: 2927679943579907593}
+  - component: {fileID: 1921032604848746014}
   m_Layer: 0
   m_Name: Cylinder021
   m_TagString: Untagged
@@ -261,3 +262,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &1921032604848746014
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894112080803104}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.81022644, y: 0.8055344, z: 1.107191}
+  m_Center: {x: -0.0000038146973, y: 0.0038162475, z: 0.5535977}

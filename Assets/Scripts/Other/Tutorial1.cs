@@ -48,6 +48,30 @@ public class Tutorial1 : MonoBehaviour
     public List<GameObject> hackMachineDirectionArrow;
     public List<GameObject> hackMachineParticles;
 
+    [Header("Spot Lights")]
+    public Light[] spotLights;
+
+    [Header("Colors")]
+    public Color firstColor = new Color(0.737f, 0.957f, 0.972f);
+    public Color secondColor = Color.red;
+
+    [Header("Settings")]
+    public float duration = 2f; // ek color se dusre me shift hone ka time
+
+    private Coroutine colorRoutine;
+    private float[] originalIntensities; // store original intensities
+
+    private void Awake()
+    {
+        // save original intensities
+        originalIntensities = new float[spotLights.Length];
+        for (int i = 0; i < spotLights.Length; i++)
+        {
+            if (spotLights[i] != null)
+                originalIntensities[i] = spotLights[i].intensity;
+        }
+    }
+
 
 
     public void Start()
@@ -196,6 +220,7 @@ public class Tutorial1 : MonoBehaviour
         if (value + 1 == hackMachineTrigger.Count)
         {
             alarmSound.SetActive(true);
+            StartColorChange();
         }
     }
 
@@ -203,8 +228,59 @@ public class Tutorial1 : MonoBehaviour
     {
         movingArrow.SetActive(false);
         useButton.SetActive(false);
-        Destroy(toActivateUseButton);
         doorOpening.GetComponent<BoxCollider>().enabled = true;
         doorOpening.SetTarget(doorOpening.openValue, true);
+        Destroy(toActivateUseButton);
+    }
+
+    // Call this function to start color changing
+    public void StartColorChange()
+    {
+        if (colorRoutine != null)
+            StopCoroutine(colorRoutine);
+
+        colorRoutine = StartCoroutine(ChangeColors());
+    }
+
+    private IEnumerator ChangeColors()
+    {
+        while (true)
+        {
+            // FirstColor to SecondColor (intensity normal to double)
+            yield return StartCoroutine(LerpColor(firstColor, secondColor, duration, false));
+
+            // SecondColor to FirstColor (intensity double to normal)
+            yield return StartCoroutine(LerpColor(secondColor, firstColor, duration, true));
+        }
+    }
+
+    private IEnumerator LerpColor(Color from, Color to, float time, bool backToNormal)
+    {
+        float elapsed = 0f;
+
+        while (elapsed < time)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / time;
+
+            for (int i = 0; i < spotLights.Length; i++)
+            {
+                Light spot = spotLights[i];
+                if (spot != null)
+                {
+                    // color lerp
+                    spot.color = Color.Lerp(from, to, t);
+
+                    // intensity lerp
+                    if (!backToNormal) // going to Red
+                        spot.intensity = Mathf.Lerp(originalIntensities[i], originalIntensities[i] * 2f, t);
+                    else // going back to Original
+                        spot.intensity = Mathf.Lerp(originalIntensities[i] * 2f, originalIntensities[i], t);
+                }
+            }
+
+            yield return null;
+        }
     }
 }
+
