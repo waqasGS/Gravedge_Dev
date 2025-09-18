@@ -87,6 +87,7 @@ namespace com.mobilin.games
         public Transform ikRightHand;
         public Transform ikLeftFoot;
         public Transform ikRightFoot;
+        public Transform ikSpineHint;
 
 #if MIS_INVECTOR_SWIMMING
         [Header("Water")]

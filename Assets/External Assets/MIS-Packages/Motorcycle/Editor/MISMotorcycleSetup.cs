@@ -20,6 +20,7 @@ namespace com.mobilin.games
         public float motorcycleMass = 800f;
         public GameObject bodyObj;
         public GameObject steerObj;
+        public GameObject spineObj;
         public GameObject axleFrontObj;
         public GameObject wheelFrontObj;
         public GameObject axleRearObj;
@@ -45,6 +46,7 @@ namespace com.mobilin.games
         public static Texture harleyFullGray;
         public static Texture body, bodyEmpty;
         public static Texture steer, steerEmpty;
+        public static Texture spine, spineEmpty;
         public static Texture suspensionFront, suspensionFrontEmpty;
         public static Texture wheelFront, wheelFrontEmpty;
         public static Texture axleRear, axleRearEmpty;
@@ -64,7 +66,7 @@ namespace com.mobilin.games
         GameObject wheelCollidersObj;
         GameObject comObj;
         GameObject seatObj;
-        GameObject handIKTargetsObj, footIKTargetsObj;
+        GameObject handIKTargetsObj, footIKTargetsObj, spineIKTargetObj;
         GameObject entryPointsObj;
 
         GameObject headLightObj;
@@ -111,7 +113,7 @@ namespace com.mobilin.games
             //SetTitleVersion(MISFeature.MIS_PACKAGE_MOTORCYCLE, MISMotorcycle.PACKAGE_VERSION);
 
             harleyFullGray = (Texture)Resources.Load("Harley_FullGray", typeof(Texture));
-            
+
             body = (Texture)Resources.Load("Body", typeof(Texture));
             bodyEmpty = (Texture)Resources.Load("Body_Empty", typeof(Texture));
 
@@ -153,6 +155,7 @@ namespace com.mobilin.games
                     motorcycleMass = EditorGUILayout.FloatField(new GUIContent("Motorcycle Mass"), motorcycleMass);
                     bodyObj = EditorGUILayout.ObjectField("Body", bodyObj, typeof(GameObject), true, GUILayout.ExpandWidth(true)) as GameObject;
                     steerObj = EditorGUILayout.ObjectField("Steer", steerObj, typeof(GameObject), true, GUILayout.ExpandWidth(true)) as GameObject;
+                    spineObj = EditorGUILayout.ObjectField("Spine", spineObj, typeof(GameObject), true, GUILayout.ExpandWidth(true)) as GameObject;
                     axleFrontObj = EditorGUILayout.ObjectField("Front Axle", axleFrontObj, typeof(GameObject), true, GUILayout.ExpandWidth(true)) as GameObject;
                     wheelFrontObj = EditorGUILayout.ObjectField("Front Wheel", wheelFrontObj, typeof(GameObject), true, GUILayout.ExpandWidth(true)) as GameObject;
                     axleRearObj = EditorGUILayout.ObjectField("Rear Axle", axleRearObj, typeof(GameObject), true, GUILayout.ExpandWidth(true)) as GameObject;
@@ -217,7 +220,7 @@ namespace com.mobilin.games
         // ----------------------------------------------------------------------------------------------------
         void VerifyParts()
         {
-            if (bodyObj == null || steerObj == null || wheelFrontObj == null || wheelRearObj == null)
+            if (bodyObj == null || steerObj == null || spineObj == null || wheelFrontObj == null || wheelRearObj == null)
                 allPartsReady = false;
             else
                 allPartsReady = true;
@@ -229,12 +232,15 @@ namespace com.mobilin.games
                 GUI.DrawTexture(harleyRect, body);
             else
                 GUI.DrawTexture(harleyRect, bodyEmpty);
-            
+
             if (steerObj)
                 GUI.DrawTexture(harleyRect, steer);
             else
                 GUI.DrawTexture(harleyRect, steerEmpty);
-
+            if (spineObj)
+                GUI.DrawTexture(harleyRect, spine);
+            else
+                GUI.DrawTexture(harleyRect, spineEmpty);
             if (wheelFrontObj)
                 GUI.DrawTexture(harleyRect, wheelFront);
             else
@@ -366,7 +372,7 @@ namespace com.mobilin.games
             vfxComponents.transform.localPosition = Vector3.zero;
             vfxComponents.transform.localRotation = Quaternion.identity;
 
-            prefab = 
+            prefab =
                 AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/Prefabs/UI.prefab"));
             GameObject uiInstance = prefab.Instantiate2D(Vector3.zero, misComponentsParentObj.transform);
 
@@ -375,7 +381,7 @@ namespace com.mobilin.games
             // Object Components
 
             // WheelColliders
-            prefab = 
+            prefab =
                 AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/Prefabs/WheelColliders.prefab"));
             wheelCollidersObj = prefab.Instantiate3D(Vector3.zero, motorcycleObj.transform);
 
@@ -392,17 +398,22 @@ namespace com.mobilin.games
             seatObj.transform.localRotation = Quaternion.identity;
 
             // Hand IK Targets
-            prefab = 
+            prefab =
                 AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/Prefabs/HandIKTargets.prefab"));
             handIKTargetsObj = prefab.Instantiate3D(Vector3.zero, steerObj.transform);
 
             // Foot IK Targets
-            prefab = 
+            prefab =
                 AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/Prefabs/FootIKTargets.prefab"));
             footIKTargetsObj = prefab.Instantiate3D(Vector3.zero, bodyObj.transform);
 
+            // Spine IK Targets
+            prefab =
+                AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/Prefabs/SpineIKTarget.prefab"));
+            spineIKTargetObj = prefab.Instantiate3D(Vector3.zero, spineObj.transform);
+
             // EntryPoints
-            prefab = 
+            prefab =
                 AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/Prefabs/EntryPoints.prefab"));
             entryPointsObj = prefab.Instantiate3D(Vector3.zero, misComponentsParentObj.transform);
 
@@ -413,7 +424,7 @@ namespace com.mobilin.games
             // Head Lights
             if (useHeadLight)
             {
-                prefab = 
+                prefab =
                     AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/Lights/HeadLight.prefab"));
                 headLightObj = prefab.Instantiate3D(Vector3.zero, steerObj.transform);
                 headLightObj.transform.localPosition = new Vector3(0f, -0.088f, 0.196f);
@@ -423,7 +434,7 @@ namespace com.mobilin.games
             // Brake Light
             if (useBrakeLight)
             {
-                prefab = 
+                prefab =
                     AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/Lights/BrakeLight.prefab"));
                 brakeLightObj = prefab.Instantiate3D(Vector3.zero, bodyObj.transform);
                 brakeLightObj.transform.localPosition = new Vector3(0f, 0.69f, -0.8f);
@@ -433,13 +444,13 @@ namespace com.mobilin.games
             // GroundSmoke
             if (useGroundSmoke)
             {
-                prefab = 
+                prefab =
                     AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/GroundSmoke/GroundSmoke.prefab"));
                 GroundSmokeFObj = prefab.Instantiate3D(Vector3.zero, vfxComponents);
                 GroundSmokeFObj.transform.localPosition = new Vector3(0f, 0f, 1.9f);
                 GroundSmokeFObj.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
 
-                prefab = 
+                prefab =
                     AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/GroundSmoke/GroundSmoke.prefab"));
                 GroundSmokeRObj = prefab.Instantiate3D(Vector3.zero, vfxComponents);
                 GroundSmokeRObj.transform.localPosition = new Vector3(0f, 0f, -0.54f);
@@ -449,7 +460,7 @@ namespace com.mobilin.games
             // BoostSpark
             if (useBoostSpark)
             {
-                prefab = 
+                prefab =
                     AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/Boost Spark/BoostSpark.prefab"));
                 BoostSparkObj = prefab.Instantiate3D(Vector3.zero, vfxComponents);
                 BoostSparkObj.transform.localPosition = new Vector3(0f, 0.1f, 0.6f);
@@ -459,7 +470,7 @@ namespace com.mobilin.games
             // BoostExplosion
             if (useBoostExplosion)
             {
-                prefab = 
+                prefab =
                     AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/Boost Explosion/BoostExplosions.prefab"));
                 BoostExplosionObj = prefab.Instantiate3D(Vector3.zero, vfxComponents);
             }
@@ -467,7 +478,7 @@ namespace com.mobilin.games
             // Exhaust
             if (useExhaust)
             {
-                prefab = 
+                prefab =
                     AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/Exhaust/ExhaustManager.prefab"));
                 ExhaustObj = prefab.Instantiate3D(Vector3.zero, vfxComponents);
             }
@@ -475,7 +486,7 @@ namespace com.mobilin.games
             // Jump Force
             if (useJumpForce)
             {
-                prefab = 
+                prefab =
                     AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/JumpForce/JumpForce.prefab"));
                 JumpForceObj = prefab.Instantiate3D(Vector3.zero, wheelRearObj.transform);
             }
@@ -483,37 +494,37 @@ namespace com.mobilin.games
 
             // ----------------------------------------------------------------------------------------------------
             // Audio Sources
-            prefab = 
+            prefab =
                 AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/Prefabs/EngineIdleSource.prefab"));
             GameObject idleSourceObj = prefab.Instantiate3D(Vector3.zero, vfxComponents);
             idleSource = idleSourceObj.GetComponent<AudioSource>();
             idleSource.clip = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/Audio/Chopper/Chopper_EngineIdle.wav"));
 
-            prefab = 
+            prefab =
                 AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/Prefabs/EngineLowSource.prefab"));
             GameObject lowSourceObj = prefab.Instantiate3D(Vector3.zero, vfxComponents);
             lowSource = lowSourceObj.GetComponent<AudioSource>();
             lowSource.clip = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/Audio/Chopper/Chopper_EngineLow.wav"));
 
-            prefab = 
+            prefab =
                 AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/Prefabs/EngineMidSource.prefab"));
             GameObject midSourceObj = prefab.Instantiate3D(Vector3.zero, vfxComponents);
             midSource = midSourceObj.GetComponent<AudioSource>();
             midSource.clip = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/Audio/Chopper/Chopper_EngineMid.wav"));
 
-            prefab = 
+            prefab =
                 AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/Prefabs/EngineHighSource.prefab"));
             GameObject highSourceObj = prefab.Instantiate3D(Vector3.zero, vfxComponents);
             highSource = highSourceObj.GetComponent<AudioSource>();
             highSource.clip = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/Audio/Chopper/Chopper_EngineHigh.wav"));
 
-            prefab = 
+            prefab =
                 AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/Prefabs/EngineReverseSource.prefab"));
             GameObject reverseSourceObj = prefab.Instantiate3D(Vector3.zero, vfxComponents);
             reverseSource = reverseSourceObj.GetComponent<AudioSource>();
             reverseSource.clip = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/Audio/Chopper/Chopper_EngineIdle.wav"));
 
-            prefab = 
+            prefab =
                 AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/Prefabs/NonSpatialSource.prefab"));
             GameObject nonSpatialSourceObj = prefab.Instantiate3D(Vector3.zero, vfxComponents);
             nonSpatialSource = nonSpatialSourceObj.GetComponent<AudioSource>();
@@ -524,14 +535,14 @@ namespace com.mobilin.games
 
             if (useSpeedometer)
             {
-                prefab = 
+                prefab =
                     AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/Scripts/UI/Speedometer/Speedometer.prefab"));
                 speedometerObj = prefab.Instantiate2D(new Vector3(-60f, -60f, 0f), uiInstance.transform);
             }
 
             if (useVehicleGlass)
             {
-                prefab = 
+                prefab =
                     AssetDatabase.LoadAssetAtPath<GameObject>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/VehicleGlass/VehicleGlass.prefab"));
                 vehicleGlassObj = prefab.Instantiate2D(Vector3.zero, uiInstance.transform);
             }
@@ -584,6 +595,7 @@ namespace com.mobilin.games
             vc.ikRightHand = handIKTargetsObj.transform.Find("IKHand_R").transform;
             vc.ikLeftFoot = footIKTargetsObj.transform.Find("IKFoot_L").transform;
             vc.ikRightFoot = footIKTargetsObj.transform.Find("IKFoot_R").transform;
+            vc.ikSpineHint = spineIKTargetObj.transform.Find("IkSpine").transform;
 
             vc.wheelList.Clear();
             motorcycleWheelFront = wheelCollidersObj.transform.Find("Collider_F").gameObject.GetComponent<mvMotorcycleWheel>();
@@ -594,10 +606,10 @@ namespace com.mobilin.games
             vc.vehicleGlassPanel = useVehicleGlass ? vehicleGlassObj : null;
             vc.useSpeedometer = useSpeedometer;
 
-            vc.wheelFrictionData = 
+            vc.wheelFrictionData =
                 AssetDatabase.LoadAssetAtPath<mvWheelFrictionData>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/WheelFrictionData/WheelFrictionData.asset"));
 
-            vc.groundData = 
+            vc.groundData =
                 AssetDatabase.LoadAssetAtPath<mvGroundData>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/GroundData/GroundData.asset"));
 
 
@@ -607,13 +619,13 @@ namespace com.mobilin.games
             AudioMixer audioMixer = AssetDatabase.LoadAssetAtPath<AudioMixer>(Path.Combine(MISEditor.MIS_ASSETS_PATH, "MIS/Scripts/FX/Audio/MISAudioMixer.mixer"));
             vcES.audioMixerGroup = audioMixer.FindMatchingGroups("SFX")[0];
 
-            vcES.acEngineStart = 
+            vcES.acEngineStart =
                 AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/Audio/Chopper/Chopper_EngineStart.wav"));
-            vcES.acEngineStop = 
+            vcES.acEngineStop =
                 AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/Audio/Chopper/Chopper_EngineStop.wav"));
-            vcES.acBrake = 
+            vcES.acBrake =
                 AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/Audio/Chopper/Chopper_Brake.wav"));
-            vcES.acGearShift = 
+            vcES.acGearShift =
                 AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(MISFeature.MIS_MOTORCYCLE_PATH, "Runtime/FX/Audio/Chopper/Chopper_GearShift.wav"));
 
             vcES.idleAudioSource = idleSource;
@@ -673,7 +685,7 @@ namespace com.mobilin.games
             }
 
 
-			/*
+            /*
             // ----------------------------------------------------------------------------------------------------
             // mvVehiclePhysicalDamage
             mvVWDealPhysicalDamage vcPhysicalDamage = motorcycleObj.AddComponent<mvVWDealPhysicalDamage>();

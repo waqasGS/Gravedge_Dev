@@ -178,6 +178,15 @@ namespace com.mobilin.games
                 tpInput.animator.SetIKRotation(AvatarIKGoal.RightHand, vcBikeInput.vc.ikRightHand.rotation);
             }
 
+            if (vcBikeInput.vc.ikSpineHint == null)
+            {
+                tpInput.animator.SetBoneLocalRotation(HumanBodyBones.Spine, Quaternion.identity);
+            }
+            else
+            {
+                tpInput.animator.SetBoneLocalRotation(HumanBodyBones.Spine, vcBikeInput.vc.ikSpineHint.rotation);
+            }
+
             if (inputSmooth.z >= 0.1f)
             {
                 if (vcBikeInput.vc.ikLeftFoot != null)

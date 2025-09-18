@@ -168,6 +168,15 @@ namespace com.mobilin.games
                 }
             }
 
+            if (vcBikeInput.vc.ikSpineHint == null)
+            {
+                tpInput.animator.SetBoneLocalRotation(HumanBodyBones.Spine, Quaternion.identity);
+            }
+            else
+            {
+                //tpInput.animator.SetBoneLocalRotation(HumanBodyBones.Spine, vcBikeInput.vc.ikSpineHint.rotation);
+            }
+
             if (inputSmooth.z >= 0.1f || tpInput.cc.IsAnimatorTag("Attack"))
             {
                 if (vcBikeInput.vc.ikLeftFoot != null)
