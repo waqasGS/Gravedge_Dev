@@ -4699,6 +4699,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8355842440735528325}
+  - component: {fileID: 6116808947882715392}
   m_Layer: 30
   m_Name: IKFoot_L
   m_TagString: Untagged
@@ -4715,12 +4716,90 @@ Transform:
   m_GameObject: {fileID: 64073286878248840}
   serializedVersion: 2
   m_LocalRotation: {x: -0.37055743, y: 0, z: 0, w: 0.92880964}
-  m_LocalPosition: {x: -0.1937, y: 0.3854, z: 0.0387}
+  m_LocalPosition: {x: -0.117, y: 0.517, z: 0.066}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1016775293269369954}
   m_LocalEulerAnglesHint: {x: -43.5, y: 0, z: 0}
+--- !u!114 &6116808947882715392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64073286878248840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed54dd0b0fddc243928de0b5ecc69af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: Cube
+  color: {r: 1, g: 0.7394293, b: 0, a: 1}
+  active: 1
+  positionIsCenterCube: 1
+  cubeCenter: {x: 0, y: 0, z: 0}
+  cubeSize: {x: 0.1, y: 0.1, z: 0.1}
+  positionIsCenterFrustum: 1
+  frustumCenter: {x: 0, y: 0, z: 0}
+  fov: 0
+  maxRange: 0
+  minRange: 0
+  aspect: 0
+  screenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  texture: {fileID: 0}
+  mat: {fileID: 0}
+  positionIsCenterIcon: 1
+  iconCenter: {x: 0, y: 0, z: 0}
+  iconName: 
+  allowScaling: 1
+  useTwoTransforms: 0
+  fromV: {x: 0, y: 0, z: 0}
+  toV: {x: 0, y: 0, z: 0}
+  fromTr: {fileID: 0}
+  toTr: {fileID: 0}
+  mesh: {fileID: 0}
+  transformIsMeshTransform: 1
+  meshPosition: {x: 0, y: 0, z: 0}
+  meshRotation: {x: 0, y: 0, z: 0}
+  meshScale: {x: 1, y: 1, z: 1}
+  subMeshIndex: -1
+  fromR: {x: 0, y: 0, z: 0}
+  directionR: {x: 0, y: 0, z: 0}
+  positionIsCenterSphere: 1
+  sphereCenter: {x: 0, y: 0, z: 0}
+  radiusS: 1
+  positionIsCenterWireCube: 1
+  wireCubeCenter: {x: 0, y: 0, z: 0}
+  wireCubeSize: {x: 1, y: 1, z: 1}
+  wireMesh: {fileID: 0}
+  transformIsWireMeshTransform: 1
+  wireMeshPosition: {x: 0, y: 0, z: 0}
+  wireMeshRotation: {x: 0, y: 0, z: 0}
+  wireMeshScale: {x: 1, y: 1, z: 1}
+  subWireMeshIndex: -1
+  positionIsCenterWireSphere: 1
+  wireSphereCenter: {x: 0, y: 0, z: 0}
+  radiusWS: 1
+  cam: {fileID: 0}
+  drawVertex: 0
+  startPointLE: {x: 0, y: 0, z: 0}
+  endPointLE: {x: 0, y: 0, z: 0}
+  fromTrLE: {fileID: 0}
+  toTrLE: {fileID: 0}
+  thickness: 0.05
+  useTwoTransformsLE: 0
+  positionCE: {x: 0, y: 0, z: 0}
+  rotationCE: {x: 0, y: 0, z: 0}
+  scaleCE: {x: 1, y: 1, z: 1}
+  positionWCE: {x: 0, y: 0, z: 0}
+  rotationWCE: {x: 0, y: 0, z: 0}
+  scaleWCE: {x: 1, y: 1, z: 1}
 --- !u!1 &125636717496241994
 GameObject:
   m_ObjectHideFlags: 0
@@ -34193,6 +34272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4406581347408072370}
+  - component: {fileID: 3701103596424145822}
   m_Layer: 30
   m_Name: IKHand_L
   m_TagString: Untagged
@@ -34208,13 +34288,91 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389525420399912330}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.31199366, y: -0.23859666, z: 0.120647684, w: 0.91168845}
-  m_LocalPosition: {x: -0.375, y: 0.3608, z: -0.0542}
+  m_LocalRotation: {x: 0.22154394, y: -0.49048287, z: 0.34082168, w: 0.7708343}
+  m_LocalPosition: {x: -0.09400328, y: 0.24700022, z: -0.3130001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8577522908633678100}
-  m_LocalEulerAnglesHint: {x: 38.789, y: -27.488, z: 5.234}
+  m_LocalEulerAnglesHint: {x: 42.523, y: -55.194, z: 24.712}
+--- !u!114 &3701103596424145822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389525420399912330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed54dd0b0fddc243928de0b5ecc69af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: Cube
+  color: {r: 1, g: 0.13757896, b: 0, a: 1}
+  active: 1
+  positionIsCenterCube: 1
+  cubeCenter: {x: 0, y: 0, z: 0}
+  cubeSize: {x: 0.1, y: 0.1, z: 0.1}
+  positionIsCenterFrustum: 1
+  frustumCenter: {x: 0, y: 0, z: 0}
+  fov: 0
+  maxRange: 0
+  minRange: 0
+  aspect: 0
+  screenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  texture: {fileID: 0}
+  mat: {fileID: 0}
+  positionIsCenterIcon: 1
+  iconCenter: {x: 0, y: 0, z: 0}
+  iconName: 
+  allowScaling: 1
+  useTwoTransforms: 0
+  fromV: {x: 0, y: 0, z: 0}
+  toV: {x: 0, y: 0, z: 0}
+  fromTr: {fileID: 0}
+  toTr: {fileID: 0}
+  mesh: {fileID: 0}
+  transformIsMeshTransform: 1
+  meshPosition: {x: 0, y: 0, z: 0}
+  meshRotation: {x: 0, y: 0, z: 0}
+  meshScale: {x: 1, y: 1, z: 1}
+  subMeshIndex: -1
+  fromR: {x: 0, y: 0, z: 0}
+  directionR: {x: 0, y: 0, z: 0}
+  positionIsCenterSphere: 1
+  sphereCenter: {x: 0, y: 0, z: 0}
+  radiusS: 1
+  positionIsCenterWireCube: 1
+  wireCubeCenter: {x: 0, y: 0, z: 0}
+  wireCubeSize: {x: 1, y: 1, z: 1}
+  wireMesh: {fileID: 0}
+  transformIsWireMeshTransform: 1
+  wireMeshPosition: {x: 0, y: 0, z: 0}
+  wireMeshRotation: {x: 0, y: 0, z: 0}
+  wireMeshScale: {x: 1, y: 1, z: 1}
+  subWireMeshIndex: -1
+  positionIsCenterWireSphere: 1
+  wireSphereCenter: {x: 0, y: 0, z: 0}
+  radiusWS: 1
+  cam: {fileID: 0}
+  drawVertex: 0
+  startPointLE: {x: 0, y: 0, z: 0}
+  endPointLE: {x: 0, y: 0, z: 0}
+  fromTrLE: {fileID: 0}
+  toTrLE: {fileID: 0}
+  thickness: 0.05
+  useTwoTransformsLE: 0
+  positionCE: {x: 0, y: 0, z: 0}
+  rotationCE: {x: 0, y: 0, z: 0}
+  scaleCE: {x: 1, y: 1, z: 1}
+  positionWCE: {x: 0, y: 0, z: 0}
+  rotationWCE: {x: 0, y: 0, z: 0}
+  scaleWCE: {x: 1, y: 1, z: 1}
 --- !u!1 &1420945215981051091
 GameObject:
   m_ObjectHideFlags: 0
@@ -43825,7 +43983,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1942766360593132333
 Transform:
   m_ObjectHideFlags: 0
@@ -43837,7 +43995,7 @@ Transform:
   m_LocalRotation: {x: -0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 1.122, z: 0.174}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1145194395195484046}
   - {fileID: 8337358697078410736}
@@ -58624,6 +58782,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2368899734707059941}
+  - component: {fileID: 1048888280593716502}
   m_Layer: 30
   m_Name: IKFoot_R
   m_TagString: Untagged
@@ -58639,13 +58798,91 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2468061735632383661}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.37055743, y: 0, z: 0, w: 0.92880964}
-  m_LocalPosition: {x: 0.1862, y: 0.3854, z: 0.0387}
+  m_LocalRotation: {x: -0.36627558, y: -0.14078823, z: 0.056169212, w: 0.91807735}
+  m_LocalPosition: {x: 0.128, y: 0.518, z: 0.065}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1016775293269369954}
-  m_LocalEulerAnglesHint: {x: -43.5, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -41.05, y: -23.413, z: 15.874}
+--- !u!114 &1048888280593716502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2468061735632383661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed54dd0b0fddc243928de0b5ecc69af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: Cube
+  color: {r: 0, g: 1, b: 0.9784224, a: 1}
+  active: 1
+  positionIsCenterCube: 1
+  cubeCenter: {x: 0, y: 0, z: 0}
+  cubeSize: {x: 0.1, y: 0.1, z: 0.1}
+  positionIsCenterFrustum: 1
+  frustumCenter: {x: 0, y: 0, z: 0}
+  fov: 0
+  maxRange: 0
+  minRange: 0
+  aspect: 0
+  screenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  texture: {fileID: 0}
+  mat: {fileID: 0}
+  positionIsCenterIcon: 1
+  iconCenter: {x: 0, y: 0, z: 0}
+  iconName: 
+  allowScaling: 1
+  useTwoTransforms: 0
+  fromV: {x: 0, y: 0, z: 0}
+  toV: {x: 0, y: 0, z: 0}
+  fromTr: {fileID: 0}
+  toTr: {fileID: 0}
+  mesh: {fileID: 0}
+  transformIsMeshTransform: 1
+  meshPosition: {x: 0, y: 0, z: 0}
+  meshRotation: {x: 0, y: 0, z: 0}
+  meshScale: {x: 1, y: 1, z: 1}
+  subMeshIndex: -1
+  fromR: {x: 0, y: 0, z: 0}
+  directionR: {x: 0, y: 0, z: 0}
+  positionIsCenterSphere: 1
+  sphereCenter: {x: 0, y: 0, z: 0}
+  radiusS: 1
+  positionIsCenterWireCube: 1
+  wireCubeCenter: {x: 0, y: 0, z: 0}
+  wireCubeSize: {x: 1, y: 1, z: 1}
+  wireMesh: {fileID: 0}
+  transformIsWireMeshTransform: 1
+  wireMeshPosition: {x: 0, y: 0, z: 0}
+  wireMeshRotation: {x: 0, y: 0, z: 0}
+  wireMeshScale: {x: 1, y: 1, z: 1}
+  subWireMeshIndex: -1
+  positionIsCenterWireSphere: 1
+  wireSphereCenter: {x: 0, y: 0, z: 0}
+  radiusWS: 1
+  cam: {fileID: 0}
+  drawVertex: 0
+  startPointLE: {x: 0, y: 0, z: 0}
+  endPointLE: {x: 0, y: 0, z: 0}
+  fromTrLE: {fileID: 0}
+  toTrLE: {fileID: 0}
+  thickness: 0.05
+  useTwoTransformsLE: 0
+  positionCE: {x: 0, y: 0, z: 0}
+  rotationCE: {x: 0, y: 0, z: 0}
+  scaleCE: {x: 1, y: 1, z: 1}
+  positionWCE: {x: 0, y: 0, z: 0}
+  rotationWCE: {x: 0, y: 0, z: 0}
+  scaleWCE: {x: 1, y: 1, z: 1}
 --- !u!1 &2470121758431044779
 GameObject:
   m_ObjectHideFlags: 0
@@ -83969,6 +84206,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1915823713096668048}
+  - {fileID: 8577522908633678100}
   m_Father: {fileID: 8440316419010663857}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3966365232944671615
@@ -84388,6 +84626,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4620581208574437327}
+  - component: {fileID: 7496606326833365198}
   m_Layer: 30
   m_Name: IKHand_R
   m_TagString: Untagged
@@ -84403,13 +84642,91 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4121283997326933228}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3714204, y: -0.11980193, z: -0.050852887, w: 0.91929775}
-  m_LocalPosition: {x: 0.4579941, y: 0.35300183, z: -0.0000022649765}
+  m_LocalRotation: {x: 0.13763842, y: 0.45820048, z: -0.4010129, w: 0.7812149}
+  m_LocalPosition: {x: 0.0995, y: 0.2435, z: -0.3148}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8577522908633678100}
-  m_LocalEulerAnglesHint: {x: 42.122, y: -20.359, z: -14.243}
+  m_LocalEulerAnglesHint: {x: 35.629, y: 48.157, z: -38.001}
+--- !u!114 &7496606326833365198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4121283997326933228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed54dd0b0fddc243928de0b5ecc69af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: Cube
+  color: {r: 0, g: 1, b: 0.02520442, a: 1}
+  active: 1
+  positionIsCenterCube: 1
+  cubeCenter: {x: 0, y: 0, z: 0}
+  cubeSize: {x: 0.1, y: 0.1, z: 0.1}
+  positionIsCenterFrustum: 1
+  frustumCenter: {x: 0, y: 0, z: 0}
+  fov: 0
+  maxRange: 0
+  minRange: 0
+  aspect: 0
+  screenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  texture: {fileID: 0}
+  mat: {fileID: 0}
+  positionIsCenterIcon: 1
+  iconCenter: {x: 0, y: 0, z: 0}
+  iconName: 
+  allowScaling: 1
+  useTwoTransforms: 0
+  fromV: {x: 0, y: 0, z: 0}
+  toV: {x: 0, y: 0, z: 0}
+  fromTr: {fileID: 0}
+  toTr: {fileID: 0}
+  mesh: {fileID: 0}
+  transformIsMeshTransform: 1
+  meshPosition: {x: 0, y: 0, z: 0}
+  meshRotation: {x: 0, y: 0, z: 0}
+  meshScale: {x: 1, y: 1, z: 1}
+  subMeshIndex: -1
+  fromR: {x: 0, y: 0, z: 0}
+  directionR: {x: 0, y: 0, z: 0}
+  positionIsCenterSphere: 1
+  sphereCenter: {x: 0, y: 0, z: 0}
+  radiusS: 1
+  positionIsCenterWireCube: 1
+  wireCubeCenter: {x: 0, y: 0, z: 0}
+  wireCubeSize: {x: 1, y: 1, z: 1}
+  wireMesh: {fileID: 0}
+  transformIsWireMeshTransform: 1
+  wireMeshPosition: {x: 0, y: 0, z: 0}
+  wireMeshRotation: {x: 0, y: 0, z: 0}
+  wireMeshScale: {x: 1, y: 1, z: 1}
+  subWireMeshIndex: -1
+  positionIsCenterWireSphere: 1
+  wireSphereCenter: {x: 0, y: 0, z: 0}
+  radiusWS: 1
+  cam: {fileID: 0}
+  drawVertex: 0
+  startPointLE: {x: 0, y: 0, z: 0}
+  endPointLE: {x: 0, y: 0, z: 0}
+  fromTrLE: {fileID: 0}
+  toTrLE: {fileID: 0}
+  thickness: 0.05
+  useTwoTransformsLE: 0
+  positionCE: {x: 0, y: 0, z: 0}
+  rotationCE: {x: 0, y: 0, z: 0}
+  scaleCE: {x: 1, y: 1, z: 1}
+  positionWCE: {x: 0, y: 0, z: 0}
+  rotationWCE: {x: 0, y: 0, z: 0}
+  scaleWCE: {x: 1, y: 1, z: 1}
 --- !u!1 &4145903752235147993
 GameObject:
   m_ObjectHideFlags: 0
@@ -104559,6 +104876,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4264963099330221568}
+  - {fileID: 1660630247410999831}
   - {fileID: 1672009245296887938}
   m_Father: {fileID: 2702605883936080659}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -115012,7 +115330,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 925251995570982350}
   m_Father: {fileID: 8440316419010663857}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5757669236454541482
@@ -130736,6 +131055,89 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4872045660203208880}
   m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
+--- !u!1 &6922359272234923034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1660630247410999831}
+  - component: {fileID: 649501912943200978}
+  - component: {fileID: 4312348858023060486}
+  m_Layer: 0
+  m_Name: glass (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1660630247410999831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922359272234923034}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.63500583, y: 0.000000029802319, z: -1.9095834e-14, w: 0.7725073}
+  m_LocalPosition: {x: -0.00010172525, y: -2.9660022, z: -8.704321}
+  m_LocalScale: {x: 196.824, y: 196.824, z: 196.824}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4831460222311540761}
+  m_LocalEulerAnglesHint: {x: -78.841, y: 0, z: 0}
+--- !u!33 &649501912943200978
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922359272234923034}
+  m_Mesh: {fileID: -5518979842351520427, guid: 687b1ef262608d249b4ce30283af44e4, type: 3}
+--- !u!23 &4312348858023060486
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922359272234923034}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 18073478133dd6240bf2b90dc10cb428, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6997201610638813742
 GameObject:
   m_ObjectHideFlags: 0
@@ -135951,7 +136353,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8577522908633678100}
   - {fileID: 8478672367954747743}
   - {fileID: 9101810615651366245}
   - {fileID: 7343964817871025183}
@@ -136023,7 +136424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openCloseEvents: 0
   openCloseWindow: 1
-  selectedToolbar: 1
+  selectedToolbar: 0
   boostInput:
     useInput: 1
     isAxisInUse: 0
@@ -136177,7 +136578,7 @@ MonoBehaviour:
   steeringWheelAxis: 1
   steeringAngle:
     origin: 20
-    now: 20
+    now: 10
   maxSpeed:
     min: 10
     max: 20
@@ -136200,7 +136601,7 @@ MonoBehaviour:
   ikRightHand: {fileID: 4620581208574437327}
   ikLeftFoot: {fileID: 8355842440735528325}
   ikRightFoot: {fileID: 2368899734707059941}
-  ikSpineHint: {fileID: 0}
+  ikSpineHint: {fileID: 62417396994169037}
   throttleInputSmooth: 0
   throttleSmoothDamp: 2
   throttleInputAbs: 0
@@ -162612,14 +163013,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8441006949850766357}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.38268346, y: 0.000000029802322, z: -2.220446e-14, w: 0.9238796}
-  m_LocalPosition: {x: 0, y: 1.4619999, z: 0.17400232}
+  m_LocalRotation: {x: -0.38268346, y: 0.00000008940697, z: -2.3980817e-14, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 1.1219999, z: 0.17400232}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4406581347408072370}
   - {fileID: 4620581208574437327}
-  m_Father: {fileID: 8440316419010663857}
+  m_Father: {fileID: 8478672367954747743}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8702532290247980384
 GameObject:
@@ -177753,3 +178154,196 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4163810863384186614, guid: 0489a8adb23368643a769716e73fd1b3, type: 3}
+--- !u!1001 &2344019548186694462
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4779438940670449009}
+    m_Modifications:
+    - target: {fileID: 308093648828302702, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_Name
+      value: SpineIKTarget
+      objectReference: {fileID: 0}
+    - target: {fileID: 308093648828302702, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331282506711108595, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331282506711108595, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331282506711108595, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331282506711108595, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.4745144
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331282506711108595, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.13159446
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331282506711108595, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.83870125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331282506711108595, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.23259239
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331282506711108595, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331282506711108595, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -121
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193200112721960688, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193200112721960688, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193200112721960688, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.89000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193200112721960688, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193200112721960688, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193200112721960688, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193200112721960688, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193200112721960688, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193200112721960688, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193200112721960688, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4574958256427252415, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2297314919124692742}
+  m_SourcePrefab: {fileID: 100100000, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+--- !u!4 &62417396994169037 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2331282506711108595, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+  m_PrefabInstance: {fileID: 2344019548186694462}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &925251995570982350 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3193200112721960688, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+  m_PrefabInstance: {fileID: 2344019548186694462}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2304194942964820353 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4574958256427252415, guid: f9d7d828af3292d4093efa0844b45815, type: 3}
+  m_PrefabInstance: {fileID: 2344019548186694462}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2297314919124692742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304194942964820353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed54dd0b0fddc243928de0b5ecc69af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: Cube
+  color: {r: 1, g: 1, b: 1, a: 1}
+  active: 1
+  positionIsCenterCube: 1
+  cubeCenter: {x: 0, y: 0, z: 0}
+  cubeSize: {x: 0.1, y: 0.1, z: 0.22}
+  positionIsCenterFrustum: 1
+  frustumCenter: {x: 0, y: 0, z: 0}
+  fov: 0
+  maxRange: 0
+  minRange: 0
+  aspect: 0
+  screenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  texture: {fileID: 0}
+  mat: {fileID: 0}
+  positionIsCenterIcon: 1
+  iconCenter: {x: 0, y: 0, z: 0}
+  iconName: 
+  allowScaling: 1
+  useTwoTransforms: 0
+  fromV: {x: 0, y: 0, z: 0}
+  toV: {x: 0, y: 0, z: 0}
+  fromTr: {fileID: 0}
+  toTr: {fileID: 0}
+  mesh: {fileID: 0}
+  transformIsMeshTransform: 1
+  meshPosition: {x: 0, y: 0, z: 0}
+  meshRotation: {x: 0, y: 0, z: 0}
+  meshScale: {x: 1, y: 1, z: 1}
+  subMeshIndex: -1
+  fromR: {x: 0, y: 0, z: 0}
+  directionR: {x: 0, y: 0, z: 0}
+  positionIsCenterSphere: 1
+  sphereCenter: {x: 0, y: 0, z: 0}
+  radiusS: 1
+  positionIsCenterWireCube: 1
+  wireCubeCenter: {x: 0, y: 0, z: 0}
+  wireCubeSize: {x: 1, y: 1, z: 1}
+  wireMesh: {fileID: 0}
+  transformIsWireMeshTransform: 1
+  wireMeshPosition: {x: 0, y: 0, z: 0}
+  wireMeshRotation: {x: 0, y: 0, z: 0}
+  wireMeshScale: {x: 1, y: 1, z: 1}
+  subWireMeshIndex: -1
+  positionIsCenterWireSphere: 1
+  wireSphereCenter: {x: 0, y: 0, z: 0}
+  radiusWS: 1
+  cam: {fileID: 0}
+  drawVertex: 0
+  startPointLE: {x: 0, y: 0, z: 0}
+  endPointLE: {x: 0, y: 0, z: 0}
+  fromTrLE: {fileID: 0}
+  toTrLE: {fileID: 0}
+  thickness: 0.05
+  useTwoTransformsLE: 0
+  positionCE: {x: 0, y: 0, z: 0}
+  rotationCE: {x: 0, y: 0, z: 0}
+  scaleCE: {x: 1, y: 1, z: 1}
+  positionWCE: {x: 0, y: 0, z: 0}
+  rotationWCE: {x: 0, y: 0, z: 0}
+  scaleWCE: {x: 1, y: 1, z: 1}

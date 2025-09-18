@@ -63,8 +63,8 @@ namespace com.mobilin.games
         // 
         // ----------------------------------------------------------------------------------------------------
 
-       private bool mount = true;
-       private bool togglePressed = false; // To prevent repeated toggling while holding the key
+        private bool mount = true;
+        private bool togglePressed = false; // To prevent repeated toggling while holding the key
         public override void Update()
         {
             if (!IsAvailable)
@@ -83,11 +83,11 @@ namespace com.mobilin.games
                 {
                     ExitInput();
                 }
-            
+
                 mount = !mount;
                 togglePressed = true;
             }
-            
+
             // Reset togglePressed when key is released
             if (Input.GetKeyUp(KeyCode.T))
             {
@@ -100,8 +100,8 @@ namespace com.mobilin.games
 
 
             //real code
-          // EnterInput();
-          // ExitInput();
+            // EnterInput();
+            // ExitInput();
 
             if (!IsOnAction || vcBikeInput == null)
                 return;
@@ -168,47 +168,94 @@ namespace com.mobilin.games
                 }
             }
 
+            //if (vcBikeInput.vc.ikSpineHint == null)
+            //{
+            //    tpInput.animator.SetBoneLocalRotation(HumanBodyBones.Spine, Quaternion.identity);
+            //}
+            //else
+            //{
+            //    tpInput.animator.SetBoneLocalRotation(HumanBodyBones.Spine, vcBikeInput.vc.ikSpineHint.rotation);
+            //    //vcBikeInput.vc.ikSpineHint = null;
+            //}
+
             if (vcBikeInput.vc.ikSpineHint == null)
             {
                 tpInput.animator.SetBoneLocalRotation(HumanBodyBones.Spine, Quaternion.identity);
             }
             else
             {
-                //tpInput.animator.SetBoneLocalRotation(HumanBodyBones.Spine, vcBikeInput.vc.ikSpineHint.rotation);
+                // Get current local rotation of Spine
+                Quaternion currentRotation = tpInput.animator.GetBoneTransform(HumanBodyBones.Spine).localRotation;
+
+                // Convert to Euler angles
+                Vector3 euler = currentRotation.eulerAngles;
+
+                // Change only X from ikSpineHint
+                float targetX = vcBikeInput.vc.ikSpineHint.rotation.eulerAngles.x;
+                euler.x = targetX;
+
+                // Apply back
+                tpInput.animator.SetBoneLocalRotation(HumanBodyBones.Spine, Quaternion.Euler(euler));
             }
 
-            if (inputSmooth.z >= 0.1f || tpInput.cc.IsAnimatorTag("Attack"))
+            if (vcBikeInput.vc.ikLeftFoot == null)
             {
-                if (vcBikeInput.vc.ikLeftFoot != null)
-                {
-                    tpInput.animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1f);
-                    tpInput.animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1f);
-                    tpInput.animator.SetIKPosition(AvatarIKGoal.LeftFoot, vcBikeInput.vc.ikLeftFoot.position);
-                    tpInput.animator.SetIKRotation(AvatarIKGoal.LeftFoot, vcBikeInput.vc.ikLeftFoot.rotation);
-                }
-
-                if (vcBikeInput.vc.ikRightFoot != null)
-                {
-                    tpInput.animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1f);
-                    tpInput.animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1f);
-                    tpInput.animator.SetIKPosition(AvatarIKGoal.RightFoot, vcBikeInput.vc.ikRightFoot.position);
-                    tpInput.animator.SetIKRotation(AvatarIKGoal.RightFoot, vcBikeInput.vc.ikRightFoot.rotation);
-                }
+                tpInput.animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 0f);
+                tpInput.animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 0f);
             }
             else
             {
-                if (vcBikeInput.vc.ikLeftFoot != null)
-                {
-                    tpInput.animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 0f);
-                    tpInput.animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 0f);
-                }
-
-                if (vcBikeInput.vc.ikRightFoot != null)
-                {
-                    tpInput.animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 0f);
-                    tpInput.animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 0f);
-                }
+                tpInput.animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1f);
+                tpInput.animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1f);
+                tpInput.animator.SetIKPosition(AvatarIKGoal.LeftFoot, vcBikeInput.vc.ikLeftFoot.position);
+                tpInput.animator.SetIKRotation(AvatarIKGoal.LeftFoot, vcBikeInput.vc.ikLeftFoot.rotation);
             }
+
+            if (vcBikeInput.vc.ikRightFoot == null)
+            {
+                tpInput.animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 0f);
+                tpInput.animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 0f);
+            }
+            else
+            {
+                tpInput.animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1f);
+                tpInput.animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1f);
+                tpInput.animator.SetIKPosition(AvatarIKGoal.RightFoot, vcBikeInput.vc.ikRightFoot.position);
+                tpInput.animator.SetIKRotation(AvatarIKGoal.RightFoot, vcBikeInput.vc.ikRightFoot.rotation);
+            }
+
+            //if (inputSmooth.z >= 0.1f || tpInput.cc.IsAnimatorTag("Attack"))
+            //{
+            //    if (vcBikeInput.vc.ikLeftFoot != null)
+            //    {
+            //        tpInput.animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1f);
+            //        tpInput.animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1f);
+            //        tpInput.animator.SetIKPosition(AvatarIKGoal.LeftFoot, vcBikeInput.vc.ikLeftFoot.position);
+            //        tpInput.animator.SetIKRotation(AvatarIKGoal.LeftFoot, vcBikeInput.vc.ikLeftFoot.rotation);
+            //    }
+
+            //    if (vcBikeInput.vc.ikRightFoot != null)
+            //    {
+            //        tpInput.animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1f);
+            //        tpInput.animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1f);
+            //        tpInput.animator.SetIKPosition(AvatarIKGoal.RightFoot, vcBikeInput.vc.ikRightFoot.position);
+            //        tpInput.animator.SetIKRotation(AvatarIKGoal.RightFoot, vcBikeInput.vc.ikRightFoot.rotation);
+            //    }
+            //}
+            //else
+            //{
+            //    if (vcBikeInput.vc.ikLeftFoot != null)
+            //    {
+            //        tpInput.animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 0f);
+            //        tpInput.animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 0f);
+            //    }
+
+            //    if (vcBikeInput.vc.ikRightFoot != null)
+            //    {
+            //        tpInput.animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 0f);
+            //        tpInput.animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 0f);
+            //    }
+            //}
         }
 
         // ----------------------------------------------------------------------------------------------------
@@ -218,7 +265,7 @@ namespace com.mobilin.games
         {
             if (HasLeftHandWeapon() || HasRightHandWeapon())
                 return true;
-            
+
             return base.HasWeapon();
         }
         protected override bool HasLeftHandWeapon()
